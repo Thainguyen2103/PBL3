@@ -57,7 +57,7 @@ app.post('/api/ocr', async (req, res) => {
     if (!image) return res.status(400).json({ error: "Thiếu dữ liệu ảnh" });
 
     const base64Data = image.replace(/^data:image\/\w+;base64,/, "");
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
     const prompt = "Đây là một chữ cái Kanji (tiếng Nhật) viết tay. Hãy nhận diện xem nó là chữ gì. Chỉ trả về duy nhất ký tự Kanji đó làm kết quả. Không thêm bất kỳ lời giải thích nào.";
 
     const result = await model.generateContent([
