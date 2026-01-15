@@ -5,18 +5,36 @@ const KanjiCanvas = forwardRef((props, ref) => {
   const contextRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const lastPos = useRef({ x: 0, y: 0 });
-  const currentLineWidth = useRef(15); // Độ dày mặc định ban đầu
+  const currentLineWidth = useRef(15); 
 
   // --- CÁC HÀM CHO PHÉP FILE CHA (HOMEPAGE) GỌI ---
   useImperativeHandle(ref, () => ({
+    // Hàm xóa bảng vẽ
     clear: () => {
       const canvas = canvasRef.current;
       const context = canvas.getContext("2d");
       context.clearRect(0, 0, canvas.width, canvas.height);
     },
+    // Hàm trích xuất ảnh để gửi cho AI
     getCanvasImage: () => {
       if (canvasRef.current) {
-        return canvasRef.current.toDataURL('image/png');
+        const mainCanvas = canvasRef.current;
+        
+        // 1. Tạo một Canvas tạm thời trong bộ nhớ để xử lý nền
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = mainCanvas.width;
+        tempCanvas.height = mainCanvas.height;
+        const tempCtx = tempCanvas.getContext('2d');
+
+        // 2. TÔ NỀN TRẮNG: AI không thể nhìn thấy nét đen trên nền trong suốt (mặc định thành đen)
+        tempCtx.fillStyle = "#FFFFFF"; 
+        tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+
+        // 3. Chép nét vẽ từ canvas chính sang nền trắng của canvas tạm
+        tempCtx.drawImage(mainCanvas, 0, 0);
+
+        // 4. Trả về chuỗi Base64 đã có nền trắng hoàn hảo cho Gemini nhận diện
+        return tempCanvas.toDataURL('image/png');
       }
       return null;
     }
@@ -30,7 +48,7 @@ const KanjiCanvas = forwardRef((props, ref) => {
       if (!canvas) return;
       const rect = canvas.getBoundingClientRect();
       
-      // Tăng độ phân giải lên gấp đôi (Retina scaling) để nét vẽ mịn, không vỡ hạt
+      // Retina scaling (x2) để nét vẽ mượt mà, AI dễ nhận diện hơn
       canvas.width = rect.width * 2; 
       canvas.height = rect.height * 2;
       
@@ -38,12 +56,11 @@ const KanjiCanvas = forwardRef((props, ref) => {
       context.scale(2, 2); 
       context.lineCap = "round";
       context.lineJoin = "round";
-      context.strokeStyle = "#000000"; // Mực đen tuyệt đối cho AI dễ đọc
+      context.strokeStyle = "#000000"; // Mực đen tuyệt đối
       contextRef.current = context;
     };
 
     updateSize();
-    // Cập nhật lại khi người dùng thay đổi kích thước cửa sổ
     window.addEventListener('resize', updateSize);
     return () => window.removeEventListener('resize', updateSize);
   }, []);
@@ -51,15 +68,16 @@ const KanjiCanvas = forwardRef((props, ref) => {
   // --- TÍNH TOÁN TỌA ĐỘ CHUẨN ---
   const getCoords = (e) => {
     const rect = canvasRef.current.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
     return {
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top
+      x: clientX - rect.left,
+      y: clientY - rect.top
     };
   };
 
   const startDrawing = (e) => {
     lastPos.current = getCoords(e);
-    // Reset độ dày khi bắt đầu nét mới
     currentLineWidth.current = 15; 
     setIsDrawing(true);
   };
@@ -70,22 +88,16 @@ const KanjiCanvas = forwardRef((props, ref) => {
     const coords = getCoords(e);
     const context = contextRef.current;
     
-    // Tính tốc độ vẽ (khoảng cách di chuyển)
     const dist = Math.sqrt(
       Math.pow(coords.x - lastPos.current.x, 2) + 
       Math.pow(coords.y - lastPos.current.y, 2)
     );
     
-    // --- CẤU HÌNH ĐỘ DÀY NÉT BÚT (QUAN TRỌNG) ---
-    // Điều chỉnh để nét không bị dính cục (như số 2) mà vẫn đủ đậm
-    // Vẽ càng nhanh -> Nét càng thanh
+    // Nét vẽ động: Vẽ nhanh nét thanh, vẽ chậm nét đậm
     let targetWidth = 22 - (dist / 10) * 8; 
-    
-    // Giới hạn độ to nhỏ (Min 8px - Max 22px)
-    if (targetWidth < 8) targetWidth = 8;   // Đủ nhỏ để tách nét chi tiết
-    if (targetWidth > 22) targetWidth = 22; // Đủ to để MangaOCR nhìn thấy
+    if (targetWidth < 8) targetWidth = 8; 
+    if (targetWidth > 22) targetWidth = 22; 
 
-    // Làm mượt sự thay đổi độ dày (Smooth transition)
     currentLineWidth.current = currentLineWidth.current * 0.8 + targetWidth * 0.2;
 
     context.beginPath();
@@ -108,8 +120,11 @@ const KanjiCanvas = forwardRef((props, ref) => {
       onMouseMove={draw}
       onMouseUp={stopDrawing}
       onMouseLeave={stopDrawing}
+      onTouchStart={startDrawing}
+      onTouchMove={draw}
+      onTouchEnd={stopDrawing}
       className="w-full h-full cursor-crosshair bg-[#FCFAF7] block touch-none"
-      style={{ touchAction: 'none' }} // Chặn cuộn trang khi vẽ trên màn cảm ứng
+      style={{ touchAction: 'none' }} 
     />
   );
 });
