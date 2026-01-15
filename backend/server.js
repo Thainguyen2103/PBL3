@@ -1,43 +1,43 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const { GoogleGenAI } = require("@google/genai");
-const kanjiDict = require("./kanji-dictionary.json"); 
+// SỬ DỤNG CHÍNH XÁC THƯ VIỆN BẠN YÊU CẦU
+const { GoogleGenAI } = require("@google/genai"); 
+const kanjiDict = require("./kanji-dictionary.json");
 
 dotenv.config();
 const app = express();
 
-app.use(cors({ origin: "*" })); 
+app.use(cors({ origin: "*" }));
 app.use(express.json({ limit: "10mb" }));
 
-// Log mọi yêu cầu đến để bạn theo dõi trên Render Dashboard
-app.use((req, res, next) => {
-    console.log(`[${new Date().toLocaleTimeString()}] Request: ${req.method} ${req.url}`);
-    next();
-});
-
+// Khởi tạo Google AI với API Key từ Environment trên Render
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-// --- ROUTE ĐĂNG NHẬP (Khớp /api/login) ---
+// --- 1. ROUTE ĐĂNG NHẬP (Fix lỗi 404) ---
 app.post("/api/login", (req, res) => {
     const { email, password } = req.body;
     if (email && password) {
         res.json({ 
-            message: "Thành công!",
-            session: { user: { email }, token: "pbl3-auth-token" } 
+            message: "Đăng nhập thành công!",
+            session: { user: { email }, token: "pbl3-auth-token-fixed" } 
         });
     } else {
-        res.status(400).json({ error: "Thiếu thông tin đăng nhập" });
+        res.status(400).json({ error: "Vui lòng nhập đầy đủ email và mật khẩu" });
     }
 });
 
-// --- ROUTE NHẬN DIỆN KANJI (6 GỢI Ý) ---
+// --- 2. ROUTE OCR KANJI (Dùng model gemini-2.5-flash) ---
 app.post("/api/ocr", async (req, res) => {
     try {
         const { image } = req.body;
-        const base64Data = image.replace(/^data:image\/\w+;base64,/, "");
-        const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
+        if (!image) return res.status(400).json({ error: "Không có dữ liệu ảnh" });
 
+        const base64Data = image.replace(/^data:image\/\w+;base64,/, "");
+
+        // Gọi model gemini-2.5-flash theo yêu cầu
+        const model = ai.getGenerativeModel({ model: "gemini-2.5-flash" });
+        
         const result = await model.generateContent([
             { text: "OCR Kanji: list 6 most likely characters, no spaces, no explanation." },
             { inlineData: { data: base64Data, mimeType: "image/png" } },
@@ -46,6 +46,7 @@ app.post("/api/ocr", async (req, res) => {
         const text = result.response.text().trim();
         const chars = text.split("").slice(0, 6);
 
+        // Khớp dữ liệu từ điển offline ngay tại server
         const candidates = chars.map(char => {
             const found = kanjiDict.find(item => item.kanji === char);
             return found || { kanji: char, hanviet: "MỚI", mean: "Dữ liệu AI" };
@@ -53,10 +54,10 @@ app.post("/api/ocr", async (req, res) => {
 
         res.json({ candidates });
     } catch (error) {
-        console.error("LỖI AI CHI TIẾT:", error.message);
+        console.error("LỖI CHI TIẾT:", error.message);
         res.status(500).json({ error: `Lỗi AI: ${error.message}` });
     }
 });
 
 const PORT = process.env.PORT || 10000;
-app.listen(PORT, () => console.log(`Server LIVE tại cổng ${PORT}`));
+app.listen(PORT, () => console.log(`Server LIVE tại cổng ${PORT} với Gemini 2.5 Flash`));
