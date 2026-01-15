@@ -7,32 +7,36 @@ const kanjiDict = require("./kanji-dictionary.json");
 dotenv.config();
 const app = express();
 
-app.use(cors({ origin: "*" })); // Cho phép Vercel truy cập
+// Cấu hình CORS để Vercel có thể truy cập Backend
+app.use(cors({ origin: "*" })); 
 app.use(express.json({ limit: "10mb" }));
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-// --- 1. ROUTE ĐĂNG NHẬP (SỬA ĐỂ KHỚP VỚI FRONTEND) ---
-// Dùng /api/login để phân biệt với các route khác
-app.post("/login", (req, res) => {
+// --- FIX LỖI 404: Cấu hình Route có tiền tố /api/ ---
+app.post("/api/login", (req, res) => {
     const { email, password } = req.body;
+    console.log("Đăng nhập:", email);
     if (email && password) {
         res.json({ 
-            message: "Thành công!",
-            session: { user: { email }, token: "fixed-token-pbl3" } 
+            message: "Đăng nhập thành công!",
+            session: { user: { email: email }, token: "fixed-pbl3-token" } 
         });
     } else {
         res.status(400).json({ error: "Thiếu thông tin đăng nhập" });
     }
 });
 
-// --- 2. ROUTE NHẬN DIỆN KANJI (6 GỢI Ý) ---
+app.post("/api/register", (req, res) => {
+    res.json({ message: "Đăng ký thành công!" });
+});
+
 app.post("/api/ocr", async (req, res) => {
     try {
         const { image } = req.body;
         const base64Data = image.replace(/^data:image\/\w+;base64,/, "");
         const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
-
+        
         const result = await model.generateContent([
             { text: "OCR Kanji: list 6 most likely characters, no spaces, no explanation." },
             { inlineData: { data: base64Data, mimeType: "image/png" } },
@@ -41,7 +45,7 @@ app.post("/api/ocr", async (req, res) => {
         const chars = result.response.text().trim().split("").slice(0, 6);
         const candidates = chars.map(char => {
             const found = kanjiDict.find(item => item.kanji === char);
-            return found || { kanji: char, hanviet: "MỚI", mean: "Dữ liệu AI" };
+            return found || { kanji: char, hanviet: "MỚI", mean: "Nhấn phân tích AI để xem" };
         });
 
         res.json({ candidates });
