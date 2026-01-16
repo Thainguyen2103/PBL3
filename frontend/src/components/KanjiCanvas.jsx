@@ -10,46 +10,46 @@ const KanjiCanvas = forwardRef((props, ref) => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    
-    // Xử lý độ phân giải cao (Retina display)
+    // Xử lý độ phân giải cao (Retina)
     const dpr = window.devicePixelRatio || 1;
-    
-    // Lấy kích thước hiển thị thực tế
     const rect = canvas.getBoundingClientRect();
     
-    // Thiết lập kích thước bộ nhớ đệm khớp với kích thước hiển thị
+    // Set kích thước thực của Canvas khớp với kích thước hiển thị
     canvas.width = rect.width * dpr;
     canvas.height = rect.height * dpr;
     
     const ctx = canvas.getContext('2d');
-    ctx.scale(dpr, dpr); // Scale để vẽ nét mịn
+    ctx.scale(dpr, dpr); 
     
-    // Cấu hình nét bút
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
-    ctx.lineWidth = 10; // Nét to hơn chút để dễ nhìn
+    ctx.lineWidth = 10; // Nét to, rõ
     ctx.strokeStyle = "black";
     
-    // Tắt tính năng "touch-action" của CSS để không bị cuộn trang khi vẽ
+    // Chặn hành động cuộn trang mặc định khi chạm tay vào canvas
     canvas.style.touchAction = "none";
   }, []);
 
-  // --- HÀM TÍNH TỌA ĐỘ CHUẨN XÁC 100% ---
+  // --- HÀM TÍNH TỌA ĐỘ BẤT TỬ (SỬA LỖI LỆCH CHUỘT) ---
   const getPos = (e) => {
-    // nativeEvent.offsetX/Y trả về tọa độ tương đối so với Canvas (đã trừ padding/border)
-    // Rất chính xác, không bị lệch chuột
-    return {
-      x: e.nativeEvent.offsetX,
-      y: e.nativeEvent.offsetY
-    };
+    const canvas = canvasRef.current;
+    // getBoundingClientRect luôn trả về vị trí chính xác của Canvas trên màn hình
+    const rect = canvas.getBoundingClientRect();
+    
+    // Tính toán tọa độ chuột dựa trên vị trí Canvas
+    // clientX/Y là vị trí chuột trên toàn màn hình
+    // Trừ đi rect.left/top sẽ ra vị trí chính xác trong Canvas
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    return { x, y };
   };
 
-  // --- SỬ DỤNG POINTER EVENTS (Gộp cả Chuột & Cảm ứng) ---
   const startDrawing = (e) => {
-    // Chỉ nhận input từ bút hoặc chuột trái (tránh chuột phải)
+    // Chỉ vẽ khi nhấn chuột trái hoặc chạm bút/tay
     if (e.buttons !== 1 && e.pointerType === 'mouse') return;
-
-    // Capture pointer để không bị trượt ra ngoài khi vẽ nhanh
+    
+    // Giữ con trỏ không bị trượt ra ngoài khi vẽ nhanh
     e.target.setPointerCapture(e.pointerId);
 
     const { x, y } = getPos(e);
@@ -72,23 +72,21 @@ const KanjiCanvas = forwardRef((props, ref) => {
     ctx.lineTo(x, y);
     ctx.stroke();
     
-    // Lưu điểm vào nét hiện tại
-    currentStrokeRef.current.push([x, y]);
+    // Lưu điểm vào nét hiện tại (làm tròn số để API dễ đọc)
+    currentStrokeRef.current.push([Math.round(x), Math.round(y)]);
   };
 
   const endDrawing = (e) => {
     if (!isDrawing.current) return;
     isDrawing.current = false;
-    
-    // Release pointer
     e.target.releasePointerCapture(e.pointerId);
     
-    // Lưu nét vẽ vào bộ nhớ tổng, CHỈ KHI nét đó có dữ liệu
+    // Lưu nét vẽ vào bộ nhớ tổng
     if (currentStrokeRef.current.length > 0) {
         traceRef.current.push(currentStrokeRef.current);
     }
     
-    // Gửi tín hiệu ra ngoài để nhận diện ngay lập tức
+    // Gửi tín hiệu nhận diện ngay lập tức
     if (props.onStrokeEnd) {
       props.onStrokeEnd();
     }
@@ -108,9 +106,7 @@ const KanjiCanvas = forwardRef((props, ref) => {
     if (traceRef.current.length === 0) return;
     traceRef.current.pop(); // Xóa nét cuối
     redraw();
-    
-    // Gọi lại nhận diện sau khi undo
-    if (props.onStrokeEnd) props.onStrokeEnd();
+    if (props.onStrokeEnd) props.onStrokeEnd(); // Nhận diện lại sau khi hoàn tác
   };
 
   const redraw = () => {
@@ -142,11 +138,10 @@ const KanjiCanvas = forwardRef((props, ref) => {
     <canvas
       ref={canvasRef}
       className="w-full h-full cursor-crosshair touch-none"
-      // Thay thế toàn bộ sự kiện cũ bằng Pointer Events
+      // Dùng Pointer Events để hỗ trợ cả Chuột và Cảm ứng mượt mà
       onPointerDown={startDrawing}
       onPointerMove={draw}
       onPointerUp={endDrawing}
-      // Không cần onMouseLeave vì đã dùng setPointerCapture
     />
   );
 });
