@@ -1,15 +1,16 @@
-import React, { useRef, useState, useEffect, useImperativeHandle, forwardRef } from 'react';
+import React, { useRef, useEffect, useImperativeHandle, forwardRef } from 'react';
 
 const KanjiCanvas = forwardRef((props, ref) => {
   const canvasRef = useRef(null);
-  const [isDrawing, setIsDrawing] = useState(false);
-  // Lưu tọa độ nét vẽ: [ [ [x,y], [x,y] ], ... ]
-  const [trace, setTrace] = useState([]); 
-  const [currentStroke, setCurrentStroke] = useState([]);
+  const isDrawing = useRef(false);
+  
+  // Dùng useRef để lưu dữ liệu nét vẽ TỨC THÌ (không bị trễ như useState)
+  const traceRef = useRef([]); 
+  const currentStrokeRef = useRef([]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    // Tăng độ phân giải cho Canvas để nét vẽ mượt hơn trên màn hình Retina/HighDPI
+    // Tăng độ phân giải Canvas (Fix lỗi nét bị răng cưa)
     const dpr = window.devicePixelRatio || 1;
     const rect = canvas.getBoundingClientRect();
     
@@ -20,18 +21,19 @@ const KanjiCanvas = forwardRef((props, ref) => {
     ctx.scale(dpr, dpr);
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
-    ctx.lineWidth = 6; // Độ dày nét bút
-    ctx.strokeStyle = "#000000"; // Màu đen
+    ctx.lineWidth = 8; // Nét đậm hơn để dễ nhận diện
+    ctx.strokeStyle = "#000000";
   }, []);
 
+  // Hàm lấy tọa độ chuẩn (Làm tròn số nguyên để Google API dễ đọc)
   const getPos = (e) => {
     const canvas = canvasRef.current;
     const rect = canvas.getBoundingClientRect();
     const clientX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
     const clientY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
     return {
-      x: clientX - rect.left,
-      y: clientY - rect.top
+      x: Math.round(clientX - rect.left),
+      y: Math.round(clientY - rect.top)
     };
   };
 
@@ -42,30 +44,36 @@ const KanjiCanvas = forwardRef((props, ref) => {
     
     ctx.beginPath();
     ctx.moveTo(x, y);
-    setIsDrawing(true);
-    setCurrentStroke([[x, y]]); // Bắt đầu lưu nét mới
+    isDrawing.current = true;
+    
+    // Bắt đầu lưu nét mới
+    currentStrokeRef.current = [[x, y]];
   };
 
   const draw = (e) => {
-    if (!isDrawing) return;
+    if (!isDrawing.current) return;
     e.preventDefault();
     const { x, y } = getPos(e);
     const ctx = canvasRef.current.getContext('2d');
     
     ctx.lineTo(x, y);
     ctx.stroke();
-    setCurrentStroke(prev => [...prev, [x, y]]); // Lưu tọa độ liên tục
+    
+    // Lưu tọa độ liên tục vào useRef
+    currentStrokeRef.current.push([x, y]);
   };
 
   const endDrawing = (e) => {
-    if (!isDrawing) return;
+    if (!isDrawing.current) return;
     e.preventDefault();
-    setIsDrawing(false);
+    isDrawing.current = false;
     
-    const newTrace = [...trace, currentStroke];
-    setTrace(newTrace);
+    // Đẩy nét vừa vẽ vào mảng tổng
+    if (currentStrokeRef.current.length > 0) {
+        traceRef.current.push(currentStrokeRef.current);
+    }
     
-    // Gửi tín hiệu ra ngoài (nếu cần nhận diện ngay lập tức khi nhấc bút)
+    // Gửi tín hiệu để HomePage nhận diện ngay lập tức
     if (props.onStrokeEnd) {
       props.onStrokeEnd();
     }
@@ -74,26 +82,39 @@ const KanjiCanvas = forwardRef((props, ref) => {
   const clearCanvas = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height); // Xóa sạch hình ảnh
-    setTrace([]); // Xóa sạch dữ liệu tọa độ
-  };
-
-  const undo = () => {
-    if (trace.length === 0) return;
-    const newTrace = trace.slice(0, -1); // Bỏ nét cuối
-    setTrace(newTrace);
-    redraw(newTrace); // Vẽ lại các nét còn lại
-  };
-
-  const redraw = (strokes) => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    // Xóa màn hình để vẽ lại từ đầu
+    // Xóa hình ảnh
     const dpr = window.devicePixelRatio || 1;
     ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
     
+    // Xóa dữ liệu trong bộ nhớ
+    traceRef.current = [];
+    currentStrokeRef.current = [];
+  };
+
+  const undo = () => {
+    if (traceRef.current.length === 0) return;
+    
+    // Bỏ nét cuối cùng
+    traceRef.current.pop();
+    redraw();
+    
+    // Tự động nhận diện lại sau khi hoàn tác
+    if (props.onStrokeEnd) {
+        props.onStrokeEnd();
+    }
+  };
+
+  const redraw = () => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    
+    // Xóa sạch để vẽ lại
+    ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+    
     ctx.beginPath();
-    strokes.forEach(stroke => {
+    // Duyệt qua từng nét trong bộ nhớ và vẽ lại
+    traceRef.current.forEach(stroke => {
       if (stroke.length === 0) return;
       ctx.beginPath();
       ctx.moveTo(stroke[0][0], stroke[0][1]);
@@ -104,12 +125,11 @@ const KanjiCanvas = forwardRef((props, ref) => {
     });
   };
 
-  // Xuất các hàm này ra ngoài để HomePage gọi được
   useImperativeHandle(ref, () => ({
     clear: clearCanvas,
     undo: undo,
-    getTrace: () => trace, // HÀM QUAN TRỌNG NHẤT: Trả về tọa độ cho thư viện handwriting.js
-    getCanvasImage: () => canvasRef.current.toDataURL("image/png") // Vẫn giữ hàm này nếu cần
+    // HÀM QUAN TRỌNG: Trả về dữ liệu từ useRef (luôn mới nhất)
+    getTrace: () => traceRef.current 
   }));
 
   return (
