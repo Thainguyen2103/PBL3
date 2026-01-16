@@ -1,18 +1,40 @@
 // src/pages/LoginPage.jsx
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Dùng để chuyển trang
+import { useNavigate } from 'react-router-dom';
+// 1. Import Context để báo cho App biết khi đăng nhập thành công
+import { useAppContext } from '../context/AppContext';
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  // 2. Lấy hàm setUser từ Context
+  const { setUser } = useAppContext();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = (e) => {
     e.preventDefault();
+    
     // Giả lập đăng nhập (Sau này sẽ kết nối Backend Python ở đây)
     if (username && password) {
+      // Tạo dữ liệu người dùng giả lập
+      const sessionData = {
+          username: username,
+          fullName: username, // Dùng tạm tên đăng nhập làm tên hiển thị
+          level: "N5 - Nhập môn",
+          exp: 0,
+          maxExp: 500,
+          language: 'vi' // Mặc định
+      };
+
+      // --- QUAN TRỌNG: CẬP NHẬT CONTEXT ---
+      // Lưu vào localStorage để F5 không mất
+      localStorage.setItem('session', JSON.stringify(sessionData));
+      // Cập nhật State toàn cục để HomePage nhận diện được ngay
+      setUser(sessionData);
+
       alert("Đăng nhập thành công! Chào mừng senpai.");
-      navigate('/home'); // Chuyển hướng sang Trang chủ
+      navigate('/home'); 
     } else {
       alert("Vui lòng nhập tài khoản!");
     }
@@ -20,6 +42,7 @@ const LoginPage = () => {
 
   return (
     <div className="flex h-screen w-full bg-gray-100">
+      
       {/* CỘT TRÁI: Hình ảnh & Branding */}
       <div className="hidden md:flex w-1/2 bg-indigo-900 flex-col justify-center items-center text-white p-10 relative overflow-hidden">
         {/* Trang trí background */}
@@ -80,4 +103,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;  
+export default LoginPage;

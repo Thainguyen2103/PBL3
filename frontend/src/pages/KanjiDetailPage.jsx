@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import dictionaryData from '../utils/kanji-dictionary.json'; 
+// 1. IMPORT CONTEXT
+import { useAppContext } from '../context/AppContext';
 
 const KanjiDetailPage = () => {
   const { character } = useParams(); 
   const navigate = useNavigate();
+  // 2. LẤY TỪ ĐIỂN TỪ CONTEXT
+  const { t } = useAppContext();
 
   const kanjiInfo = dictionaryData.find(item => item.kanji === character);
 
@@ -21,7 +25,7 @@ const KanjiDetailPage = () => {
             onClick={() => navigate('/home')} 
             className="px-8 py-3 bg-black text-white rounded-xl font-bold hover:scale-105 transition-transform"
         >
-            Quay về Dojo
+            {t.back}
         </button>
       </div>
     );
@@ -37,7 +41,7 @@ const KanjiDetailPage = () => {
                 className="flex items-center gap-3 text-white/80 hover:text-white md:text-gray-400 md:hover:text-black transition-all font-bold group bg-black/20 md:bg-transparent px-4 py-2 rounded-full md:p-0 backdrop-blur-sm md:backdrop-blur-none"
             >
                 <span className="bg-white/20 md:bg-gray-100 group-hover:bg-white md:group-hover:bg-gray-200 w-8 h-8 rounded-full flex items-center justify-center text-lg shadow-sm">←</span>
-                <span className="text-sm tracking-wide">Quay lại</span>
+                <span className="text-sm tracking-wide">{t.detail_back || "Quay lại"}</span>
             </button>
         </div>
 
@@ -57,7 +61,7 @@ const KanjiDetailPage = () => {
                 
                 <div className="text-center mt-4">
                     <span className="bg-red-600/90 text-white px-3 py-1 rounded text-[10px] font-black tracking-[0.2em] uppercase mb-3 inline-block shadow-lg">
-                        Hán Việt
+                        {t.home_result_hanviet}
                     </span>
                     <h2 className="text-4xl md:text-5xl font-black uppercase tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-red-200 via-white to-red-200">
                         {kanjiInfo.hanviet}
@@ -66,10 +70,11 @@ const KanjiDetailPage = () => {
             </div>
         </div>
 
+        {/* --- CỘT PHẢI: THÔNG TIN CHI TIẾT --- */}
         <div className="w-full md:w-7/12 p-8 md:p-12 bg-white flex flex-col gap-8 overflow-y-auto max-h-screen">
             
             <div className="border-l-4 border-black pl-6">
-                <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Ý nghĩa</h3>
+                <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest mb-2">{t.home_meaning}</h3>
                 <p className="text-2xl md:text-3xl font-bold text-gray-800 leading-snug">
                     {kanjiInfo.mean}
                 </p>
@@ -79,14 +84,14 @@ const KanjiDetailPage = () => {
                 <div className="bg-blue-50/50 p-5 rounded-2xl border border-blue-100">
                     <div className="flex items-center gap-2 mb-2">
                         <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                        <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Âm Onyomi</span>
+                        <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Onyomi</span>
                     </div>
                     <span className="text-lg font-bold text-blue-900">{kanjiInfo.onyomi || "---"}</span>
                 </div>
                 <div className="bg-green-50/50 p-5 rounded-2xl border border-green-100">
                     <div className="flex items-center gap-2 mb-2">
                         <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                        <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Âm Kunyomi</span>
+                        <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Kunyomi</span>
                     </div>
                     <span className="text-lg font-bold text-green-900">{kanjiInfo.kunyomi || "---"}</span>
                 </div>
@@ -97,7 +102,7 @@ const KanjiDetailPage = () => {
             <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-sm">
                 <div className="flex flex-wrap gap-8 mb-6 border-b border-gray-200 pb-6">
                     <div>
-                        <span className="block text-[10px] text-gray-400 font-black uppercase mb-1">Bộ thủ chính</span>
+                        <span className="block text-[10px] text-gray-400 font-black uppercase mb-1">{t.detail_radical || "Bộ thủ"}</span>
                         {/* --- FONT THƯ PHÁP CHO BỘ THỦ --- */}
                         <span 
                             className="text-3xl font-black text-slate-800"
@@ -107,17 +112,17 @@ const KanjiDetailPage = () => {
                         </span>
                     </div>
                     <div>
-                        <span className="block text-[10px] text-gray-400 font-black uppercase mb-1">Tổng số nét</span>
+                        <span className="block text-[10px] text-gray-400 font-black uppercase mb-1">{t.detail_strokes || "Số nét"}</span>
                         <span className="text-2xl font-black text-slate-800">{kanjiInfo.strokes || "?"}</span>
                     </div>
                     <div>
-                        <span className="block text-[10px] text-gray-400 font-black uppercase mb-1">Hình thành</span>
+                        <span className="block text-[10px] text-gray-400 font-black uppercase mb-1">{t.detail_formation || "Hình thành"}</span>
                         <span className="text-lg font-bold text-slate-800">{kanjiInfo.formation || "---"}</span>
                     </div>
                 </div>
 
                 <div className="mb-6">
-                    <span className="block text-[10px] text-blue-500 font-black uppercase mb-3">Các thành phần cấu tạo:</span>
+                    <span className="block text-[10px] text-blue-500 font-black uppercase mb-3">{t.detail_components || "Thành phần cấu tạo:"}</span>
                     <div className="flex flex-wrap gap-2">
                         {kanjiInfo.components ? (
                             kanjiInfo.components.split(/,|、/).map((part, index) => (
@@ -137,7 +142,7 @@ const KanjiDetailPage = () => {
                 
                 <div className="bg-white p-5 rounded-xl border border-yellow-200 shadow-sm relative mt-2">
                     <span className="absolute -top-3 left-4 bg-yellow-100 text-yellow-700 px-3 py-1 rounded-md text-[10px] font-black uppercase tracking-wider border border-yellow-200">
-                        💡 Mẹo nhớ nhanh
+                        {t.detail_tip || "Mẹo nhớ"}
                     </span>
                     <p className="text-slate-700 italic leading-relaxed pt-2">
                         "{kanjiInfo.detail || "Đang cập nhật..."}"
