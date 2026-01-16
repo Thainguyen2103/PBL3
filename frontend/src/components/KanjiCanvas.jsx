@@ -4,41 +4,54 @@ const KanjiCanvas = forwardRef((props, ref) => {
   const canvasRef = useRef(null);
   const isDrawing = useRef(false);
   
-  // Dùng useRef để lưu dữ liệu nét vẽ TỨC THÌ (không bị trễ như useState)
+  // Lưu trữ nét vẽ: [ [ [x,y], [x,y] ], ... ]
   const traceRef = useRef([]); 
   const currentStrokeRef = useRef([]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    // Tăng độ phân giải Canvas (Fix lỗi nét bị răng cưa)
+    
+    // Xử lý độ phân giải cao (Retina display)
     const dpr = window.devicePixelRatio || 1;
+    
+    // Lấy kích thước hiển thị thực tế
     const rect = canvas.getBoundingClientRect();
     
+    // Thiết lập kích thước bộ nhớ đệm khớp với kích thước hiển thị
     canvas.width = rect.width * dpr;
     canvas.height = rect.height * dpr;
     
     const ctx = canvas.getContext('2d');
-    ctx.scale(dpr, dpr);
+    ctx.scale(dpr, dpr); // Scale để vẽ nét mịn
+    
+    // Cấu hình nét bút
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
-    ctx.lineWidth = 8; // Nét đậm hơn để dễ nhận diện
-    ctx.strokeStyle = "#000000";
+    ctx.lineWidth = 10; // Nét to hơn chút để dễ nhìn
+    ctx.strokeStyle = "black";
+    
+    // Tắt tính năng "touch-action" của CSS để không bị cuộn trang khi vẽ
+    canvas.style.touchAction = "none";
   }, []);
 
-  // Hàm lấy tọa độ chuẩn (Làm tròn số nguyên để Google API dễ đọc)
+  // --- HÀM TÍNH TỌA ĐỘ CHUẨN XÁC 100% ---
   const getPos = (e) => {
-    const canvas = canvasRef.current;
-    const rect = canvas.getBoundingClientRect();
-    const clientX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
-    const clientY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
+    // nativeEvent.offsetX/Y trả về tọa độ tương đối so với Canvas (đã trừ padding/border)
+    // Rất chính xác, không bị lệch chuột
     return {
-      x: Math.round(clientX - rect.left),
-      y: Math.round(clientY - rect.top)
+      x: e.nativeEvent.offsetX,
+      y: e.nativeEvent.offsetY
     };
   };
 
+  // --- SỬ DỤNG POINTER EVENTS (Gộp cả Chuột & Cảm ứng) ---
   const startDrawing = (e) => {
-    e.preventDefault();
+    // Chỉ nhận input từ bút hoặc chuột trái (tránh chuột phải)
+    if (e.buttons !== 1 && e.pointerType === 'mouse') return;
+
+    // Capture pointer để không bị trượt ra ngoài khi vẽ nhanh
+    e.target.setPointerCapture(e.pointerId);
+
     const { x, y } = getPos(e);
     const ctx = canvasRef.current.getContext('2d');
     
@@ -46,34 +59,36 @@ const KanjiCanvas = forwardRef((props, ref) => {
     ctx.moveTo(x, y);
     isDrawing.current = true;
     
-    // Bắt đầu lưu nét mới
+    // Bắt đầu nét mới
     currentStrokeRef.current = [[x, y]];
   };
 
   const draw = (e) => {
     if (!isDrawing.current) return;
-    e.preventDefault();
+    
     const { x, y } = getPos(e);
     const ctx = canvasRef.current.getContext('2d');
     
     ctx.lineTo(x, y);
     ctx.stroke();
     
-    // Lưu tọa độ liên tục vào useRef
+    // Lưu điểm vào nét hiện tại
     currentStrokeRef.current.push([x, y]);
   };
 
   const endDrawing = (e) => {
     if (!isDrawing.current) return;
-    e.preventDefault();
     isDrawing.current = false;
     
-    // Đẩy nét vừa vẽ vào mảng tổng
+    // Release pointer
+    e.target.releasePointerCapture(e.pointerId);
+    
+    // Lưu nét vẽ vào bộ nhớ tổng, CHỈ KHI nét đó có dữ liệu
     if (currentStrokeRef.current.length > 0) {
         traceRef.current.push(currentStrokeRef.current);
     }
     
-    // Gửi tín hiệu để HomePage nhận diện ngay lập tức
+    // Gửi tín hiệu ra ngoài để nhận diện ngay lập tức
     if (props.onStrokeEnd) {
       props.onStrokeEnd();
     }
@@ -82,26 +97,20 @@ const KanjiCanvas = forwardRef((props, ref) => {
   const clearCanvas = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    // Xóa hình ảnh
     const dpr = window.devicePixelRatio || 1;
     ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
     
-    // Xóa dữ liệu trong bộ nhớ
     traceRef.current = [];
     currentStrokeRef.current = [];
   };
 
   const undo = () => {
     if (traceRef.current.length === 0) return;
-    
-    // Bỏ nét cuối cùng
-    traceRef.current.pop();
+    traceRef.current.pop(); // Xóa nét cuối
     redraw();
     
-    // Tự động nhận diện lại sau khi hoàn tác
-    if (props.onStrokeEnd) {
-        props.onStrokeEnd();
-    }
+    // Gọi lại nhận diện sau khi undo
+    if (props.onStrokeEnd) props.onStrokeEnd();
   };
 
   const redraw = () => {
@@ -109,11 +118,9 @@ const KanjiCanvas = forwardRef((props, ref) => {
     const ctx = canvas.getContext('2d');
     const dpr = window.devicePixelRatio || 1;
     
-    // Xóa sạch để vẽ lại
     ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
     
     ctx.beginPath();
-    // Duyệt qua từng nét trong bộ nhớ và vẽ lại
     traceRef.current.forEach(stroke => {
       if (stroke.length === 0) return;
       ctx.beginPath();
@@ -128,22 +135,18 @@ const KanjiCanvas = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => ({
     clear: clearCanvas,
     undo: undo,
-    // HÀM QUAN TRỌNG: Trả về dữ liệu từ useRef (luôn mới nhất)
-    getTrace: () => traceRef.current 
+    getTrace: () => traceRef.current
   }));
 
   return (
     <canvas
       ref={canvasRef}
       className="w-full h-full cursor-crosshair touch-none"
-      style={{ width: '100%', height: '100%' }}
-      onMouseDown={startDrawing}
-      onMouseMove={draw}
-      onMouseUp={endDrawing}
-      onMouseLeave={endDrawing}
-      onTouchStart={startDrawing}
-      onTouchMove={draw}
-      onTouchEnd={endDrawing}
+      // Thay thế toàn bộ sự kiện cũ bằng Pointer Events
+      onPointerDown={startDrawing}
+      onPointerMove={draw}
+      onPointerUp={endDrawing}
+      // Không cần onMouseLeave vì đã dùng setPointerCapture
     />
   );
 });
