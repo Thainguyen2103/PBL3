@@ -1,38 +1,102 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAppContext } from '../context/AppContext';
 
 const Profile = () => {
   const navigate = useNavigate();
+  const { user, updateUserInfo } = useAppContext();
   
-  // State giả lập dữ liệu người dùng
-  const [user, setUser] = useState({
-    name: 'Samurai User',
-    email: 'samurai@kanjidojo.com',
-    bio: 'Đang trên con đường chinh phục N2. Thích anime và thư pháp.',
-    level: 'N4 - Sơ Trung',
-    streak: 15,
-    avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=Samurai',
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    bio: '',
+    level: 'N5',
+    streak: 0,
+    avatar: '',
     goal: 'Học 5 Kanji mỗi ngày'
   });
 
-  // State hiển thị thông báo lưu thành công
+  const [isLoading, setIsLoading] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
 
-  // Danh sách Avatar để chọn nhanh
-  const avatarOptions = [
-    'Samurai', 'Neko', 'Shiba', 'Sensei', 'Geisha', 'Ronin'
-  ];
+  const avatarOptions = ['Samurai', 'Neko', 'Shiba', 'Sensei', 'Geisha', 'Ronin'];
 
-  const handleSave = (e) => {
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        // Thử lấy cả name hoặc fullName hoặc username
+        fullName: user.name || user.fullName || user.username || 'Sensei', 
+        email: user.email || 'Chưa cập nhật',
+        bio: user.bio || '',
+        level: user.level || 'N5',
+        streak: user.streak || 0,
+        avatar: user.avatar || 'https://api.dicebear.com/7.x/adventurer/svg?seed=Sensei',
+        goal: user.goal || 'Học 5 Kanji mỗi ngày'
+      });
+    }
+  }, [user]);
+
+  const handleSave = async (e) => {
     e.preventDefault();
-    setIsSaved(true);
-    setTimeout(() => setIsSaved(false), 2000); // Ẩn thông báo sau 2s
+    setIsLoading(true);
+
+    try {
+      // 1. LẤY TOKEN TỪ SESSION (Quan trọng để Server cho phép sửa)
+      const session = JSON.parse(localStorage.getItem('session'));
+      const token = session?.access_token || session?.token; 
+
+      console.log("Đang gửi dữ liệu lên Server:", formData);
+
+      const response = await fetch('https://pbl3-sofd.onrender.com/api/update-profile', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          // Gửi kèm Token nếu có
+          ...(token && { 'Authorization': `Bearer ${token}` }) 
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          // Gửi cả 2 trường để chắc chắn Server nhận được 1 trong 2
+          name: formData.fullName,      
+          fullName: formData.fullName,
+          bio: formData.bio,
+          avatar: formData.avatar,
+          goal: formData.goal
+        }),
+      });
+
+      const data = await response.json();
+      console.log("Server phản hồi:", data);
+
+      if (response.ok) {
+        // Cập nhật Context ngay lập tức
+        // Lưu ý: Cập nhật cả trường 'name' và 'fullName' vào local để đồng bộ
+        updateUserInfo({ ...formData, name: formData.fullName });
+        
+        setIsSaved(true);
+        setTimeout(() => setIsSaved(false), 2000);
+      } else {
+        alert("Lỗi Server: " + (data.message || "Không thể lưu"));
+      }
+    } catch (error) {
+      console.error("Lỗi kết nối:", error);
+      alert("Không thể kết nối đến máy chủ.");
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  const handleLogout = () => {
+    if(window.confirm("Bạn chắc chắn muốn đăng xuất?")) {
+        localStorage.removeItem('session');
+        navigate('/auth');
+        window.location.reload();
+    }
+  }
 
   return (
     <div className="min-h-screen bg-[#FDFBF7] flex font-sans">
       
-      {/* SIDEBAR (Giữ nguyên để đồng bộ, hoặc tách thành Component riêng) */}
       <aside className="w-80 bg-white border-r border-gray-100 p-6 flex flex-col shadow-xl z-20 h-screen sticky top-0 hidden md:flex">
         <div className="flex items-center gap-3 mb-10 px-2 cursor-pointer" onClick={() => navigate('/home')}>
           <div className="bg-black text-white w-10 h-10 rounded-xl flex items-center justify-center font-black text-xl">漢</div>
@@ -49,15 +113,11 @@ const Profile = () => {
         </div>
       </aside>
 
-      {/* MAIN CONTENT */}
       <main className="flex-1 p-8 overflow-y-auto h-screen">
         <div className="max-w-5xl mx-auto">
           
-          {/* Header & Back Button (Mobile) */}
           <div className="flex items-center gap-4 mb-8">
-            <button onClick={() => navigate('/home')} className="md:hidden bg-white p-3 rounded-xl shadow-sm border border-gray-100">
-              ←
-            </button>
+            <button onClick={() => navigate('/home')} className="md:hidden bg-white p-3 rounded-xl shadow-sm border border-gray-100">←</button>
             <div>
               <h1 className="text-3xl font-black text-gray-900 uppercase tracking-tight">Hồ Sơ Của Tôi</h1>
               <p className="text-gray-400 font-medium italic">Quản lý thông tin và cá nhân hóa trải nghiệm.</p>
@@ -65,32 +125,26 @@ const Profile = () => {
           </div>
 
           <div className="flex flex-col lg:flex-row gap-8">
-            
-            {/* CỘT TRÁI: AVATAR & THỐNG KÊ */}
             <div className="w-full lg:w-1/3 flex flex-col gap-6">
-              
-              {/* Card Avatar */}
               <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100 text-center relative group">
                 <div className="w-32 h-32 mx-auto bg-gray-100 rounded-3xl overflow-hidden border-4 border-white shadow-lg mb-4 relative cursor-pointer">
-                  <img src={user.avatar} alt="Avatar" className="w-full h-full object-cover" />
-                  {/* Overlay chỉnh sửa */}
+                  <img src={formData.avatar} alt="Avatar" className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                     <span className="text-white text-xs font-bold uppercase tracking-widest">Đổi ảnh</span>
                   </div>
                 </div>
                 
-                <h2 className="text-xl font-black text-gray-900">{user.name}</h2>
-                <p className="text-sm font-bold text-gray-400 uppercase tracking-widest mt-1">{user.level}</p>
+                <h2 className="text-xl font-black text-gray-900">{formData.fullName}</h2>
+                <p className="text-sm font-bold text-gray-400 uppercase tracking-widest mt-1">{formData.level}</p>
 
-                {/* Chọn nhanh Avatar */}
                 <div className="mt-6 pt-6 border-t border-gray-50">
                   <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3">Chọn linh vật đại diện</p>
                   <div className="flex justify-center gap-2 flex-wrap">
                     {avatarOptions.map((seed) => (
                       <button 
                         key={seed}
-                        onClick={() => setUser({...user, avatar: `https://api.dicebear.com/7.x/adventurer/svg?seed=${seed}`})}
-                        className={`w-10 h-10 rounded-xl overflow-hidden border-2 transition-all ${user.avatar.includes(seed) ? 'border-black scale-110 shadow-md' : 'border-transparent hover:border-gray-200'}`}
+                        onClick={() => setFormData({...formData, avatar: `https://api.dicebear.com/7.x/adventurer/svg?seed=${seed}`})}
+                        className={`w-10 h-10 rounded-xl overflow-hidden border-2 transition-all ${formData.avatar.includes(seed) ? 'border-black scale-110 shadow-md' : 'border-transparent hover:border-gray-200'}`}
                       >
                         <img src={`https://api.dicebear.com/7.x/adventurer/svg?seed=${seed}`} alt={seed} />
                       </button>
@@ -98,25 +152,8 @@ const Profile = () => {
                   </div>
                 </div>
               </div>
-
-              {/* Card Thống kê */}
-              <div className="bg-black text-white p-8 rounded-[2.5rem] shadow-lg relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-3xl"></div>
-                <div className="relative z-10">
-                  <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-6">Thành tích học tập</h3>
-                  <div className="flex justify-between items-end mb-4">
-                    <span className="text-3xl font-black">{user.streak}</span>
-                    <span className="text-xs font-bold text-green-400 uppercase bg-green-400/20 px-2 py-1 rounded-lg">Ngày liên tiếp 🔥</span>
-                  </div>
-                  <div className="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
-                    <div className="bg-gradient-to-r from-green-400 to-blue-500 h-full w-[70%]"></div>
-                  </div>
-                  <p className="text-xs text-gray-500 mt-3 font-medium">Bạn chăm chỉ hơn 85% người dùng khác!</p>
-                </div>
-              </div>
             </div>
 
-            {/* CỘT PHẢI: FORM CHỈNH SỬA */}
             <div className="flex-1">
               <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100">
                 <h3 className="text-xl font-black text-gray-900 mb-6 uppercase tracking-tight">Thông tin chi tiết</h3>
@@ -127,29 +164,23 @@ const Profile = () => {
                       <label className="block text-xs font-bold text-gray-400 uppercase mb-2 ml-1">Tên hiển thị</label>
                       <input 
                         type="text" 
-                        value={user.name} 
-                        onChange={(e) => setUser({...user, name: e.target.value})}
+                        value={formData.fullName} 
+                        onChange={(e) => setFormData({...formData, fullName: e.target.value})}
                         className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl px-5 py-3 font-bold text-gray-800 outline-none focus:border-black transition-all"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-bold text-gray-400 uppercase mb-2 ml-1">Email (Không thể sửa)</label>
-                      <input 
-                        type="email" 
-                        value={user.email} 
-                        disabled
-                        className="w-full bg-gray-100 border-2 border-transparent rounded-2xl px-5 py-3 font-bold text-gray-400 cursor-not-allowed"
-                      />
+                      <label className="block text-xs font-bold text-gray-400 uppercase mb-2 ml-1">Email</label>
+                      <div className="relative">
+                          <input type="email" value={formData.email} disabled className="w-full bg-gray-100 border-2 border-transparent rounded-2xl px-5 py-3 font-bold text-gray-500 cursor-not-allowed opacity-70"/>
+                          <span className="absolute right-4 top-3.5 text-lg">🔒</span>
+                      </div>
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-xs font-bold text-gray-400 uppercase mb-2 ml-1">Mục tiêu học tập</label>
-                    <select 
-                      value={user.goal}
-                      onChange={(e) => setUser({...user, goal: e.target.value})}
-                      className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl px-5 py-3 font-bold text-gray-800 outline-none focus:border-black transition-all appearance-none"
-                    >
+                    <select value={formData.goal} onChange={(e) => setFormData({...formData, goal: e.target.value})} className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl px-5 py-3 font-bold text-gray-800 outline-none focus:border-black transition-all appearance-none">
                       <option>Học 5 Kanji mỗi ngày</option>
                       <option>Học 10 Kanji mỗi ngày</option>
                       <option>Chinh phục N5 trong 1 tháng</option>
@@ -159,38 +190,16 @@ const Profile = () => {
 
                   <div>
                     <label className="block text-xs font-bold text-gray-400 uppercase mb-2 ml-1">Giới thiệu bản thân (Bio)</label>
-                    <textarea 
-                      value={user.bio}
-                      onChange={(e) => setUser({...user, bio: e.target.value})}
-                      className="w-full h-32 bg-gray-50 border-2 border-gray-100 rounded-2xl px-5 py-3 font-medium text-gray-800 outline-none focus:border-black transition-all resize-none"
-                    ></textarea>
+                    <textarea value={formData.bio} onChange={(e) => setFormData({...formData, bio: e.target.value})} className="w-full h-32 bg-gray-50 border-2 border-gray-100 rounded-2xl px-5 py-3 font-medium text-gray-800 outline-none focus:border-black transition-all resize-none"></textarea>
                   </div>
 
                   <div className="pt-6 border-t border-gray-50 flex items-center justify-between">
-                    <button type="button" className="text-red-500 text-xs font-black uppercase tracking-widest hover:underline">
-                      Đăng xuất
-                    </button>
-                    
-                    <button 
-                      type="submit" 
-                      className="bg-black text-white px-8 py-3 rounded-xl font-bold hover:bg-gray-800 transition-all active:scale-95 shadow-lg flex items-center gap-2"
-                    >
-                      {isSaved ? 'Đã Lưu! ✓' : 'Lưu Thay Đổi'}
+                    <button type="button" onClick={handleLogout} className="text-red-500 text-xs font-black uppercase tracking-widest hover:underline">Đăng xuất</button>
+                    <button type="submit" disabled={isLoading} className="bg-black text-white px-8 py-3 rounded-xl font-bold hover:bg-gray-800 transition-all active:scale-95 shadow-lg flex items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed">
+                      {isLoading ? 'Đang lưu...' : (isSaved ? 'Đã Lưu! ✓' : 'Lưu Thay Đổi')}
                     </button>
                   </div>
                 </form>
-
-              </div>
-
-              {/* Khu vực nguy hiểm */}
-              <div className="mt-8 bg-red-50 p-8 rounded-[2.5rem] border border-red-100 flex items-center justify-between opacity-80 hover:opacity-100 transition-opacity">
-                <div>
-                  <h4 className="text-red-600 font-black uppercase tracking-tight">Xóa tài khoản</h4>
-                  <p className="text-red-400 text-xs font-bold mt-1">Hành động này không thể hoàn tác.</p>
-                </div>
-                <button className="bg-white text-red-500 border-2 border-red-100 px-5 py-2 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all">
-                  Xóa
-                </button>
               </div>
             </div>
           </div>
