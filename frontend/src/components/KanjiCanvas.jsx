@@ -2,74 +2,33 @@ import React, { useRef, useState, useEffect, useImperativeHandle, forwardRef } f
 
 const KanjiCanvas = forwardRef((props, ref) => {
   const canvasRef = useRef(null);
-  const contextRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
-  const lastPos = useRef({ x: 0, y: 0 });
-  const currentLineWidth = useRef(15); 
+  // Lưu tọa độ nét vẽ: [ [ [x,y], [x,y] ], ... ]
+  const [trace, setTrace] = useState([]); 
+  const [currentStroke, setCurrentStroke] = useState([]);
 
-  // --- CÁC HÀM CHO PHÉP FILE CHA (HOMEPAGE) GỌI ---
-  useImperativeHandle(ref, () => ({
-    // Hàm xóa bảng vẽ
-    clear: () => {
-      const canvas = canvasRef.current;
-      const context = canvas.getContext("2d");
-      context.clearRect(0, 0, canvas.width, canvas.height);
-    },
-    // Hàm trích xuất ảnh để gửi cho AI
-    getCanvasImage: () => {
-      if (canvasRef.current) {
-        const mainCanvas = canvasRef.current;
-        
-        // 1. Tạo một Canvas tạm thời trong bộ nhớ để xử lý nền
-        const tempCanvas = document.createElement('canvas');
-        tempCanvas.width = mainCanvas.width;
-        tempCanvas.height = mainCanvas.height;
-        const tempCtx = tempCanvas.getContext('2d');
-
-        // 2. TÔ NỀN TRẮNG: AI không thể nhìn thấy nét đen trên nền trong suốt (mặc định thành đen)
-        tempCtx.fillStyle = "#FFFFFF"; 
-        tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
-
-        // 3. Chép nét vẽ từ canvas chính sang nền trắng của canvas tạm
-        tempCtx.drawImage(mainCanvas, 0, 0);
-
-        // 4. Trả về chuỗi Base64 đã có nền trắng hoàn hảo cho Gemini nhận diện
-        return tempCanvas.toDataURL('image/png');
-      }
-      return null;
-    }
-  }));
-
-  // --- KHỞI TẠO CANVAS (ĐỘ PHÂN GIẢI CAO) ---
   useEffect(() => {
     const canvas = canvasRef.current;
+    // Tăng độ phân giải cho Canvas để nét vẽ mượt hơn trên màn hình Retina/HighDPI
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
     
-    const updateSize = () => {
-      if (!canvas) return;
-      const rect = canvas.getBoundingClientRect();
-      
-      // Retina scaling (x2) để nét vẽ mượt mà, AI dễ nhận diện hơn
-      canvas.width = rect.width * 2; 
-      canvas.height = rect.height * 2;
-      
-      const context = canvas.getContext("2d");
-      context.scale(2, 2); 
-      context.lineCap = "round";
-      context.lineJoin = "round";
-      context.strokeStyle = "#000000"; // Mực đen tuyệt đối
-      contextRef.current = context;
-    };
-
-    updateSize();
-    window.addEventListener('resize', updateSize);
-    return () => window.removeEventListener('resize', updateSize);
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    
+    const ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.lineWidth = 6; // Độ dày nét bút
+    ctx.strokeStyle = "#000000"; // Màu đen
   }, []);
 
-  // --- TÍNH TOÁN TỌA ĐỘ CHUẨN ---
-  const getCoords = (e) => {
-    const rect = canvasRef.current.getBoundingClientRect();
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+  const getPos = (e) => {
+    const canvas = canvasRef.current;
+    const rect = canvas.getBoundingClientRect();
+    const clientX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+    const clientY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
     return {
       x: clientX - rect.left,
       y: clientY - rect.top
@@ -77,54 +36,94 @@ const KanjiCanvas = forwardRef((props, ref) => {
   };
 
   const startDrawing = (e) => {
-    lastPos.current = getCoords(e);
-    currentLineWidth.current = 15; 
+    e.preventDefault();
+    const { x, y } = getPos(e);
+    const ctx = canvasRef.current.getContext('2d');
+    
+    ctx.beginPath();
+    ctx.moveTo(x, y);
     setIsDrawing(true);
+    setCurrentStroke([[x, y]]); // Bắt đầu lưu nét mới
   };
 
   const draw = (e) => {
     if (!isDrawing) return;
+    e.preventDefault();
+    const { x, y } = getPos(e);
+    const ctx = canvasRef.current.getContext('2d');
     
-    const coords = getCoords(e);
-    const context = contextRef.current;
-    
-    const dist = Math.sqrt(
-      Math.pow(coords.x - lastPos.current.x, 2) + 
-      Math.pow(coords.y - lastPos.current.y, 2)
-    );
-    
-    // Nét vẽ động: Vẽ nhanh nét thanh, vẽ chậm nét đậm
-    let targetWidth = 22 - (dist / 10) * 8; 
-    if (targetWidth < 8) targetWidth = 8; 
-    if (targetWidth > 22) targetWidth = 22; 
-
-    currentLineWidth.current = currentLineWidth.current * 0.8 + targetWidth * 0.2;
-
-    context.beginPath();
-    context.lineWidth = currentLineWidth.current;
-    context.moveTo(lastPos.current.x, lastPos.current.y);
-    context.lineTo(coords.x, coords.y);
-    context.stroke();
-    
-    lastPos.current = coords;
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    setCurrentStroke(prev => [...prev, [x, y]]); // Lưu tọa độ liên tục
   };
 
-  const stopDrawing = () => {
+  const endDrawing = (e) => {
+    if (!isDrawing) return;
+    e.preventDefault();
     setIsDrawing(false);
+    
+    const newTrace = [...trace, currentStroke];
+    setTrace(newTrace);
+    
+    // Gửi tín hiệu ra ngoài (nếu cần nhận diện ngay lập tức khi nhấc bút)
+    if (props.onStrokeEnd) {
+      props.onStrokeEnd();
+    }
   };
+
+  const clearCanvas = () => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Xóa sạch hình ảnh
+    setTrace([]); // Xóa sạch dữ liệu tọa độ
+  };
+
+  const undo = () => {
+    if (trace.length === 0) return;
+    const newTrace = trace.slice(0, -1); // Bỏ nét cuối
+    setTrace(newTrace);
+    redraw(newTrace); // Vẽ lại các nét còn lại
+  };
+
+  const redraw = (strokes) => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    // Xóa màn hình để vẽ lại từ đầu
+    const dpr = window.devicePixelRatio || 1;
+    ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+    
+    ctx.beginPath();
+    strokes.forEach(stroke => {
+      if (stroke.length === 0) return;
+      ctx.beginPath();
+      ctx.moveTo(stroke[0][0], stroke[0][1]);
+      stroke.forEach(point => {
+        ctx.lineTo(point[0], point[1]);
+      });
+      ctx.stroke();
+    });
+  };
+
+  // Xuất các hàm này ra ngoài để HomePage gọi được
+  useImperativeHandle(ref, () => ({
+    clear: clearCanvas,
+    undo: undo,
+    getTrace: () => trace, // HÀM QUAN TRỌNG NHẤT: Trả về tọa độ cho thư viện handwriting.js
+    getCanvasImage: () => canvasRef.current.toDataURL("image/png") // Vẫn giữ hàm này nếu cần
+  }));
 
   return (
     <canvas
       ref={canvasRef}
+      className="w-full h-full cursor-crosshair touch-none"
+      style={{ width: '100%', height: '100%' }}
       onMouseDown={startDrawing}
       onMouseMove={draw}
-      onMouseUp={stopDrawing}
-      onMouseLeave={stopDrawing}
+      onMouseUp={endDrawing}
+      onMouseLeave={endDrawing}
       onTouchStart={startDrawing}
       onTouchMove={draw}
-      onTouchEnd={stopDrawing}
-      className="w-full h-full cursor-crosshair bg-[#FCFAF7] block touch-none"
-      style={{ touchAction: 'none' }} 
+      onTouchEnd={endDrawing}
     />
   );
 });
