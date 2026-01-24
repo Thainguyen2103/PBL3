@@ -123,7 +123,7 @@ const AuthPage = () => {
       const templateParams = {
         to_name: email.split('@')[0],
         to_email: email, // EmailJS sẽ gửi đến địa chỉ này
-        verify_link: verifyLink,
+        verification_link: verifyLink,
       };
 
       await emailjs.send(EMAIL_SERVICE_ID, EMAIL_TEMPLATE_ID, templateParams, EMAIL_PUBLIC_KEY);

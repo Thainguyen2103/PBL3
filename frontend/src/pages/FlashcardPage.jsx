@@ -5,7 +5,7 @@ import { useAppContext } from '../context/AppContext';
 import { flashcardData } from "../utils/kanji-dictionary";
 import { supabase } from '../supabaseClient'; 
 
-// --- COMPONENT MODAL XÁC NHẬN (MỚI) ---
+// --- COMPONENT MODAL XÁC NHẬN (GIỮ NGUYÊN) ---
 const ConfirmModal = ({ isOpen, title, message, onConfirm, onCancel }) => {
     if (!isOpen) return null;
     return (
@@ -47,11 +47,22 @@ const FlashcardPage = () => {
   const [lessonToReview, setLessonToReview] = useState(null);
 
   const [masteredKanjiList, setMasteredKanjiList] = useState([]);
+  const [completedLessons, setCompletedLessons] = useState({});
 
+  // 🔥 FIX LỖI: Load dữ liệu theo USER ID (Mỗi người một kho riêng)
   useEffect(() => {
-      const localList = JSON.parse(localStorage.getItem('my_mastered_kanji') || '[]');
-      setMasteredKanjiList(localList);
-  }, []);
+      if (user && user.id) {
+          // 1. Load danh sách từ đã thuộc của user này
+          const userMasteredKey = `mastered_kanji_${user.id}`;
+          const localList = JSON.parse(localStorage.getItem(userMasteredKey) || '[]');
+          setMasteredKanjiList(localList);
+
+          // 2. Load danh sách bài đã học xong của user này
+          const userProgressKey = `kanji_progress_${user.id}`;
+          const savedProgress = localStorage.getItem(userProgressKey);
+          setCompletedLessons(savedProgress ? JSON.parse(savedProgress) : {});
+      }
+  }, [user]); // Chạy lại mỗi khi user thay đổi (đăng nhập/đăng xuất)
 
   const generatedLessons = useMemo(() => {
     const lessons = [];
@@ -82,28 +93,31 @@ const FlashcardPage = () => {
     return lessons;
   }, [t]); 
 
-  const [completedLessons, setCompletedLessons] = useState(() => {
-      const saved = localStorage.getItem('kanji_progress');
-      return saved ? JSON.parse(saved) : {};
-  });
-
+  // 🔥 FIX LỖI: Lưu tiến độ theo USER ID
   const markLessonComplete = (lessonId) => {
+      if (!user || !user.id) return;
+
       const newProgress = { ...completedLessons, [lessonId]: true };
       setCompletedLessons(newProgress);
-      localStorage.setItem('kanji_progress', JSON.stringify(newProgress));
+      
+      const userProgressKey = `kanji_progress_${user.id}`;
+      localStorage.setItem(userProgressKey, JSON.stringify(newProgress));
   };
 
   // --- LOGIC CẬP NHẬT ĐIỂM (CÓ CHECK) ---
   const incrementKanjiCount = async (kanjiChar, lessonId) => {
       if (!user || !user.id) return;
       
-      // 🛑 CHẶN QUAN TRỌNG: Nếu bài này ĐÃ HOÀN THÀNH rồi -> Không cộng điểm nữa
+      // 🛑 CHẶN: Nếu bài này ĐÃ HOÀN THÀNH rồi -> Không cộng điểm nữa
       if (completedLessons[lessonId]) {
           console.log("⚠️ Đang ôn tập bài cũ, không tính điểm xếp hạng.");
           return;
       }
 
-      const localMasteredList = JSON.parse(localStorage.getItem('my_mastered_kanji') || '[]');
+      // 🔥 FIX LỖI: Check trong localStorage của đúng User đó
+      const userMasteredKey = `mastered_kanji_${user.id}`;
+      const localMasteredList = JSON.parse(localStorage.getItem(userMasteredKey) || '[]');
+      
       if (localMasteredList.includes(kanjiChar)) return; 
 
       try {
@@ -113,7 +127,8 @@ const FlashcardPage = () => {
           await supabase.from('users').update({ kanji_learned: currentKanji + 1 }).eq('id', user.id);
           
           localMasteredList.push(kanjiChar);
-          localStorage.setItem('my_mastered_kanji', JSON.stringify(localMasteredList));
+          // Lưu lại vào key riêng của user
+          localStorage.setItem(userMasteredKey, JSON.stringify(localMasteredList));
           setMasteredKanjiList(localMasteredList);
 
       } catch (err) {
@@ -124,7 +139,7 @@ const FlashcardPage = () => {
   const incrementLessonCount = async (lessonId) => {
       if (!user || !user.id) return;
       
-      // 🛑 CHẶN QUAN TRỌNG: Bài cũ không cộng điểm bài
+      // 🛑 CHẶN: Bài cũ không cộng điểm bài
       if (completedLessons[lessonId]) return;
 
       try {
@@ -142,8 +157,6 @@ const FlashcardPage = () => {
       if (!lessonToReview) return;
       
       const lesson = lessonToReview;
-      // Khi ôn tập: Lấy TOÀN BỘ thẻ của bài đó (không lọc thẻ đã thuộc)
-      // Để người dùng được học lại từ A-Z
       const allCards = [...lesson.originalCards].sort(() => 0.5 - Math.random());
 
       setCurrentLesson(lesson);
@@ -152,19 +165,23 @@ const FlashcardPage = () => {
       setIsFlipped(false);
       setMode('game');
       setQueue(allCards);
-      setSessionTotal(allCards.length); // Tổng số thẻ của bài
-      setLessonToReview(null); // Đóng modal
+      setSessionTotal(allCards.length); 
+      setLessonToReview(null); 
   };
 
-  // --- 2. XỬ LÝ BẮT ĐẦU HỌC MỚI (Logic cũ) ---
+  // --- 2. XỬ LÝ BẮT ĐẦU HỌC MỚI ---
   const handleSelectLesson = (lesson) => {
+    if (!user || !user.id) return;
+
     // Nếu bài đã hoàn thành -> Không vào thẳng mà hiện modal hỏi ôn tập
     if (completedLessons[lesson.id]) {
-        return; // Click vào bài đã xong thì không làm gì (hoặc có thể mở modal ôn tập luôn nếu muốn)
-        // Hiện tại ta chỉ cho bấm nút Reset để ôn tập
+        return; 
     }
 
-    const localMastered = JSON.parse(localStorage.getItem('my_mastered_kanji') || '[]');
+    // 🔥 FIX LỖI: Lọc thẻ đã thuộc dựa trên danh sách CỦA USER ĐÓ
+    const userMasteredKey = `mastered_kanji_${user.id}`;
+    const localMastered = JSON.parse(localStorage.getItem(userMasteredKey) || '[]');
+    
     const remainingCards = lesson.originalCards.filter(card => !localMastered.includes(card.kanji));
 
     setCurrentLesson(lesson);
@@ -194,7 +211,6 @@ const FlashcardPage = () => {
 
           if (level === 'master') {
               setStats(prev => ({ ...prev, mastered: prev.mastered + 1 }));
-              // Truyền thêm ID bài học để check
               incrementKanjiCount(currentCard.kanji, currentLesson.id); 
           } 
           else {
@@ -212,7 +228,6 @@ const FlashcardPage = () => {
 
           if (newQueue.length === 0) {
               setFinished(true);
-              // Chỉ đánh dấu hoàn thành & cộng điểm bài nếu chưa từng xong
               if (currentLesson && !completedLessons[currentLesson.id]) {
                   incrementLessonCount(currentLesson.id);
                   markLessonComplete(currentLesson.id);
@@ -294,13 +309,14 @@ const FlashcardPage = () => {
                         {generatedLessons.map((lesson) => {
                             const isDone = completedLessons[lesson.id];
                             const totalWords = lesson.originalCards.length;
+                            // 🔥 FIX LỖI: Chỉ đếm những từ CỦA USER NÀY đã thuộc
                             const masteredCount = lesson.originalCards.filter(c => masteredKanjiList.includes(c.kanji)).length;
                             const isFullyMastered = masteredCount === totalWords;
 
                             return (
                                 <div 
                                     key={lesson.id}
-                                    onClick={() => !isDone && handleSelectLesson(lesson)} // Nếu xong rồi thì chặn click vào body, chỉ cho bấm nút ôn tập
+                                    onClick={() => !isDone && handleSelectLesson(lesson)} 
                                     className={`group p-5 rounded-[1.5rem] border transition-all cursor-pointer relative overflow-hidden ${isDone ? 'bg-green-50 border-green-200' : 'bg-white border-gray-100 hover:shadow-xl hover:-translate-y-1'}`}
                                 >
                                     <div className="absolute -right-2 -top-2 text-[4rem] text-black/5 group-hover:text-black/10 transition-colors select-none font-kai font-normal">
@@ -312,13 +328,13 @@ const FlashcardPage = () => {
                                                 {lesson.title}
                                             </span>
                                             
-                                            {/* NÚT ÔN TẬP (Chỉ hiện khi đã học xong) */}
+                                            {/* NÚT ÔN TẬP */}
                                             <div className="flex gap-2">
                                                 {isDone && (
                                                     <button 
                                                         onClick={(e) => {
                                                             e.stopPropagation();
-                                                            setLessonToReview(lesson); // Mở Modal
+                                                            setLessonToReview(lesson); 
                                                         }}
                                                         className="w-8 h-8 rounded-full bg-white/80 hover:bg-blue-100 text-gray-400 hover:text-blue-600 flex items-center justify-center transition-colors shadow-sm"
                                                         title="Ôn tập lại"
@@ -378,13 +394,15 @@ const FlashcardPage = () => {
                     </div>
 
                     <div className="relative h-[60vh] w-auto aspect-[3/4] perspective-1000 group cursor-pointer mb-6" onClick={handleFlip}>
-                        {/* (Phần Card giữ nguyên) */}
+                        {/* CARD MẶT TRƯỚC */}
                         <div className={`w-full h-full duration-500 transform-style-3d card-inner relative ${isFlipped ? 'rotate-y-180' : ''}`}>
                             <div className="absolute inset-0 bg-white rounded-[2rem] shadow-2xl border border-gray-100 flex flex-col items-center justify-center backface-hidden z-20">
                                 <span className="text-xs font-bold text-gray-300 uppercase tracking-[0.2em] absolute top-6">{t?.flashcard_flip_hint || "CHẠM ĐỂ LẬT"}</span>
                                 <h1 className="text-[10rem] md:text-[12rem] text-slate-800 font-kai font-normal leading-none mb-2 select-none">{currentCard.kanji}</h1>
                                 <p className="text-gray-500 text-xs font-bold bg-gray-100 px-3 py-1 rounded-full absolute bottom-8">{currentLesson.title}</p>
                             </div>
+                            
+                            {/* CARD MẶT SAU */}
                             <div className="absolute inset-0 bg-[#1a1a1a] text-white rounded-[2rem] shadow-2xl flex flex-col backface-hidden rotate-y-180 z-20 overflow-hidden">
                                 <div className="w-full h-full overflow-y-auto no-scrollbar p-6 flex flex-col">
                                     <div className="text-center border-b border-white/10 pb-4 mb-4 shrink-0">
