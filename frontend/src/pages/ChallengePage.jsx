@@ -45,38 +45,33 @@ const ChallengePage = () => {
     input[type=range] { -webkit-appearance: none; background: transparent; }
     input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 24px; width: 24px; border-radius: 50%; background: black; cursor: pointer; margin-top: -10px; box-shadow: 0 2px 6px rgba(0,0,0,0.3); }
     input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 6px; cursor: pointer; background: #e2e8f0; border-radius: 99px; }
+    
+    /* Ẩn thanh cuộn cho gọn */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   `;
 
   // --- 🔥 1. LOAD USER & TIẾN ĐỘ TỪ SUPABASE 🔥 ---
   useEffect(() => {
     const fetchUserData = async () => {
-        // 👇 QUAN TRỌNG: LẤY ĐÚNG KEY 'session' TRONG LOCAL STORAGE 👇
         const storedJson = localStorage.getItem('session');
-        
         if (storedJson) {
             try {
                 const userObj = JSON.parse(storedJson);
                 setCurrentUser(userObj); 
-                console.log(">> [DEBUG] User đã đăng nhập. ID:", userObj.id);
-
-                // Lấy tiến độ từ Supabase
+                
                 const { data, error } = await supabase
                     .from('challenge_progress')
                     .select('lesson_id')
                     .eq('user_id', userObj.id); 
 
                 if (!error && data) {
-                    console.log(">> [DEBUG] Tiến độ tải về:", data);
                     const finishedList = data.map(row => row.lesson_id);
                     setCompletedLessons(finishedList);
-                } else {
-                    console.error(">> [ERROR] Lỗi tải tiến độ:", error);
                 }
             } catch (e) {
-                console.error(">> [ERROR] User trong LocalStorage bị lỗi JSON:", e);
+                console.error("Lỗi parse user:", e);
             }
-        } else {
-            console.warn(">> [WARN] Không tìm thấy key 'session' trong LocalStorage. Hãy đăng nhập lại!");
         }
     };
     fetchUserData();
@@ -85,20 +80,11 @@ const ChallengePage = () => {
   // --- 🔥 2. LƯU ĐIỂM (QUAN TRỌNG NHẤT) 🔥 ---
   useEffect(() => {
     const saveToSupabase = async () => {
-        // Điều kiện để lưu: Đã xong game + Có điểm + Đã chọn bài + Đã đăng nhập
         if (isFinished && score > 0 && selectedLesson && currentUser) {
-            console.log(">> [DEBUG] Đang chuẩn bị lưu điểm...");
-            console.log("   - User ID:", currentUser.id);
-            console.log("   - Lesson ID:", selectedLesson);
-            console.log("   - Score:", score);
-
-            // Cập nhật UI ngay lập tức
             if (!completedLessons.includes(selectedLesson)) {
                 setCompletedLessons(prev => [...prev, selectedLesson]);
             }
-
             try {
-                // Kiểm tra điểm cũ
                 const { data: existingData } = await supabase
                     .from('challenge_progress')
                     .select('score')
@@ -106,40 +92,22 @@ const ChallengePage = () => {
                     .eq('lesson_id', selectedLesson)
                     .maybeSingle();
 
-                // Logic: Lưu nếu chưa có điểm HOẶC điểm mới cao hơn
                 if (!existingData || score > existingData.score) {
-                    console.log(">> [DEBUG] Đang gửi lệnh UPSERT lên Supabase...");
-                    
-                    const { error } = await supabase
-                        .from('challenge_progress')
-                        .upsert({ 
-                            user_id: currentUser.id, 
-                            lesson_id: selectedLesson,
-                            score: score,
-                            completed_at: new Date().toISOString()
-                        }, { onConflict: 'user_id, lesson_id' });
-
-                    if (error) {
-                        console.error(">> [ERROR] Lỗi Supabase:", error);
-                        alert(`Lỗi lưu điểm: ${error.message}`);
-                    } else {
-                        console.log(">> [SUCCESS] ✅ Đã lưu thành công!");
-                    }
-                } else {
-                    console.log(">> [INFO] Điểm thấp hơn kỷ lục cũ, không lưu.");
+                    await supabase.from('challenge_progress').upsert({ 
+                        user_id: currentUser.id, 
+                        lesson_id: selectedLesson,
+                        score: score,
+                        completed_at: new Date().toISOString()
+                    }, { onConflict: 'user_id, lesson_id' });
                 }
             } catch (err) {
-                console.error(">> [ERROR] Lỗi hệ thống:", err);
+                console.error("Lỗi lưu điểm:", err);
             }
         }
     };
-
     saveToSupabase();
   }, [isFinished, score, selectedLesson, currentUser]);
 
-
-  // --- (CÁC PHẦN LOGIC GAME BÊN DƯỚI GIỮ NGUYÊN) ---
-  
   // --- LOGIC TÍNH TOÁN MAX CÂU HỎI ---
   useEffect(() => {
     if (!selectedLesson) return;
@@ -257,7 +225,6 @@ const ChallengePage = () => {
                 q.options = [...distractors, { text: correctText, isCorrect: true }].sort(() => 0.5 - Math.random());
             }
         } else {
-            // READING
             q.hint = mode === 'writing_reading' ? "Gõ HIRAGANA (hoặc Romaji)" : "CÁCH ĐỌC?";
             const correctArr = isSingle ? parseReadings(item) : [item.hiragana];
             q.correctAnswers = correctArr;
@@ -303,7 +270,6 @@ const ChallengePage = () => {
     setInputStatus(null);
   };
 
-  // --- HANDLERS ---
   useEffect(() => {
     if (isPlaying && !isFinished && selectedAns === null && inputStatus === null) {
       timerRef.current = setInterval(() => {
@@ -386,9 +352,22 @@ const ChallengePage = () => {
 
       {/* 1. MENU CHỌN BÀI */}
       {!selectedLesson ? (
-        <div className="flex-1 overflow-y-auto p-8 flex flex-col items-center">
+        <div className="flex-1 overflow-y-auto p-8 flex flex-col items-center no-scrollbar">
              <div className="w-full max-w-7xl">
-                <button onClick={() => navigate('/')} className="mb-6 flex items-center gap-2 text-gray-500 hover:text-black font-black transition-colors text-lg uppercase"><span>⬅</span> Trang chủ</button>
+                
+                {/* --- 🔥 NÚT QUAY LẠI MỚI (ĐẸP HƠN) 🔥 --- */}
+                <button 
+                    onClick={() => navigate('/')} 
+                    className="mb-8 flex items-center gap-3 px-5 py-2.5 bg-white border border-gray-200 rounded-full shadow-sm hover:shadow-md hover:border-gray-300 transition-all group"
+                >
+                    <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-slate-100 group-hover:text-slate-600 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="m15 18-6-6 6-6"/>
+                        </svg>
+                    </div>
+                    <span className="font-bold text-gray-500 uppercase tracking-widest text-xs group-hover:text-slate-800">Trang chủ</span>
+                </button>
+
                 <h1 className="text-6xl font-black text-slate-800 mb-10 uppercase">ĐẤU TRƯỜNG KANJI</h1>
                 
                 {/* Lưới Level */}
