@@ -6,7 +6,7 @@ import FriendSystem from './FriendSystem';
 import ForumTab from '../components/ForumTab'; 
 import MessageSystem from './MessageSystem'; 
 
-// 1. CẤU HÌNH
+// --- CẤU HÌNH ---
 const COUNTRY_MAP = { 'VN': 'Việt Nam', 'JP': '日本', 'KR': '한국', 'CN': '中国', 'US': 'USA', 'GB': 'UK', 'FR': 'France', 'DE': 'Deutschland', 'RU': 'Россия', 'TH': 'ประเทศไทย', 'OT': 'Earth' };
 const RANK_TIERS = [
     { limit: 1, title: "THẦN NGỮ CHI VƯƠNG 👑", bg: "bg-yellow-950", text: "text-yellow-200", border: "border-yellow-500", glow: "shadow-yellow-500/50" },
@@ -42,9 +42,9 @@ const RealFireAura = ({ rank, children }) => {
 
 const RankBadge = ({ index }) => {
     const rank = index + 1;
-    if (rank === 1) return <div className="relative w-24 h-24 flex items-center justify-center -my-6 hover:scale-110 transition-transform"><img src="https://cdn-icons-png.flaticon.com/128/2877/2877189.png" className="w-full h-full object-contain filter drop-shadow-md" /><div className="absolute -bottom-1 w-7 h-7 bg-yellow-600 text-white rounded-full flex items-center justify-center font-black border-2 border-yellow-300 shadow-md text-sm z-20">1</div></div>;
-    if (rank === 2) return <div className="relative w-20 h-20 flex items-center justify-center -my-5 hover:scale-110 transition-transform"><img src="https://cdn-icons-png.flaticon.com/128/16780/16780898.png" className="w-full h-full object-contain filter drop-shadow-md" /><div className="absolute -bottom-1 w-6 h-6 bg-orange-600 text-white rounded-full flex items-center justify-center font-black border-2 border-orange-300 shadow-md text-xs z-20">2</div></div>;
-    if (rank === 3) return <div className="relative w-16 h-16 flex items-center justify-center -my-4 hover:scale-110 transition-transform"><img src="https://cdn-icons-png.flaticon.com/128/13640/13640322.png" className="w-full h-full object-contain filter drop-shadow-md" /><div className="absolute -bottom-1 w-5 h-5 bg-slate-600 text-white rounded-full flex items-center justify-center font-black border-2 border-slate-300 shadow-md text-[10px] z-20">3</div></div>;
+    if (rank === 1) return <div className="relative w-24 h-24 flex items-center justify-center -my-6 hover:scale-110 transition-transform"><img src="https://cdn-icons-png.flaticon.com/128/2877/2877189.png" className="w-full h-full object-contain filter drop-shadow-md" alt=""/><div className="absolute -bottom-1 w-7 h-7 bg-yellow-600 text-white rounded-full flex items-center justify-center font-black border-2 border-yellow-300 shadow-md text-sm z-20">1</div></div>;
+    if (rank === 2) return <div className="relative w-20 h-20 flex items-center justify-center -my-5 hover:scale-110 transition-transform"><img src="https://cdn-icons-png.flaticon.com/128/16780/16780898.png" className="w-full h-full object-contain filter drop-shadow-md" alt=""/><div className="absolute -bottom-1 w-6 h-6 bg-orange-600 text-white rounded-full flex items-center justify-center font-black border-2 border-orange-300 shadow-md text-xs z-20">2</div></div>;
+    if (rank === 3) return <div className="relative w-16 h-16 flex items-center justify-center -my-4 hover:scale-110 transition-transform"><img src="https://cdn-icons-png.flaticon.com/128/13640/13640322.png" className="w-full h-full object-contain filter drop-shadow-md" alt=""/><div className="absolute -bottom-1 w-5 h-5 bg-slate-600 text-white rounded-full flex items-center justify-center font-black border-2 border-slate-300 shadow-md text-[10px] z-20">3</div></div>;
     return <div className="w-8 h-8 rounded-lg bg-slate-800 text-white flex items-center justify-center font-black text-sm border-b-4 border-slate-600 shadow-md">{rank}</div>;
 };
 
@@ -76,49 +76,24 @@ const WorldPage = () => {
         setActiveTab('friends'); 
     };
 
-    // 🔥 FETCH DATA: XẾP HẠNG CÔNG TÂM (ĐIỂM CHIẾN CÔNG -> BÀI HỌC)
+    // --- FETCH DATA ---
     useEffect(() => {
         if (activeTab === 'ranking') {
             const fetchLeaderboard = async () => {
                 setLoading(true);
-                
-                // 1. Lấy Users
-                const { data: users } = await supabase.from('users')
-                    .select('id, full_name, avatar, lessons_completed, kanji_learned, level, gender, country, bio, email, phone, address, birthdate')
-                    .limit(200); // Lấy rộng hơn chút để sắp xếp lại
-
+                const { data: users } = await supabase.from('users').select('id, full_name, avatar, lessons_completed, kanji_learned, level, gender, country, bio').limit(200);
                 if (users) {
-                    // 2. Lấy điểm Chiến Công
                     const userIds = users.map(u => u.id);
-                    const { data: scores } = await supabase
-                        .from('challenge_progress')
-                        .select('user_id, score')
-                        .in('user_id', userIds);
-
-                    // 3. Tính tổng điểm
+                    const { data: scores } = await supabase.from('challenge_progress').select('user_id, score').in('user_id', userIds);
                     const scoreMap = {};
-                    if (scores) {
-                        scores.forEach(item => {
-                            if (!scoreMap[item.user_id]) scoreMap[item.user_id] = 0;
-                            scoreMap[item.user_id] += item.score;
-                        });
-                    }
-
-                    // 4. Gộp và SẮP XẾP LẠI (QUAN TRỌNG)
-                    const mergedData = users.map(u => ({
-                        ...u,
-                        total_challenge_score: scoreMap[u.id] || 0
-                    }));
-
-                    // 🔥 LOGIC CÔNG TÂM: Ưu tiên Điểm Chiến Công, nếu bằng nhau thì so Bài học
+                    if (scores) scores.forEach(item => { if (!scoreMap[item.user_id]) scoreMap[item.user_id] = 0; scoreMap[item.user_id] += item.score; });
+                    const mergedData = users.map(u => ({ ...u, total_challenge_score: scoreMap[u.id] || 0 }));
                     mergedData.sort((a, b) => {
-                        if (b.total_challenge_score !== a.total_challenge_score) {
-                            return b.total_challenge_score - a.total_challenge_score;
-                        }
-                        return b.lessons_completed - a.lessons_completed;
+                        if (b.total_challenge_score !== a.total_challenge_score) return b.total_challenge_score - a.total_challenge_score;
+                        if (b.lessons_completed !== a.lessons_completed) return b.lessons_completed - a.lessons_completed;
+                        return b.kanji_learned - a.kanji_learned;
                     });
-                    
-                    setLeaderboard(mergedData.slice(0, 100)); // Lấy top 100 sau khi sort
+                    setLeaderboard(mergedData.slice(0, 100));
                 }
                 setLoading(false);
             };
@@ -126,43 +101,100 @@ const WorldPage = () => {
         }
     }, [activeTab]);
 
+    // --- 🔥 LOGIC THÔNG BÁO REALTIME (ĐÃ FIX ÉP KIỂU ID) ---
+    useEffect(() => {
+        if (!user) return;
+
+        console.log("🟢 [REALTIME] Bắt đầu kết nối...");
+
+        const channel = supabase.channel('forum_final_tracker')
+            // 1. CÓ BÀI MỚI (INSERT POSTS)
+            .on(
+                'postgres_changes',
+                { event: 'INSERT', schema: 'public', table: 'posts' },
+                (payload) => {
+                    // Ép kiểu về String để so sánh an toàn (vì DB là số, JS là chuỗi/số)
+                    if (String(payload.new.user_id) !== String(user.id)) {
+                        console.log("🔥 Có bài mới từ người khác!");
+                        setNotifications(prev => ({ ...prev, forum: (prev.forum || 0) + 1 }));
+                    }
+                }
+            )
+            // 2. CÓ COMMENT MỚI (INSERT COMMENTS)
+            .on(
+                'postgres_changes',
+                { event: 'INSERT', schema: 'public', table: 'comments' },
+                async (payload) => {
+                    const newComment = payload.new;
+                    
+                    // Nếu chính mình comment -> Bỏ qua
+                    if (String(newComment.user_id) === String(user.id)) return;
+
+                    // Kiểm tra xem bài viết đó có phải của mình không
+                    const { data: post } = await supabase
+                        .from('posts')
+                        .select('user_id')
+                        .eq('id', newComment.post_id)
+                        .single();
+
+                    // Ép kiểu ID bài viết và User ID về String để so sánh
+                    if (post && String(post.user_id) === String(user.id)) {
+                        console.log("🔔 Ting! Có comment vào bài của mình!");
+                        setNotifications(prev => ({ ...prev, forum: (prev.forum || 0) + 1 }));
+                    }
+                }
+            )
+            // 3. CÓ LIKE/HAHA MỚI (UPDATE POSTS)
+            .on(
+                'postgres_changes',
+                { event: 'UPDATE', schema: 'public', table: 'posts' },
+                (payload) => {
+                    const newPost = payload.new;
+                    const oldPost = payload.old;
+
+                    // Chỉ quan tâm nếu bài viết là của mình
+                    if (String(newPost.user_id) === String(user.id)) {
+                        // So sánh likes cũ và mới (chuyển về chuỗi JSON để so sánh)
+                        const oldLikes = JSON.stringify(oldPost.likes || []);
+                        const newLikes = JSON.stringify(newPost.likes || []);
+
+                        if (oldLikes !== newLikes) {
+                            console.log("❤️ Ting! Có like mới!");
+                            setNotifications(prev => ({ ...prev, forum: (prev.forum || 0) + 1 }));
+                        }
+                    }
+                }
+            )
+            .subscribe();
+
+        return () => {
+            supabase.removeChannel(channel);
+        };
+    }, [user, setNotifications]);
+
     return (
         <div className="flex h-screen bg-[#Fdfdfd] font-sans text-slate-900 overflow-hidden">
             <Sidebar />
             <main className="flex-1 h-full flex flex-col bg-slate-50/50 p-6 overflow-hidden relative">
                 
-                {/* HEADER & MENU TABS */}
+                {/* HEADER */}
                 <div className="flex justify-between items-end mb-6 shrink-0 relative z-10 max-w-5xl mx-auto w-full">
                     <div>
-                        <h1 className="text-3xl font-black text-slate-800 tracking-tight mb-2 flex items-center gap-3">
-                            Thế Giới Kanji <span className="text-4xl animate-bounce">🌏</span>
-                        </h1>
-                        <p className="text-gray-500 font-medium text-sm">
-                            {activeTab === 'ranking' && "Sảnh Danh Vọng - Vinh danh Chiến Binh!"}
-                            {activeTab === 'friends' && "Kết nối bạn bè bốn phương!"}
-                            {activeTab === 'messages' && "Trò chuyện & Nhắn tin!"}
-                            {activeTab === 'forum' && "Thảo luận & Chia sẻ kiến thức!"}
-                        </p>
+                        <h1 className="text-3xl font-black text-slate-800 tracking-tight mb-2 flex items-center gap-3">Thế Giới Kanji <span className="text-4xl animate-bounce">🌏</span></h1>
+                        <p className="text-gray-500 font-medium text-sm">Sảnh Danh Vọng & Cộng Đồng</p>
                     </div>
-                    
                     <div className="bg-white p-1 rounded-xl shadow-sm border border-gray-100 flex gap-1">
                         <button onClick={() => handleTabChange('ranking')} className={`px-5 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all ${activeTab === 'ranking' ? 'bg-slate-900 text-white shadow-md' : 'text-gray-400 hover:text-slate-900'}`}>🏆 BXH</button>
                         <button onClick={handleFriendTabClick} className={`px-5 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all ${activeTab === 'friends' ? 'bg-indigo-600 text-white shadow-md' : 'text-gray-400 hover:text-indigo-600'}`}>🤝 Bạn Bè</button>
-                        <button onClick={() => handleTabChange('messages')} className={`relative px-5 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all ${activeTab === 'messages' ? 'bg-teal-600 text-white shadow-md' : 'text-gray-400 hover:text-teal-600'}`}>
-                            💬 Tin Nhắn {notifications?.message > 0 && <span className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center text-[9px] font-bold border-2 border-white animate-bounce shadow-sm">{notifications.message > 99 ? '99+' : notifications.message}</span>}
-                        </button>
-                        <button onClick={() => handleTabChange('forum')} className={`relative px-5 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all ${activeTab === 'forum' ? 'bg-pink-600 text-white shadow-md' : 'text-gray-400 hover:text-pink-600'}`}>
-                            🗨️ Diễn Đàn {notifications?.forum > 0 && <span className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center text-[9px] font-bold border-2 border-white animate-bounce shadow-sm">{notifications.forum > 99 ? '99+' : notifications.forum}</span>}
-                        </button>
+                        <button onClick={() => handleTabChange('messages')} className={`relative px-5 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all ${activeTab === 'messages' ? 'bg-teal-600 text-white shadow-md' : 'text-gray-400 hover:text-teal-600'}`}>💬 Tin Nhắn {notifications?.message > 0 && <span className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center text-[9px] font-bold border-2 border-white animate-bounce shadow-sm">{notifications.message > 99 ? '99+' : notifications.message}</span>}</button>
+                        <button onClick={() => handleTabChange('forum')} className={`relative px-5 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all ${activeTab === 'forum' ? 'bg-pink-600 text-white shadow-md' : 'text-gray-400 hover:text-pink-600'}`}>🗨️ Diễn Đàn {notifications?.forum > 0 && <span className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center text-[9px] font-bold border-2 border-white animate-bounce shadow-sm">{notifications.forum > 99 ? '99+' : notifications.forum}</span>}</button>
                     </div>
                 </div>
 
                 {/* CONTENT AREA */}
-                <div className="flex-1 overflow-y-auto custom-scrollbar pr-2 relative z-10 w-full max-w-5xl mx-auto">
-                    
-                    {/* --- TAB 1: BẢNG XẾP HẠNG (ĐÃ THÊM CỘT CHIẾN CÔNG) --- */}
+                <div className="flex-1 overflow-y-auto custom-scrollbar pr-2 relative z-10 w-full max-w-5xl mx-auto pb-10">
                     {activeTab === 'ranking' && (
-                        loading ? <div className="flex justify-center h-64 items-center text-gray-400 font-bold animate-pulse">⏳ Đang tải...</div> : (
+                        loading ? <div className="flex justify-center h-64 items-center text-gray-400 font-bold animate-pulse">⏳ Đang tải dữ liệu...</div> : (
                             <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl overflow-hidden">
                                 <table className="w-full">
                                     <thead>
@@ -171,7 +203,6 @@ const WorldPage = () => {
                                             <th className="py-4 pl-4">Chiến binh</th>
                                             <th className="py-4 text-center w-36">Trình độ</th>
                                             <th className="py-4 text-center w-32">Sức mạnh</th>
-                                            {/* 🔥 CỘT MỚI: CHIẾN CÔNG 🔥 */}
                                             <th className="py-4 text-center w-36 text-red-600">Chiến Công</th>
                                             <th className="py-4 text-right pr-8 w-32">Thành tựu</th>
                                         </tr>
@@ -182,49 +213,13 @@ const WorldPage = () => {
                                             const displayAvatar = u.avatar || `https://ui-avatars.com/api/?name=${u.full_name}&background=random&color=fff`;
                                             const tierInfo = getRankTierInfo(idx);
                                             const countryInfo = getCountryInfo(u.country);
-
                                             return (
                                                 <tr key={u.id} onClick={() => handleUserClick(u)} className={`group transition-all border-b border-gray-50 last:border-0 cursor-pointer ${isMe ? 'bg-indigo-50/60 hover:bg-indigo-100' : 'hover:bg-gray-50'} relative z-10`}>
                                                     <td className="py-4 pl-8"><div className="flex justify-center items-center"><RankBadge index={idx} /></div></td>
-                                                    <td className="py-4 pl-4">
-                                                        <div className="flex items-center gap-6">
-                                                            <RealFireAura rank={idx + 1}>
-                                                                <div className={`w-12 h-12 rounded-full overflow-hidden border-[2px] shadow-sm group-hover:scale-105 transition-transform ${idx === 0 ? 'border-yellow-200' : 'border-gray-100'}`}>
-                                                                    <img src={displayAvatar} alt="" className="w-full h-full object-cover" />
-                                                                </div>
-                                                            </RealFireAura>
-                                                            <div>
-                                                                <div className="flex items-center gap-2">
-                                                                    <p className={`font-black text-sm truncate max-w-[180px] ${isMe ? 'text-indigo-900' : 'text-slate-800'}`}>{u.full_name || "Vô danh"}</p>
-                                                                    {getGenderBadge(u.gender)}
-                                                                    {isMe && <span className="text-[9px] font-bold bg-indigo-600 text-white px-1.5 py-0.5 rounded shadow-sm">YOU</span>}
-                                                                </div>
-                                                                <div className="flex items-center gap-2 mt-1.5">
-                                                                    <div className="flex items-center gap-1 bg-gray-100 px-1.5 py-0.5 rounded border border-gray-200">
-                                                                        {countryInfo.flag ? <img src={countryInfo.flag} alt="" className="w-3.5 rounded-[2px]" /> : <span>🌍</span>}
-                                                                        <span className="text-[9px] font-bold text-gray-600 uppercase">{countryInfo.name}</span>
-                                                                    </div>
-                                                                    <div className={`px-2 py-0.5 rounded border text-[8px] font-black uppercase tracking-wide shadow-sm ${tierInfo.bg} ${tierInfo.text} ${tierInfo.border} ${tierInfo.glow}`}>{tierInfo.title}</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
+                                                    <td className="py-4 pl-4"><div className="flex items-center gap-6"><RealFireAura rank={idx + 1}><div className={`w-12 h-12 rounded-full overflow-hidden border-[2px] shadow-sm group-hover:scale-105 transition-transform ${idx === 0 ? 'border-yellow-200' : 'border-gray-100'}`}><img src={displayAvatar} alt="avatar" className="w-full h-full object-cover" /></div></RealFireAura><div><div className="flex items-center gap-2"><p className={`font-black text-sm truncate max-w-[180px] ${isMe ? 'text-indigo-900' : 'text-slate-800'}`}>{u.full_name || "Vô danh"}</p>{getGenderBadge(u.gender)}{isMe && <span className="text-[9px] font-bold bg-indigo-600 text-white px-1.5 py-0.5 rounded shadow-sm">YOU</span>}</div><div className="flex items-center gap-2 mt-1.5"><div className="flex items-center gap-1 bg-gray-100 px-1.5 py-0.5 rounded border border-gray-200">{countryInfo.flag ? <img src={countryInfo.flag} alt="flag" className="w-3.5 rounded-[2px]" /> : <span>🌍</span>}<span className="text-[9px] font-bold text-gray-600 uppercase">{countryInfo.name}</span></div><div className={`px-2 py-0.5 rounded border text-[8px] font-black uppercase tracking-wide shadow-sm ${tierInfo.bg} ${tierInfo.text} ${tierInfo.border} ${tierInfo.glow}`}>{tierInfo.title}</div></div></div></div></td>
                                                     <td className="py-4 text-center"><LevelBadge level={u.level} /></td>
-                                                    <td className="py-4 text-center">
-                                                        <div className="inline-flex flex-col items-center">
-                                                            <span className={`font-black text-lg ${idx < 3 ? 'text-yellow-600' : 'text-slate-700'}`}>{u.kanji_learned || 0}</span>
-                                                            <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest bg-gray-100 px-1.5 rounded-full mt-0.5">Kanji</span>
-                                                        </div>
-                                                    </td>
-                                                    
-                                                    {/* 🔥 CỘT ĐIỂM CHIẾN CÔNG (MỚI) 🔥 */}
-                                                    <td className="py-4 text-center">
-                                                        <div className="inline-flex flex-col items-center bg-red-50 border border-red-100 px-3 py-1 rounded-lg">
-                                                            <span className="font-black text-red-600 text-lg">{u.total_challenge_score ? u.total_challenge_score.toLocaleString() : 0}</span>
-                                                            <span className="text-[8px] font-bold text-red-300 uppercase tracking-widest">Điểm</span>
-                                                        </div>
-                                                    </td>
-
+                                                    <td className="py-4 text-center"><div className="inline-flex flex-col items-center"><span className={`font-black text-lg ${idx < 3 ? 'text-yellow-600' : 'text-slate-700'}`}>{u.kanji_learned || 0}</span><span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest bg-gray-100 px-1.5 rounded-full mt-0.5">Kanji</span></div></td>
+                                                    <td className="py-4 text-center"><div className="inline-flex flex-col items-center bg-red-50 border border-red-100 px-3 py-1 rounded-lg shadow-sm"><span className="font-black text-red-600 text-lg">{u.total_challenge_score ? u.total_challenge_score.toLocaleString() : 0}</span><span className="text-[8px] font-bold text-red-300 uppercase tracking-widest">Điểm</span></div></td>
                                                     <td className="py-4 text-right pr-8"><div className={`inline-block px-4 py-2 rounded-xl font-black text-xs shadow-md transition-transform group-hover:scale-105 ${idx === 0 ? 'bg-gradient-to-r from-yellow-500 to-orange-600 text-white' : 'bg-slate-900 text-white'}`}>{u.lessons_completed || 0} <span className="opacity-70 ml-0.5">BÀI</span></div></td>
                                                 </tr>
                                             );
@@ -234,27 +229,12 @@ const WorldPage = () => {
                             </div>
                         )
                     )}
-
-                    {/* --- CÁC TAB KHÁC --- */}
                     {activeTab === 'friends' && <FriendSystem user={user} initialSelectedUser={selectedUser} onBackToRank={selectedUser ? () => { setSelectedUser(null); setActiveTab('ranking'); } : null} />}
                     {activeTab === 'messages' && <MessageSystem user={user} />}
                     {activeTab === 'forum' && <ForumTab user={user} onUserClick={handleUserClick} />}
                 </div>
             </main>
-            
-            <style>{`
-                .custom-scrollbar::-webkit-scrollbar { width: 6px; } .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 20px; }
-                .font-kai { font-family: 'Yuji Syuku', serif; }
-                @keyframes fire-wave {
-                    0% { transform: translateY(0) scaleX(1) rotate(0deg); opacity: 0.8; }
-                    25% { transform: translateY(-5px) scaleX(1.05) rotate(1deg); }
-                    50% { transform: translateY(-10px) scaleX(0.95) rotate(-1deg); opacity: 0.6; }
-                    75% { transform: translateY(-5px) scaleX(1.02) rotate(0.5deg); }
-                    100% { transform: translateY(0) scaleX(1) rotate(0deg); opacity: 0.8; }
-                }
-                .animate-fire-wave { animation: fire-wave 2s ease-in-out infinite; }
-                .animate-fire-wave-fast { animation: fire-wave 1.2s ease-in-out infinite reverse; }
-            `}</style>
+            <style>{` .custom-scrollbar::-webkit-scrollbar { width: 6px; } .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 20px; } .font-kai { font-family: 'Yuji Syuku', serif; } @keyframes fire-wave { 0% { transform: translateY(0) scaleX(1) rotate(0deg); opacity: 0.8; } 25% { transform: translateY(-5px) scaleX(1.05) rotate(1deg); } 50% { transform: translateY(-10px) scaleX(0.95) rotate(-1deg); opacity: 0.6; } 75% { transform: translateY(-5px) scaleX(1.02) rotate(0.5deg); } 100% { transform: translateY(0) scaleX(1) rotate(0deg); opacity: 0.8; } } .animate-fire-wave { animation: fire-wave 2s ease-in-out infinite; } .animate-fire-wave-fast { animation: fire-wave 1.2s ease-in-out infinite reverse; } `}</style>
         </div>
     );
 };
