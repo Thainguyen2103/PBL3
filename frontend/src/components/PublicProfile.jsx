@@ -110,7 +110,7 @@ const PublicProfile = ({ targetUser, currentUser, onBack }) => {
                             <span className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-[10px] font-black uppercase tracking-widest">{targetUser.country || 'VN'}</span>
                         </div>
                     </div>
-                    {/* Nút Back */}
+                    {/* Nút Back - Chỉ gọi onBack được truyền từ FriendSystem (đã fix logic ở đó) */}
                     <button onClick={onBack} className="inline-flex items-center gap-2 px-6 py-2 rounded-xl bg-gray-100 text-gray-600 text-xs font-bold hover:bg-gray-200 transition-all">
                         {t.profile_back_list}
                     </button>

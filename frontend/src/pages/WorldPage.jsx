@@ -19,7 +19,7 @@ const RANK_TIERS = [
     { limit: 9999, titleKey: "world_rank_7", bg: "bg-gray-100", text: "text-gray-500", border: "border-gray-200", glow: "shadow-none" }
 ];
 
-// --- BỘ ICON SVG CHẤT MẠNG XÃ HỘI ---
+// --- BỘ ICON SVG ---
 const Icons = {
     Ranking: () => (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
@@ -35,7 +35,7 @@ const Icons = {
     )
 };
 
-// --- COMPONENTS CON GIỮ NGUYÊN (LevelBadge, RealFireAura, RankBadge) ---
+// --- COMPONENTS CON ---
 const LevelBadge = ({ level }) => {
     let style = "bg-gray-100 text-gray-500 border-gray-200";
     const l = level ? level.toUpperCase() : "N5";
@@ -68,8 +68,8 @@ const RankBadge = ({ index }) => {
 
 // --- MAIN PAGE ---
 const WorldPage = () => {
-    const { user, notifications, setNotifications, language } = useAppContext(); // ✅ Lấy language từ Context
-    const t = translations[language] || translations.vi; // ✅ Lấy bộ từ điển
+    const { user, notifications, setNotifications, language } = useAppContext(); 
+    const t = translations[language] || translations.vi;
 
     const [activeTab, setActiveTab] = useState('ranking'); 
     const [leaderboard, setLeaderboard] = useState([]);
@@ -86,11 +86,13 @@ const WorldPage = () => {
         if (tabName === 'forum') setNotifications(prev => ({ ...prev, forum: 0 }));
     };
 
+    // Khi bấm vào 1 user, chuyển sang tab FriendSystem nhưng kèm selectedUser
     const handleUserClick = (u) => { 
         setSelectedUser(u); 
         setActiveTab('friends'); 
     };
     
+    // Khi bấm tab Bạn bè bình thường
     const handleFriendTabClick = () => { 
         setSelectedUser(null); 
         setActiveTab('friends'); 
@@ -163,7 +165,7 @@ const WorldPage = () => {
                         <p className="text-gray-500 font-bold text-sm mt-1 uppercase tracking-widest pl-1">{t.world_slogan}</p>
                     </div>
 
-                    {/* 2. Menu Tabs (Right) - To, Rõ, Đẹp */}
+                    {/* 2. Menu Tabs (Right) */}
                     <div className="flex bg-gray-100/80 p-1.5 rounded-2xl shadow-inner gap-2">
                         {/* TAB 1: Bảng Xếp Hạng */}
                         <button 
@@ -207,7 +209,7 @@ const WorldPage = () => {
                             <span>{t.world_tab_messages}</span>
                         </button>
 
-                        {/* TAB 4: Diễn Đàn (Đã đổi tên & Icon Globe) */}
+                        {/* TAB 4: Diễn Đàn */}
                         <button 
                             onClick={() => handleTabChange('forum')}
                             className={`flex items-center gap-3 px-6 py-3.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all duration-300 relative group
@@ -264,7 +266,16 @@ const WorldPage = () => {
                             </div>
                         )
                     )}
-                    {activeTab === 'friends' && <FriendSystem user={user} initialSelectedUser={selectedUser} onBackToRank={selectedUser ? () => { setSelectedUser(null); setActiveTab('ranking'); } : null} />}
+
+                    {/* ✅ FIX LỖI: Sửa onBackToRank để chỉ reset selectedUser, không set tab về ranking */}
+                    {activeTab === 'friends' && (
+                        <FriendSystem 
+                            user={user} 
+                            initialSelectedUser={selectedUser} 
+                            onBackToRank={() => setSelectedUser(null)} 
+                        />
+                    )}
+                    
                     {activeTab === 'messages' && <MessageSystem user={user} />}
                     {activeTab === 'forum' && <ForumTab user={user} onUserClick={handleUserClick} />}
                 </div>
