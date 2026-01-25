@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
+import { useAppContext } from '../context/AppContext'; // ✅ Import Context
+import { translations } from '../utils/translations'; // ✅ Import Translations
 
 // --- CẤU HÌNH ICON ĐƠN GIẢN ---
 const REACTIONS = [
@@ -48,19 +50,19 @@ const Toast = ({ message }) => (
 );
 
 // --- HỘP THOẠI XÁC NHẬN ---
-const DeleteConfirmDialog = ({ onConfirm, onCancel }) => (
+const DeleteConfirmDialog = ({ onConfirm, onCancel, t }) => (
     <div className="fixed inset-0 z-[2001] flex items-center justify-center bg-black/10 backdrop-blur-[1px] animate-in fade-in duration-200">
         <div className="bg-white rounded-xl shadow-2xl p-5 w-72 border border-gray-100 transform scale-100 animate-in zoom-in-95 duration-200">
-            <h3 className="font-bold text-slate-800 text-center mb-1">Xóa bài viết?</h3>
+            <h3 className="font-bold text-slate-800 text-center mb-1">{t.myposts_delete_confirm_title}</h3>
             <p className="text-gray-500 text-xs text-center mb-5 leading-relaxed">
-                Bài viết sẽ bị xóa vĩnh viễn và không thể khôi phục.
+                {t.myposts_delete_confirm_msg}
             </p>
             <div className="flex gap-2">
                 <button onClick={onCancel} className="flex-1 py-2 rounded-lg bg-gray-100 text-gray-600 text-xs font-bold hover:bg-gray-200 transition-colors">
-                    Hủy
+                    {t.myposts_btn_cancel}
                 </button>
                 <button onClick={onConfirm} className="flex-1 py-2 rounded-lg bg-red-500 text-white text-xs font-bold hover:bg-red-600 shadow-md shadow-red-200 transition-all">
-                    Xóa
+                    {t.myposts_btn_delete}
                 </button>
             </div>
         </div>
@@ -69,6 +71,9 @@ const DeleteConfirmDialog = ({ onConfirm, onCancel }) => (
 
 // --- MAIN COMPONENT ---
 const MyPostsManager = ({ user, onClose, onPostClick }) => {
+    const { language } = useAppContext(); // ✅ Lấy language từ Context
+    const t = translations[language] || translations.vi; // ✅ Lấy bộ từ điển
+
     const [myPosts, setMyPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     
@@ -119,10 +124,10 @@ const MyPostsManager = ({ user, onClose, onPostClick }) => {
         if (!error) {
             setMyPosts(myPosts.filter(p => p.id !== deleteTarget.id));
             setDeleteTarget(null);
-            setToastMsg("Đã xóa thành công");
+            setToastMsg(t.myposts_toast_success);
             setTimeout(() => setToastMsg(null), 3000);
         } else {
-            alert("Lỗi: " + error.message);
+            alert(t.myposts_error + error.message);
             setDeleteTarget(null);
         }
     };
@@ -134,7 +139,7 @@ const MyPostsManager = ({ user, onClose, onPostClick }) => {
                 {/* Header đơn giản */}
                 <div className="px-5 py-4 border-b border-gray-100 flex justify-between items-center bg-white">
                     <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                        <span>🗂️</span> Bài viết của bạn
+                        <span>🗂️</span> {t.myposts_title}
                         <span className="bg-gray-100 text-gray-500 text-[10px] px-2 py-0.5 rounded-full">{myPosts.length}</span>
                     </h3>
                     <button onClick={onClose} className="text-gray-400 hover:text-gray-600 hover:bg-gray-100 w-8 h-8 rounded-full transition-all flex items-center justify-center font-bold">✕</button>
@@ -149,7 +154,7 @@ const MyPostsManager = ({ user, onClose, onPostClick }) => {
                     ) : (
                         myPosts.length === 0 ? (
                             <div className="text-center py-20 text-gray-400 text-sm">
-                                Bạn chưa đăng bài viết nào.
+                                {t.myposts_empty}
                             </div>
                         ) : (
                             <div className="space-y-3">
@@ -179,7 +184,7 @@ const MyPostsManager = ({ user, onClose, onPostClick }) => {
                                             {/* Nội dung */}
                                             <div className="flex-1 min-w-0 flex flex-col justify-center gap-1">
                                                 <p className={`text-slate-700 text-sm font-medium line-clamp-1 ${!thumbUrl ? 'text-base' : ''}`}>
-                                                    {post.content || <span className="text-gray-400 italic">Không có tiêu đề</span>}
+                                                    {post.content || <span className="text-gray-400 italic">{t.myposts_no_title}</span>}
                                                 </p>
                                                 
                                                 <div className="flex items-center gap-3">
@@ -197,7 +202,7 @@ const MyPostsManager = ({ user, onClose, onPostClick }) => {
                                                 <button 
                                                     onClick={(e) => requestDelete(e, post)}
                                                     className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-300 hover:text-red-500 hover:bg-red-50 transition-all"
-                                                    title="Xóa"
+                                                    title={t.myposts_btn_delete}
                                                 >
                                                     🗑️
                                                 </button>
@@ -212,7 +217,7 @@ const MyPostsManager = ({ user, onClose, onPostClick }) => {
             </div>
 
             {/* Dialog & Toast */}
-            {deleteTarget && <DeleteConfirmDialog onConfirm={confirmDelete} onCancel={() => setDeleteTarget(null)} />}
+            {deleteTarget && <DeleteConfirmDialog onConfirm={confirmDelete} onCancel={() => setDeleteTarget(null)} t={t} />}
             {toastMsg && <Toast message={toastMsg} />}
         </div>
     );

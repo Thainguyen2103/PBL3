@@ -379,7 +379,16 @@ export const translations = {
     
     // Stats
     profile_stat_kanji: "Kanji",
-    profile_stat_lessons: "Bài học"
+    profile_stat_lessons: "Bài học",
+    myposts_title: "Bài viết của bạn",
+    myposts_delete_confirm_title: "Xóa bài viết?",
+    myposts_delete_confirm_msg: "Bài viết sẽ bị xóa vĩnh viễn và không thể khôi phục.",
+    myposts_btn_cancel: "Hủy",
+    myposts_btn_delete: "Xóa",
+    myposts_toast_success: "Đã xóa thành công",
+    myposts_empty: "Bạn chưa đăng bài viết nào.",
+    myposts_no_title: "Không có tiêu đề",
+    myposts_error: "Lỗi: "
   },
 
   // =================================================================
@@ -750,7 +759,16 @@ export const translations = {
 
     // Stats
     profile_stat_kanji: "Kanji",
-    profile_stat_lessons: "Lessons"
+    profile_stat_lessons: "Lessons",
+    myposts_title: "Your Posts",
+    myposts_delete_confirm_title: "Delete Post?",
+    myposts_delete_confirm_msg: "This post will be permanently deleted and cannot be recovered.",
+    myposts_btn_cancel: "Cancel",
+    myposts_btn_delete: "Delete",
+    myposts_toast_success: "Deleted successfully",
+    myposts_empty: "You haven't posted anything yet.",
+    myposts_no_title: "No title",
+    myposts_error: "Error: "
   },
 
   // =================================================================
@@ -1118,7 +1136,16 @@ export const translations = {
 
     // Stats
     profile_stat_kanji: "漢字",
-    profile_stat_lessons: "レッスン"
+    profile_stat_lessons: "レッスン",
+    myposts_title: "あなたの投稿",
+    myposts_delete_confirm_title: "投稿を削除？",
+    myposts_delete_confirm_msg: "この投稿は完全に削除され、復元できません。",
+    myposts_btn_cancel: "キャンセル",
+    myposts_btn_delete: "削除",
+    myposts_toast_success: "削除しました",
+    myposts_empty: "まだ投稿がありません。",
+    myposts_no_title: "タイトルなし",
+    myposts_error: "エラー: "
   },
 
   // =================================================================
@@ -1486,7 +1513,16 @@ export const translations = {
 
     // Stats
     profile_stat_kanji: "汉字",
-    profile_stat_lessons: "课程"
+    profile_stat_lessons: "课程",
+    myposts_title: "你的帖子",
+    myposts_delete_confirm_title: "删除帖子？",
+    myposts_delete_confirm_msg: "此帖子将被永久删除且无法恢复。",
+    myposts_btn_cancel: "取消",
+    myposts_btn_delete: "删除",
+    myposts_toast_success: "删除成功",
+    myposts_empty: "你还没有发布任何帖子。",
+    myposts_no_title: "无标题",
+    myposts_error: "错误: "
   },
 
   // =================================================================
@@ -1854,6 +1890,15 @@ export const translations = {
 
     // Stats
     profile_stat_kanji: "한자",
-    profile_stat_lessons: "레슨"
+    profile_stat_lessons: "레슨",
+    myposts_title: "내 게시물",
+    myposts_delete_confirm_title: "게시물 삭제?",
+    myposts_delete_confirm_msg: "이 게시물은 영구적으로 삭제되며 복구할 수 없습니다.",
+    myposts_btn_cancel: "취소",
+    myposts_btn_delete: "삭제",
+    myposts_toast_success: "삭제되었습니다",
+    myposts_empty: "아직 게시물이 없습니다.",
+    myposts_no_title: "제목 없음",
+    myposts_error: "오류: "
   }
 };
