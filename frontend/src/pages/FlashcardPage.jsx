@@ -5,6 +5,7 @@ import { useAppContext } from '../context/AppContext';
 import { supabase } from '../supabaseClient'; 
 import kanjiBase from '../utils/kanji-base.json';
 import jukugoBase from '../utils/jukugo-data.json';
+import { translations } from '../utils/translations'; // Import trực tiếp
 
 // --- BỘ ICON SVG GỌN ĐẸP ---
 const Icons = {
@@ -18,7 +19,7 @@ const Icons = {
     card: <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
 };
 
-const ConfirmModal = ({ isOpen, title, message, onConfirm, onCancel }) => {
+const ConfirmModal = ({ isOpen, title, message, onConfirm, onCancel, t }) => {
     if (!isOpen) return null;
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-fade-in text-center">
@@ -27,8 +28,8 @@ const ConfirmModal = ({ isOpen, title, message, onConfirm, onCancel }) => {
                 <h3 className="text-xl font-bold text-slate-800 mb-2">{title}</h3>
                 <p className="text-gray-500 text-sm mb-8 leading-relaxed">{message}</p>
                 <div className="flex gap-3">
-                    <button onClick={onCancel} className="flex-1 py-3.5 rounded-2xl font-black text-gray-400 hover:bg-gray-50 transition-all uppercase text-xs tracking-widest">Hủy</button>
-                    <button onClick={onConfirm} className="flex-1 py-3.5 rounded-2xl font-black bg-slate-900 text-white hover:bg-slate-800 shadow-lg transition-all uppercase text-xs tracking-widest">Học lại</button>
+                    <button onClick={onCancel} className="flex-1 py-3.5 rounded-2xl font-black text-gray-400 hover:bg-gray-50 transition-all uppercase text-xs tracking-widest">{t.modal_btn_cancel}</button>
+                    <button onClick={onConfirm} className="flex-1 py-3.5 rounded-2xl font-black bg-slate-900 text-white hover:bg-slate-800 shadow-lg transition-all uppercase text-xs tracking-widest">{t.modal_btn_confirm}</button>
                 </div>
             </div>
         </div>
@@ -37,7 +38,10 @@ const ConfirmModal = ({ isOpen, title, message, onConfirm, onCancel }) => {
 
 const FlashcardPage = () => {
   const navigate = useNavigate();
-  const { user } = useAppContext();
+  const { user, language } = useAppContext();
+  // ✅ Lấy đúng translation object
+  const t = translations[language] || translations.vi;
+
   const ITEMS_PER_LESSON = 16; 
 
   const [mode, setMode] = useState('menu'); 
@@ -80,7 +84,7 @@ const FlashcardPage = () => {
         for (let i = 0; i < kanjiBase.length; i += ITEMS_PER_LESSON) {
             const chunk = kanjiBase.slice(i, i + ITEMS_PER_LESSON);
             const num = Math.floor(i / ITEMS_PER_LESSON) + 1;
-            lessons.push({ id: num, title: `Bài ${num}`, desc: { start: chunk[0]?.kanji, end: chunk[chunk.length - 1]?.kanji }, originalCards: chunk });
+            lessons.push({ id: num, title: `${t.flashcard_lesson} ${num}`, desc: { start: chunk[0]?.kanji, end: chunk[chunk.length - 1]?.kanji }, originalCards: chunk });
         }
     } else {
         const grouped = {};
@@ -89,11 +93,11 @@ const FlashcardPage = () => {
             grouped[item.lesson].push(item);
         });
         Object.keys(grouped).sort((a,b) => a - b).forEach(id => {
-            lessons.push({ id: parseInt(id), title: `Bài ${id}`, desc: { start: grouped[id][0]?.kanji, end: grouped[id][grouped[id].length - 1]?.kanji }, originalCards: grouped[id] });
+            lessons.push({ id: parseInt(id), title: `${t.flashcard_lesson} ${id}`, desc: { start: grouped[id][0]?.kanji, end: grouped[id][grouped[id].length - 1]?.kanji }, originalCards: grouped[id] });
         });
     }
     return lessons;
-  }, [deckType]);
+  }, [deckType, t.flashcard_lesson]);
 
   const prepareGame = (lesson, isReview) => {
       const cards = isReview ? lesson.originalCards : lesson.originalCards.filter(card => !masteredList.includes(card.kanji));
@@ -164,7 +168,14 @@ const FlashcardPage = () => {
 
   return (
     <div className="flex h-screen bg-[#Fdfdfd] font-sans text-slate-900 overflow-hidden select-none">
-      <ConfirmModal isOpen={!!lessonToReview} title={`Học lại ${lessonToReview?.title}?`} message="Toàn bộ từ vựng sẽ được làm mới để bạn ôn tập." onConfirm={() => prepareGame(lessonToReview, true)} onCancel={() => setLessonToReview(null)} />
+      <ConfirmModal 
+        isOpen={!!lessonToReview} 
+        title={`${t.modal_review_title} ${lessonToReview?.title}?`} 
+        message={t.modal_review_msg} 
+        onConfirm={() => prepareGame(lessonToReview, true)} 
+        onCancel={() => setLessonToReview(null)}
+        t={t}
+      />
       <Sidebar />
       <main className="flex-1 h-full flex flex-col relative overflow-hidden">
         <div className="px-8 py-4 bg-[#Fdfdfd] flex justify-between items-center border-b border-gray-100 shrink-0 h-20 shadow-sm z-50">
@@ -172,24 +183,23 @@ const FlashcardPage = () => {
                 <div className="flex flex-row items-center gap-8 w-full">
                     <div className="flex items-center gap-4">
                         <div className="w-11 h-11 rounded-2xl bg-slate-900 text-white flex items-center justify-center shadow-lg">{Icons.card}</div>
-                        <div><h1 className="text-xl font-black text-slate-800 leading-none">LUYỆN TẬP</h1><p className="text-[9px] font-black text-gray-400 uppercase tracking-widest">FLASH CARD</p></div>
+                        <div><h1 className="text-xl font-black text-slate-800 leading-none">{t.flashcard_practice_title}</h1><p className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{t.flashcard_sub_title}</p></div>
                     </div>
                     <div className="flex bg-gray-100 p-1.5 rounded-2xl border border-gray-200 ml-auto">
-                        <button onClick={() => setDeckType('single')} className={`px-6 py-2 rounded-xl text-xs font-black uppercase transition-all ${deckType === 'single' ? 'bg-white text-slate-900 shadow-sm scale-105' : 'text-gray-400 hover:text-slate-600'}`}>🀄 Kanji Đơn</button>
-                        <button onClick={() => setDeckType('jukugo')} className={`px-6 py-2 rounded-xl text-xs font-black uppercase transition-all ${deckType === 'jukugo' ? 'bg-white text-indigo-600 shadow-sm scale-105' : 'text-gray-400 hover:text-indigo-600'}`}>📚 Từ Ghép</button>
+                        <button onClick={() => setDeckType('single')} className={`px-6 py-2 rounded-xl text-xs font-black uppercase transition-all ${deckType === 'single' ? 'bg-white text-slate-900 shadow-sm scale-105' : 'text-gray-400 hover:text-slate-600'}`}>{t.flashcard_kanji_single}</button>
+                        <button onClick={() => setDeckType('jukugo')} className={`px-6 py-2 rounded-xl text-xs font-black uppercase transition-all ${deckType === 'jukugo' ? 'bg-white text-indigo-600 shadow-sm scale-105' : 'text-gray-400 hover:text-indigo-600'}`}>{t.flashcard_jukugo}</button>
                     </div>
                 </div>
             ) : (
-                <button onClick={() => setMode('menu')} className="flex items-center gap-3 text-gray-400 hover:text-slate-900 font-black transition-all text-sm group px-6 py-2.5 rounded-2xl hover:bg-gray-100"><span className="group-hover:-translate-x-1 transition-transform">{Icons.back}</span><span>DỪNG LẠI</span></button>
+                <button onClick={() => setMode('menu')} className="flex items-center gap-3 text-gray-400 hover:text-slate-900 font-black transition-all text-sm group px-6 py-2.5 rounded-2xl hover:bg-gray-100"><span className="group-hover:-translate-x-1 transition-transform">{Icons.back}</span><span>{t.flashcard_stop}</span></button>
             )}
         </div>
 
         <div className="flex-1 bg-gray-50/50 overflow-hidden flex flex-col">
             {mode === 'menu' && (
-                // 🔥 Cập nhật class: Bỏ no-scrollbar, thêm custom-scrollbar và pr-4
                 <div className="overflow-y-auto h-full p-8 pr-4 custom-scrollbar pb-24">
                     {loadingProgress ? (
-                        <div className="flex justify-center items-center h-64 text-gray-400 font-bold animate-pulse">Đang tải Database...</div>
+                        <div className="flex justify-center items-center h-64 text-gray-400 font-bold animate-pulse">{t.flashcard_loading}</div>
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
                             {generatedLessons.map((lesson) => {
@@ -208,7 +218,7 @@ const FlashcardPage = () => {
                                             <span className={`font-kai text-slate-900 whitespace-nowrap shrink transition-all ${getMenuFontSize(lesson.desc.end)}`}>{lesson.desc.end}</span>
                                         </div>
                                         <div className="relative z-10">
-                                            <div className="flex justify-between text-[11px] font-black text-gray-400 mb-2 uppercase tracking-tighter"><span>Tiến độ</span><span>{mastered}/{lesson.originalCards.length}</span></div>
+                                            <div className="flex justify-between text-[11px] font-black text-gray-400 mb-2 uppercase tracking-tighter"><span>{t.flashcard_progress}</span><span>{mastered}/{lesson.originalCards.length}</span></div>
                                             <div className="w-full h-2.5 bg-gray-100 rounded-full overflow-hidden shadow-inner"><div className={`h-full transition-all duration-700 ${isDone ? 'bg-green-500' : 'bg-indigo-500'}`} style={{ width: `${(mastered / lesson.originalCards.length) * 100}%` }}></div></div>
                                         </div>
                                     </div>
@@ -222,44 +232,47 @@ const FlashcardPage = () => {
             {mode === 'game' && !finished && queue[0] && (
                 <div className="h-full w-full flex items-center justify-center p-6 gap-8 lg:px-20 overflow-hidden">
                     <div className="flex-1 flex flex-col items-center justify-center h-full max-w-[550px] shrink-0 my-auto">
-                        <div className="w-full mb-6 shrink-0"><div className="flex justify-between text-[12px] font-black text-gray-400 mb-2 uppercase px-2"><span>Còn lại: {queue.length}</span><span>{Math.round(progressPercent)}%</span></div><div className="w-full h-2.5 bg-gray-200 rounded-full overflow-hidden shadow-inner"><div className="h-full bg-slate-900 transition-all duration-500" style={{ width: `${progressPercent}%` }}></div></div></div>
+                        <div className="w-full mb-6 shrink-0"><div className="flex justify-between text-[12px] font-black text-gray-400 mb-2 uppercase px-2"><span>{t.flashcard_remaining}: {queue.length}</span><span>{Math.round(progressPercent)}%</span></div><div className="w-full h-2.5 bg-gray-200 rounded-full overflow-hidden shadow-inner"><div className="h-full bg-slate-900 transition-all duration-500" style={{ width: `${progressPercent}%` }}></div></div></div>
                         <div className="relative w-full h-[75vh] max-h-[650px] perspective-2000 group cursor-pointer shadow-2xl rounded-[3.5rem]" onClick={() => setIsFlipped(!isFlipped)}>
                             <div className={`w-full h-full duration-500 transform-style-3d relative ${isFlipped ? 'rotate-y-180' : ''}`}>
                                 <div className="absolute inset-0 bg-white rounded-[3.5rem] border border-gray-100 flex flex-col items-center justify-center backface-hidden z-20 p-12 text-center overflow-hidden">
-                                    <span className="text-[12px] font-black text-gray-300 uppercase absolute top-10 animate-pulse tracking-widest">CHẠM ĐỂ LẬT</span>
+                                    <span className="text-[12px] font-black text-gray-300 uppercase absolute top-10 animate-pulse tracking-widest">{t.flashcard_tap_to_flip}</span>
                                     <h1 className={`font-kai leading-none select-none text-slate-800 whitespace-nowrap px-6 drop-shadow-sm ${getDynamicFontSize(queue[0].kanji)}`}>{queue[0].kanji}</h1>
                                     <p className="text-gray-400 text-xs font-black bg-gray-50 px-6 py-2 rounded-2xl absolute bottom-12 uppercase tracking-widest border border-gray-100">{currentLesson?.title}</p>
                                 </div>
                                 <div className="absolute inset-0 bg-slate-900 text-white rounded-[3.5rem] shadow-2xl flex flex-col backface-hidden rotate-y-180 z-20 border-[6px] border-slate-800 overflow-hidden text-center">
                                     <div className="flex-1 flex flex-col p-10 justify-between min-h-0">
-                                        <div className="flex flex-col items-center">
-                                            <h2 className={`font-kai text-white opacity-20 whitespace-nowrap mb-2 ${queue[0].kanji.length > 2 ? 'text-3xl' : 'text-5xl'}`}>{queue[0].kanji}</h2>
-                                            <div className="inline-block bg-yellow-500 text-slate-950 px-5 py-1 rounded-xl text-[11px] font-black uppercase mb-4 shadow-lg">{queue[0].hanviet || "HÁN VIỆT"}</div>
-                                            <p className="text-3xl md:text-4xl font-black text-white leading-tight uppercase tracking-tight">{typeof queue[0].mean === 'object' ? queue[0].mean.vi || queue[0].mean.en : queue[0].mean}</p>
-                                        </div>
-                                        <div className="bg-white/5 py-6 rounded-[2rem] border border-white/10 flex flex-col items-center justify-center my-4 shrink-0">
-                                            {deckType === 'single' ? (
-                                                <div className="w-full px-8 space-y-3">
-                                                    <div className="flex justify-between items-center"><span className="text-[10px] font-black text-gray-500 tracking-widest uppercase">KUN</span><span className="text-xl font-bold text-green-400 whitespace-nowrap">{queue[0].kunyomi || "-"}</span></div>
-                                                    <div className="w-full h-[1px] bg-white/10"></div>
-                                                    <div className="flex justify-between items-center"><span className="text-[10px] font-black text-gray-500 tracking-widest uppercase">ONY</span><span className="text-xl font-bold text-blue-400 whitespace-nowrap">{queue[0].onyomi || "-"}</span></div>
-                                                </div>
-                                            ) : (
-                                                <div className="px-4"><p className="text-[10px] font-black text-gray-500 tracking-[0.4em] mb-2 uppercase">CÁCH ĐỌC</p><p className="text-3xl md:text-4xl font-black text-pink-400 tracking-wider leading-none uppercase whitespace-nowrap">{queue[0].hiragana}</p></div>
-                                            )}
-                                        </div>
-                                        {queue[0].detail && <div className="px-2"><p className="text-gray-300 italic font-medium text-sm md:text-base opacity-90 line-clamp-4">"{queue[0].detail}"</p></div>}
+                                            <div className="flex flex-col items-center">
+                                                <h2 className={`font-kai text-white opacity-20 whitespace-nowrap mb-2 ${queue[0].kanji.length > 2 ? 'text-3xl' : 'text-5xl'}`}>{queue[0].kanji}</h2>
+                                                <div className="inline-block bg-yellow-500 text-slate-950 px-5 py-1 rounded-xl text-[11px] font-black uppercase mb-4 shadow-lg">{queue[0].hanviet || "HÁN VIỆT"}</div>
+                                                <p className="text-3xl md:text-4xl font-black text-white leading-tight uppercase tracking-tight">
+                                                    {/* Hiển thị nghĩa theo ngôn ngữ đã chọn */}
+                                                    {typeof queue[0].mean === 'object' ? (queue[0].mean[language] || queue[0].mean.vi) : queue[0].mean}
+                                                </p>
+                                            </div>
+                                            <div className="bg-white/5 py-6 rounded-[2rem] border border-white/10 flex flex-col items-center justify-center my-4 shrink-0">
+                                                {deckType === 'single' ? (
+                                                    <div className="w-full px-8 space-y-3">
+                                                        <div className="flex justify-between items-center"><span className="text-[10px] font-black text-gray-500 tracking-widest uppercase">{t.flashcard_kun}</span><span className="text-xl font-bold text-green-400 whitespace-nowrap">{queue[0].kunyomi || "-"}</span></div>
+                                                        <div className="w-full h-[1px] bg-white/10"></div>
+                                                        <div className="flex justify-between items-center"><span className="text-[10px] font-black text-gray-500 tracking-widest uppercase">{t.flashcard_ony}</span><span className="text-xl font-bold text-blue-400 whitespace-nowrap">{queue[0].onyomi || "-"}</span></div>
+                                                    </div>
+                                                ) : (
+                                                    <div className="px-4"><p className="text-[10px] font-black text-gray-500 tracking-[0.4em] mb-2 uppercase">{t.flashcard_reading}</p><p className="text-3xl md:text-4xl font-black text-pink-400 tracking-wider leading-none uppercase whitespace-nowrap">{queue[0].hiragana}</p></div>
+                                                )}
+                                            </div>
+                                            {queue[0].detail && <div className="px-2"><p className="text-gray-300 italic font-medium text-sm md:text-base opacity-90 line-clamp-4">"{queue[0].detail}"</p></div>}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className={`flex flex-col gap-3 w-48 shrink-0 transition-all duration-500 ${isFlipped ? 'opacity-100 translate-x-0' : 'opacity-10 translate-x-12 pointer-events-none filter grayscale'} my-auto pb-10`}>
-                        <button onClick={() => handleRate('forgot')} className="group flex items-center gap-4 p-4 bg-white rounded-2xl border-2 border-red-100 shadow-sm transition-all active:scale-90"><div className="w-10 h-10 rounded-xl bg-red-100 text-red-600 flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors">{Icons.forgot}</div><span className="text-[12px] font-black text-gray-400 group-hover:text-red-600 uppercase tracking-widest">QUÊN</span></button>
-                        <button onClick={() => handleRate('hard')} className="group flex items-center gap-4 p-4 bg-white rounded-2xl border-2 border-orange-100 shadow-sm transition-all active:scale-90"><div className="w-10 h-10 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center shrink-0 group-hover:bg-orange-600 group-hover:text-white transition-colors">{Icons.hard}</div><span className="text-[12px] font-black text-gray-400 group-hover:text-orange-600 uppercase tracking-widest">KHÓ</span></button>
-                        <button onClick={() => handleRate('good')} className="group flex items-center gap-4 p-4 bg-white rounded-2xl border-2 border-yellow-100 shadow-sm transition-all active:scale-90"><div className="w-10 h-10 rounded-xl bg-yellow-100 text-yellow-600 flex items-center justify-center shrink-0 group-hover:bg-yellow-600 group-hover:text-white transition-colors">{Icons.good}</div><span className="text-[12px] font-black text-gray-400 group-hover:text-yellow-600 uppercase tracking-widest">TẠM</span></button>
-                        <button onClick={() => handleRate('easy')} className="group flex items-center gap-4 p-4 bg-white rounded-2xl border-2 border-blue-100 shadow-sm transition-all active:scale-90"><div className="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors">{Icons.easy}</div><span className="text-[12px] font-black text-gray-400 group-hover:text-blue-600 uppercase tracking-widest">DỄ</span></button>
-                        <button onClick={() => handleRate('master')} className="group flex items-center gap-4 p-4 bg-emerald-50 rounded-2xl border-2 border-emerald-400 shadow-xl transition-all active:scale-95 mt-4 group"><div className="w-12 h-12 rounded-xl bg-emerald-500 text-white flex items-center justify-center shrink-0 shadow-lg group-hover:bg-white group-hover:text-emerald-500 transition-colors">{Icons.master}</div><span className="text-sm font-black text-emerald-700 group-hover:text-white uppercase tracking-widest">THUỘC</span></button>
+                        <button onClick={() => handleRate('forgot')} className="group flex items-center gap-4 p-4 bg-white rounded-2xl border-2 border-red-100 shadow-sm transition-all active:scale-90"><div className="w-10 h-10 rounded-xl bg-red-100 text-red-600 flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors">{Icons.forgot}</div><span className="text-[12px] font-black text-gray-400 group-hover:text-red-600 uppercase tracking-widest">{t.flashcard_btn_forgot}</span></button>
+                        <button onClick={() => handleRate('hard')} className="group flex items-center gap-4 p-4 bg-white rounded-2xl border-2 border-orange-100 shadow-sm transition-all active:scale-90"><div className="w-10 h-10 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center shrink-0 group-hover:bg-orange-600 group-hover:text-white transition-colors">{Icons.hard}</div><span className="text-[12px] font-black text-gray-400 group-hover:text-orange-600 uppercase tracking-widest">{t.flashcard_btn_hard}</span></button>
+                        <button onClick={() => handleRate('good')} className="group flex items-center gap-4 p-4 bg-white rounded-2xl border-2 border-yellow-100 shadow-sm transition-all active:scale-90"><div className="w-10 h-10 rounded-xl bg-yellow-100 text-yellow-600 flex items-center justify-center shrink-0 group-hover:bg-yellow-600 group-hover:text-white transition-colors">{Icons.good}</div><span className="text-[12px] font-black text-gray-400 group-hover:text-yellow-600 uppercase tracking-widest">{t.flashcard_btn_good}</span></button>
+                        <button onClick={() => handleRate('easy')} className="group flex items-center gap-4 p-4 bg-white rounded-2xl border-2 border-blue-100 shadow-sm transition-all active:scale-90"><div className="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors">{Icons.easy}</div><span className="text-[12px] font-black text-gray-400 group-hover:text-blue-600 uppercase tracking-widest">{t.flashcard_btn_easy}</span></button>
+                        <button onClick={() => handleRate('master')} className="group flex items-center gap-4 p-4 bg-emerald-50 rounded-2xl border-2 border-emerald-400 shadow-xl transition-all active:scale-95 mt-4 group"><div className="w-12 h-12 rounded-xl bg-emerald-500 text-white flex items-center justify-center shrink-0 shadow-lg group-hover:bg-white group-hover:text-emerald-500 transition-colors">{Icons.master}</div><span className="text-sm font-black text-emerald-700 group-hover:text-white uppercase tracking-widest">{t.flashcard_btn_master}</span></button>
                     </div>
                 </div>
             )}
@@ -268,12 +281,12 @@ const FlashcardPage = () => {
                 <div className="h-full flex items-center justify-center bg-white z-[100] animate-fade-in">
                   <div className="text-center max-w-md p-12">
                     <div className="w-32 h-32 bg-emerald-500 text-white rounded-[3rem] flex items-center justify-center text-6xl mx-auto mb-8 shadow-2xl shadow-emerald-200">完</div>
-                    <h2 className="text-4xl font-black text-slate-800 mb-4 uppercase">XUẤT SẮC!</h2>
+                    <h2 className="text-4xl font-black text-slate-800 mb-4 uppercase">{t.flashcard_finish_awesome}</h2>
                     <div className="grid grid-cols-2 gap-4 mb-10 bg-gray-50 p-6 rounded-[2rem] border border-gray-100 shadow-inner">
-                        <div className="text-center border-r border-gray-200"><div className="text-3xl font-black text-slate-800">{currentLesson?.originalCards.length}</div><div className="text-[11px] uppercase font-black text-gray-400 mt-1 tracking-widest">Tổng từ</div></div>
-                        <div className="text-center"><div className="text-3xl font-black text-orange-500">{stats.review}</div><div className="text-[11px] uppercase font-black text-gray-400 mt-1 tracking-widest">Lặp lại</div></div>
+                        <div className="text-center border-r border-gray-200"><div className="text-3xl font-black text-slate-800">{currentLesson?.originalCards.length}</div><div className="text-[11px] uppercase font-black text-gray-400 mt-1 tracking-widest">{t.flashcard_total_words}</div></div>
+                        <div className="text-center"><div className="text-3xl font-black text-orange-500">{stats.review}</div><div className="text-[11px] uppercase font-black text-gray-400 mt-1 tracking-widest">{t.flashcard_review_count}</div></div>
                     </div>
-                    <button onClick={() => setMode('menu')} className="w-full py-5 bg-slate-900 text-white rounded-2xl font-black hover:bg-slate-800 transition-all shadow-xl uppercase tracking-widest active:scale-95">VỀ DANH SÁCH BÀI HỌC</button>
+                    <button onClick={() => setMode('menu')} className="w-full py-5 bg-slate-900 text-white rounded-2xl font-black hover:bg-slate-800 transition-all shadow-xl uppercase tracking-widest active:scale-95">{t.flashcard_back_list}</button>
                   </div>
                 </div>
             )}

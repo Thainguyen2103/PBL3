@@ -1,8 +1,9 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
+import { translations } from '../utils/translations'; // ✅ SỬA LỖI: Dùng import thay vì require
 
-// --- ICON ÔNG LÃO (SVG Custom - Giữ nguyên) ---
+// --- ICON ÔNG LÃO (SVG Custom) ---
 const OldManIcon = () => (
     <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M10 45 L50 10 L90 45 Z" fill="currentColor" stroke="none" />
@@ -25,20 +26,23 @@ const MENU_ITEMS = [
 const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, t, notifications } = useAppContext();
+  const { user, notifications, language } = useAppContext(); 
+  
+  // ✅ Lấy ngôn ngữ từ file translations đã import ở trên
+  const t = translations[language] || translations.vi;
 
   const totalNotifications = (notifications?.message || 0) + (notifications?.forum || 0);
 
   return (
     <aside className="w-72 bg-white border-r border-gray-100 p-6 flex flex-col shadow-sm z-50 flex-shrink-0 h-screen font-sans">
       
-      {/* --- LOGO (Đã khôi phục giống hệt bản cũ của bạn) --- */}
+      {/* --- LOGO --- */}
       <div className="mb-10 flex items-center gap-3 select-none cursor-pointer group" onClick={() => navigate('/')}>
          <div className="w-10 h-10 bg-black rounded-xl flex items-center justify-center text-white text-2xl shadow-xl transition-transform group-hover:scale-105" style={{ fontFamily: "'Yuji Syuku', serif" }}>
-            漢
+           漢
          </div>
          <h1 className="text-3xl font-black text-slate-900 tracking-tighter leading-none mt-1" style={{ fontFamily: "'Yuji Syuku', serif" }}>
-            KAN
+           KAN
          </h1>
       </div>
 
@@ -52,12 +56,11 @@ const Sidebar = () => {
                 <div 
                     key={item.path}
                     onClick={() => navigate(item.path)} 
-                    // 🔥 SỬA LỖI: Luôn thêm class 'font-bold' để chữ không bị mỏng đi khi Active
                     className={`
                         relative px-4 py-3.5 rounded-2xl cursor-pointer flex items-center gap-3 transition-all select-none group font-bold
                         ${isActive 
-                            ? 'bg-black text-white shadow-md' // Active: Nền đen, chữ trắng
-                            : 'text-gray-400 hover:text-black hover:bg-gray-50' // Inactive: Xám, hover đen
+                            ? 'bg-black text-white shadow-md' 
+                            : 'text-gray-400 hover:text-black hover:bg-gray-50' 
                         }
                     `}
                 >
@@ -68,7 +71,7 @@ const Sidebar = () => {
                     
                     {/* Label */}
                     <span className="tracking-wide truncate">
-                        {t?.[item.labelKey] || item.defaultLabel}
+                        {t[item.labelKey] || item.defaultLabel}
                     </span>
 
                     {/* Notification Badge */}
@@ -100,14 +103,13 @@ const Sidebar = () => {
                    {user?.name || user?.full_name || 'Khách'}
                </span>
                <span className="text-[10px] text-slate-400 font-bold group-hover:text-blue-500 transition-colors uppercase">
-                   {t?.menu_profile_view || "XEM HỒ SƠ"} ➝
+                   {t.menu_profile_view || "XEM HỒ SƠ"} ➝
                </span>
             </div>
          </div>
       </div>
 
       <style>{`
-        /* Thanh cuộn tinh tế */
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #e2e8f0; border-radius: 10px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }

@@ -1,10 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { supabase } from '../supabaseClient';
 import EmojiPicker from 'emoji-picker-react';
+import { useAppContext } from '../context/AppContext'; // ✅ Import Context
+import { translations } from '../utils/translations'; // ✅ Import Translations
 
 const REACTIONS = ['❤️', '😆', '😮', '😢', '😠', '👍'];
 
 const MessageSystem = ({ user }) => {
+    const { language } = useAppContext(); // ✅ Lấy language từ Context
+    const t = translations[language] || translations.vi; // ✅ Lấy bộ từ điển ngôn ngữ tương ứng
+
     const [friends, setFriends] = useState([]);
     const [selectedFriend, setSelectedFriend] = useState(null);
     const [messages, setMessages] = useState([]);
@@ -203,7 +208,8 @@ const MessageSystem = ({ user }) => {
         <div className="h-[600px] bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden flex font-sans">
             {/* LIST BẠN BÈ */}
             <div className="w-1/3 border-r border-gray-100 bg-gray-50/50 flex flex-col">
-                <div className="p-4 border-b border-gray-100"><h3 className="font-black text-slate-800 text-lg">Đoạn chat</h3></div>
+                {/* ✅ Cập nhật: t.msg_chat_title */}
+                <div className="p-4 border-b border-gray-100"><h3 className="font-black text-slate-800 text-lg">{t.msg_chat_title}</h3></div>
                 <div className="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-1">
                     {friends.map(f => (
                         <div key={f.id} onClick={() => setSelectedFriend(f)} className={`flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-all ${selectedFriend?.id === f.id ? 'bg-white shadow-md' : 'hover:bg-gray-100'}`}>
@@ -216,7 +222,8 @@ const MessageSystem = ({ user }) => {
                                     <h4 className={`text-sm truncate ${f.unread ? 'font-black text-slate-900' : 'font-bold text-slate-700'}`}>{f.full_name}</h4>
                                     {f.unread && <span className="w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse"></span>}
                                 </div>
-                                <p className={`text-xs truncate ${f.unread ? 'font-bold text-slate-800' : 'text-gray-400'}`}>{f.unread ? 'Tin nhắn mới' : (isUserOnline(f.id) ? 'Đang hoạt động' : 'Offline')}</p>
+                                {/* ✅ Cập nhật: t.msg_new_message, t.msg_active, t.msg_offline */}
+                                <p className={`text-xs truncate ${f.unread ? 'font-bold text-slate-800' : 'text-gray-400'}`}>{f.unread ? t.msg_new_message : (isUserOnline(f.id) ? t.msg_active : t.msg_offline)}</p>
                             </div>
                         </div>
                     ))}
@@ -234,7 +241,8 @@ const MessageSystem = ({ user }) => {
                             </div>
                             <div>
                                 <h3 className="font-bold text-slate-800">{selectedFriend.full_name}</h3>
-                                <p className="text-xs text-gray-500">{isUserOnline(selectedFriend.id) ? <span className="text-green-600 font-bold">● Đang hoạt động</span> : 'Không hoạt động'}</p>
+                                {/* ✅ Cập nhật: t.msg_active, t.msg_not_active */}
+                                <p className="text-xs text-gray-500">{isUserOnline(selectedFriend.id) ? <span className="text-green-600 font-bold">● {t.msg_active}</span> : t.msg_not_active}</p>
                             </div>
                         </div>
 
@@ -245,47 +253,55 @@ const MessageSystem = ({ user }) => {
                                 const isMenuOpen = activeMenuId === msg.id;
                                 return (
                                     <div key={index} className={`flex items-end gap-2 group mb-4 ${isMe ? 'flex-row-reverse' : 'flex-row'}`}>
-                                        {!isMe && <img src={selectedFriend.avatar} className="w-8 h-8 rounded-full mb-1" alt="" />}
-                                        <div className="relative max-w-[70%] group/msg">
-                                            {!msg.is_deleted && (
-                                                <div className={`absolute -top-7 ${isMe ? 'right-0' : 'left-0'} flex gap-1 bg-white shadow-sm border border-gray-100 rounded-full px-1.5 py-0.5 opacity-0 group-hover/msg:opacity-100 transition-opacity z-20`}>
-                                                    {REACTIONS.map(emoji => <button key={emoji} onClick={() => handleReaction(msg.id, emoji, msg.reactions)} className="hover:scale-125 transition-transform text-xs px-0.5">{emoji}</button>)}
-                                                </div>
-                                            )}
-                                            {!msg.is_deleted && (
-                                                <div className={`absolute top-1/2 -translate-y-1/2 ${isMe ? '-left-8' : '-right-8'} opacity-0 group-hover/msg:opacity-100 transition-opacity ${isMenuOpen ? 'opacity-100' : ''}`}>
-                                                    <button className="msg-menu-btn w-6 h-6 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-lg pb-2" onClick={(e) => { e.stopPropagation(); setActiveMenuId(isMenuOpen ? null : msg.id); }}>...</button>
-                                                    {isMenuOpen && (
-                                                        <div className={`msg-menu-dropdown absolute top-full ${isMe ? 'right-0' : 'left-0'} mt-1 bg-white shadow-lg border border-gray-100 rounded-lg overflow-hidden z-50 w-28 py-1 flex flex-col`}>
-                                                            <button onClick={() => { setReplyingTo(msg); textareaRef.current?.focus(); setActiveMenuId(null); }} className="px-3 py-1.5 text-left text-xs font-medium hover:bg-gray-50 text-slate-700">Trả lời</button>
-                                                            {isMe && msg.type === 'text' && <button onClick={() => handleStartEdit(msg)} className="px-3 py-1.5 text-left text-xs font-medium hover:bg-gray-50 text-slate-700">Chỉnh sửa</button>}
-                                                            {isMe && <button onClick={() => handleUnsend(msg.id)} className="px-3 py-1.5 text-left text-xs font-medium hover:bg-red-50 text-red-500">Thu hồi</button>}
-                                                        </div>
+                                            {!isMe && <img src={selectedFriend.avatar} className="w-8 h-8 rounded-full mb-1" alt="" />}
+                                            <div className="relative max-w-[70%] group/msg">
+                                                {!msg.is_deleted && (
+                                                    <div className={`absolute -top-7 ${isMe ? 'right-0' : 'left-0'} flex gap-1 bg-white shadow-sm border border-gray-100 rounded-full px-1.5 py-0.5 opacity-0 group-hover/msg:opacity-100 transition-opacity z-20`}>
+                                                        {REACTIONS.map(emoji => <button key={emoji} onClick={() => handleReaction(msg.id, emoji, msg.reactions)} className="hover:scale-125 transition-transform text-xs px-0.5">{emoji}</button>)}
+                                                    </div>
+                                                )}
+                                                {!msg.is_deleted && (
+                                                    <div className={`absolute top-1/2 -translate-y-1/2 ${isMe ? '-left-8' : '-right-8'} opacity-0 group-hover/msg:opacity-100 transition-opacity ${isMenuOpen ? 'opacity-100' : ''}`}>
+                                                        <button className="msg-menu-btn w-6 h-6 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-lg pb-2" onClick={(e) => { e.stopPropagation(); setActiveMenuId(isMenuOpen ? null : msg.id); }}>...</button>
+                                                        {isMenuOpen && (
+                                                            <div className={`msg-menu-dropdown absolute top-full ${isMe ? 'right-0' : 'left-0'} mt-1 bg-white shadow-lg border border-gray-100 rounded-lg overflow-hidden z-50 w-28 py-1 flex flex-col`}>
+                                                                    {/* ✅ Cập nhật: t.msg_reply */}
+                                                                    <button onClick={() => { setReplyingTo(msg); textareaRef.current?.focus(); setActiveMenuId(null); }} className="px-3 py-1.5 text-left text-xs font-medium hover:bg-gray-50 text-slate-700">{t.msg_reply}</button>
+                                                                    {/* ✅ Cập nhật: t.msg_edit */}
+                                                                    {isMe && msg.type === 'text' && <button onClick={() => handleStartEdit(msg)} className="px-3 py-1.5 text-left text-xs font-medium hover:bg-gray-50 text-slate-700">{t.msg_edit}</button>}
+                                                                    {/* ✅ Cập nhật: t.msg_unsend */}
+                                                                    {isMe && <button onClick={() => handleUnsend(msg.id)} className="px-3 py-1.5 text-left text-xs font-medium hover:bg-red-50 text-red-500">{t.msg_unsend}</button>}
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                )}
+                                                {msg.reply_to && !msg.is_deleted && (
+                                                    <div className={`text-xs p-2 mb-1 rounded-xl opacity-70 border-l-4 ${isMe ? 'bg-blue-700 text-white border-blue-300' : 'bg-gray-100 text-gray-600 border-gray-400'}`}>
+                                                        {/* ✅ Cập nhật: t.msg_replying_to */}
+                                                        <span className="font-bold block mb-0.5">{t.msg_replying_to}</span>
+                                                        {/* ✅ Cập nhật: t.msg_reply_image */}
+                                                        {msg.reply_to.type === 'image' ? t.msg_reply_image : <span className="line-clamp-1">{msg.reply_to.content}</span>}
+                                                    </div>
+                                                )}
+                                                <div className={`px-4 py-2.5 rounded-2xl text-sm font-medium shadow-sm relative ${msg.is_deleted ? 'bg-gray-50 text-gray-400 border border-gray-100 italic' : (isMe ? 'bg-blue-600 text-white rounded-br-sm' : 'bg-white text-slate-800 border border-gray-100 rounded-bl-sm')}`}>
+                                                    {/* ✅ Cập nhật: t.msg_deleted */}
+                                                    {msg.is_deleted ? t.msg_deleted : (
+                                                        <>
+                                                            {msg.type === 'image' ? <img src={msg.content} alt="sent" className="rounded-lg max-h-60 object-cover cursor-pointer" onClick={() => window.open(msg.content, '_blank')} /> : <div style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word', lineHeight: '1.5' }}>{msg.content}</div>}
+                                                            {/* ✅ Cập nhật: t.msg_edited */}
+                                                            {msg.is_edited && <span className={`text-[9px] block text-right mt-1 ${isMe ? 'text-blue-200' : 'text-gray-400'}`}>{t.msg_edited}</span>}
+                                                        </>
+                                                    )}
+                                                    {!msg.is_deleted && msg.reactions && Object.keys(msg.reactions).length > 0 && (
+                                                        <div className={`absolute -bottom-2 ${isMe ? 'left-0' : 'right-0'} bg-white border border-gray-100 rounded-full px-1 py-0 shadow-sm flex gap-0.5 z-10 items-center scale-90 origin-bottom`}>{Array.from(new Set(Object.values(msg.reactions))).map((e, i) => <span key={i} className="text-[10px]">{e}</span>)}</div>
                                                     )}
                                                 </div>
-                                            )}
-                                            {msg.reply_to && !msg.is_deleted && (
-                                                <div className={`text-xs p-2 mb-1 rounded-xl opacity-70 border-l-4 ${isMe ? 'bg-blue-700 text-white border-blue-300' : 'bg-gray-100 text-gray-600 border-gray-400'}`}>
-                                                    <span className="font-bold block mb-0.5">↳ Đang trả lời:</span>
-                                                    {msg.reply_to.type === 'image' ? '🖼️ [Hình ảnh]' : <span className="line-clamp-1">{msg.reply_to.content}</span>}
-                                                </div>
-                                            )}
-                                            <div className={`px-4 py-2.5 rounded-2xl text-sm font-medium shadow-sm relative ${msg.is_deleted ? 'bg-gray-50 text-gray-400 border border-gray-100 italic' : (isMe ? 'bg-blue-600 text-white rounded-br-sm' : 'bg-white text-slate-800 border border-gray-100 rounded-bl-sm')}`}>
-                                                {msg.is_deleted ? "Tin nhắn đã được thu hồi" : (
-                                                    <>
-                                                        {msg.type === 'image' ? <img src={msg.content} alt="sent" className="rounded-lg max-h-60 object-cover cursor-pointer" onClick={() => window.open(msg.content, '_blank')} /> : <div style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word', lineHeight: '1.5' }}>{msg.content}</div>}
-                                                        {msg.is_edited && <span className={`text-[9px] block text-right mt-1 ${isMe ? 'text-blue-200' : 'text-gray-400'}`}>đã chỉnh sửa</span>}
-                                                    </>
-                                                )}
-                                                {!msg.is_deleted && msg.reactions && Object.keys(msg.reactions).length > 0 && (
-                                                    <div className={`absolute -bottom-2 ${isMe ? 'left-0' : 'right-0'} bg-white border border-gray-100 rounded-full px-1 py-0 shadow-sm flex gap-0.5 z-10 items-center scale-90 origin-bottom`}>{Array.from(new Set(Object.values(msg.reactions))).map((e, i) => <span key={i} className="text-[10px]">{e}</span>)}</div>
-                                                )}
                                             </div>
-                                        </div>
                                     </div>
                                 );
                             })}
-                            {isUploading && <div className="flex justify-end"><div className="text-xs text-gray-400 animate-pulse bg-gray-100 px-3 py-1 rounded-full">Đang gửi ảnh ({selectedFiles.length})...</div></div>}
+                            {/* ✅ Cập nhật: t.msg_sending_image */}
+                            {isUploading && <div className="flex justify-end"><div className="text-xs text-gray-400 animate-pulse bg-gray-100 px-3 py-1 rounded-full">{t.msg_sending_image} ({selectedFiles.length})...</div></div>}
                             <div ref={messagesEndRef} />
                         </div>
 
@@ -294,7 +310,8 @@ const MessageSystem = ({ user }) => {
                             {(replyingTo || editingMessage) && (
                                 <div className="flex items-center justify-between bg-gray-50 p-2 px-4 rounded-t-xl text-xs border-l-4 border-blue-500 mb-1 animate-fade-in-up shadow-sm mx-2">
                                     <div>
-                                        {editingMessage ? <span className="font-bold text-blue-600 block mb-0.5">✏️ Đang chỉnh sửa tin nhắn</span> : <><span className="font-bold text-gray-500 block mb-0.5">↳ Đang trả lời:</span><span className="text-slate-700 line-clamp-1">{replyingTo?.type === 'image' ? '🖼️ [Hình ảnh]' : replyingTo?.content}</span></>}
+                                        {/* ✅ Cập nhật: t.msg_edit, t.msg_replying_to, t.msg_reply_image */}
+                                        {editingMessage ? <span className="font-bold text-blue-600 block mb-0.5">✏️ {t.msg_edit}</span> : <><span className="font-bold text-gray-500 block mb-0.5">{t.msg_replying_to}</span><span className="text-slate-700 line-clamp-1">{replyingTo?.type === 'image' ? t.msg_reply_image : replyingTo?.content}</span></>}
                                     </div>
                                     <button onClick={() => { setReplyingTo(null); setEditingMessage(null); setNewMessage(''); }} className="text-gray-400 hover:text-red-500 font-bold text-lg px-2">×</button>
                                 </div>
@@ -309,7 +326,8 @@ const MessageSystem = ({ user }) => {
                                             <button onClick={() => removeImage(idx)} className="absolute -top-2 -right-2 bg-gray-800 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs hover:bg-red-500 shadow-md">✕</button>
                                         </div>
                                     ))}
-                                    <span className="text-xs text-gray-400 font-bold italic self-center ml-2">Đã chọn {previewUrls.length} ảnh</span>
+                                    {/* ✅ Cập nhật: t.msg_selected_images */}
+                                    <span className="text-xs text-gray-400 font-bold italic self-center ml-2">{t.msg_selected_images} {previewUrls.length}</span>
                                 </div>
                             )}
 
@@ -318,23 +336,26 @@ const MessageSystem = ({ user }) => {
                             <div className="flex items-end gap-2 bg-gray-50 px-3 py-2 rounded-3xl border border-gray-200 focus-within:border-blue-400 transition-colors">
                                 {!editingMessage && (
                                     <>
-                                        <button type="button" onClick={() => fileInputRef.current.click()} className={`p-2 transition-colors shrink-0 ${previewUrls.length > 0 ? 'text-blue-500' : 'text-gray-400 hover:text-blue-500'}`}><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" /></svg></button>
-                                        
-                                        {/* ✅ INPUT MULTIPLE */}
-                                        <input type="file" ref={fileInputRef} onChange={handleFileSelect} className="hidden" accept="image/*" multiple />
-                                        
-                                        <button type="button" onClick={() => setShowEmoji(!showEmoji)} className="p-2 text-gray-400 hover:text-yellow-500 transition-colors shrink-0"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" /></svg></button>
+                                            <button type="button" onClick={() => fileInputRef.current.click()} className={`p-2 transition-colors shrink-0 ${previewUrls.length > 0 ? 'text-blue-500' : 'text-gray-400 hover:text-blue-500'}`}><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" /></svg></button>
+                                            
+                                            {/* ✅ INPUT MULTIPLE */}
+                                            <input type="file" ref={fileInputRef} onChange={handleFileSelect} className="hidden" accept="image/*" multiple />
+                                            
+                                            <button type="button" onClick={() => setShowEmoji(!showEmoji)} className="p-2 text-gray-400 hover:text-yellow-500 transition-colors shrink-0"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" /></svg></button>
                                     </>
                                 )}
-                                <textarea ref={textareaRef} value={newMessage} onChange={(e) => setNewMessage(e.target.value)} onKeyDown={(e) => { if(e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSendMessage(); } }} placeholder={editingMessage ? "Nhập nội dung mới..." : "Nhập tin nhắn..."} className="flex-1 bg-transparent px-2 py-2.5 outline-none text-sm font-medium text-slate-800 resize-none max-h-32 overflow-y-auto scrollbar-hide" rows={1} style={{ minHeight: '44px', lineHeight: '1.5' }} />
+                                {/* ✅ Cập nhật: t.msg_input_placeholder, t.msg_input_placeholder_edit */}
+                                <textarea ref={textareaRef} value={newMessage} onChange={(e) => setNewMessage(e.target.value)} onKeyDown={(e) => { if(e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSendMessage(); } }} placeholder={editingMessage ? t.msg_input_placeholder_edit : t.msg_input_placeholder} className="flex-1 bg-transparent px-2 py-2.5 outline-none text-sm font-medium text-slate-800 resize-none max-h-32 overflow-y-auto scrollbar-hide" rows={1} style={{ minHeight: '44px', lineHeight: '1.5' }} />
                                 <button onClick={handleSendMessage} disabled={!newMessage.trim() && selectedFiles.length === 0} className="p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all disabled:opacity-50 shadow-md shrink-0 mb-1">
-                                    {editingMessage ? <span className="text-[10px] font-bold px-1">LƯU</span> : <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 ml-0.5"><path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" /></svg>}
+                                    {/* ✅ Cập nhật: t.msg_btn_save */}
+                                    {editingMessage ? <span className="text-[10px] font-bold px-1">{t.msg_btn_save}</span> : <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 ml-0.5"><path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" /></svg>}
                                 </button>
                             </div>
                         </div>
                     </>
                 ) : (
-                    <div className="flex-1 flex flex-col items-center justify-center text-center p-8 bg-slate-50"><div className="text-6xl mb-4 grayscale opacity-20">💬</div><h3 className="font-bold text-slate-400">Chọn một người bạn để nhắn tin</h3></div>
+                    /* ✅ Cập nhật: t.msg_select_friend_hint */
+                    <div className="flex-1 flex flex-col items-center justify-center text-center p-8 bg-slate-50"><div className="text-6xl mb-4 grayscale opacity-20">💬</div><h3 className="font-bold text-slate-400">{t.msg_select_friend_hint}</h3></div>
                 )}
             </div>
             <style>{`.scrollbar-hide::-webkit-scrollbar { display: none; } .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; } .animate-fade-in-up { animation: fadeInUp 0.2s ease-out; } @keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }`}</style>

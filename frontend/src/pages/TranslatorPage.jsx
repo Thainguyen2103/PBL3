@@ -3,67 +3,25 @@ import { useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import { useAppContext } from '../context/AppContext';
 import { flashcardData as dictionaryData } from "../utils/kanji-dictionary";
-
-const LANGUAGES = [
-    { code: 'auto', label: 'PHÁT HIỆN NGÔN NGỮ', flag: '✨' },
-    { code: 'vi', label: 'TIẾNG VIỆT', flag: '🇻🇳' },
-    { code: 'en', label: 'ENGLISH', flag: '🇬🇧' },
-    { code: 'ja', label: 'TIẾNG NHẬT', flag: '🇯🇵' },
-    { code: 'zh', label: 'TIẾNG TRUNG', flag: '🇨🇳' },
-    { code: 'ko', label: 'TIẾNG HÀN', flag: '🇰🇷' }
-];
-
-// --- DROPDOWN COMPONENT (GIỮ NGUYÊN) ---
-const CustomDropdown = ({ value, onChange, options, disabled }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const containerRef = useRef(null);
-
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (containerRef.current && !containerRef.current.contains(event.target)) {
-                setIsOpen(false);
-            }
-        };
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
-
-    const selectedOption = options.find(o => o.code === value) || options[0];
-
-    return (
-        <div className="relative" ref={containerRef}>
-            <button 
-                onClick={() => !disabled && setIsOpen(!isOpen)}
-                className={`flex items-center gap-2 text-xs font-black uppercase tracking-widest transition-colors ${disabled ? 'text-gray-300 cursor-not-allowed' : 'text-slate-600 hover:text-blue-600'}`}
-            >
-                <span className="text-lg">{selectedOption.flag}</span>
-                <span>{selectedOption.label}</span>
-                {!disabled && <span className="text-[10px] ml-1 opacity-50">▼</span>}
-            </button>
-
-            {isOpen && (
-                <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 z-50 overflow-hidden animate-fade-in-up">
-                    {options.map((opt) => (
-                        <div 
-                            key={opt.code}
-                            onClick={() => { onChange(opt.code); setIsOpen(false); }}
-                            className={`px-4 py-3 cursor-pointer flex items-center gap-3 hover:bg-blue-50 transition-colors ${value === opt.code ? 'bg-blue-50 text-blue-600' : 'text-slate-600'}`}
-                        >
-                            <span className="text-xl">{opt.flag}</span>
-                            <span className="text-xs font-bold uppercase tracking-wide">{opt.label}</span>
-                            {value === opt.code && <span className="ml-auto text-blue-600">✓</span>}
-                        </div>
-                    ))}
-                </div>
-            )}
-        </div>
-    );
-};
+import { translations } from '../utils/translations'; // Import trực tiếp để đảm bảo
 
 const TranslatorPage = () => {
     const navigate = useNavigate();
-    const { user } = useAppContext();
+    const { user, language } = useAppContext(); 
     
+    // ✅ Lấy đúng translation object
+    const t = translations[language] || translations.vi;
+
+    // --- CẤU HÌNH NGÔN NGỮ ĐỘNG ---
+    const LANGUAGES = [
+        { code: 'auto', label: t.lang_auto, flag: '✨' },
+        { code: 'vi', label: t.lang_vi, flag: '🇻🇳' },
+        { code: 'en', label: t.lang_en, flag: '🇬🇧' },
+        { code: 'ja', label: t.lang_ja, flag: '🇯🇵' },
+        { code: 'zh', label: t.lang_zh, flag: '🇨🇳' },
+        { code: 'ko', label: t.lang_ko, flag: '🇰🇷' }
+    ];
+
     const [inputText, setInputText] = useState("");
     const [translatedText, setTranslatedText] = useState("");
     const [transliteration, setTransliteration] = useState(""); 
@@ -137,7 +95,7 @@ const TranslatorPage = () => {
             }
         } catch (err) {
             console.error(err);
-            setTranslatedText("Lỗi kết nối...");
+            setTranslatedText("Error...");
             setTransliteration("");
         } finally {
             setIsTranslating(false);
@@ -161,7 +119,7 @@ const TranslatorPage = () => {
             
             <main className="flex-1 h-full flex flex-col bg-slate-50/50 p-6 md:p-8 overflow-hidden">
                 
-                <h1 className="text-3xl font-black text-slate-800 mb-6 tracking-tight shrink-0">Dịch Thuật AI</h1>
+                <h1 className="text-3xl font-black text-slate-800 mb-6 tracking-tight shrink-0">{t.translator_title}</h1>
 
                 <div className="bg-white rounded-[2rem] shadow-xl border border-gray-100 flex flex-col md:flex-row relative z-10 flex-1 min-h-0 overflow-hidden">
                     
@@ -171,14 +129,14 @@ const TranslatorPage = () => {
                             <CustomDropdown value={sourceLang} onChange={setSourceLang} options={LANGUAGES} />
                             {detectedLangDisplay && sourceLang === 'auto' && (
                                 <span className="text-[9px] font-black text-green-600 bg-green-50 px-2 py-1 rounded-lg animate-fade-in border border-green-100 uppercase tracking-wider">
-                                    PHÁT HIỆN: {detectedLangDisplay}
+                                    {t.translator_detect}: {detectedLangDisplay}
                                 </span>
                             )}
                         </div>
                         
                         <textarea 
                             className="w-full flex-1 p-6 resize-none outline-none text-2xl font-medium text-slate-700 placeholder-gray-300 bg-transparent leading-relaxed custom-scrollbar"
-                            placeholder="Nhập văn bản..."
+                            placeholder={t.translator_placeholder}
                             value={inputText}
                             onChange={e => setInputText(e.target.value)}
                             spellCheck="false"
@@ -215,17 +173,17 @@ const TranslatorPage = () => {
                             {isTranslating ? (
                                 <div className="flex items-center gap-3 text-gray-400 animate-pulse mt-4">
                                     <span className="w-5 h-5 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin"></span>
-                                    <span className="text-sm font-bold uppercase tracking-wider">Đang dịch...</span>
+                                    <span className="text-sm font-bold uppercase tracking-wider">{t.translator_translating}</span>
                                 </div>
                             ) : (
                                 <>
                                     <div className="flex-1 flex flex-col gap-2"> 
                                         {/* PHẦN DỊCH CHÍNH (TO, ĐẬM) */}
                                         <div className="text-3xl md:text-4xl font-bold text-slate-800 leading-relaxed break-words">
-                                            {translatedText || <span className="text-gray-300 select-none text-2xl font-normal">Bản dịch sẽ hiện ở đây...</span>}
+                                            {translatedText || <span className="text-gray-300 select-none text-2xl font-normal">{t.translator_translation_placeholder}</span>}
                                         </div>
                                         
-                                        {/* 🔥 PHẦN PHIÊN ÂM (NGAY DƯỚI, MÀU NHẠT HƠN, FONT CHUẨN) */}
+                                        {/* PHẦN PHIÊN ÂM */}
                                         {translatedText && transliteration && (
                                             <div className="text-lg md:text-xl text-slate-500 font-medium font-sans leading-relaxed break-words">
                                                 {transliteration}
@@ -243,7 +201,7 @@ const TranslatorPage = () => {
                     <div className="mt-6 shrink-0 animate-fade-in-up pb-2">
                         <div className="flex items-center gap-4 mb-4">
                             <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">
-                                KANJI TÌM THẤY ({relatedKanji.length})
+                                {t.translator_kanji_found} ({relatedKanji.length})
                             </span>
                             <div className="h-px bg-gray-200 flex-1"></div>
                         </div>
@@ -273,6 +231,53 @@ const TranslatorPage = () => {
                 .animate-fade-in-up { animation: fadeInUp 0.5s ease-out; }
                 @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
             `}</style>
+        </div>
+    );
+};
+
+// --- DROPDOWN COMPONENT (GIỮ NGUYÊN) ---
+const CustomDropdown = ({ value, onChange, options, disabled }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const containerRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (containerRef.current && !containerRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
+    const selectedOption = options.find(o => o.code === value) || options[0];
+
+    return (
+        <div className="relative" ref={containerRef}>
+            <button 
+                onClick={() => !disabled && setIsOpen(!isOpen)}
+                className={`flex items-center gap-2 text-xs font-black uppercase tracking-widest transition-colors ${disabled ? 'text-gray-300 cursor-not-allowed' : 'text-slate-600 hover:text-blue-600'}`}
+            >
+                <span className="text-lg">{selectedOption.flag}</span>
+                <span>{selectedOption.label}</span>
+                {!disabled && <span className="text-[10px] ml-1 opacity-50">▼</span>}
+            </button>
+
+            {isOpen && (
+                <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 z-50 overflow-hidden animate-fade-in-up">
+                    {options.map((opt) => (
+                        <div 
+                            key={opt.code}
+                            onClick={() => { onChange(opt.code); setIsOpen(false); }}
+                            className={`px-4 py-3 cursor-pointer flex items-center gap-3 hover:bg-blue-50 transition-colors ${value === opt.code ? 'bg-blue-50 text-blue-600' : 'text-slate-600'}`}
+                        >
+                            <span className="text-xl">{opt.flag}</span>
+                            <span className="text-xs font-bold uppercase tracking-wide">{opt.label}</span>
+                            {value === opt.code && <span className="ml-auto text-blue-600">✓</span>}
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 };

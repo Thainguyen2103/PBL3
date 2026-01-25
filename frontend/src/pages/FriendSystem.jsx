@@ -1,8 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../supabaseClient';
 import PublicProfile from '../components/PublicProfile';
+import { useAppContext } from '../context/AppContext'; // ✅ Import Context
+import { translations } from '../utils/translations'; // ✅ Import Translations
 
 const FriendSystem = ({ user, initialSelectedUser, onBackToRank }) => {
+    const { language } = useAppContext(); // ✅ Lấy language từ Context
+    const t = translations[language] || translations.vi; // ✅ Lấy bộ từ điển
+
     const [viewProfile, setViewProfile] = useState(initialSelectedUser);
     
     // Data Lists
@@ -125,7 +130,7 @@ const FriendSystem = ({ user, initialSelectedUser, onBackToRank }) => {
                 
                 <input 
                     type="text" 
-                    placeholder="Tìm chiến hữu bằng tên, email..." 
+                    placeholder={t.friend_search_placeholder} // ✅ t.key
                     value={searchTerm}
                     onChange={handleSearch}
                     // pl-14 để chữ không đè lên icon
@@ -144,13 +149,14 @@ const FriendSystem = ({ user, initialSelectedUser, onBackToRank }) => {
                 {/* Kết quả tìm kiếm */}
                 {searchTerm.length >= 2 && (
                     <div className="animate-fade-in">
-                        <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 ml-1">Kết quả tìm kiếm</h3>
+                        {/* ✅ t.key */}
+                        <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 ml-1">{t.friend_search_result}</h3>
                         <div className="grid gap-2">
                             {searchResults.length > 0 ? (
                                 searchResults.map(u => <MiniCard key={u.id} target={u} />)
                             ) : (
                                 <div className="text-center py-4 text-gray-400 text-xs border-2 border-dashed border-gray-100 rounded-xl">
-                                    Không tìm thấy chiến binh nào.
+                                    {t.friend_not_found} {/* ✅ t.key */}
                                 </div>
                             )}
                         </div>
@@ -164,7 +170,7 @@ const FriendSystem = ({ user, initialSelectedUser, onBackToRank }) => {
                         {friendRequests.length > 0 && (
                             <div className="animate-fade-in-down">
                                 <h3 className="text-[10px] font-black text-red-500 uppercase tracking-widest mb-3 ml-1 flex items-center gap-2">
-                                    <span>💌</span> Lời mời kết bạn
+                                    <span>💌</span> {t.friend_requests} {/* ✅ t.key */}
                                 </h3>
                                 <div className="grid gap-2">
                                     {friendRequests.map(u => <MiniCard key={u.id} target={u} />)}
@@ -175,7 +181,7 @@ const FriendSystem = ({ user, initialSelectedUser, onBackToRank }) => {
                         {/* Danh sách bạn bè */}
                         <div>
                             <h3 className="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-3 ml-1 flex items-center gap-2">
-                                <span>💎</span> Bạn bè ({myFriends.length})
+                                <span>💎</span> {t.friend_list} ({myFriends.length}) {/* ✅ t.key */}
                             </h3>
                             {myFriends.length > 0 ? (
                                 <div className="grid gap-2">
@@ -184,8 +190,8 @@ const FriendSystem = ({ user, initialSelectedUser, onBackToRank }) => {
                             ) : (
                                 <div className="flex flex-col items-center justify-center py-12 bg-white rounded-2xl border-2 border-dashed border-gray-100 text-center">
                                     <div className="text-4xl mb-3 grayscale opacity-20">🙌</div>
-                                    <p className="text-gray-500 font-bold text-sm">Chưa có bạn bè nào.</p>
-                                    <p className="text-gray-400 text-xs mt-1">Hãy tìm kiếm để kết nối!</p>
+                                    <p className="text-gray-500 font-bold text-sm">{t.friend_no_data}</p> {/* ✅ t.key */}
+                                    <p className="text-gray-400 text-xs mt-1">{t.friend_connect_hint}</p> {/* ✅ t.key */}
                                 </div>
                             )}
                         </div>

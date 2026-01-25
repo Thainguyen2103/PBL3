@@ -3,10 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import { useAppContext } from '../context/AppContext';
 import { flashcardData as dictionaryData } from "../utils/kanji-dictionary";
+import { translations } from '../utils/translations'; // Import trực tiếp để đảm bảo
 
 const DictionaryPage = () => {
     const navigate = useNavigate();
-    const { t, user } = useAppContext();
+    const { user, language } = useAppContext(); // Lấy language từ context
+    
+    // ✅ Lấy đúng translation object
+    const t = translations[language] || translations.vi;
+
     const [searchTerm, setSearchTerm] = useState("");
 
     // --- LOGIC LỌC THÔNG MINH ---
@@ -21,7 +26,8 @@ const DictionaryPage = () => {
             const hanviet = item.hanviet ? item.hanviet.toLowerCase() : "";
             if (hanviet.includes(term) || normalizeVi(hanviet).includes(term)) return true;
 
-            const mean = typeof item.mean === 'object' ? (item.mean[user?.language] || item.mean.vi || "") : (item.mean || "");
+            // Xử lý đa ngôn ngữ cho nghĩa (nếu item.mean là object)
+            const mean = typeof item.mean === 'object' ? (item.mean[language] || item.mean.vi || "") : (item.mean || "");
             if (mean.toLowerCase().includes(term) || normalizeVi(mean).includes(term)) return true;
 
             if (item.onyomi && item.onyomi.toLowerCase().includes(term)) return true;
@@ -32,7 +38,7 @@ const DictionaryPage = () => {
 
             return false;
         });
-    }, [searchTerm, user?.language]);
+    }, [searchTerm, language]);
 
     useEffect(() => { window.scrollTo(0, 0); }, []);
 
@@ -47,12 +53,12 @@ const DictionaryPage = () => {
                     <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div>
                             <h1 className="text-3xl font-black text-slate-800 tracking-tight mb-1">
-                                {t?.dictionary_title || "Từ Điển Kanji"}
+                                {t.dictionary_title || "Từ Điển Kanji"}
                             </h1>
                             <div className="flex items-center gap-2 text-xs font-bold text-gray-400 uppercase tracking-widest">
-                                <span>KHO DỮ LIỆU</span>
+                                <span>{t.dictionary_data_source || "KHO DỮ LIỆU"}</span>
                                 <span className="w-1 h-1 rounded-full bg-gray-300"></span>
-                                <span>{dictionaryData.length} TỪ (512 GỐC)</span>
+                                <span>{dictionaryData.length} {t.dictionary_total_words || "TỪ (512 GỐC)"}</span>
                             </div>
                         </div>
                         
@@ -63,7 +69,7 @@ const DictionaryPage = () => {
                                     type="text" 
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
-                                    placeholder={t?.dictionary_search_placeholder || "Tra Kanji, Hán Việt, hoặc dán cả câu..."}
+                                    placeholder={t.dictionary_search_placeholder || "Tra Kanji, Hán Việt, hoặc dán cả câu..."}
                                     className="w-full pl-12 pr-10 py-3 bg-gray-100 border-2 border-transparent focus:bg-white focus:border-slate-900 rounded-2xl outline-none transition-all font-medium text-slate-700 placeholder-gray-400 shadow-sm"
                                 />
                                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xl text-gray-400 group-focus-within:text-slate-900 transition-colors">🔍</span>
@@ -76,7 +82,7 @@ const DictionaryPage = () => {
                             <button 
                                 onClick={() => navigate('/translator')}
                                 className="p-3 bg-white border border-gray-200 rounded-xl hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all shadow-sm group/btn"
-                                title="Chuyển sang Dịch thuật AI"
+                                title={t.dictionary_translator_tooltip || "Chuyển sang Dịch thuật AI"}
                             >
                                 <span className="text-xl">🌐</span>
                             </button>
@@ -85,7 +91,6 @@ const DictionaryPage = () => {
                 </div>
 
                 {/* GRID KANJI VỚI THANH CUỘN MỚI */}
-                {/* Thêm padding phải (pr-2) để nội dung không dính vào thanh cuộn */}
                 <div className="flex-1 overflow-y-auto p-8 pr-4 custom-scrollbar">
                     <div className="max-w-7xl mx-auto">
                         {filteredData.length > 0 ? (
@@ -106,13 +111,14 @@ const DictionaryPage = () => {
                                                 </span>
                                             </div>
                                             <p className="text-sm font-bold text-gray-500 line-clamp-1 group-hover:text-slate-800">
-                                                {typeof item.mean === 'object' ? (item.mean[user?.language] || item.mean.vi) : item.mean}
+                                                {/* Hiển thị nghĩa theo ngôn ngữ đã chọn */}
+                                                {typeof item.mean === 'object' ? (item.mean[language] || item.mean.vi) : item.mean}
                                             </p>
                                             
                                             {/* Tag báo hiệu nếu Kanji này có trong câu input */}
                                             {searchTerm.includes(item.kanji) && (
                                                 <div className="absolute top-0 right-0 bg-green-500 text-white text-[9px] font-bold px-2 py-1 rounded-bl-lg">
-                                                    ✓ Tìm thấy
+                                                    ✓ {t.dictionary_found || "Tìm thấy"}
                                                 </div>
                                             )}
                                         </div>
@@ -122,7 +128,7 @@ const DictionaryPage = () => {
                         ) : (
                             <div className="flex flex-col items-center justify-center h-64 opacity-50">
                                 <span className="text-4xl mb-2">🍃</span>
-                                <p className="font-bold text-slate-400 uppercase tracking-widest text-xs">Không tìm thấy trong kho 512 từ</p>
+                                <p className="font-bold text-slate-400 uppercase tracking-widest text-xs">{t.dictionary_not_found || "Không tìm thấy trong kho 512 từ"}</p>
                             </div>
                         )}
                     </div>

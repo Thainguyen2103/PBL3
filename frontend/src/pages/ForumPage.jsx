@@ -2,26 +2,29 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 import { useAppContext } from '../context/AppContext';
 import { supabase } from '../supabaseClient';
-
-// --- HÀM HELPER THỜI GIAN ---
-const timeAgo = (dateString) => {
-    const date = new Date(dateString);
-    const now = new Date();
-    const seconds = Math.floor((now - date) / 1000);
-    if (seconds < 60) return 'Vừa xong';
-    const minutes = Math.floor(seconds / 60);
-    if (minutes < 60) return `${minutes} phút trước`;
-    const hours = Math.floor(minutes / 60);
-    if (hours < 24) return `${hours} giờ trước`;
-    return `${date.getDate()}/${date.getMonth() + 1}`;
-};
+import { translations } from '../utils/translations'; // ✅ Import Translations
 
 const ForumPage = () => {
-    const { user } = useAppContext();
+    const { user, language } = useAppContext(); // ✅ Lấy language từ Context
+    const t = translations[language] || translations.vi; // ✅ Lấy bộ từ điển ngôn ngữ tương ứng
+
     const [posts, setPosts] = useState([]);
     const [newContent, setNewContent] = useState('');
     const [loading, setLoading] = useState(true);
     const [posting, setPosting] = useState(false);
+
+    // --- HÀM HELPER THỜI GIAN (Đưa vào trong component để dùng t) ---
+    const timeAgo = (dateString) => {
+        const date = new Date(dateString);
+        const now = new Date();
+        const seconds = Math.floor((now - date) / 1000);
+        if (seconds < 60) return t.forum_time_just_now; // ✅ t.key
+        const minutes = Math.floor(seconds / 60);
+        if (minutes < 60) return `${minutes} ${t.forum_time_mins_ago}`; // ✅ t.key
+        const hours = Math.floor(minutes / 60);
+        if (hours < 24) return `${hours} ${t.forum_time_hours_ago}`; // ✅ t.key
+        return `${date.getDate()}/${date.getMonth() + 1}`;
+    };
 
     // --- 1. LẤY DỮ LIỆU BÀI VIẾT ---
     const fetchPosts = async () => {
@@ -56,7 +59,7 @@ const ForumPage = () => {
             setNewContent('');
             fetchPosts(); // Refresh lại feed
         } else {
-            alert('Lỗi đăng bài: ' + error.message);
+            alert(t.forum_error_post + error.message); // ✅ t.key
         }
         setPosting(false);
     };
@@ -90,9 +93,9 @@ const ForumPage = () => {
                 {/* HEADER */}
                 <div className="p-6 border-b border-gray-100 bg-white shadow-sm z-10">
                     <h1 className="text-2xl font-black text-slate-800 tracking-tight flex items-center gap-2">
-                        Diễn Đàn Thảo Luận <span className="text-2xl animate-pulse">💬</span>
+                        {t.forum_title} <span className="text-2xl animate-pulse">💬</span> {/* ✅ t.key */}
                     </h1>
-                    <p className="text-gray-500 text-xs mt-1">Nơi trao đổi kiến thức và chém gió của các Chiến Binh Kanji.</p>
+                    <p className="text-gray-500 text-xs mt-1">{t.forum_subtitle}</p> {/* ✅ t.key */}
                 </div>
 
                 {/* CONTENT AREA */}
@@ -109,7 +112,7 @@ const ForumPage = () => {
                                     <textarea
                                         value={newContent}
                                         onChange={(e) => setNewContent(e.target.value)}
-                                        placeholder="Hôm nay bạn học được từ mới nào? Chia sẻ đi..."
+                                        placeholder={t.forum_post_placeholder} // ✅ t.key
                                         className="w-full bg-gray-50 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 resize-none h-24"
                                     />
                                     <div className="flex justify-between items-center mt-3">
@@ -122,7 +125,7 @@ const ForumPage = () => {
                                             disabled={posting || !newContent.trim()}
                                             className={`px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest text-white transition-all ${!newContent.trim() ? 'bg-gray-300 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-700 shadow-md hover:shadow-indigo-500/30'}`}
                                         >
-                                            {posting ? 'Đang đăng...' : 'Đăng Bài'}
+                                            {posting ? t.forum_btn_posting : t.forum_btn_post} {/* ✅ t.key */}
                                         </button>
                                     </div>
                                 </div>
@@ -131,7 +134,7 @@ const ForumPage = () => {
 
                         {/* --- DANH SÁCH BÀI VIẾT (FEED) --- */}
                         {loading ? (
-                            <div className="text-center py-10 text-gray-400 text-sm">⏳ Đang tải tin mới...</div>
+                            <div className="text-center py-10 text-gray-400 text-sm">{t.forum_loading}</div> // ✅ t.key
                         ) : (
                             posts.map((post) => {
                                 const isLiked = post.likes?.includes(user?.id);
@@ -160,9 +163,6 @@ const ForumPage = () => {
                                             {post.content}
                                         </div>
 
-                                        {/* Post Image (Nếu có - Demo placeholder) */}
-                                        {/* {post.image_url && <img src={post.image_url} className="w-full rounded-xl mb-4 border border-gray-100" />} */}
-
                                         {/* Post Actions */}
                                         <div className="flex items-center gap-6 border-t border-gray-50 pt-3">
                                             <button 
@@ -175,12 +175,12 @@ const ForumPage = () => {
                                             
                                             <button className="flex items-center gap-2 text-xs font-bold text-gray-400 hover:text-indigo-500 transition-colors">
                                                 <span className="text-lg">💬</span>
-                                                Bình luận
+                                                {t.forum_action_comment} {/* ✅ t.key */}
                                             </button>
 
                                             <button className="flex items-center gap-2 text-xs font-bold text-gray-400 hover:text-blue-500 transition-colors ml-auto">
                                                 <span className="text-lg">✈️</span>
-                                                Gửi
+                                                {t.forum_action_share} {/* ✅ t.key */}
                                             </button>
                                         </div>
                                     </div>
@@ -192,7 +192,7 @@ const ForumPage = () => {
                         {!loading && posts.length === 0 && (
                             <div className="text-center py-10 text-gray-400">
                                 <div className="text-4xl mb-2">🦗</div>
-                                <p>Chưa có bài viết nào. Hãy là người đầu tiên!</p>
+                                <p>{t.forum_no_posts}</p> {/* ✅ t.key */}
                             </div>
                         )}
                     </div>
