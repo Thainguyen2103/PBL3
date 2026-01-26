@@ -1,25 +1,51 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
-import { translations } from '../utils/translations'; // ✅ SỬA LỖI: Dùng import thay vì require
+import { translations } from '../utils/translations'; 
 
-// --- ICON ÔNG LÃO (SVG Custom) ---
-const OldManIcon = () => (
-    <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10 45 L50 10 L90 45 Z" fill="currentColor" stroke="none" />
-        <path d="M35 50 Q50 90 65 50 Z" fill="currentColor" stroke="none" />
-    </svg>
-);
+// --- BỘ ICON SVG TÙY CHỈNH ---
+const Icons = {
+    // Icon Ông lão (Chatbot) - Giữ nguyên
+    OldMan: () => (
+        <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 45 L50 10 L90 45 Z" fill="currentColor" stroke="none" />
+            <path d="M35 50 Q50 90 65 50 Z" fill="currentColor" stroke="none" />
+        </svg>
+    ),
+    
+    // ✅ ICON GAMEPAD MỚI (MÀU MÈ & NGẦU HƠN)
+    GameController: () => (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            {/* Thân tay cầm màu Tím (Violet) */}
+            <rect x="2" y="6" width="20" height="13" rx="4.5" fill="#8B5CF6" />
+            {/* Bóng đổ nhẹ bên dưới để tạo khối 3D */}
+            <rect x="2" y="16" width="20" height="3" rx="4.5" fill="#7C3AED" />
+            
+            {/* D-Pad (Phím điều hướng) màu trắng */}
+            <path d="M7 11H9V9H10V11H12V12H10V14H9V12H7V11Z" fill="white" />
+
+            {/* Các nút bấm ABXY nhiều màu */}
+            <circle cx="15.5" cy="12.5" r="1.2" fill="#FACC15" /> {/* Vàng */}
+            <circle cx="17.5" cy="10.5" r="1.2" fill="#EF4444" /> {/* Đỏ */}
+            <circle cx="17.5" cy="14.5" r="1.2" fill="#3B82F6" /> {/* Xanh dương */}
+            <circle cx="19.5" cy="12.5" r="1.2" fill="#22C55E" /> {/* Xanh lá */}
+        </svg>
+    )
+};
 
 // --- CẤU HÌNH MENU ---
 const MENU_ITEMS = [
     { path: '/', icon: '🏠', labelKey: 'menu_home', defaultLabel: 'Trang chủ' },
     { path: '/viet-tay', icon: '✍️', labelKey: 'menu_handwriting', defaultLabel: 'Tra cứu' },
-    { path: '/chat', icon: <OldManIcon />, labelKey: 'menu_chatbot', defaultLabel: 'Chatbot', isSvg: true },
+    { path: '/chat', icon: <Icons.OldMan />, labelKey: 'menu_chatbot', defaultLabel: 'Chatbot', isSvg: true },
     { path: '/dictionary', icon: '📖', labelKey: 'menu_dictionary', defaultLabel: 'Từ điển' },
     { path: '/translator', icon: '🌐', labelKey: 'menu_translator', defaultLabel: 'Dịch thuật' },
     { path: '/flashcards', icon: '🎴', labelKey: 'menu_flashcard', defaultLabel: 'Flashcard' },
     { path: '/challenge', icon: '⚔️', labelKey: 'menu_challenge', defaultLabel: 'Thử thách' },
+    
+    // ✅ Dùng Icon GameController mới
+    { path: '/arena', icon: <Icons.GameController />, labelKey: 'menu_game', defaultLabel: 'Trò chơi', isSvg: true }, 
+    
     { path: '/world', icon: '🌍', labelKey: 'menu_world', defaultLabel: 'Thế Giới', hasNotification: true }
 ];
 
@@ -28,9 +54,7 @@ const Sidebar = () => {
   const location = useLocation();
   const { user, notifications, language } = useAppContext(); 
   
-  // ✅ Lấy ngôn ngữ từ file translations đã import ở trên
   const t = translations[language] || translations.vi;
-
   const totalNotifications = (notifications?.message || 0) + (notifications?.forum || 0);
 
   return (

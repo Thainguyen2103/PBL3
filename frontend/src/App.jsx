@@ -19,15 +19,19 @@ import KanjiGraphPage from './pages/KanjiGraphPage'; // Trang Sơ đồ mạng l
 import DictionaryPage from './pages/DictionaryPage'; // Trang Từ điển 512 từ
 import KanjiDetailPage from './pages/KanjiDetailPage'; // Trang Chi tiết Kanji
 import TranslatorPage from './pages/TranslatorPage'; // Trang Dịch thuật
-import ChallengePage from './pages/ChallengePage'; // 🔥 Trang Thử thách (Mới thêm)
+import ChallengePage from './pages/ChallengePage'; // Trang Thử thách
 import WorldPage from './pages/WorldPage';       // Trang Thế giới
 import ForumPage from './pages/ForumPage';       // Trang Diễn đàn
+
+// --- 🔥 IMPORT ARENA PAGES (ĐUA NGỰA KANJI) 🔥 ---
+import ArenaLobbyPage from './pages/ArenaLobbyPage'; // Sảnh chờ, tìm trận, xếp hạng
+import KanjiRacePage from './pages/KanjiRacePage';   // Màn hình đua (Gameplay)
 
 function App() {
   return (
     <div className="App min-h-screen bg-[#fdfbf7]">
       
-      {/* Component thông báo chạy ngầm toàn app */}
+      {/* Component thông báo chạy ngầm toàn app (Toast Notification) */}
       <NotificationManager />
 
       <Routes>
@@ -67,10 +71,25 @@ function App() {
           </AuthGuard>
         } />
 
-        {/* 🔥 ĐÃ THÊM ROUTE THỬ THÁCH VÀO ĐÂY */}
         <Route path="/challenge" element={
           <AuthGuard>
             <ChallengePage />
+          </AuthGuard>
+        } />
+
+        {/* --- 🔥 ROUTE VÕ ĐÀI (ĐUA NGỰA) 🔥 --- */}
+        
+        {/* 1. Trang Sảnh chờ & Tìm trận */}
+        <Route path="/arena" element={
+          <AuthGuard>
+            <ArenaLobbyPage />
+          </AuthGuard>
+        } />
+
+        {/* 2. Trang Sàn đấu (Gameplay Đua Ngựa) */}
+        <Route path="/arena/play" element={
+          <AuthGuard>
+            <KanjiRacePage />
           </AuthGuard>
         } />
 
