@@ -121,12 +121,22 @@ const WorldPage = () => {
                     const { data: scores } = await supabase.from('challenge_progress').select('user_id, score').in('user_id', userIds);
                     const scoreMap = {};
                     if (scores) scores.forEach(item => { if (!scoreMap[item.user_id]) scoreMap[item.user_id] = 0; scoreMap[item.user_id] += item.score; });
-                    const mergedData = users.map(u => ({ ...u, total_challenge_score: scoreMap[u.id] || 0 }));
-                    mergedData.sort((a, b) => {
-                        if (b.total_challenge_score !== a.total_challenge_score) return b.total_challenge_score - a.total_challenge_score;
-                        if (b.lessons_completed !== a.lessons_completed) return b.lessons_completed - a.lessons_completed;
-                        return b.kanji_learned - a.kanji_learned;
+                    const mergedData = users.map(u => {
+                        const challengeScore = scoreMap[u.id] || 0;
+                        const rankPoints = u.rank_points || 0;
+                        const lessonsCompleted = u.lessons_completed || 0;
+                        const kanjiLearned = u.kanji_learned || 0;
+                        
+                        // Tính điểm toàn diện (trọng số: rank 40%, challenge 30%, lessons 20%, kanji 10%)
+                        const comprehensiveScore = (rankPoints * 0.4) + (challengeScore * 0.3) + (lessonsCompleted * 20 * 0.2) + (kanjiLearned * 0.1);
+                        
+                        return { 
+                            ...u, 
+                            total_challenge_score: challengeScore,
+                            comprehensive_score: comprehensiveScore
+                        };
                     });
+                    mergedData.sort((a, b) => b.comprehensive_score - a.comprehensive_score);
                     setLeaderboard(mergedData.slice(0, 100));
                 }
                 setLoading(false);
