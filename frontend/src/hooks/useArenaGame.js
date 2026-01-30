@@ -5,7 +5,7 @@ import kanjiBase from '../utils/kanji-base.json';
 import jukugoData from '../utils/jukugo-data.json';
 
 const ITEMS_PER_LESSON = 16;
-const WINNING_SCORE = 10;
+const WINNING_SCORE = 20;
 
 /**
  * Hook quản lý Arena Game - Cơ chế "Ai đúng trước thắng"
@@ -45,10 +45,15 @@ export const useArenaGame = (matchId, players, user, config) => {
     // === SKIP VOTE ===
     const [skipVotes, setSkipVotes] = useState([]); // IDs of players who voted to skip
     
+    // === MCQ WRONG TRACKING ===
+    const [mcqWrongPlayers, setMcqWrongPlayers] = useState([]); // IDs of players who answered wrong in MCQ
+    const [myWrongAnswer, setMyWrongAnswer] = useState(null); // The wrong option I selected
+
     // === REFS ===
     const channelRef = useRef(null);
     const forfeitedPlayersRef = useRef([]);
     const skipVotesRef = useRef([]);
+    const mcqWrongPlayersRef = useRef([]);
     const hasFinishedRef = useRef(false);
     const questionsRef = useRef([]);
     const currentQRef = useRef(0);
@@ -83,6 +88,92 @@ export const useArenaGame = (matchId, players, user, config) => {
         return [...new Set(readings)];
     };
 
+    // === HELPER: Parse readings with labels ===
+    const parseReadingsWithLabels = (item) => {
+        let parts = [];
+        if (item.kunyomi && item.kunyomi !== "-") {
+            const kuns = item.kunyomi.split(',').map(s => s.split('(')[0].replace(/\./g, '').trim());
+            if (kuns.length > 0 && kuns[0]) {
+                parts.push(`Kun: ${kuns.join(', ')}`);
+            }
+        }
+        if (item.onyomi && item.onyomi !== "-") {
+            const ons = item.onyomi.split(',').map(s => {
+                const clean = s.split('(')[0].replace(/\./g, '').trim();
+                return wanakana.toHiragana(clean);
+            });
+            if (ons.length > 0 && ons[0]) {
+                parts.push(`On: ${ons.join(', ')}`);
+            }
+        }
+        return parts.join(' | ');
+    };
+
+    // === HELPER: Generate MCQ options với format đầy đủ và cùng độ dài ===
+    const generateMCQOptions = useCallback((item, isMeaning, isSingle, sourceArray) => {
+        // Lấy độ dài kanji của item chính
+        const targetLength = item.kanji?.length || 1;
+        
+        // Lọc các distractor có cùng độ dài kanji trước
+        let sameLengthItems = sourceArray.filter(k => 
+            k.kanji !== item.kanji && 
+            k.kanji?.length === targetLength
+        );
+        
+        // Nếu không đủ 3 distractor cùng độ dài, lấy thêm từ độ dài gần nhất
+        if (sameLengthItems.length < 3) {
+            const nearbyLengthItems = sourceArray.filter(k => 
+                k.kanji !== item.kanji && 
+                Math.abs((k.kanji?.length || 1) - targetLength) <= 1
+            );
+            sameLengthItems = [...sameLengthItems, ...nearbyLengthItems];
+        }
+        
+        // Shuffle và chọn 3 distractor
+        const distractors = sameLengthItems
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 3)
+            .map(d => {
+                if (isMeaning) {
+                    // Format: "Hán Việt - Nghĩa" cho cả kanji lẻ và jukugo
+                    const hanviet = d.hanviet || '';
+                    const mean = d.mean || '';
+                    return { 
+                        text: hanviet ? `${hanviet} - ${mean}` : mean, 
+                        isCorrect: false 
+                    };
+                } else {
+                    // Format cách đọc với Kun/On labels cho kanji, hiragana cho jukugo
+                    if (isSingle) {
+                        const readingsText = parseReadingsWithLabels(d);
+                        return { text: readingsText || '-', isCorrect: false };
+                    } else {
+                        return { text: d.hiragana || '-', isCorrect: false };
+                    }
+                }
+            });
+        
+        let correctText;
+        if (isMeaning) {
+            // Format: "Hán Việt - Nghĩa"
+            const hanviet = item.hanviet || '';
+            const mean = item.mean || '';
+            correctText = hanviet ? `${hanviet} - ${mean}` : mean;
+        } else {
+            if (isSingle) {
+                // Hiển thị với Kun/On labels
+                correctText = parseReadingsWithLabels(item);
+            } else {
+                correctText = item.hiragana;
+            }
+        }
+        
+        const options = [...distractors, { text: correctText, isCorrect: true }]
+            .sort(() => 0.5 - Math.random());
+        
+        return options;
+    }, []);
+
     // === GENERATE QUESTIONS (only host does this) ===
     const generateQuestions = useCallback(() => {
         const lessonId = config?.lesson || 1;
@@ -95,79 +186,141 @@ export const useArenaGame = (matchId, players, user, config) => {
         let allQuestions = [];
 
         singleData.forEach((item, idx) => {
+            // 50% MCQ, 50% Writing
+            const isMCQ_meaning = Math.random() > 0.5;
+            const isMCQ_reading = Math.random() > 0.5;
+            
             // Hỏi nghĩa
-            allQuestions.push({
+            const meaningQ = {
                 id: `k_m_${idx}`,
                 question: item.kanji,
                 type: 'kanji',
+                mode: isMCQ_meaning ? 'mcq' : 'writing',
                 askMeaning: true,
-                hint: 'NGHĨA',
+                hint: isMCQ_meaning ? 'CHỌN NGHĨA' : 'NHẬP NGHĨA',
                 correctAnswers: [
                     item.hanviet.toLowerCase(),
                     ...item.mean.split(/[,;]/).map(s => s.trim().toLowerCase())
                 ],
-                displayAnswer: `${item.hanviet} - ${item.mean}`
-            });
+                displayAnswer: `${item.hanviet} - ${item.mean}`,
+                options: isMCQ_meaning ? generateMCQOptions(item, true, true, kanjiBase) : []
+            };
+            allQuestions.push(meaningQ);
             
             // Hỏi đọc
             const readings = parseReadings(item);
             if (readings.length > 0) {
-                allQuestions.push({
+                const readingQ = {
                     id: `k_r_${idx}`,
                     question: item.kanji,
                     type: 'kanji',
+                    mode: isMCQ_reading ? 'mcq' : 'writing',
                     askMeaning: false,
-                    hint: 'CÁCH ĐỌC',
+                    hint: isMCQ_reading ? 'CHỌN CÁCH ĐỌC' : 'NHẬP CÁCH ĐỌC',
                     correctAnswers: readings,
-                    displayAnswer: readings.join(' / ')
-                });
+                    displayAnswer: readings.join(' / '),
+                    options: isMCQ_reading ? generateMCQOptions(item, false, true, kanjiBase) : []
+                };
+                allQuestions.push(readingQ);
             }
         });
 
         compoundData.forEach((item, idx) => {
+            const isMCQ_meaning = Math.random() > 0.5;
+            const isMCQ_reading = Math.random() > 0.5;
+            
             // Hỏi nghĩa
-            allQuestions.push({
+            const meaningQ = {
                 id: `j_m_${idx}`,
-                question: item.kanji,  // jukugo-data.json uses 'kanji' field
+                question: item.kanji,
                 type: 'jukugo',
+                mode: isMCQ_meaning ? 'mcq' : 'writing',
                 askMeaning: true,
-                hint: 'NGHĨA',
+                hint: isMCQ_meaning ? 'CHỌN NGHĨA' : 'NHẬP NGHĨA',
                 correctAnswers: [
                     item.hanviet?.toLowerCase(),
                     item.mean?.toLowerCase()
                 ].filter(Boolean),
-                displayAnswer: `${item.hanviet || ''} - ${item.mean}`
-            });
+                displayAnswer: `${item.hanviet || ''} - ${item.mean}`,
+                options: isMCQ_meaning ? generateMCQOptions(item, true, false, jukugoData) : []
+            };
+            allQuestions.push(meaningQ);
             
             // Hỏi đọc
             if (item.hiragana) {
-                allQuestions.push({
+                const readingQ = {
                     id: `j_r_${idx}`,
-                    question: item.kanji,  // jukugo-data.json uses 'kanji' field
+                    question: item.kanji,
                     type: 'jukugo',
+                    mode: isMCQ_reading ? 'mcq' : 'writing',
                     askMeaning: false,
-                    hint: 'CÁCH ĐỌC',
+                    hint: isMCQ_reading ? 'CHỌN CÁCH ĐỌC' : 'NHẬP CÁCH ĐỌC',
                     correctAnswers: [item.hiragana],
-                    displayAnswer: item.hiragana
-                });
+                    displayAnswer: item.hiragana,
+                    options: isMCQ_reading ? generateMCQOptions(item, false, false, jukugoData) : []
+                };
+                allQuestions.push(readingQ);
             }
         });
 
-        // Shuffle với seed từ matchId
-        const seed = matchId?.split('').reduce((a, c) => a + c.charCodeAt(0), 0) || 0;
-        allQuestions.sort((a, b) => {
-            const hashA = (a.id.charCodeAt(0) * 31 + seed) % 1000;
-            const hashB = (b.id.charCodeAt(0) * 31 + seed) % 1000;
-            return hashA - hashB;
-        });
+        // Shuffle ngẫu nhiên tốt hơn với Fisher-Yates algorithm
+        const shuffleArray = (arr, seed) => {
+            const result = [...arr];
+            let currentSeed = seed;
+            
+            // Simple seeded random
+            const seededRandom = () => {
+                currentSeed = (currentSeed * 9301 + 49297) % 233280;
+                return currentSeed / 233280;
+            };
+            
+            for (let i = result.length - 1; i > 0; i--) {
+                const j = Math.floor(seededRandom() * (i + 1));
+                [result[i], result[j]] = [result[j], result[i]];
+            }
+            return result;
+        };
         
-        return allQuestions.slice(0, 30);
-    }, [config, matchId]);
+        const seed = matchId?.split('').reduce((a, c) => a + c.charCodeAt(0), 0) || Date.now();
+        let shuffled = shuffleArray(allQuestions, seed);
+        
+        // Đảm bảo không có 2 câu liên tiếp cùng 1 kanji (question)
+        const reorderToAvoidDuplicates = (questions) => {
+            const result = [];
+            const remaining = [...questions];
+            
+            while (remaining.length > 0) {
+                // Tìm câu hỏi không trùng kanji với câu trước
+                const lastKanji = result.length > 0 ? result[result.length - 1].question : null;
+                
+                let foundIdx = remaining.findIndex(q => q.question !== lastKanji);
+                
+                // Nếu không tìm được, chấp nhận câu đầu tiên
+                if (foundIdx === -1) foundIdx = 0;
+                
+                result.push(remaining[foundIdx]);
+                remaining.splice(foundIdx, 1);
+            }
+            
+            return result;
+        };
+        
+        shuffled = reorderToAvoidDuplicates(shuffled);
+        
+        return shuffled.slice(0, 50);
+    }, [config, matchId, generateMCQOptions]);
 
     // === CHECK ANSWER ===
     const checkAnswer = (answer, question) => {
         if (!question) return false;
         
+        // MCQ mode: kiểm tra xem option được chọn có isCorrect không
+        if (question.mode === 'mcq' && question.options) {
+            const selectedOption = question.options.find(opt => opt.text === answer);
+            return selectedOption?.isCorrect === true;
+        }
+        
+        // Writing mode: so sánh với correctAnswers
         const userVal = answer.toLowerCase().trim();
         const userValKana = wanakana.toHiragana(userVal);
 
@@ -401,6 +554,10 @@ export const useArenaGame = (matchId, players, user, config) => {
                     // Reset skip votes cho câu mới
                     skipVotesRef.current = [];
                     setSkipVotes([]);
+                    // Reset MCQ wrong players cho câu mới
+                    mcqWrongPlayersRef.current = [];
+                    setMcqWrongPlayers([]);
+                    setMyWrongAnswer(null);
                 } else {
                     // Hết câu hỏi - người có điểm cao nhất thắng
                     const maxScore = Math.max(...Object.values(scoresRef.current));
@@ -501,6 +658,78 @@ export const useArenaGame = (matchId, players, user, config) => {
                     if (activePlayers?.length === 1 && !hasFinishedRef.current) {
                         console.log('🏆 Last player standing:', activePlayers[0].full_name);
                         endGame(activePlayers[0]);
+                    }
+                }
+            })
+            // === MCQ TRẢ LỜI SAI ===
+            .on('broadcast', { event: 'MCQ_WRONG_ANSWER' }, ({ payload }) => {
+                console.log('❌ MCQ wrong answer from:', payload.playerName);
+                
+                if (hasFinishedRef.current || isLockedRef.current) {
+                    return;
+                }
+                
+                // Bỏ qua nếu đây là message của chính mình (đã xử lý local rồi)
+                if (String(payload.playerId) === String(user.id)) {
+                    return;
+                }
+                
+                // Thêm vào danh sách đã trả lời sai
+                const newWrongPlayers = [...mcqWrongPlayersRef.current];
+                if (!newWrongPlayers.includes(String(payload.playerId))) {
+                    newWrongPlayers.push(String(payload.playerId));
+                    mcqWrongPlayersRef.current = newWrongPlayers;
+                    setMcqWrongPlayers([...newWrongPlayers]);
+                    
+                    // Kiểm tra xem tất cả active players đều đã sai chưa
+                    const activePlayers = players?.filter(p => !isPlayerForfeited(p.id, forfeitedPlayersRef.current)) || [];
+                    const allWrong = activePlayers.every(p => newWrongPlayers.includes(String(p.id)));
+                    
+                    console.log('👥 Wrong players:', newWrongPlayers.length, '/', activePlayers.length, 'All wrong:', allWrong);
+                    
+                    if (allWrong && activePlayers.length > 0) {
+                        console.log('❌ All players answered wrong! Showing answer...');
+                        
+                        // Lock và hiển thị đáp án
+                        setIsLocked(true);
+                        isLockedRef.current = true;
+                        
+                        const currentQ = questionsRef.current[currentQRef.current];
+                        setRoundWinner({
+                            odlId: null,
+                            odlName: 'Không ai trả lời đúng',
+                            answer: currentQ?.displayAnswer || 'N/A'
+                        });
+                        setShowAnswer(true);
+                        
+                        // HOST gửi lệnh chuyển câu sau 2.5 giây
+                        if (isHostRef.current) {
+                            setTimeout(() => {
+                                const nextIndex = currentQRef.current + 1;
+                                channel.send({
+                                    type: 'broadcast',
+                                    event: 'NEXT_QUESTION',
+                                    payload: { questionIndex: nextIndex }
+                                });
+                                // Host cũng tự chuyển câu
+                                if (nextIndex < questionsRef.current.length) {
+                                    currentQRef.current = nextIndex;
+                                    setCurrentQ(nextIndex);
+                                    setCurrentQuestion(questionsRef.current[nextIndex]);
+                                    setIsLocked(false);
+                                    isLockedRef.current = false;
+                                    setRoundWinner(null);
+                                    setShowAnswer(false);
+                                    setInputValue('');
+                                    setMyAnswerStatus(null);
+                                    mcqWrongPlayersRef.current = [];
+                                    setMcqWrongPlayers([]);
+                                    setMyWrongAnswer(null);
+                                    skipVotesRef.current = [];
+                                    setSkipVotes([]);
+                                }
+                            }, 2500);
+                        }
                     }
                 }
             })
@@ -750,17 +979,95 @@ export const useArenaGame = (matchId, players, user, config) => {
             }
         } else {
             console.log('❌ Wrong answer');
-            setMyAnswerStatus('wrong');
-            setInputValue('');
             
-            // Reset sau 0.5 giây để thử lại
-            setTimeout(() => {
-                if (!isLockedRef.current) {
-                    setMyAnswerStatus(null);
+            const currentQuestion = questionsRef.current[currentQRef.current];
+            
+            // MCQ mode: khóa luôn không cho chọn nữa
+            if (currentQuestion?.mode === 'mcq') {
+                setMyAnswerStatus('wrong');
+                setMyWrongAnswer(answer); // Lưu đáp án sai đã chọn
+                
+                // Broadcast cho người khác biết mình đã sai
+                if (channelRef.current) {
+                    channelRef.current.send({
+                        type: 'broadcast',
+                        event: 'MCQ_WRONG_ANSWER',
+                        payload: { 
+                            playerId: user.id, 
+                            playerName: user.full_name,
+                            wrongAnswer: answer
+                        }
+                    });
                 }
-            }, 500);
+                
+                // === XỬ LÝ LOCAL ===
+                const newWrongPlayers = [...mcqWrongPlayersRef.current, String(user.id)];
+                mcqWrongPlayersRef.current = newWrongPlayers;
+                setMcqWrongPlayers([...newWrongPlayers]);
+                
+                // Kiểm tra xem tất cả đều đã sai chưa
+                const activePlayers = players?.filter(p => !checkPlayerForfeited(p.id, forfeitedPlayersRef.current)) || [];
+                const allWrong = activePlayers.every(p => newWrongPlayers.includes(String(p.id)));
+                
+                console.log('👥 After my wrong - Wrong players:', newWrongPlayers.length, '/', activePlayers.length, 'All wrong:', allWrong);
+                
+                if (allWrong && activePlayers.length > 0) {
+                    console.log('❌ All players answered wrong! Showing answer...');
+                    
+                    // Lock và hiển thị đáp án
+                    setIsLocked(true);
+                    isLockedRef.current = true;
+                    
+                    setRoundWinner({
+                        odlId: null,
+                        odlName: 'Không ai trả lời đúng',
+                        answer: currentQuestion?.displayAnswer || 'N/A'
+                    });
+                    setShowAnswer(true);
+                    
+                    // HOST gửi lệnh chuyển câu sau 2.5 giây
+                    if (isHostRef.current && channelRef.current) {
+                        setTimeout(() => {
+                            const nextIndex = currentQRef.current + 1;
+                            channelRef.current.send({
+                                type: 'broadcast',
+                                event: 'NEXT_QUESTION',
+                                payload: { questionIndex: nextIndex }
+                            });
+                            // Host cũng tự chuyển câu
+                            if (nextIndex < questionsRef.current.length) {
+                                currentQRef.current = nextIndex;
+                                setCurrentQ(nextIndex);
+                                setCurrentQuestion(questionsRef.current[nextIndex]);
+                                setIsLocked(false);
+                                isLockedRef.current = false;
+                                setRoundWinner(null);
+                                setShowAnswer(false);
+                                setInputValue('');
+                                setMyAnswerStatus(null);
+                                mcqWrongPlayersRef.current = [];
+                                setMcqWrongPlayers([]);
+                                setMyWrongAnswer(null);
+                                skipVotesRef.current = [];
+                                setSkipVotes([]);
+                            }
+                        }, 2500);
+                    }
+                }
+            } else {
+                // Writing mode: cho thử lại
+                setMyAnswerStatus('wrong');
+                setInputValue('');
+                
+                // Reset sau 0.5 giây để thử lại
+                setTimeout(() => {
+                    if (!isLockedRef.current) {
+                        setMyAnswerStatus(null);
+                    }
+                }, 500);
+            }
         }
-    }, [user]); // Removed gamePhase - using gamePhaseRef instead
+    }, [user, players]); // Added players dependency
 
     // Helper to check if player forfeited (for use outside channel scope)
     const checkPlayerForfeited = (playerId, forfeitedList) => {
@@ -923,6 +1230,9 @@ export const useArenaGame = (matchId, players, user, config) => {
         skipVotes,
         forfeit,
         forfeitedPlayers,
-        players
+        players,
+        // MCQ wrong tracking
+        mcqWrongPlayers,
+        myWrongAnswer
     };
 };
