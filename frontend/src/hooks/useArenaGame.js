@@ -372,6 +372,32 @@ export const useArenaGame = (matchId, players, user, config) => {
                 .eq('id', user.id);
 
             console.log(`✅ Updated rank points: ${currentPoints} -> ${newPoints}`);
+
+            // 📊 Cập nhật daily_stats - tracking rank points trong ngày
+            if (delta > 0) {
+                const now = new Date();
+                const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+                
+                const { data: existingStat } = await supabase
+                    .from('daily_stats')
+                    .select('id, rank_points_earned')
+                    .eq('user_id', user.id)
+                    .eq('stat_date', today)
+                    .maybeSingle();
+                
+                if (existingStat) {
+                    await supabase.from('daily_stats').update({
+                        rank_points_earned: (existingStat.rank_points_earned || 0) + delta
+                    }).eq('id', existingStat.id);
+                } else {
+                    await supabase.from('daily_stats').insert({
+                        user_id: user.id,
+                        stat_date: today,
+                        rank_points_earned: delta
+                    });
+                }
+                console.log(`✅ Updated daily rank points: +${delta}`);
+            }
         } catch (error) {
             console.error('Error updating rank points:', error);
         }

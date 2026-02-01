@@ -52,34 +52,42 @@ const MASCOT_MESSAGES = {
 };
 
 // Phân tích thói quen học tập
+// userData = tổng tích lũy từ bảng users
+// monthlyData = mỗi ngày lưu SỐ HỌC TRONG NGÀY (từ daily_stats)
 const analyzeUserHabit = (userData, monthlyData) => {
     if (!userData) return 'normal';
     
-    const { kanjiLearned, rankPoints, challengeScore } = userData;
+    // Tổng tích lũy từ bảng users
+    const totalKanji = userData.kanjiLearned || 0;
+    const totalRankPoints = userData.rankPoints || 0;
+    const totalChallengeScore = userData.challengeScore || 0;
     
-    // Đếm số ngày có học trong tháng
+    // Đếm số ngày có học trong tháng (dựa vào daily_stats)
     const daysWithData = monthlyData?.filter(d => 
         (d.kanjiLearned > 0 || d.rankPoints > 0 || d.challengeScore > 0)
     ).length || 0;
+    
+    // Tổng số kanji học trong tháng này
+    const kanjiThisMonth = monthlyData?.reduce((sum, d) => sum + (d.kanjiLearned || 0), 0) || 0;
     
     // Kiểm tra ngày hôm nay có học không
     const today = monthlyData?.find(d => d.isToday);
     const learnedToday = today && (today.kanjiLearned > 0 || today.rankPoints > 0);
     
-    // Người mới (ít hơn 10 kanji)
-    if (kanjiLearned < 10) return 'newbie';
+    // Người mới (tổng ít hơn 10 kanji)
+    if (totalKanji < 10) return 'newbie';
     
-    // Thành tích cao (challenge score > 100)
-    if (challengeScore > 100) return 'champion';
+    // Thành tích cao (tổng challenge score > 100)
+    if (totalChallengeScore > 100) return 'champion';
     
     // Chăm chỉ (học nhiều hơn 5 ngày trong tháng)
     if (daysWithData >= 5) return 'hardworking';
     
-    // Tiến bộ tốt (rank points > 200)
-    if (rankPoints > 200) return 'progressing';
+    // Tiến bộ tốt (tổng rank points > 200)
+    if (totalRankPoints > 200) return 'progressing';
     
-    // Lâu không học (không có data và đã có ít nhất 1 kanji trước đó)
-    if (daysWithData === 0 && kanjiLearned > 0 && !learnedToday) return 'comeback';
+    // Lâu không học (tháng này chưa có data và đã có ít nhất 1 kanji trước đó)
+    if (daysWithData === 0 && totalKanji > 0 && !learnedToday) return 'comeback';
     
     return 'normal';
 };

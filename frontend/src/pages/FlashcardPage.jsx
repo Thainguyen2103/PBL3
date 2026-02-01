@@ -125,29 +125,33 @@ const FlashcardPage = () => {
                   const col = deckType === 'single' ? 'mastered_kanji' : 'mastered_jukugo';
                   await supabase.from('users').update({ [col]: newList }).eq('id', user.id);
                   
-                  // 📊 Cập nhật daily_stats - tracking theo ngày
-                  const today = new Date().toISOString().split('T')[0];
+                  // 📊 Cập nhật daily_stats - ghi nhận số học TRONG NGÀY
+                  // Mỗi khi master 1 kanji → +1 vào record ngày hôm nay
+                  const now = new Date();
+                  const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+                  
                   const { data: existingStat } = await supabase
                       .from('daily_stats')
-                      .select('id, flashcards_learned, kanji_learned')
+                      .select('id, kanji_learned')
                       .eq('user_id', user.id)
                       .eq('stat_date', today)
                       .maybeSingle();
                   
                   if (existingStat) {
+                      // Đã có record hôm nay → +1
                       await supabase.from('daily_stats').update({
-                          flashcards_learned: (existingStat.flashcards_learned || 0) + 1,
                           kanji_learned: deckType === 'single' ? (existingStat.kanji_learned || 0) + 1 : existingStat.kanji_learned
                       }).eq('id', existingStat.id);
                   } else {
+                      // Chưa có → tạo mới với giá trị 1
                       await supabase.from('daily_stats').insert({
                           user_id: user.id,
                           stat_date: today,
-                          flashcards_learned: 1,
                           kanji_learned: deckType === 'single' ? 1 : 0
                       });
                   }
                   
+                  // Update tổng tích lũy trong bảng users
                   if (deckType === 'single') {
                       const { data } = await supabase.from('users').select('kanji_learned').eq('id', user.id).single();
                       await supabase.from('users').update({ kanji_learned: (data?.kanji_learned || 0) + 1 }).eq('id', user.id);

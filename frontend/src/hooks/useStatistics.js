@@ -4,7 +4,7 @@ import { supabase } from '../supabaseClient';
 // Helper
 const getDaysInMonth = (year, month) => new Date(year, month + 1, 0).getDate();
 
-// Format date to YYYY-MM-DD
+// Format date to YYYY-MM-DD (local time)
 const formatDate = (date) => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -12,58 +12,8 @@ const formatDate = (date) => {
     return `${year}-${month}-${day}`;
 };
 
-// Lưu tổng tích lũy của hôm nay vào database (chỉ update hôm nay, không đụng ngày trước)
-const saveDailySnapshot = async (userId, data) => {
-    if (!userId || !data) return;
-    
-    const today = formatDate(new Date());
-    
-    try {
-        // Kiểm tra xem đã có record cho ngày hôm nay chưa
-        const { data: existing } = await supabase
-            .from('daily_stats')
-            .select('id')
-            .eq('user_id', userId)
-            .eq('stat_date', today)
-            .single();
-        
-        if (existing) {
-            // Đã có record hôm nay → UPDATE tổng tích lũy mới nhất
-            const { error } = await supabase
-                .from('daily_stats')
-                .update({
-                    rank_points_earned: data.rankPoints,
-                    kanji_learned: data.kanjiLearned,
-                    challenge_score: data.challengeScore,
-                    flashcards_learned: data.totalFlashcards || 0,
-                    updated_at: new Date().toISOString()
-                })
-                .eq('id', existing.id);
-            
-            if (error) console.error('Update error:', error);
-            else console.log('Today stats updated:', data.kanjiLearned);
-        } else {
-            // Chưa có record hôm nay → INSERT mới
-            const { error } = await supabase
-                .from('daily_stats')
-                .insert({
-                    user_id: userId,
-                    stat_date: today,
-                    rank_points_earned: data.rankPoints,
-                    kanji_learned: data.kanjiLearned,
-                    challenge_score: data.challengeScore,
-                    flashcards_learned: data.totalFlashcards || 0
-                });
-            
-            if (error) console.error('Insert error:', error);
-            else console.log('Today stats created:', data.kanjiLearned);
-        }
-    } catch (error) {
-        console.error('Error saving daily stats:', error);
-    }
-};
-
 // Lấy stats của 1 tháng từ database
+// daily_stats lưu SỐ HỌC TRONG NGÀY (không phải tổng tích lũy)
 const fetchMonthlySnapshots = async (userId, year, month) => {
     if (!userId) return {};
     
@@ -129,7 +79,7 @@ export const useStatistics = (userId) => {
 
     const isCurrentMonth = selectedMonth === today.getMonth() && selectedYear === today.getFullYear();
 
-    // Fetch user totals và lưu snapshot hôm nay
+    // Fetch user totals (tổng tích lũy từ bảng users)
     useEffect(() => {
         const fetchData = async () => {
             if (!userId) return;
@@ -164,9 +114,7 @@ export const useStatistics = (userId) => {
                 };
 
                 setUserData(currentData);
-                
-                // Lưu snapshot cho ngày hôm nay vào database
-                await saveDailySnapshot(userId, currentData);
+                // Không cần saveDailySnapshot - FlashcardPage đã handle việc +1 khi học
                 
             } catch (error) {
                 console.error('Error fetching stats:', error);
@@ -187,6 +135,7 @@ export const useStatistics = (userId) => {
     }, [userId, selectedMonth, selectedYear]);
 
     // Generate monthly chart data từ database snapshots
+    // daily_stats lưu SỐ HỌC TRONG NGÀY (không phải tổng tích lũy)
     const monthlyData = useMemo(() => {
         const now = new Date();
         const daysInMonth = getDaysInMonth(selectedYear, selectedMonth);
@@ -200,13 +149,8 @@ export const useStatistics = (userId) => {
             const dayOfWeek = date.getDay();
             const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
             
-            // Lấy snapshot của ngày đó từ database (nếu có)
+            // Lấy snapshot của ngày đó từ database (số học trong ngày)
             const snapshot = dailySnapshots[dateKey];
-            
-            // Nếu là hôm nay, dùng dữ liệu realtime; ngày khác dùng snapshot từ DB
-            const dayData = isToday && userData 
-                ? userData 
-                : snapshot;
 
             data.push({
                 day,
@@ -214,13 +158,14 @@ export const useStatistics = (userId) => {
                 dayName: dayNames[dayOfWeek],
                 isToday,
                 isWeekend,
-                rankPoints: dayData?.rankPoints || 0,
-                kanjiLearned: dayData?.kanjiLearned || 0,
-                challengeScore: dayData?.challengeScore || 0
+                // Luôn dùng snapshot từ daily_stats (số học trong ngày)
+                rankPoints: snapshot?.rankPoints || 0,
+                kanjiLearned: snapshot?.kanjiLearned || 0,
+                challengeScore: snapshot?.challengeScore || 0
             });
         }
         return data;
-    }, [userData, dailySnapshots, selectedMonth, selectedYear]);
+    }, [dailySnapshots, selectedMonth, selectedYear]);
 
     // Monthly totals
     const monthlyTotals = useMemo(() => ({

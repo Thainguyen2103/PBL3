@@ -108,9 +108,12 @@ const ChallengePage = () => {
                         completed_at: new Date().toISOString()
                     }, { onConflict: 'user_id, lesson_id' });
                     
-                    // 📊 Cập nhật daily_stats - tracking theo ngày
+                    // 📊 Cập nhật daily_stats - tracking điểm thử thách trong ngày
                     if (scoreToAdd > 0) {
-                        const today = new Date().toISOString().split('T')[0];
+                        // Dùng local date, không dùng toISOString() vì nó là UTC
+                        const now = new Date();
+                        const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+                        
                         const { data: existingStat } = await supabase
                             .from('daily_stats')
                             .select('id, challenge_score')
