@@ -12,59 +12,13 @@ const formatDate = (date) => {
     return `${year}-${month}-${day}`;
 };
 
-// Lưu snapshot hôm nay vào database (lưu số tăng thêm trong ngày, không phải tổng)
+// Lưu tổng tích lũy của hôm nay vào database (chỉ update hôm nay, không đụng ngày trước)
 const saveDailySnapshot = async (userId, data) => {
     if (!userId || !data) return;
     
     const today = formatDate(new Date());
     
     try {
-        // Lấy record của ngày hôm qua để tính số tăng
-        const yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 1);
-        const yesterdayStr = formatDate(yesterday);
-        
-        const { data: yesterdayData } = await supabase
-            .from('daily_stats')
-            .select('kanji_learned, rank_points_earned, challenge_score, flashcards_learned')
-            .eq('user_id', userId)
-            .eq('stat_date', yesterdayStr)
-            .single();
-        
-        // Tính số tăng thêm trong ngày hôm nay
-        const prevKanji = yesterdayData?.kanji_learned || 0;
-        const prevRank = yesterdayData?.rank_points_earned || 0;
-        const prevChallenge = yesterdayData?.challenge_score || 0;
-        const prevFlashcards = yesterdayData?.flashcards_learned || 0;
-        
-        // Nếu chưa có dữ liệu ngày trước, lấy từ daily_stats record cũ nhất
-        let baseKanji = prevKanji, baseRank = prevRank, baseChallenge = prevChallenge, baseFlashcards = prevFlashcards;
-        
-        if (!yesterdayData) {
-            // Lấy record mới nhất trước hôm nay
-            const { data: lastRecord } = await supabase
-                .from('daily_stats')
-                .select('kanji_learned, rank_points_earned, challenge_score, flashcards_learned')
-                .eq('user_id', userId)
-                .lt('stat_date', today)
-                .order('stat_date', { ascending: false })
-                .limit(1)
-                .single();
-            
-            if (lastRecord) {
-                baseKanji = lastRecord.kanji_learned || 0;
-                baseRank = lastRecord.rank_points_earned || 0;
-                baseChallenge = lastRecord.challenge_score || 0;
-                baseFlashcards = lastRecord.flashcards_learned || 0;
-            }
-        }
-        
-        // Số học được trong ngày = tổng hiện tại - base (ngày trước)
-        const todayKanji = Math.max(0, data.kanjiLearned - baseKanji);
-        const todayRank = Math.max(0, data.rankPoints - baseRank);
-        const todayChallenge = Math.max(0, data.challengeScore - baseChallenge);
-        const todayFlashcards = Math.max(0, (data.totalFlashcards || 0) - baseFlashcards);
-        
         // Kiểm tra xem đã có record cho ngày hôm nay chưa
         const { data: existing } = await supabase
             .from('daily_stats')
@@ -74,35 +28,35 @@ const saveDailySnapshot = async (userId, data) => {
             .single();
         
         if (existing) {
-            // Đã có record → UPDATE với số tăng mới nhất
+            // Đã có record hôm nay → UPDATE tổng tích lũy mới nhất
             const { error } = await supabase
                 .from('daily_stats')
                 .update({
-                    rank_points_earned: todayRank,
-                    kanji_learned: todayKanji,
-                    challenge_score: todayChallenge,
-                    flashcards_learned: todayFlashcards,
+                    rank_points_earned: data.rankPoints,
+                    kanji_learned: data.kanjiLearned,
+                    challenge_score: data.challengeScore,
+                    flashcards_learned: data.totalFlashcards || 0,
                     updated_at: new Date().toISOString()
                 })
                 .eq('id', existing.id);
             
             if (error) console.error('Update error:', error);
-            else console.log('Daily increment updated:', { todayKanji, todayRank, todayChallenge });
+            else console.log('Today stats updated:', data.kanjiLearned);
         } else {
-            // Chưa có record → INSERT mới
+            // Chưa có record hôm nay → INSERT mới
             const { error } = await supabase
                 .from('daily_stats')
                 .insert({
                     user_id: userId,
                     stat_date: today,
-                    rank_points_earned: todayRank,
-                    kanji_learned: todayKanji,
-                    challenge_score: todayChallenge,
-                    flashcards_learned: todayFlashcards
+                    rank_points_earned: data.rankPoints,
+                    kanji_learned: data.kanjiLearned,
+                    challenge_score: data.challengeScore,
+                    flashcards_learned: data.totalFlashcards || 0
                 });
             
             if (error) console.error('Insert error:', error);
-            else console.log('Daily increment created:', { todayKanji, todayRank, todayChallenge });
+            else console.log('Today stats created:', data.kanjiLearned);
         }
     } catch (error) {
         console.error('Error saving daily stats:', error);
