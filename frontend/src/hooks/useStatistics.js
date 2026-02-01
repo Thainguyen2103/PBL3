@@ -12,32 +12,51 @@ const formatDate = (date) => {
     return `${year}-${month}-${day}`;
 };
 
-// Lưu snapshot hôm nay vào database
+// Lưu snapshot hôm nay vào database (chỉ tạo mới nếu chưa có, không update ngày cũ)
 const saveDailySnapshot = async (userId, data) => {
     if (!userId || !data) return;
     
     const today = formatDate(new Date());
     
     try {
-        // Upsert: insert nếu chưa có, update nếu đã có
-        const { data: result, error } = await supabase
+        // Kiểm tra xem đã có record cho ngày hôm nay chưa
+        const { data: existing } = await supabase
             .from('daily_stats')
-            .upsert({
-                user_id: userId,
-                stat_date: today,
-                rank_points_earned: data.rankPoints,
-                kanji_learned: data.kanjiLearned,
-                challenge_score: data.challengeScore,
-                flashcards_learned: data.totalFlashcards || 0
-            }, {
-                onConflict: 'user_id,stat_date'
-            })
-            .select();
+            .select('id')
+            .eq('user_id', userId)
+            .eq('stat_date', today)
+            .single();
         
-        if (error) {
-            console.error('Supabase upsert error:', error);
+        if (existing) {
+            // Đã có record → chỉ UPDATE với giá trị mới nhất của hôm nay
+            const { error } = await supabase
+                .from('daily_stats')
+                .update({
+                    rank_points_earned: data.rankPoints,
+                    kanji_learned: data.kanjiLearned,
+                    challenge_score: data.challengeScore,
+                    flashcards_learned: data.totalFlashcards || 0,
+                    updated_at: new Date().toISOString()
+                })
+                .eq('id', existing.id);
+            
+            if (error) console.error('Update error:', error);
+            else console.log('Daily stats updated for today');
         } else {
-            console.log('Daily stats saved:', result);
+            // Chưa có record → INSERT mới
+            const { error } = await supabase
+                .from('daily_stats')
+                .insert({
+                    user_id: userId,
+                    stat_date: today,
+                    rank_points_earned: data.rankPoints,
+                    kanji_learned: data.kanjiLearned,
+                    challenge_score: data.challengeScore,
+                    flashcards_learned: data.totalFlashcards || 0
+                });
+            
+            if (error) console.error('Insert error:', error);
+            else console.log('Daily stats created for today');
         }
     } catch (error) {
         console.error('Error saving daily stats:', error);
