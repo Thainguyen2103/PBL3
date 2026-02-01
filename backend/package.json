@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@google/genai": "^1.36.0",
+    "@google/generative-ai": "^0.24.1",
+    "@supabase/supabase-js": "^2.90.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1"
+  }
+}

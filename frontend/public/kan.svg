@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect x="5" y="5" width="90" height="90" rx="12" fill="#1a1a1a" />
+  
+  <text 
+    x="50" 
+    y="50" 
+    text-anchor="middle" 
+    dominant-baseline="central" 
+    font-family="'HiraMinProN-W6', 'YuMincho', 'Times New Roman', serif" 
+    font-weight="900" 
+    font-size="62" 
+    fill="#ffffff"
+  >
+    漢
+  </text>
+</svg>

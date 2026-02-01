@@ -1,0 +1,5903 @@
+[
+  {
+    "kanji": "一つ",
+    "hiragana": "ひとつ",
+    "hanviet": "NHẤT",
+    "mean": "Một cái",
+    "lesson": 1
+  },
+  {
+    "kanji": "一人",
+    "hiragana": "ひとり",
+    "hanviet": "NHẤT NHÂN",
+    "mean": "Một người",
+    "lesson": 1
+  },
+  {
+    "kanji": "一月",
+    "hiragana": "いちがつ",
+    "hanviet": "NHẤT NGUYỆT",
+    "mean": "Tháng 1",
+    "lesson": 1
+  },
+  {
+    "kanji": "二つ",
+    "hiragana": "ふたつ",
+    "hanviet": "NHỊ",
+    "mean": "Hai cái",
+    "lesson": 1
+  },
+  {
+    "kanji": "二人",
+    "hiragana": "ふたり",
+    "hanviet": "NHỊ NHÂN",
+    "mean": "Hai người",
+    "lesson": 1
+  },
+  {
+    "kanji": "二月",
+    "hiragana": "にがつ",
+    "hanviet": "NHỊ NGUYỆT",
+    "mean": "Tháng 2",
+    "lesson": 1
+  },
+  {
+    "kanji": "三つ",
+    "hiragana": "みっつ",
+    "hanviet": "TAM",
+    "mean": "Ba cái",
+    "lesson": 1
+  },
+  {
+    "kanji": "三日",
+    "hiragana": "みっか",
+    "hanviet": "TAM NHẬT",
+    "mean": "Ngày mùng 3",
+    "lesson": 1
+  },
+  {
+    "kanji": "三月",
+    "hiragana": "さんがつ",
+    "hanviet": "TAM NGUYỆT",
+    "mean": "Tháng 3",
+    "lesson": 1
+  },
+  {
+    "kanji": "四つ",
+    "hiragana": "よっつ",
+    "hanviet": "TỨ",
+    "mean": "Bốn cái",
+    "lesson": 1
+  },
+  {
+    "kanji": "四日",
+    "hiragana": "よっか",
+    "hanviet": "TỨ NHẬT",
+    "mean": "Ngày mùng 4",
+    "lesson": 1
+  },
+  {
+    "kanji": "四月",
+    "hiragana": "しがつ",
+    "hanviet": "TỨ NGUYỆT",
+    "mean": "Tháng 4",
+    "lesson": 1
+  },
+  {
+    "kanji": "五つ",
+    "hiragana": "いつつ",
+    "hanviet": "NGŨ",
+    "mean": "Năm cái",
+    "lesson": 1
+  },
+  {
+    "kanji": "五日",
+    "hiragana": "いつか",
+    "hanviet": "NGŨ NHẬT",
+    "mean": "Ngày mùng 5",
+    "lesson": 1
+  },
+  {
+    "kanji": "五月",
+    "hiragana": "ごがつ",
+    "hanviet": "NGŨ NGUYỆT",
+    "mean": "Tháng 5",
+    "lesson": 1
+  },
+  {
+    "kanji": "六つ",
+    "hiragana": "むっつ",
+    "hanviet": "LỤC",
+    "mean": "Sáu cái",
+    "lesson": 1
+  },
+  {
+    "kanji": "六日",
+    "hiragana": "むいか",
+    "hanviet": "LỤC NHẬT",
+    "mean": "Ngày mùng 6",
+    "lesson": 1
+  },
+  {
+    "kanji": "六百",
+    "hiragana": "ろっぴゃく",
+    "hanviet": "LỤC BÁCH",
+    "mean": "Sáu trăm",
+    "lesson": 1
+  },
+  {
+    "kanji": "七つ",
+    "hiragana": "ななつ",
+    "hanviet": "THẤT",
+    "mean": "Bảy cái",
+    "lesson": 1
+  },
+  {
+    "kanji": "七日",
+    "hiragana": "なのか",
+    "hanviet": "THẤT NHẬT",
+    "mean": "Ngày mùng 7",
+    "lesson": 1
+  },
+  {
+    "kanji": "七月",
+    "hiragana": "しちがつ",
+    "hanviet": "THẤT NGUYỆT",
+    "mean": "Tháng 7",
+    "lesson": 1
+  },
+  {
+    "kanji": "八つ",
+    "hiragana": "やっつ",
+    "hanviet": "BÁT",
+    "mean": "Tám cái",
+    "lesson": 1
+  },
+  {
+    "kanji": "八日",
+    "hiragana": "ようか",
+    "hanviet": "BÁT NHẬT",
+    "mean": "Ngày mùng 8",
+    "lesson": 1
+  },
+  {
+    "kanji": "八百屋",
+    "hiragana": "やおや",
+    "hanviet": "BÁT BÁCH ỐC",
+    "mean": "Cửa hàng rau quả",
+    "lesson": 1
+  },
+  {
+    "kanji": "九つ",
+    "hiragana": "ここのつ",
+    "hanviet": "CỬU",
+    "mean": "Chín cái",
+    "lesson": 1
+  },
+  {
+    "kanji": "九日",
+    "hiragana": "ここのか",
+    "hanviet": "CỬU NHẬT",
+    "mean": "Ngày mùng 9",
+    "lesson": 1
+  },
+  {
+    "kanji": "九月",
+    "hiragana": "くがつ",
+    "hanviet": "CỬU NGUYỆT",
+    "mean": "Tháng 9",
+    "lesson": 1
+  },
+  {
+    "kanji": "十",
+    "hiragana": "とお",
+    "hanviet": "THẬP",
+    "mean": "Mười cái",
+    "lesson": 1
+  },
+  {
+    "kanji": "十日",
+    "hiragana": "とおか",
+    "hanviet": "THẬP NHẬT",
+    "mean": "Ngày mùng 10",
+    "lesson": 1
+  },
+  {
+    "kanji": "十月",
+    "hiragana": "じゅうがつ",
+    "hanviet": "THẬP NGUYỆT",
+    "mean": "Tháng 10",
+    "lesson": 1
+  },
+  {
+    "kanji": "百",
+    "hiragana": "ひゃく",
+    "hanviet": "BÁCH",
+    "mean": "Một trăm",
+    "lesson": 1
+  },
+  {
+    "kanji": "三百",
+    "hiragana": "さんびゃく",
+    "hanviet": "TAM BÁCH",
+    "mean": "Ba trăm",
+    "lesson": 1
+  },
+  {
+    "kanji": "六百",
+    "hiragana": "ろっぴゃく",
+    "hanviet": "LỤC BÁCH",
+    "mean": "Sáu trăm",
+    "lesson": 1
+  },
+  {
+    "kanji": "千",
+    "hiragana": "せん",
+    "hanviet": "THIÊN",
+    "mean": "Một nghìn",
+    "lesson": 1
+  },
+  {
+    "kanji": "三千",
+    "hiragana": "さんぜん",
+    "hanviet": "TAM THIÊN",
+    "mean": "Ba nghìn",
+    "lesson": 1
+  },
+  {
+    "kanji": "千葉",
+    "hiragana": "ちば",
+    "hanviet": "THIÊN DIỆP",
+    "mean": "Tỉnh Chiba",
+    "lesson": 1
+  },
+  {
+    "kanji": "一万",
+    "hiragana": "いちまん",
+    "hanviet": "NHẤT VẠN",
+    "mean": "Mười nghìn",
+    "lesson": 1
+  },
+  {
+    "kanji": "万国",
+    "hiragana": "ばんこく",
+    "hanviet": "VẠN QUỐC",
+    "mean": "Vạn quốc / Tất cả các nước",
+    "lesson": 1
+  },
+  {
+    "kanji": "円",
+    "hiragana": "えん",
+    "hanviet": "VIÊN",
+    "mean": "Yên (tiền Nhật) / Tròn",
+    "lesson": 1
+  },
+  {
+    "kanji": "円高",
+    "hiragana": "えんだか",
+    "hanviet": "VIÊN CAO",
+    "mean": "Đồng yên tăng giá",
+    "lesson": 1
+  },
+  {
+    "kanji": "口",
+    "hiragana": "くち",
+    "hanviet": "KHẨU",
+    "mean": "Miệng",
+    "lesson": 1
+  },
+  {
+    "kanji": "人口",
+    "hiragana": "じんこう",
+    "hanviet": "NHÂN KHẨU",
+    "mean": "Dân số",
+    "lesson": 1
+  },
+  {
+    "kanji": "入り口",
+    "hiragana": "いりぐち",
+    "hanviet": "NHẬP KHẨU",
+    "mean": "Cửa vào",
+    "lesson": 1
+  },
+  {
+    "kanji": "目",
+    "hiragana": "め",
+    "hanviet": "MỤC",
+    "mean": "Mắt",
+    "lesson": 1
+  },
+  {
+    "kanji": "一日目",
+    "hiragana": "いちにちめ",
+    "hanviet": "NHẤT NHẬT MỤC",
+    "mean": "Ngày thứ nhất",
+    "lesson": 1
+  },
+  {
+    "kanji": "目的",
+    "hiragana": "もくてき",
+    "hanviet": "MỤC ĐÍCH",
+    "mean": "Mục đích",
+    "lesson": 1
+  },
+  {
+    "kanji": "日曜日",
+    "hiragana": "にちようび",
+    "hanviet": "NHẬT DIỆU NHẬT",
+    "mean": "Chủ nhật",
+    "lesson": 2
+  },
+  {
+    "kanji": "日本",
+    "hiragana": "にほん",
+    "hanviet": "NHẬT BẢN",
+    "mean": "Nhật Bản",
+    "lesson": 2
+  },
+  {
+    "kanji": "今日",
+    "hiragana": "きょう",
+    "hanviet": "KIM NHẬT",
+    "mean": "Hôm nay",
+    "lesson": 2
+  },
+  {
+    "kanji": "月曜日",
+    "hiragana": "げつようび",
+    "hanviet": "NGUYỆT DIỆU NHẬT",
+    "mean": "Thứ hai",
+    "lesson": 2
+  },
+  {
+    "kanji": "一月",
+    "hiragana": "いちがつ",
+    "hanviet": "NHẤT NGUYỆT",
+    "mean": "Tháng 1",
+    "lesson": 2
+  },
+  {
+    "kanji": "今月",
+    "hiragana": "こんげつ",
+    "hanviet": "KIM NGUYỆT",
+    "mean": "Tháng này",
+    "lesson": 2
+  },
+  {
+    "kanji": "火曜日",
+    "hiragana": "かようび",
+    "hanviet": "HỎA DIỆU NHẬT",
+    "mean": "Thứ ba",
+    "lesson": 2
+  },
+  {
+    "kanji": "火山",
+    "hiragana": "かざん",
+    "hanviet": "HỎA SƠN",
+    "mean": "Núi lửa",
+    "lesson": 2
+  },
+  {
+    "kanji": "火",
+    "hiragana": "ひ",
+    "hanviet": "HỎA",
+    "mean": "Lửa",
+    "lesson": 2
+  },
+  {
+    "kanji": "水曜日",
+    "hiragana": "すいようび",
+    "hanviet": "THỦY DIỆU NHẬT",
+    "mean": "Thứ tư",
+    "lesson": 2
+  },
+  {
+    "kanji": "水",
+    "hiragana": "みず",
+    "hanviet": "THỦY",
+    "mean": "Nước",
+    "lesson": 2
+  },
+  {
+    "kanji": "木曜日",
+    "hiragana": "もくようび",
+    "hanviet": "MỘC DIỆU NHẬT",
+    "mean": "Thứ năm",
+    "lesson": 2
+  },
+  {
+    "kanji": "木",
+    "hiragana": "き",
+    "hanviet": "MỘC",
+    "mean": "Cây",
+    "lesson": 2
+  },
+  {
+    "kanji": "金曜日",
+    "hiragana": "きんようび",
+    "hanviet": "KIM DIỆU NHẬT",
+    "mean": "Thứ sáu",
+    "lesson": 2
+  },
+  {
+    "kanji": "お金",
+    "hiragana": "おかね",
+    "hanviet": "KIM",
+    "mean": "Tiền",
+    "lesson": 2
+  },
+  {
+    "kanji": "土曜日",
+    "hiragana": "どようび",
+    "hanviet": "THỔ DIỆU NHẬT",
+    "mean": "Thứ bảy",
+    "lesson": 2
+  },
+  {
+    "kanji": "土",
+    "hiragana": "つち",
+    "hanviet": "THỔ",
+    "mean": "Đất",
+    "lesson": 2
+  },
+  {
+    "kanji": "何曜日",
+    "hiragana": "なんようび",
+    "hanviet": "HÀ DIỆU NHẬT",
+    "mean": "Thứ mấy",
+    "lesson": 2
+  },
+  {
+    "kanji": "本",
+    "hiragana": "ほん",
+    "hanviet": "BẢN",
+    "mean": "Sách",
+    "lesson": 2
+  },
+  {
+    "kanji": "山本",
+    "hiragana": "やまもと",
+    "hanviet": "SƠN BẢN",
+    "mean": "Yamamoto (tên riêng)",
+    "lesson": 2
+  },
+  {
+    "kanji": "日本人",
+    "hiragana": "にほんじん",
+    "hanviet": "NHẬT BẢN NHÂN",
+    "mean": "Người Nhật",
+    "lesson": 2
+  },
+  {
+    "kanji": "一人",
+    "hiragana": "ひとり",
+    "hanviet": "NHẤT NHÂN",
+    "mean": "Một người",
+    "lesson": 2
+  },
+  {
+    "kanji": "大人",
+    "hiragana": "おとな",
+    "hanviet": "ĐẠI NHÂN",
+    "mean": "Người lớn",
+    "lesson": 2
+  },
+  {
+    "kanji": "今",
+    "hiragana": "いま",
+    "hanviet": "KIM",
+    "mean": "Bây giờ",
+    "lesson": 2
+  },
+  {
+    "kanji": "今月",
+    "hiragana": "こんげつ",
+    "hanviet": "KIM NGUYỆT",
+    "mean": "Tháng này",
+    "lesson": 2
+  },
+  {
+    "kanji": "お寺",
+    "hiragana": "おてら",
+    "hanviet": "TỰ",
+    "mean": "Chùa",
+    "lesson": 2
+  },
+  {
+    "kanji": "時間",
+    "hiragana": "じかん",
+    "hanviet": "THỜI GIAN",
+    "mean": "Thời gian",
+    "lesson": 2
+  },
+  {
+    "kanji": "時々",
+    "hiragana": "ときどき",
+    "hanviet": "THỜI",
+    "mean": "Thỉnh thoảng",
+    "lesson": 2
+  },
+  {
+    "kanji": "三時",
+    "hiragana": "さんじ",
+    "hanviet": "TAM THỜI",
+    "mean": "3 giờ",
+    "lesson": 2
+  },
+  {
+    "kanji": "半分",
+    "hiragana": "はんぶん",
+    "hanviet": "BÁN PHÂN",
+    "mean": "Một nửa",
+    "lesson": 2
+  },
+  {
+    "kanji": "三時半",
+    "hiragana": "さんじはん",
+    "hanviet": "TAM THỜI BÁN",
+    "mean": "3 rưỡi (3:30)",
+    "lesson": 2
+  },
+  {
+    "kanji": "刀",
+    "hiragana": "かたな",
+    "hanviet": "ĐAO",
+    "mean": "Thanh kiếm / Đao",
+    "lesson": 2
+  },
+  {
+    "kanji": "日本刀",
+    "hiragana": "にほんとう",
+    "hanviet": "NHẬT BẢN ĐAO",
+    "mean": "Kiếm Nhật",
+    "lesson": 2
+  },
+  {
+    "kanji": "分ける",
+    "hiragana": "わける",
+    "hanviet": "PHÂN",
+    "mean": "Chia ra",
+    "lesson": 2
+  },
+  {
+    "kanji": "五分",
+    "hiragana": "ごふん",
+    "hanviet": "NGŨ PHÂN",
+    "mean": "5 phút",
+    "lesson": 2
+  },
+  {
+    "kanji": "分かる",
+    "hiragana": "わかる",
+    "hanviet": "PHÂN",
+    "mean": "Hiểu",
+    "lesson": 2
+  },
+  {
+    "kanji": "上",
+    "hiragana": "うえ",
+    "hanviet": "THƯỢNG",
+    "mean": "Trên",
+    "lesson": 3
+  },
+  {
+    "kanji": "上げる",
+    "hiragana": "あげる",
+    "hanviet": "THƯỢNG",
+    "mean": "Nâng lên / Tặng",
+    "lesson": 3
+  },
+  {
+    "kanji": "上手",
+    "hiragana": "じょうず",
+    "hanviet": "THƯỢNG THỦ",
+    "mean": "Giỏi",
+    "lesson": 3
+  },
+  {
+    "kanji": "下",
+    "hiragana": "した",
+    "hanviet": "HẠ",
+    "mean": "Dưới",
+    "lesson": 3
+  },
+  {
+    "kanji": "下げる",
+    "hiragana": "さげる",
+    "hanviet": "HẠ",
+    "mean": "Hạ xuống",
+    "lesson": 3
+  },
+  {
+    "kanji": "下手",
+    "hiragana": "へた",
+    "hanviet": "HẠ THỦ",
+    "mean": "Kém",
+    "lesson": 3
+  },
+  {
+    "kanji": "中",
+    "hiragana": "なか",
+    "hanviet": "TRUNG",
+    "mean": "Trong / Giữa",
+    "lesson": 3
+  },
+  {
+    "kanji": "中国",
+    "hiragana": "ちゅうごく",
+    "hanviet": "TRUNG QUỐC",
+    "mean": "Trung Quốc",
+    "lesson": 3
+  },
+  {
+    "kanji": "一年中",
+    "hiragana": "いちねんじゅう",
+    "hanviet": "NHẤT NIÊN TRUNG",
+    "mean": "Suốt một năm",
+    "lesson": 3
+  },
+  {
+    "kanji": "外",
+    "hiragana": "そと",
+    "hanviet": "NGOẠI",
+    "mean": "Bên ngoài",
+    "lesson": 3
+  },
+  {
+    "kanji": "外国",
+    "hiragana": "がいこく",
+    "hanviet": "NGOẠI QUỐC",
+    "mean": "Nước ngoài",
+    "lesson": 3
+  },
+  {
+    "kanji": "右",
+    "hiragana": "みぎ",
+    "hanviet": "HỮU",
+    "mean": "Bên phải",
+    "lesson": 3
+  },
+  {
+    "kanji": "右手",
+    "hiragana": "みぎて",
+    "hanviet": "HỮU THỦ",
+    "mean": "Tay phải",
+    "lesson": 3
+  },
+  {
+    "kanji": "工学",
+    "hiragana": "こうがく",
+    "hanviet": "CÔNG HỌC",
+    "mean": "Kỹ thuật học",
+    "lesson": 3
+  },
+  {
+    "kanji": "工事",
+    "hiragana": "こうじ",
+    "hanviet": "CÔNG SỰ",
+    "mean": "Công trường / Thi công",
+    "lesson": 3
+  },
+  {
+    "kanji": "左",
+    "hiragana": "ひだり",
+    "hanviet": "TẢ",
+    "mean": "Bên trái",
+    "lesson": 3
+  },
+  {
+    "kanji": "左手",
+    "hiragana": "ひだりて",
+    "hanviet": "TẢ THỦ",
+    "mean": "Tay trái",
+    "lesson": 3
+  },
+  {
+    "kanji": "前",
+    "hiragana": "まえ",
+    "hanviet": "TIỀN",
+    "mean": "Trước",
+    "lesson": 3
+  },
+  {
+    "kanji": "午前",
+    "hiragana": "ごぜん",
+    "hanviet": "NGỌ TIỀN",
+    "mean": "Buổi sáng (AM)",
+    "lesson": 3
+  },
+  {
+    "kanji": "後ろ",
+    "hiragana": "うしろ",
+    "hanviet": "HẬU",
+    "mean": "Phía sau",
+    "lesson": 3
+  },
+  {
+    "kanji": "午後",
+    "hiragana": "ごご",
+    "hanviet": "NGỌ HẬU",
+    "mean": "Buổi chiều (PM)",
+    "lesson": 3
+  },
+  {
+    "kanji": "午前",
+    "hiragana": "ごぜん",
+    "hanviet": "NGỌ TIỀN",
+    "mean": "Buổi sáng (AM)",
+    "lesson": 3
+  },
+  {
+    "kanji": "午後",
+    "hiragana": "ごご",
+    "hanviet": "NGỌ HẬU",
+    "mean": "Buổi chiều (PM)",
+    "lesson": 3
+  },
+  {
+    "kanji": "門",
+    "hiragana": "もん",
+    "hanviet": "MÔN",
+    "mean": "Cổng",
+    "lesson": 3
+  },
+  {
+    "kanji": "専門",
+    "hiragana": "せんもん",
+    "hanviet": "CHUYÊN MÔN",
+    "mean": "Chuyên môn",
+    "lesson": 3
+  },
+  {
+    "kanji": "間",
+    "hiragana": "あいだ",
+    "hanviet": "GIAN",
+    "mean": "Ở giữa",
+    "lesson": 3
+  },
+  {
+    "kanji": "時間",
+    "hiragana": "じかん",
+    "hanviet": "THỜI GIAN",
+    "mean": "Thời gian",
+    "lesson": 3
+  },
+  {
+    "kanji": "東",
+    "hiragana": "ひがし",
+    "hanviet": "ĐÔNG",
+    "mean": "Hướng Đông",
+    "lesson": 3
+  },
+  {
+    "kanji": "東口",
+    "hiragana": "ひがしぐち",
+    "hanviet": "ĐÔNG KHẨU",
+    "mean": "Cửa Đông",
+    "lesson": 3
+  },
+  {
+    "kanji": "東京",
+    "hiragana": "とうきょう",
+    "hanviet": "ĐÔNG KINH",
+    "mean": "Tokyo",
+    "lesson": 3
+  },
+  {
+    "kanji": "西",
+    "hiragana": "にし",
+    "hanviet": "TÂY",
+    "mean": "Hướng Tây",
+    "lesson": 3
+  },
+  {
+    "kanji": "西口",
+    "hiragana": "にしぐち",
+    "hanviet": "TÂY KHẨU",
+    "mean": "Cửa Tây",
+    "lesson": 3
+  },
+  {
+    "kanji": "南",
+    "hiragana": "みなみ",
+    "hanviet": "NAM",
+    "mean": "Hướng Nam",
+    "lesson": 3
+  },
+  {
+    "kanji": "南口",
+    "hiragana": "みなみぐち",
+    "hanviet": "NAM KHẨU",
+    "mean": "Cửa Nam",
+    "lesson": 3
+  },
+  {
+    "kanji": "東南アジア",
+    "hiragana": "とうなんアジア",
+    "hanviet": "ĐÔNG NAM",
+    "mean": "Đông Nam Á",
+    "lesson": 3
+  },
+  {
+    "kanji": "北",
+    "hiragana": "きた",
+    "hanviet": "BẮC",
+    "mean": "Hướng Bắc",
+    "lesson": 3
+  },
+  {
+    "kanji": "北口",
+    "hiragana": "きたぐち",
+    "hanviet": "BẮC KHẨU",
+    "mean": "Cửa Bắc",
+    "lesson": 3
+  },
+  {
+    "kanji": "田んぼ",
+    "hiragana": "たんぼ",
+    "hanviet": "ĐIỀN",
+    "mean": "Ruộng lúa",
+    "lesson": 4
+  },
+  {
+    "kanji": "田中",
+    "hiragana": "たなか",
+    "hanviet": "ĐIỀN TRUNG",
+    "mean": "Tanaka (tên riêng)",
+    "lesson": 4
+  },
+  {
+    "kanji": "力",
+    "hiragana": "ちから",
+    "hanviet": "LỰC",
+    "mean": "Sức lực",
+    "lesson": 4
+  },
+  {
+    "kanji": "水力",
+    "hiragana": "すいりょく",
+    "hanviet": "THỦY LỰC",
+    "mean": "Thủy lực",
+    "lesson": 4
+  },
+  {
+    "kanji": "男",
+    "hiragana": "おとこ",
+    "hanviet": "NAM",
+    "mean": "Đàn ông",
+    "lesson": 4
+  },
+  {
+    "kanji": "男の子",
+    "hiragana": "おとこのこ",
+    "hanviet": "NAM TỬ",
+    "mean": "Bé trai",
+    "lesson": 4
+  },
+  {
+    "kanji": "女",
+    "hiragana": "おんな",
+    "hanviet": "NỮ",
+    "mean": "Phụ nữ",
+    "lesson": 4
+  },
+  {
+    "kanji": "女の子",
+    "hiragana": "おんなのこ",
+    "hanviet": "NỮ TỬ",
+    "mean": "Bé gái",
+    "lesson": 4
+  },
+  {
+    "kanji": "子供",
+    "hiragana": "こども",
+    "hanviet": "TỬ CUNG",
+    "mean": "Trẻ em",
+    "lesson": 4
+  },
+  {
+    "kanji": "女子学生",
+    "hiragana": "じょしがくせい",
+    "hanviet": "NỮ TỬ HỌC SINH",
+    "mean": "Nữ sinh",
+    "lesson": 4
+  },
+  {
+    "kanji": "学生",
+    "hiragana": "がくせい",
+    "hanviet": "HỌC SINH",
+    "mean": "Sinh viên / Học sinh",
+    "lesson": 4
+  },
+  {
+    "kanji": "大学",
+    "hiragana": "だいがく",
+    "hanviet": "ĐẠI HỌC",
+    "mean": "Đại học",
+    "lesson": 4
+  },
+  {
+    "kanji": "生まれる",
+    "hiragana": "うまれる",
+    "hanviet": "SINH",
+    "mean": "Được sinh ra",
+    "lesson": 4
+  },
+  {
+    "kanji": "先生",
+    "hiragana": "せんせい",
+    "hanviet": "TIÊN SINH",
+    "mean": "Giáo viên",
+    "lesson": 4
+  },
+  {
+    "kanji": "生きる",
+    "hiragana": "いきる",
+    "hanviet": "SINH",
+    "mean": "Sống",
+    "lesson": 4
+  },
+  {
+    "kanji": "先",
+    "hiragana": "さき",
+    "hanviet": "TIÊN",
+    "mean": "Trước / Lúc nãy",
+    "lesson": 4
+  },
+  {
+    "kanji": "先月",
+    "hiragana": "せんげつ",
+    "hanviet": "TIÊN NGUYỆT",
+    "mean": "Tháng trước",
+    "lesson": 4
+  },
+  {
+    "kanji": "何",
+    "hiragana": "なに",
+    "hanviet": "HÀ",
+    "mean": "Cái gì",
+    "lesson": 4
+  },
+  {
+    "kanji": "何か",
+    "hiragana": "なにか",
+    "hanviet": "HÀ",
+    "mean": "Cái gì đó",
+    "lesson": 4
+  },
+  {
+    "kanji": "何人",
+    "hiragana": "なんにん",
+    "hanviet": "HÀ NHÂN",
+    "mean": "Mấy người",
+    "lesson": 4
+  },
+  {
+    "kanji": "父",
+    "hiragana": "ちち",
+    "hanviet": "PHỤ",
+    "mean": "Bố (của tôi)",
+    "lesson": 4
+  },
+  {
+    "kanji": "お父さん",
+    "hiragana": "おとうさん",
+    "hanviet": "PHỤ",
+    "mean": "Bố (người khác/gọi bố)",
+    "lesson": 4
+  },
+  {
+    "kanji": "母",
+    "hiragana": "はは",
+    "hanviet": "MẪU",
+    "mean": "Mẹ (của tôi)",
+    "lesson": 4
+  },
+  {
+    "kanji": "お母さん",
+    "hiragana": "おかあさん",
+    "hanviet": "MẪU",
+    "mean": "Mẹ (người khác/gọi mẹ)",
+    "lesson": 4
+  },
+  {
+    "kanji": "三年生",
+    "hiragana": "さんねんせい",
+    "hanviet": "TAM NIÊN SINH",
+    "mean": "Học sinh năm 3",
+    "lesson": 4
+  },
+  {
+    "kanji": "年",
+    "hiragana": "とし",
+    "hanviet": "NIÊN",
+    "mean": "Năm / Tuổi",
+    "lesson": 4
+  },
+  {
+    "kanji": "去年",
+    "hiragana": "きょねん",
+    "hanviet": "KHỨ NIÊN",
+    "mean": "Năm ngoái",
+    "lesson": 4
+  },
+  {
+    "kanji": "過去",
+    "hiragana": "かこ",
+    "hanviet": "QUÁ KHỨ",
+    "mean": "Quá khứ",
+    "lesson": 4
+  },
+  {
+    "kanji": "毎日",
+    "hiragana": "まいにち",
+    "hanviet": "MỖI NHẬT",
+    "mean": "Mỗi ngày",
+    "lesson": 4
+  },
+  {
+    "kanji": "毎月",
+    "hiragana": "まいつき",
+    "hanviet": "MỖI NGUYỆT",
+    "mean": "Mỗi tháng",
+    "lesson": 4
+  },
+  {
+    "kanji": "王",
+    "hiragana": "おう",
+    "hanviet": "VƯƠNG",
+    "mean": "Vua",
+    "lesson": 4
+  },
+  {
+    "kanji": "王様",
+    "hiragana": "おうさま",
+    "hanviet": "VƯƠNG DẠNG",
+    "mean": "Vua (kính ngữ)",
+    "lesson": 4
+  },
+  {
+    "kanji": "国",
+    "hiragana": "くに",
+    "hanviet": "QUỐC",
+    "mean": "Đất nước",
+    "lesson": 4
+  },
+  {
+    "kanji": "中国",
+    "hiragana": "ちゅうごく",
+    "hanviet": "TRUNG QUỐC",
+    "mean": "Trung Quốc",
+    "lesson": 4
+  },
+  {
+    "kanji": "見る",
+    "hiragana": "みる",
+    "hanviet": "KIẾN",
+    "mean": "Nhìn / Xem",
+    "lesson": 5
+  },
+  {
+    "kanji": "見せる",
+    "hiragana": "みせる",
+    "hanviet": "KIẾN",
+    "mean": "Cho xem",
+    "lesson": 5
+  },
+  {
+    "kanji": "花見",
+    "hiragana": "はなみ",
+    "hanviet": "HOA KIẾN",
+    "mean": "Ngắm hoa",
+    "lesson": 5
+  },
+  {
+    "kanji": "行く",
+    "hiragana": "いく",
+    "hanviet": "HÀNH",
+    "mean": "Đi",
+    "lesson": 5
+  },
+  {
+    "kanji": "銀行",
+    "hiragana": "ぎんこう",
+    "hanviet": "NGÂN HÀNH",
+    "mean": "Ngân hàng",
+    "lesson": 5
+  },
+  {
+    "kanji": "旅行",
+    "hiragana": "りょこう",
+    "hanviet": "LỮ HÀNH",
+    "mean": "Du lịch",
+    "lesson": 5
+  },
+  {
+    "kanji": "米",
+    "hiragana": "こめ",
+    "hanviet": "MỄ",
+    "mean": "Gạo",
+    "lesson": 5
+  },
+  {
+    "kanji": "米国",
+    "hiragana": "べいこく",
+    "hanviet": "MỄ QUỐC",
+    "mean": "Nước Mỹ",
+    "lesson": 5
+  },
+  {
+    "kanji": "来る",
+    "hiragana": "くる",
+    "hanviet": "LAI",
+    "mean": "Đến",
+    "lesson": 5
+  },
+  {
+    "kanji": "来年",
+    "hiragana": "らいねん",
+    "hanviet": "LAI NIÊN",
+    "mean": "Năm sau",
+    "lesson": 5
+  },
+  {
+    "kanji": "来月",
+    "hiragana": "らいげつ",
+    "hanviet": "LAI NGUYỆT",
+    "mean": "Tháng sau",
+    "lesson": 5
+  },
+  {
+    "kanji": "良い",
+    "hiragana": "よい",
+    "hanviet": "LƯƠNG",
+    "mean": "Tốt",
+    "lesson": 5
+  },
+  {
+    "kanji": "良心",
+    "hiragana": "りょうしん",
+    "hanviet": "LƯƠNG TÂM",
+    "mean": "Lương tâm",
+    "lesson": 5
+  },
+  {
+    "kanji": "食べる",
+    "hiragana": "たべる",
+    "hanviet": "THỰC",
+    "mean": "Ăn",
+    "lesson": 5
+  },
+  {
+    "kanji": "食事",
+    "hiragana": "しょくじ",
+    "hanviet": "THỰC SỰ",
+    "mean": "Bữa ăn",
+    "lesson": 5
+  },
+  {
+    "kanji": "食べ物",
+    "hiragana": "たべもの",
+    "hanviet": "THỰC VẬT",
+    "mean": "Đồ ăn",
+    "lesson": 5
+  },
+  {
+    "kanji": "飲む",
+    "hiragana": "のむ",
+    "hanviet": "ẨM",
+    "mean": "Uống",
+    "lesson": 5
+  },
+  {
+    "kanji": "飲み物",
+    "hiragana": "のみもの",
+    "hanviet": "ẨM VẬT",
+    "mean": "Đồ uống",
+    "lesson": 5
+  },
+  {
+    "kanji": "会う",
+    "hiragana": "あう",
+    "hanviet": "HỘI",
+    "mean": "Gặp",
+    "lesson": 5
+  },
+  {
+    "kanji": "会社",
+    "hiragana": "かいしゃ",
+    "hanviet": "HỘI XÃ",
+    "mean": "Công ty",
+    "lesson": 5
+  },
+  {
+    "kanji": "会話",
+    "hiragana": "かいわ",
+    "hanviet": "HỘI THOẠI",
+    "mean": "Hội thoại",
+    "lesson": 5
+  },
+  {
+    "kanji": "耳",
+    "hiragana": "みみ",
+    "hanviet": "NHĨ",
+    "mean": "Tai",
+    "lesson": 5
+  },
+  {
+    "kanji": "耳鼻科",
+    "hiragana": "じびか",
+    "hanviet": "NHĨ TỴ KHOA",
+    "mean": "Khoa tai mũi họng",
+    "lesson": 5
+  },
+  {
+    "kanji": "聞く",
+    "hiragana": "きく",
+    "hanviet": "VĂN",
+    "mean": "Nghe / Hỏi",
+    "lesson": 5
+  },
+  {
+    "kanji": "新聞",
+    "hiragana": "しんぶん",
+    "hanviet": "TÂN VĂN",
+    "mean": "Báo",
+    "lesson": 5
+  },
+  {
+    "kanji": "言う",
+    "hiragana": "いう",
+    "hanviet": "NGÔN",
+    "mean": "Nói",
+    "lesson": 5
+  },
+  {
+    "kanji": "言語",
+    "hiragana": "げんご",
+    "hanviet": "NGÔN NGỮ",
+    "mean": "Ngôn ngữ",
+    "lesson": 5
+  },
+  {
+    "kanji": "話す",
+    "hiragana": "はなす",
+    "hanviet": "THOẠI",
+    "mean": "Nói chuyện",
+    "lesson": 5
+  },
+  {
+    "kanji": "話",
+    "hiragana": "はなし",
+    "hanviet": "THOẠI",
+    "mean": "Câu chuyện",
+    "lesson": 5
+  },
+  {
+    "kanji": "電話",
+    "hiragana": "でんわ",
+    "hanviet": "ĐIỆN THOẠI",
+    "mean": "Điện thoại",
+    "lesson": 5
+  },
+  {
+    "kanji": "立つ",
+    "hiragana": "たつ",
+    "hanviet": "LẬP",
+    "mean": "Đứng",
+    "lesson": 5
+  },
+  {
+    "kanji": "役に立つ",
+    "hiragana": "やくにたつ",
+    "hanviet": "DỊCH LẬP",
+    "mean": "Có ích",
+    "lesson": 5
+  },
+  {
+    "kanji": "待つ",
+    "hiragana": "まつ",
+    "hanviet": "ĐÃI",
+    "mean": "Đợi",
+    "lesson": 5
+  },
+  {
+    "kanji": "招待",
+    "hiragana": "しょうたい",
+    "hanviet": "CHIÊU ĐÃI",
+    "mean": "Chiêu đãi / Mời",
+    "lesson": 5
+  },
+  {
+    "kanji": "周り",
+    "hiragana": "まわり",
+    "hanviet": "CHU",
+    "mean": "Xung quanh",
+    "lesson": 5
+  },
+  {
+    "kanji": "周期",
+    "hiragana": "しゅうき",
+    "hanviet": "CHU KỲ",
+    "mean": "Chu kỳ",
+    "lesson": 5
+  },
+  {
+    "kanji": "今週",
+    "hiragana": "こんしゅう",
+    "hanviet": "KIM CHU",
+    "mean": "Tuần này",
+    "lesson": 5
+  },
+  {
+    "kanji": "来週",
+    "hiragana": "らいしゅう",
+    "hanviet": "LAI CHU",
+    "mean": "Tuần sau",
+    "lesson": 5
+  },
+  {
+    "kanji": "一週間",
+    "hiragana": "いっしゅうかん",
+    "hanviet": "NHẤT CHU GIAN",
+    "mean": "1 tuần",
+    "lesson": 5
+  },
+  {
+    "kanji": "大きい",
+    "hiragana": "おおきい",
+    "hanviet": "ĐẠI",
+    "mean": "To / Lớn",
+    "lesson": 6
+  },
+  {
+    "kanji": "大学",
+    "hiragana": "だいがく",
+    "hanviet": "ĐẠI HỌC",
+    "mean": "Đại học",
+    "lesson": 6
+  },
+  {
+    "kanji": "小さい",
+    "hiragana": "ちいさい",
+    "hanviet": "TIỂU",
+    "mean": "Nhỏ",
+    "lesson": 6
+  },
+  {
+    "kanji": "小学校",
+    "hiragana": "しょうがっこう",
+    "hanviet": "TIỂU HỌC HIỆU",
+    "mean": "Trường tiểu học",
+    "lesson": 6
+  },
+  {
+    "kanji": "高い",
+    "hiragana": "たかい",
+    "hanviet": "CAO",
+    "mean": "Cao / Đắt",
+    "lesson": 6
+  },
+  {
+    "kanji": "高校生",
+    "hiragana": "こうこうせい",
+    "hanviet": "CAO HIỆU SINH",
+    "mean": "Học sinh cấp 3",
+    "lesson": 6
+  },
+  {
+    "kanji": "安い",
+    "hiragana": "やすい",
+    "hanviet": "AN",
+    "mean": "Rẻ",
+    "lesson": 6
+  },
+  {
+    "kanji": "安心",
+    "hiragana": "あんしん",
+    "hanviet": "AN TÂM",
+    "mean": "An tâm",
+    "lesson": 6
+  },
+  {
+    "kanji": "新しい",
+    "hiragana": "あたらしい",
+    "hanviet": "TÂN",
+    "mean": "Mới",
+    "lesson": 6
+  },
+  {
+    "kanji": "新聞",
+    "hiragana": "しんぶん",
+    "hanviet": "TÂN VĂN",
+    "mean": "Báo",
+    "lesson": 6
+  },
+  {
+    "kanji": "古い",
+    "hiragana": "ふるい",
+    "hanviet": "CỔ",
+    "mean": "Cũ",
+    "lesson": 6
+  },
+  {
+    "kanji": "中古",
+    "hiragana": "ちゅうこ",
+    "hanviet": "TRUNG CỔ",
+    "mean": "Đồ cũ / Second-hand",
+    "lesson": 6
+  },
+  {
+    "kanji": "元気",
+    "hiragana": "げんき",
+    "hanviet": "NGUYÊN KHÍ",
+    "mean": "Khỏe mạnh",
+    "lesson": 6
+  },
+  {
+    "kanji": "元日",
+    "hiragana": "がんじつ",
+    "hanviet": "NGUYÊN NHẬT",
+    "mean": "Ngày mùng 1 Tết",
+    "lesson": 6
+  },
+  {
+    "kanji": "天気",
+    "hiragana": "てんき",
+    "hanviet": "THIÊN KHÍ",
+    "mean": "Thời tiết",
+    "lesson": 6
+  },
+  {
+    "kanji": "電気",
+    "hiragana": "でんき",
+    "hanviet": "ĐIỆN KHÍ",
+    "mean": "Điện / Đèn điện",
+    "lesson": 6
+  },
+  {
+    "kanji": "多い",
+    "hiragana": "おおい",
+    "hanviet": "ĐA",
+    "mean": "Nhiều",
+    "lesson": 6
+  },
+  {
+    "kanji": "多少",
+    "hiragana": "たしょう",
+    "hanviet": "ĐA THIỂU",
+    "mean": "Ít nhiều / Một chút",
+    "lesson": 6
+  },
+  {
+    "kanji": "少ない",
+    "hiragana": "すくない",
+    "hanviet": "THIỂU",
+    "mean": "Ít",
+    "lesson": 6
+  },
+  {
+    "kanji": "少し",
+    "hiragana": "すこし",
+    "hanviet": "THIỂU",
+    "mean": "Một chút",
+    "lesson": 6
+  },
+  {
+    "kanji": "広い",
+    "hiragana": "ひろい",
+    "hanviet": "QUẢNG",
+    "mean": "Rộng",
+    "lesson": 6
+  },
+  {
+    "kanji": "広場",
+    "hiragana": "ひろば",
+    "hanviet": "QUẢNG TRƯỜNG",
+    "mean": "Quảng trường",
+    "lesson": 6
+  },
+  {
+    "kanji": "早い",
+    "hiragana": "はやい",
+    "hanviet": "TẢO",
+    "mean": "Sớm",
+    "lesson": 6
+  },
+  {
+    "kanji": "早朝",
+    "hiragana": "そうちょう",
+    "hanviet": "TẢO TRIỀU",
+    "mean": "Sáng sớm",
+    "lesson": 6
+  },
+  {
+    "kanji": "長い",
+    "hiragana": "ながい",
+    "hanviet": "TRƯỜNG",
+    "mean": "Dài",
+    "lesson": 6
+  },
+  {
+    "kanji": "社長",
+    "hiragana": "しゃちょう",
+    "hanviet": "XÃ TRƯỞNG",
+    "mean": "Giám đốc",
+    "lesson": 6
+  },
+  {
+    "kanji": "明るい",
+    "hiragana": "あかるい",
+    "hanviet": "MINH",
+    "mean": "Sáng / Vui vẻ",
+    "lesson": 6
+  },
+  {
+    "kanji": "明日",
+    "hiragana": "あした",
+    "hanviet": "MINH NHẬT",
+    "mean": "Ngày mai",
+    "lesson": 6
+  },
+  {
+    "kanji": "好きな",
+    "hiragana": "すきな",
+    "hanviet": "HẢO",
+    "mean": "Thích",
+    "lesson": 6
+  },
+  {
+    "kanji": "大好きな",
+    "hiragana": "だいすきな",
+    "hanviet": "ĐẠI HẢO",
+    "mean": "Rất thích",
+    "lesson": 6
+  },
+  {
+    "kanji": "友達",
+    "hiragana": "ともだち",
+    "hanviet": "HỮU ĐẠT",
+    "mean": "Bạn bè",
+    "lesson": 6
+  },
+  {
+    "kanji": "友人",
+    "hiragana": "ゆうじん",
+    "hanviet": "HỮU NHÂN",
+    "mean": "Bạn thân",
+    "lesson": 6
+  },
+  {
+    "kanji": "入る",
+    "hiragana": "はいる",
+    "hanviet": "NHẬP",
+    "mean": "Vào",
+    "lesson": 7
+  },
+  {
+    "kanji": "入れる",
+    "hiragana": "いれる",
+    "hanviet": "NHẬP",
+    "mean": "Cho vào",
+    "lesson": 7
+  },
+  {
+    "kanji": "入り口",
+    "hiragana": "いりぐち",
+    "hanviet": "NHẬP KHẨU",
+    "mean": "Cửa vào",
+    "lesson": 7
+  },
+  {
+    "kanji": "出る",
+    "hiragana": "でる",
+    "hanviet": "XUẤT",
+    "mean": "Ra",
+    "lesson": 7
+  },
+  {
+    "kanji": "出す",
+    "hiragana": "だす",
+    "hanviet": "XUẤT",
+    "mean": "Lấy ra / Gửi đi",
+    "lesson": 7
+  },
+  {
+    "kanji": "出口",
+    "hiragana": "でぐち",
+    "hanviet": "XUẤT KHẨU",
+    "mean": "Cửa ra",
+    "lesson": 7
+  },
+  {
+    "kanji": "市役所",
+    "hiragana": "しやくしょ",
+    "hanviet": "THỊ DỊCH SỞ",
+    "mean": "Ủy ban thành phố",
+    "lesson": 7
+  },
+  {
+    "kanji": "市長",
+    "hiragana": "しちょう",
+    "hanviet": "THỊ TRƯỞNG",
+    "mean": "Thị trưởng",
+    "lesson": 7
+  },
+  {
+    "kanji": "町",
+    "hiragana": "まち",
+    "hanviet": "ĐINH",
+    "mean": "Thị trấn / Khu phố",
+    "lesson": 7
+  },
+  {
+    "kanji": "下町",
+    "hiragana": "したまち",
+    "hanviet": "HẠ ĐINH",
+    "mean": "Khu phố buôn bán",
+    "lesson": 7
+  },
+  {
+    "kanji": "村",
+    "hiragana": "むら",
+    "hanviet": "THÔN",
+    "mean": "Làng",
+    "lesson": 7
+  },
+  {
+    "kanji": "村長",
+    "hiragana": "そんちょう",
+    "hanviet": "THÔN TRƯỞNG",
+    "mean": "Trưởng làng",
+    "lesson": 7
+  },
+  {
+    "kanji": "雨",
+    "hiragana": "あめ",
+    "hanviet": "VŨ",
+    "mean": "Mưa",
+    "lesson": 7
+  },
+  {
+    "kanji": "大雨",
+    "hiragana": "おおあめ",
+    "hanviet": "ĐẠI VŨ",
+    "mean": "Mưa lớn",
+    "lesson": 7
+  },
+  {
+    "kanji": "電気",
+    "hiragana": "でんき",
+    "hanviet": "ĐIỆN KHÍ",
+    "mean": "Điện",
+    "lesson": 7
+  },
+  {
+    "kanji": "電車",
+    "hiragana": "でんしゃ",
+    "hanviet": "ĐIỆN XA",
+    "mean": "Tàu điện",
+    "lesson": 7
+  },
+  {
+    "kanji": "車",
+    "hiragana": "くるま",
+    "hanviet": "XA",
+    "mean": "Xe ô tô",
+    "lesson": 7
+  },
+  {
+    "kanji": "電車",
+    "hiragana": "でんしゃ",
+    "hanviet": "ĐIỆN XA",
+    "mean": "Tàu điện",
+    "lesson": 7
+  },
+  {
+    "kanji": "馬",
+    "hiragana": "うま",
+    "hanviet": "MÃ",
+    "mean": "Con ngựa",
+    "lesson": 7
+  },
+  {
+    "kanji": "乗馬",
+    "hiragana": "じょうば",
+    "hanviet": "THỪA MÃ",
+    "mean": "Cưỡi ngựa",
+    "lesson": 7
+  },
+  {
+    "kanji": "駅",
+    "hiragana": "えき",
+    "hanviet": "DỊCH",
+    "mean": "Nhà ga",
+    "lesson": 7
+  },
+  {
+    "kanji": "駅員",
+    "hiragana": "えきいん",
+    "hanviet": "DỊCH VIÊN",
+    "mean": "Nhân viên nhà ga",
+    "lesson": 7
+  },
+  {
+    "kanji": "会社",
+    "hiragana": "かいしゃ",
+    "hanviet": "HỘI XÃ",
+    "mean": "Công ty",
+    "lesson": 7
+  },
+  {
+    "kanji": "社会",
+    "hiragana": "しゃかい",
+    "hanviet": "XÃ HỘI",
+    "mean": "Xã hội",
+    "lesson": 7
+  },
+  {
+    "kanji": "学校",
+    "hiragana": "がっこう",
+    "hanviet": "HỌC HIỆU",
+    "mean": "Trường học",
+    "lesson": 7
+  },
+  {
+    "kanji": "校長",
+    "hiragana": "こうちょう",
+    "hanviet": "HIỆU TRƯỞNG",
+    "mean": "Hiệu trưởng",
+    "lesson": 7
+  },
+  {
+    "kanji": "店",
+    "hiragana": "みせ",
+    "hanviet": "ĐIẾM",
+    "mean": "Cửa hàng",
+    "lesson": 7
+  },
+  {
+    "kanji": "店員",
+    "hiragana": "てんいん",
+    "hanviet": "ĐIẾM VIÊN",
+    "mean": "Nhân viên cửa hàng",
+    "lesson": 7
+  },
+  {
+    "kanji": "銀行",
+    "hiragana": "ぎんこう",
+    "hanviet": "NGÂN HÀNH",
+    "mean": "Ngân hàng",
+    "lesson": 7
+  },
+  {
+    "kanji": "銀色",
+    "hiragana": "ぎんいろ",
+    "hanviet": "NGÂN SẮC",
+    "mean": "Màu bạc",
+    "lesson": 7
+  },
+  {
+    "kanji": "病気",
+    "hiragana": "びょうき",
+    "hanviet": "BỆNH KHÍ",
+    "mean": "Bệnh tật",
+    "lesson": 7
+  },
+  {
+    "kanji": "病院",
+    "hiragana": "びょういん",
+    "hanviet": "BỆNH VIỆN",
+    "mean": "Bệnh viện",
+    "lesson": 7
+  },
+  {
+    "kanji": "病院",
+    "hiragana": "びょういん",
+    "hanviet": "BỆNH VIỆN",
+    "mean": "Bệnh viện",
+    "lesson": 7
+  },
+  {
+    "kanji": "大学院",
+    "hiragana": "だいがくいん",
+    "hanviet": "ĐẠI HỌC VIỆN",
+    "mean": "Cao học",
+    "lesson": 7
+  },
+  {
+    "kanji": "休む",
+    "hiragana": "やすむ",
+    "hanviet": "HƯU",
+    "mean": "Nghỉ ngơi",
+    "lesson": 8
+  },
+  {
+    "kanji": "休み",
+    "hiragana": "やすみ",
+    "hanviet": "HƯU",
+    "mean": "Ngày nghỉ",
+    "lesson": 8
+  },
+  {
+    "kanji": "休日",
+    "hiragana": "きゅうじつ",
+    "hanviet": "HƯU NHẬT",
+    "mean": "Ngày nghỉ",
+    "lesson": 8
+  },
+  {
+    "kanji": "走る",
+    "hiragana": "はしる",
+    "hanviet": "TẨU",
+    "mean": "Chạy",
+    "lesson": 8
+  },
+  {
+    "kanji": "起きる",
+    "hiragana": "おきる",
+    "hanviet": "KHỞI",
+    "mean": "Thức dậy",
+    "lesson": 8
+  },
+  {
+    "kanji": "起こす",
+    "hiragana": "おこす",
+    "hanviet": "KHỞI",
+    "mean": "Đánh thức",
+    "lesson": 8
+  },
+  {
+    "kanji": "貝",
+    "hiragana": "かい",
+    "hanviet": "BỐI",
+    "mean": "Con sò",
+    "lesson": 8
+  },
+  {
+    "kanji": "買う",
+    "hiragana": "かう",
+    "hanviet": "MÃI",
+    "mean": "Mua",
+    "lesson": 8
+  },
+  {
+    "kanji": "買い物",
+    "hiragana": "かいもの",
+    "hanviet": "MÃI VẬT",
+    "mean": "Mua sắm",
+    "lesson": 8
+  },
+  {
+    "kanji": "売る",
+    "hiragana": "うる",
+    "hanviet": "MẠI",
+    "mean": "Bán",
+    "lesson": 8
+  },
+  {
+    "kanji": "売り場",
+    "hiragana": "うりば",
+    "hanviet": "MẠI TRƯỜNG",
+    "mean": "Quầy bán hàng",
+    "lesson": 8
+  },
+  {
+    "kanji": "読む",
+    "hiragana": "よむ",
+    "hanviet": "ĐỘC",
+    "mean": "Đọc",
+    "lesson": 8
+  },
+  {
+    "kanji": "読書",
+    "hiragana": "どくしょ",
+    "hanviet": "ĐỘC THƯ",
+    "mean": "Việc đọc sách",
+    "lesson": 8
+  },
+  {
+    "kanji": "書く",
+    "hiragana": "かく",
+    "hanviet": "THƯ",
+    "mean": "Viết",
+    "lesson": 8
+  },
+  {
+    "kanji": "辞書",
+    "hiragana": "じしょ",
+    "hanviet": "TỪ THƯ",
+    "mean": "Từ điển",
+    "lesson": 8
+  },
+  {
+    "kanji": "帰る",
+    "hiragana": "かえる",
+    "hanviet": "QUY",
+    "mean": "Trở về",
+    "lesson": 8
+  },
+  {
+    "kanji": "帰国",
+    "hiragana": "きこく",
+    "hanviet": "QUY QUỐC",
+    "mean": "Về nước",
+    "lesson": 8
+  },
+  {
+    "kanji": "勉強する",
+    "hiragana": "べんきょうする",
+    "hanviet": "MIỄN CƯỜNG",
+    "mean": "Học tập",
+    "lesson": 8
+  },
+  {
+    "kanji": "弓",
+    "hiragana": "ゆみ",
+    "hanviet": "CUNG",
+    "mean": "Cái cung",
+    "lesson": 8
+  },
+  {
+    "kanji": "虫",
+    "hiragana": "むし",
+    "hanviet": "TRÙNG",
+    "mean": "Côn trùng",
+    "lesson": 8
+  },
+  {
+    "kanji": "強い",
+    "hiragana": "つよい",
+    "hanviet": "CƯỜNG",
+    "mean": "Mạnh",
+    "lesson": 8
+  },
+  {
+    "kanji": "勉強",
+    "hiragana": "べんきょう",
+    "hanviet": "MIỄN CƯỜNG",
+    "mean": "Học tập",
+    "lesson": 8
+  },
+  {
+    "kanji": "持つ",
+    "hiragana": "もつ",
+    "hanviet": "TRÌ",
+    "mean": "Cầm / Mang",
+    "lesson": 8
+  },
+  {
+    "kanji": "お金持ち",
+    "hiragana": "おかねもち",
+    "hanviet": "KIM TRÌ",
+    "mean": "Người giàu",
+    "lesson": 8
+  },
+  {
+    "kanji": "名前",
+    "hiragana": "なまえ",
+    "hanviet": "DANH TIỀN",
+    "mean": "Tên",
+    "lesson": 8
+  },
+  {
+    "kanji": "有名",
+    "hiragana": "ゆうめい",
+    "hanviet": "HỮU DANH",
+    "mean": "Nổi tiếng",
+    "lesson": 8
+  },
+  {
+    "kanji": "日本語",
+    "hiragana": "にほんご",
+    "hanviet": "NHẬT BẢN NGỮ",
+    "mean": "Tiếng Nhật",
+    "lesson": 8
+  },
+  {
+    "kanji": "外国語",
+    "hiragana": "がいこくご",
+    "hanviet": "NGOẠI QUỐC NGỮ",
+    "mean": "Tiếng nước ngoài",
+    "lesson": 8
+  },
+  {
+    "kanji": "春",
+    "hiragana": "はる",
+    "hanviet": "XUÂN",
+    "mean": "Mùa xuân",
+    "lesson": 9
+  },
+  {
+    "kanji": "春休み",
+    "hiragana": "はるやすみ",
+    "hanviet": "XUÂN HƯU",
+    "mean": "Kỳ nghỉ xuân",
+    "lesson": 9
+  },
+  {
+    "kanji": "夏",
+    "hiragana": "なつ",
+    "hanviet": "HẠ",
+    "mean": "Mùa hè",
+    "lesson": 9
+  },
+  {
+    "kanji": "夏休み",
+    "hiragana": "なつやすみ",
+    "hanviet": "HẠ HƯU",
+    "mean": "Kỳ nghỉ hè",
+    "lesson": 9
+  },
+  {
+    "kanji": "秋",
+    "hiragana": "あき",
+    "hanviet": "THU",
+    "mean": "Mùa thu",
+    "lesson": 9
+  },
+  {
+    "kanji": "冬",
+    "hiragana": "ふゆ",
+    "hanviet": "ĐÔNG",
+    "mean": "Mùa đông",
+    "lesson": 9
+  },
+  {
+    "kanji": "冬休み",
+    "hiragana": "ふゆやすみ",
+    "hanviet": "ĐÔNG HƯU",
+    "mean": "Kỳ nghỉ đông",
+    "lesson": 9
+  },
+  {
+    "kanji": "朝",
+    "hiragana": "あさ",
+    "hanviet": "TRIỀU",
+    "mean": "Buổi sáng",
+    "lesson": 9
+  },
+  {
+    "kanji": "毎朝",
+    "hiragana": "まいあさ",
+    "hanviet": "MỖI TRIỀU",
+    "mean": "Mỗi sáng",
+    "lesson": 9
+  },
+  {
+    "kanji": "昼",
+    "hiragana": "ひる",
+    "hanviet": "TRÚ",
+    "mean": "Buổi trưa",
+    "lesson": 9
+  },
+  {
+    "kanji": "昼休み",
+    "hiragana": "ひるやすみ",
+    "hanviet": "TRÚ HƯU",
+    "mean": "Nghỉ trưa",
+    "lesson": 9
+  },
+  {
+    "kanji": "夕方",
+    "hiragana": "ゆうがた",
+    "hanviet": "TỊCH PHƯƠNG",
+    "mean": "Chiều tối",
+    "lesson": 9
+  },
+  {
+    "kanji": "夕食",
+    "hiragana": "ゆうしょく",
+    "hanviet": "TỊCH THỰC",
+    "mean": "Bữa tối",
+    "lesson": 9
+  },
+  {
+    "kanji": "読み方",
+    "hiragana": "よみかた",
+    "hanviet": "ĐỘC PHƯƠNG",
+    "mean": "Cách đọc",
+    "lesson": 9
+  },
+  {
+    "kanji": "方法",
+    "hiragana": "ほうほう",
+    "hanviet": "PHƯƠNG PHÁP",
+    "mean": "Phương pháp",
+    "lesson": 9
+  },
+  {
+    "kanji": "晩",
+    "hiragana": "ばん",
+    "hanviet": "VÃN",
+    "mean": "Buổi tối",
+    "lesson": 9
+  },
+  {
+    "kanji": "今晩",
+    "hiragana": "こんばん",
+    "hanviet": "KIM VÃN",
+    "mean": "Tối nay",
+    "lesson": 9
+  },
+  {
+    "kanji": "夜",
+    "hiragana": "よる",
+    "hanviet": "DẠ",
+    "mean": "Đêm",
+    "lesson": 9
+  },
+  {
+    "kanji": "今夜",
+    "hiragana": "こんや",
+    "hanviet": "KIM DẠ",
+    "mean": "Đêm nay",
+    "lesson": 9
+  },
+  {
+    "kanji": "心",
+    "hiragana": "こころ",
+    "hanviet": "TÂM",
+    "mean": "Trái tim / Tấm lòng",
+    "lesson": 9
+  },
+  {
+    "kanji": "安心する",
+    "hiragana": "あんしんする",
+    "hanviet": "AN TÂM",
+    "mean": "An tâm",
+    "lesson": 9
+  },
+  {
+    "kanji": "手",
+    "hiragana": "て",
+    "hanviet": "THỦ",
+    "mean": "Tay",
+    "lesson": 9
+  },
+  {
+    "kanji": "下手",
+    "hiragana": "へた",
+    "hanviet": "HẠ THỦ",
+    "mean": "Kém",
+    "lesson": 9
+  },
+  {
+    "kanji": "上手",
+    "hiragana": "じょうず",
+    "hanviet": "THƯỢNG THỦ",
+    "mean": "Giỏi",
+    "lesson": 9
+  },
+  {
+    "kanji": "足",
+    "hiragana": "あし",
+    "hanviet": "TÚC",
+    "mean": "Chân",
+    "lesson": 9
+  },
+  {
+    "kanji": "足りる",
+    "hiragana": "たりる",
+    "hanviet": "TÚC",
+    "mean": "Đủ",
+    "lesson": 9
+  },
+  {
+    "kanji": "体",
+    "hiragana": "からだ",
+    "hanviet": "THỂ",
+    "mean": "Cơ thể",
+    "lesson": 9
+  },
+  {
+    "kanji": "首",
+    "hiragana": "くび",
+    "hanviet": "THỦ",
+    "mean": "Cổ",
+    "lesson": 9
+  },
+  {
+    "kanji": "道",
+    "hiragana": "みち",
+    "hanviet": "ĐẠO",
+    "mean": "Con đường",
+    "lesson": 9
+  },
+  {
+    "kanji": "書道",
+    "hiragana": "しょどう",
+    "hanviet": "THƯ ĐẠO",
+    "mean": "Thư pháp",
+    "lesson": 9
+  },
+  {
+    "kanji": "山",
+    "hiragana": "やま",
+    "hanviet": "SƠN",
+    "mean": "Núi",
+    "lesson": 10
+  },
+  {
+    "kanji": "富士山",
+    "hiragana": "ふじさん",
+    "hanviet": "PHÚ SĨ SƠN",
+    "mean": "Núi Phú Sĩ",
+    "lesson": 10
+  },
+  {
+    "kanji": "川",
+    "hiragana": "かわ",
+    "hanviet": "XUYÊN",
+    "mean": "Sông",
+    "lesson": 10
+  },
+  {
+    "kanji": "林",
+    "hiragana": "はやし",
+    "hanviet": "LÂM",
+    "mean": "Rừng thưa",
+    "lesson": 10
+  },
+  {
+    "kanji": "小林",
+    "hiragana": "こばやし",
+    "hanviet": "TIỂU LÂM",
+    "mean": "Kobayashi (tên riêng)",
+    "lesson": 10
+  },
+  {
+    "kanji": "森",
+    "hiragana": "もり",
+    "hanviet": "SÂM",
+    "mean": "Rừng rậm",
+    "lesson": 10
+  },
+  {
+    "kanji": "空",
+    "hiragana": "そら",
+    "hanviet": "KHÔNG",
+    "mean": "Bầu trời",
+    "lesson": 10
+  },
+  {
+    "kanji": "空気",
+    "hiragana": "くうき",
+    "hanviet": "KHÔNG KHÍ",
+    "mean": "Không khí",
+    "lesson": 10
+  },
+  {
+    "kanji": "海",
+    "hiragana": "うみ",
+    "hanviet": "HẢI",
+    "mean": "Biển",
+    "lesson": 10
+  },
+  {
+    "kanji": "海外",
+    "hiragana": "かいがい",
+    "hanviet": "HẢI NGOẠI",
+    "mean": "Nước ngoài",
+    "lesson": 10
+  },
+  {
+    "kanji": "化学",
+    "hiragana": "かがく",
+    "hanviet": "HÓA HỌC",
+    "mean": "Hóa học",
+    "lesson": 10
+  },
+  {
+    "kanji": "文化",
+    "hiragana": "ぶんか",
+    "hanviet": "VĂN HÓA",
+    "mean": "Văn hóa",
+    "lesson": 10
+  },
+  {
+    "kanji": "花",
+    "hiragana": "はな",
+    "hanviet": "HOA",
+    "mean": "Hoa",
+    "lesson": 10
+  },
+  {
+    "kanji": "花見",
+    "hiragana": "はなみ",
+    "hanviet": "HOA KIẾN",
+    "mean": "Ngắm hoa",
+    "lesson": 10
+  },
+  {
+    "kanji": "天気",
+    "hiragana": "てんき",
+    "hanviet": "THIÊN KHÍ",
+    "mean": "Thời tiết",
+    "lesson": 10
+  },
+  {
+    "kanji": "赤",
+    "hiragana": "あか",
+    "hanviet": "XÍCH",
+    "mean": "Màu đỏ",
+    "lesson": 10
+  },
+  {
+    "kanji": "赤い",
+    "hiragana": "あかい",
+    "hanviet": "XÍCH",
+    "mean": "Đỏ (tính từ)",
+    "lesson": 10
+  },
+  {
+    "kanji": "青",
+    "hiragana": "あお",
+    "hanviet": "THANH",
+    "mean": "Màu xanh",
+    "lesson": 10
+  },
+  {
+    "kanji": "青い",
+    "hiragana": "あおい",
+    "hanviet": "THANH",
+    "mean": "Xanh (tính từ)",
+    "lesson": 10
+  },
+  {
+    "kanji": "白",
+    "hiragana": "しろ",
+    "hanviet": "BẠCH",
+    "mean": "Màu trắng",
+    "lesson": 10
+  },
+  {
+    "kanji": "白い",
+    "hiragana": "しろい",
+    "hanviet": "BẠCH",
+    "mean": "Trắng (tính từ)",
+    "lesson": 10
+  },
+  {
+    "kanji": "黒",
+    "hiragana": "くろ",
+    "hanviet": "HẮC",
+    "mean": "Màu đen",
+    "lesson": 10
+  },
+  {
+    "kanji": "黒い",
+    "hiragana": "くろい",
+    "hanviet": "HẮC",
+    "mean": "Đen (tính từ)",
+    "lesson": 10
+  },
+  {
+    "kanji": "色",
+    "hiragana": "いろ",
+    "hanviet": "SẮC",
+    "mean": "Màu sắc",
+    "lesson": 10
+  },
+  {
+    "kanji": "色々",
+    "hiragana": "いろいろ",
+    "hanviet": "SẮC",
+    "mean": "Nhiều loại",
+    "lesson": 10
+  },
+  {
+    "kanji": "魚",
+    "hiragana": "さかな",
+    "hanviet": "NGƯ",
+    "mean": "Cá",
+    "lesson": 10
+  },
+  {
+    "kanji": "犬",
+    "hiragana": "いぬ",
+    "hanviet": "KHUYỂN",
+    "mean": "Chó",
+    "lesson": 10
+  },
+  {
+    "kanji": "料理",
+    "hiragana": "りょうり",
+    "hanviet": "LIỆU LÝ",
+    "mean": "Món ăn / Nấu ăn",
+    "lesson": 11
+  },
+  {
+    "kanji": "料金",
+    "hiragana": "りょうきん",
+    "hanviet": "LIỆU KIM",
+    "mean": "Chi phí",
+    "lesson": 11
+  },
+  {
+    "kanji": "心理学",
+    "hiragana": "しんりがく",
+    "hanviet": "TÂM LÝ HỌC",
+    "mean": "Tâm lý học",
+    "lesson": 11
+  },
+  {
+    "kanji": "反対する",
+    "hiragana": "はんたいする",
+    "hanviet": "PHẢN ĐỐI",
+    "mean": "Phản đối",
+    "lesson": 11
+  },
+  {
+    "kanji": "ご飯",
+    "hiragana": "ごはん",
+    "hanviet": "PHẠN",
+    "mean": "Cơm / Bữa ăn",
+    "lesson": 11
+  },
+  {
+    "kanji": "朝飯",
+    "hiragana": "あさめし",
+    "hanviet": "TRIỀU PHẠN",
+    "mean": "Bữa sáng",
+    "lesson": 11
+  },
+  {
+    "kanji": "牛",
+    "hiragana": "うし",
+    "hanviet": "NGƯU",
+    "mean": "Con bò",
+    "lesson": 11
+  },
+  {
+    "kanji": "牛乳",
+    "hiragana": "ぎゅうにゅう",
+    "hanviet": "NGƯU NHŨ",
+    "mean": "Sữa bò",
+    "lesson": 11
+  },
+  {
+    "kanji": "牛肉",
+    "hiragana": "ぎゅうにく",
+    "hanviet": "NGƯU NHỤC",
+    "mean": "Thịt bò",
+    "lesson": 11
+  },
+  {
+    "kanji": "豚肉",
+    "hiragana": "ぶたにく",
+    "hanviet": "ĐỒN NHỤC",
+    "mean": "Thịt lợn",
+    "lesson": 11
+  },
+  {
+    "kanji": "鳥",
+    "hiragana": "とり",
+    "hanviet": "ĐIỂU",
+    "mean": "Con chim",
+    "lesson": 11
+  },
+  {
+    "kanji": "肉",
+    "hiragana": "にく",
+    "hanviet": "NHỤC",
+    "mean": "Thịt",
+    "lesson": 11
+  },
+  {
+    "kanji": "お茶",
+    "hiragana": "おちゃ",
+    "hanviet": "TRÀ",
+    "mean": "Trà",
+    "lesson": 11
+  },
+  {
+    "kanji": "茶色",
+    "hiragana": "ちゃいろ",
+    "hanviet": "TRÀ SẮC",
+    "mean": "Màu nâu",
+    "lesson": 11
+  },
+  {
+    "kanji": "予定",
+    "hiragana": "よてい",
+    "hanviet": "DỰ ĐỊNH",
+    "mean": "Dự định",
+    "lesson": 11
+  },
+  {
+    "kanji": "予約",
+    "hiragana": "よやく",
+    "hanviet": "DỰ ƯỚC",
+    "mean": "Đặt trước",
+    "lesson": 11
+  },
+  {
+    "kanji": "野菜",
+    "hiragana": "やさい",
+    "hanviet": "DÃ THÁI",
+    "mean": "Rau",
+    "lesson": 11
+  },
+  {
+    "kanji": "長野",
+    "hiragana": "ながの",
+    "hanviet": "TRƯỜNG DÃ",
+    "mean": "Nagano (tỉnh)",
+    "lesson": 11
+  },
+  {
+    "kanji": "切る",
+    "hiragana": "きる",
+    "hanviet": "THIẾT",
+    "mean": "Cắt",
+    "lesson": 11
+  },
+  {
+    "kanji": "切手",
+    "hiragana": "きって",
+    "hanviet": "THIẾT THỦ",
+    "mean": "Tem",
+    "lesson": 11
+  },
+  {
+    "kanji": "作る",
+    "hiragana": "つくる",
+    "hanviet": "TÁC",
+    "mean": "Làm / Chế tạo",
+    "lesson": 11
+  },
+  {
+    "kanji": "手作り",
+    "hiragana": "てづくり",
+    "hanviet": "THỦ TÁC",
+    "mean": "Làm bằng tay",
+    "lesson": 11
+  },
+  {
+    "kanji": "未来",
+    "hiragana": "みらい",
+    "hanviet": "VỊ LAI",
+    "mean": "Tương lai",
+    "lesson": 11
+  },
+  {
+    "kanji": "味",
+    "hiragana": "あじ",
+    "hanviet": "VỊ",
+    "mean": "Vị",
+    "lesson": 11
+  },
+  {
+    "kanji": "意味",
+    "hiragana": "いみ",
+    "hanviet": "Ý VỊ",
+    "mean": "Ý nghĩa",
+    "lesson": 11
+  },
+  {
+    "kanji": "趣味",
+    "hiragana": "しゅみ",
+    "hanviet": "THÚ VỊ",
+    "mean": "Sở thích",
+    "lesson": 11
+  },
+  {
+    "kanji": "音楽",
+    "hiragana": "おんがく",
+    "hanviet": "ÂM NHẠC",
+    "mean": "Âm nhạc",
+    "lesson": 12
+  },
+  {
+    "kanji": "音",
+    "hiragana": "おと",
+    "hanviet": "ÂM",
+    "mean": "Âm thanh",
+    "lesson": 12
+  },
+  {
+    "kanji": "楽しい",
+    "hiragana": "たのしい",
+    "hanviet": "LẠC",
+    "mean": "Vui vẻ",
+    "lesson": 12
+  },
+  {
+    "kanji": "楽しみ",
+    "hiragana": "たのしみ",
+    "hanviet": "LẠC",
+    "mean": "Niềm vui / Mong đợi",
+    "lesson": 12
+  },
+  {
+    "kanji": "歌",
+    "hiragana": "うた",
+    "hanviet": "CA",
+    "mean": "Bài hát",
+    "lesson": 12
+  },
+  {
+    "kanji": "歌う",
+    "hiragana": "うたう",
+    "hanviet": "CA",
+    "mean": "Hát",
+    "lesson": 12
+  },
+  {
+    "kanji": "歌手",
+    "hiragana": "かしゅ",
+    "hanviet": "CA THỦ",
+    "mean": "Ca sĩ",
+    "lesson": 12
+  },
+  {
+    "kanji": "自分",
+    "hiragana": "じぶん",
+    "hanviet": "TỰ PHÂN",
+    "mean": "Bản thân mình",
+    "lesson": 12
+  },
+  {
+    "kanji": "自転車",
+    "hiragana": "じてんしゃ",
+    "hanviet": "TỰ CHUYỂN XA",
+    "mean": "Xe đạp",
+    "lesson": 12
+  },
+  {
+    "kanji": "乗る",
+    "hiragana": "のる",
+    "hanviet": "THỪA",
+    "mean": "Lên xe",
+    "lesson": 12
+  },
+  {
+    "kanji": "写真",
+    "hiragana": "しゃしん",
+    "hanviet": "TẢ CHÂN",
+    "mean": "Bức ảnh",
+    "lesson": 12
+  },
+  {
+    "kanji": "写す",
+    "hiragana": "うつす",
+    "hanviet": "TẢ",
+    "mean": "Chụp / Chép lại",
+    "lesson": 12
+  },
+  {
+    "kanji": "真ん中",
+    "hiragana": "まんなか",
+    "hanviet": "CHÂN TRUNG",
+    "mean": "Chính giữa",
+    "lesson": 12
+  },
+  {
+    "kanji": "台所",
+    "hiragana": "だいどころ",
+    "hanviet": "ĐÀI SỞ",
+    "mean": "Nhà bếp",
+    "lesson": 12
+  },
+  {
+    "kanji": "二台",
+    "hiragana": "にだい",
+    "hanviet": "NHỊ ĐÀI",
+    "mean": "2 cái (xe/máy móc)",
+    "lesson": 12
+  },
+  {
+    "kanji": "中央",
+    "hiragana": "ちゅうおう",
+    "hanviet": "TRUNG ƯƠNG",
+    "mean": "Trung ương",
+    "lesson": 12
+  },
+  {
+    "kanji": "映画",
+    "hiragana": "えいが",
+    "hanviet": "ÁNH HỌA",
+    "mean": "Phim",
+    "lesson": 12
+  },
+  {
+    "kanji": "羊",
+    "hiragana": "ひつじ",
+    "hanviet": "DƯƠNG",
+    "mean": "Con cừu",
+    "lesson": 12
+  },
+  {
+    "kanji": "洋服",
+    "hiragana": "ようふく",
+    "hanviet": "DƯƠNG PHỤC",
+    "mean": "Âu phục / Quần áo tây",
+    "lesson": 12
+  },
+  {
+    "kanji": "服",
+    "hiragana": "ふく",
+    "hanviet": "PHỤC",
+    "mean": "Quần áo",
+    "lesson": 12
+  },
+  {
+    "kanji": "着る",
+    "hiragana": "きる",
+    "hanviet": "TRƯỚC",
+    "mean": "Mặc",
+    "lesson": 12
+  },
+  {
+    "kanji": "上着",
+    "hiragana": "うわぎ",
+    "hanviet": "THƯỢNG TRƯỚC",
+    "mean": "Áo khoác",
+    "lesson": 12
+  },
+  {
+    "kanji": "到着する",
+    "hiragana": "とうちゃくする",
+    "hanviet": "ĐÁO TRƯỚC",
+    "mean": "Đến nơi",
+    "lesson": 12
+  },
+  {
+    "kanji": "家",
+    "hiragana": "いえ",
+    "hanviet": "GIA",
+    "mean": "Nhà",
+    "lesson": 13
+  },
+  {
+    "kanji": "家族",
+    "hiragana": "かぞく",
+    "hanviet": "GIA TỘC",
+    "mean": "Gia đình",
+    "lesson": 13
+  },
+  {
+    "kanji": "矢",
+    "hiragana": "や",
+    "hanviet": "THỈ",
+    "mean": "Mũi tên",
+    "lesson": 13
+  },
+  {
+    "kanji": "親",
+    "hiragana": "おや",
+    "hanviet": "THÂN",
+    "mean": "Cha mẹ",
+    "lesson": 13
+  },
+  {
+    "kanji": "親切な",
+    "hiragana": "しんせつな",
+    "hanviet": "THÂN THIẾT",
+    "mean": "Tốt bụng",
+    "lesson": 13
+  },
+  {
+    "kanji": "兄",
+    "hiragana": "あに",
+    "hanviet": "HUYNH",
+    "mean": "Anh trai (của tôi)",
+    "lesson": 13
+  },
+  {
+    "kanji": "お兄さん",
+    "hiragana": "おにいさん",
+    "hanviet": "HUYNH",
+    "mean": "Anh trai (người khác)",
+    "lesson": 13
+  },
+  {
+    "kanji": "姉",
+    "hiragana": "あね",
+    "hanviet": "TỶ",
+    "mean": "Chị gái (của tôi)",
+    "lesson": 13
+  },
+  {
+    "kanji": "お姉さん",
+    "hiragana": "おねえさん",
+    "hanviet": "TỶ",
+    "mean": "Chị gái (người khác)",
+    "lesson": 13
+  },
+  {
+    "kanji": "弟",
+    "hiragana": "おとうと",
+    "hanviet": "ĐỆ",
+    "mean": "Em trai (của tôi)",
+    "lesson": 13
+  },
+  {
+    "kanji": "兄弟",
+    "hiragana": "きょうだい",
+    "hanviet": "HUYNH ĐỆ",
+    "mean": "Anh em",
+    "lesson": 13
+  },
+  {
+    "kanji": "妹",
+    "hiragana": "いもうと",
+    "hanviet": "MUỘI",
+    "mean": "Em gái (của tôi)",
+    "lesson": 13
+  },
+  {
+    "kanji": "私",
+    "hiragana": "わたし",
+    "hanviet": "TƯ",
+    "mean": "Tôi",
+    "lesson": 13
+  },
+  {
+    "kanji": "夫",
+    "hiragana": "おっと",
+    "hanviet": "PHU",
+    "mean": "Chồng (của tôi)",
+    "lesson": 13
+  },
+  {
+    "kanji": "妻",
+    "hiragana": "つま",
+    "hanviet": "THÊ",
+    "mean": "Vợ (của tôi)",
+    "lesson": 13
+  },
+  {
+    "kanji": "主人",
+    "hiragana": "しゅじん",
+    "hanviet": "CHỦ NHÂN",
+    "mean": "Chồng / Ông chủ",
+    "lesson": 13
+  },
+  {
+    "kanji": "住む",
+    "hiragana": "すむ",
+    "hanviet": "TRÚ",
+    "mean": "Sống / Cư trú",
+    "lesson": 13
+  },
+  {
+    "kanji": "住所",
+    "hiragana": "じゅうしょ",
+    "hanviet": "TRÚ SỞ",
+    "mean": "Địa chỉ",
+    "lesson": 13
+  },
+  {
+    "kanji": "糸",
+    "hiragana": "いと",
+    "hanviet": "MỊCH",
+    "mean": "Sợi chỉ",
+    "lesson": 13
+  },
+  {
+    "kanji": "氏名",
+    "hiragana": "しめい",
+    "hanviet": "THỊ DANH",
+    "mean": "Họ tên",
+    "lesson": 13
+  },
+  {
+    "kanji": "紙",
+    "hiragana": "かみ",
+    "hanviet": "CHỈ",
+    "mean": "Giấy",
+    "lesson": 13
+  },
+  {
+    "kanji": "手紙",
+    "hiragana": "てがみ",
+    "hanviet": "THỦ CHỈ",
+    "mean": "Bức thư",
+    "lesson": 13
+  },
+  {
+    "kanji": "教室",
+    "hiragana": "きょうしつ",
+    "hanviet": "GIÁO THẤT",
+    "mean": "Phòng học",
+    "lesson": 14
+  },
+  {
+    "kanji": "教える",
+    "hiragana": "おしえる",
+    "hanviet": "GIÁO",
+    "mean": "Dạy",
+    "lesson": 14
+  },
+  {
+    "kanji": "習う",
+    "hiragana": "ならう",
+    "hanviet": "TẬP",
+    "mean": "Học (từ ai đó)",
+    "lesson": 14
+  },
+  {
+    "kanji": "練習",
+    "hiragana": "れんしゅう",
+    "hanviet": "LUYỆN TẬP",
+    "mean": "Luyện tập",
+    "lesson": 14
+  },
+  {
+    "kanji": "羽",
+    "hiragana": "はね",
+    "hanviet": "VŨ",
+    "mean": "Lông vũ / Cánh",
+    "lesson": 14
+  },
+  {
+    "kanji": "漢字",
+    "hiragana": "かんじ",
+    "hanviet": "HÁN TỰ",
+    "mean": "Chữ Hán",
+    "lesson": 14
+  },
+  {
+    "kanji": "字",
+    "hiragana": "じ",
+    "hanviet": "TỰ",
+    "mean": "Chữ",
+    "lesson": 14
+  },
+  {
+    "kanji": "入学式",
+    "hiragana": "にゅうがくしき",
+    "hanviet": "NHẬP HỌC THỨC",
+    "mean": "Lễ nhập học",
+    "lesson": 14
+  },
+  {
+    "kanji": "試験",
+    "hiragana": "しけん",
+    "hanviet": "THÍ NGHIỆM",
+    "mean": "Kỳ thi",
+    "lesson": 14
+  },
+  {
+    "kanji": "宿題",
+    "hiragana": "しゅくだい",
+    "hanviet": "TÚC ĐỀ",
+    "mean": "Bài tập về nhà",
+    "lesson": 14
+  },
+  {
+    "kanji": "問題",
+    "hiragana": "もんだい",
+    "hanviet": "VẤN ĐỀ",
+    "mean": "Vấn đề / Câu hỏi",
+    "lesson": 14
+  },
+  {
+    "kanji": "文学",
+    "hiragana": "ぶんがく",
+    "hanviet": "VĂN HỌC",
+    "mean": "Văn học",
+    "lesson": 14
+  },
+  {
+    "kanji": "作文",
+    "hiragana": "さくぶん",
+    "hanviet": "TÁC VĂN",
+    "mean": "Bài văn",
+    "lesson": 14
+  },
+  {
+    "kanji": "英語",
+    "hiragana": "えいご",
+    "hanviet": "ANH NGỮ",
+    "mean": "Tiếng Anh",
+    "lesson": 14
+  },
+  {
+    "kanji": "質問",
+    "hiragana": "しつもん",
+    "hanviet": "CHẤT VẤN",
+    "mean": "Câu hỏi",
+    "lesson": 14
+  },
+  {
+    "kanji": "説明する",
+    "hiragana": "せつめいする",
+    "hanviet": "THUYẾT MINH",
+    "mean": "Giải thích",
+    "lesson": 14
+  },
+  {
+    "kanji": "小説",
+    "hiragana": "しょうせつ",
+    "hanviet": "TIỂU THUYẾT",
+    "mean": "Tiểu thuyết",
+    "lesson": 14
+  },
+  {
+    "kanji": "遠い",
+    "hiragana": "とおい",
+    "hanviet": "VIỄN",
+    "mean": "Xa",
+    "lesson": 15
+  },
+  {
+    "kanji": "近い",
+    "hiragana": "ちかい",
+    "hanviet": "CẬN",
+    "mean": "Gần",
+    "lesson": 15
+  },
+  {
+    "kanji": "近く",
+    "hiragana": "ちかく",
+    "hanviet": "CẬN",
+    "mean": "Gần (trạng từ/danh từ)",
+    "lesson": 15
+  },
+  {
+    "kanji": "医者",
+    "hiragana": "いしゃ",
+    "hanviet": "Y GIẢ",
+    "mean": "Bác sĩ",
+    "lesson": 15
+  },
+  {
+    "kanji": "学者",
+    "hiragana": "がくしゃ",
+    "hanviet": "HỌC GIẢ",
+    "mean": "Học giả",
+    "lesson": 15
+  },
+  {
+    "kanji": "暑い",
+    "hiragana": "あつい",
+    "hanviet": "THỬ",
+    "mean": "Nóng (thời tiết)",
+    "lesson": 15
+  },
+  {
+    "kanji": "寒い",
+    "hiragana": "さむい",
+    "hanviet": "HÀN",
+    "mean": "Lạnh (thời tiết)",
+    "lesson": 15
+  },
+  {
+    "kanji": "重い",
+    "hiragana": "おもい",
+    "hanviet": "TRỌNG",
+    "mean": "Nặng",
+    "lesson": 15
+  },
+  {
+    "kanji": "軽い",
+    "hiragana": "かるい",
+    "hanviet": "KHINH",
+    "mean": "Nhẹ",
+    "lesson": 15
+  },
+  {
+    "kanji": "低い",
+    "hiragana": "ひくい",
+    "hanviet": "ĐÊ",
+    "mean": "Thấp",
+    "lesson": 15
+  },
+  {
+    "kanji": "弱い",
+    "hiragana": "よわい",
+    "hanviet": "NHƯỢC",
+    "mean": "Yếu",
+    "lesson": 15
+  },
+  {
+    "kanji": "悪い",
+    "hiragana": "わるい",
+    "hanviet": "ÁC",
+    "mean": "Xấu",
+    "lesson": 15
+  },
+  {
+    "kanji": "暗い",
+    "hiragana": "くらい",
+    "hanviet": "ÁM",
+    "mean": "Tối",
+    "lesson": 15
+  },
+  {
+    "kanji": "太い",
+    "hiragana": "ふとい",
+    "hanviet": "THÁI",
+    "mean": "Mập / Béo",
+    "lesson": 15
+  },
+  {
+    "kanji": "太る",
+    "hiragana": "ふとる",
+    "hanviet": "THÁI",
+    "mean": "Mập lên",
+    "lesson": 15
+  },
+  {
+    "kanji": "豆",
+    "hiragana": "まめ",
+    "hanviet": "ĐẬU",
+    "mean": "Hạt đậu",
+    "lesson": 15
+  },
+  {
+    "kanji": "短い",
+    "hiragana": "みじかい",
+    "hanviet": "ĐOẢN",
+    "mean": "Ngắn",
+    "lesson": 15
+  },
+  {
+    "kanji": "光",
+    "hiragana": "ひかり",
+    "hanviet": "QUANG",
+    "mean": "Ánh sáng",
+    "lesson": 15
+  },
+  {
+    "kanji": "光る",
+    "hiragana": "ひかる",
+    "hanviet": "QUANG",
+    "mean": "Tỏa sáng",
+    "lesson": 15
+  },
+  {
+    "kanji": "風",
+    "hiragana": "かぜ",
+    "hanviet": "PHONG",
+    "mean": "Gió",
+    "lesson": 15
+  },
+  {
+    "kanji": "台風",
+    "hiragana": "たいふう",
+    "hanviet": "ĐÀI PHONG",
+    "mean": "Bão",
+    "lesson": 15
+  },
+  {
+    "kanji": "運ぶ",
+    "hiragana": "はこぶ",
+    "hanviet": "VẬN",
+    "mean": "Vận chuyển / Khiêng",
+    "lesson": 16
+  },
+  {
+    "kanji": "運動",
+    "hiragana": "うんどう",
+    "hanviet": "VẬN ĐỘNG",
+    "mean": "Vận động / Thể dục",
+    "lesson": 16
+  },
+  {
+    "kanji": "動物",
+    "hiragana": "どうぶつ",
+    "hanviet": "ĐỘNG VẬT",
+    "mean": "Động vật",
+    "lesson": 16
+  },
+  {
+    "kanji": "止まる",
+    "hiragana": "とまる",
+    "hanviet": "CHỈ",
+    "mean": "Dừng lại",
+    "lesson": 16
+  },
+  {
+    "kanji": "中止",
+    "hiragana": "ちゅうし",
+    "hanviet": "TRUNG CHỈ",
+    "mean": "Hủy bỏ",
+    "lesson": 16
+  },
+  {
+    "kanji": "歩く",
+    "hiragana": "あるく",
+    "hanviet": "BỘ",
+    "mean": "Đi bộ",
+    "lesson": 16
+  },
+  {
+    "kanji": "散歩する",
+    "hiragana": "さんぽする",
+    "hanviet": "TÁN BỘ",
+    "mean": "Đi dạo",
+    "lesson": 16
+  },
+  {
+    "kanji": "使う",
+    "hiragana": "つかう",
+    "hanviet": "SỬ",
+    "mean": "Sử dụng",
+    "lesson": 16
+  },
+  {
+    "kanji": "大使館",
+    "hiragana": "たいしかん",
+    "hanviet": "ĐẠI SỨ QUÁN",
+    "mean": "Đại sứ quán",
+    "lesson": 16
+  },
+  {
+    "kanji": "送る",
+    "hiragana": "おくる",
+    "hanviet": "TỐNG",
+    "mean": "Gửi / Tiễn",
+    "lesson": 16
+  },
+  {
+    "kanji": "洗う",
+    "hiragana": "あらう",
+    "hanviet": "TẨY",
+    "mean": "Rửa",
+    "lesson": 16
+  },
+  {
+    "kanji": "トイレ",
+    "hiragana": "おてあらい",
+    "hanviet": "THỦ TẨY",
+    "mean": "Nhà vệ sinh",
+    "lesson": 16
+  },
+  {
+    "kanji": "急ぐ",
+    "hiragana": "いそぐ",
+    "hanviet": "CẤP",
+    "mean": "Vội vàng",
+    "lesson": 16
+  },
+  {
+    "kanji": "急行",
+    "hiragana": "きゅうこう",
+    "hanviet": "CẤP HÀNH",
+    "mean": "Tàu tốc hành",
+    "lesson": 16
+  },
+  {
+    "kanji": "開ける",
+    "hiragana": "あける",
+    "hanviet": "KHAI",
+    "mean": "Mở",
+    "lesson": 16
+  },
+  {
+    "kanji": "開く",
+    "hiragana": "ひらく",
+    "hanviet": "KHAI",
+    "mean": "Mở (cửa hàng, tài khoản)",
+    "lesson": 16
+  },
+  {
+    "kanji": "閉める",
+    "hiragana": "しめる",
+    "hanviet": "BẾ",
+    "mean": "Đóng",
+    "lesson": 16
+  },
+  {
+    "kanji": "押す",
+    "hiragana": "おす",
+    "hanviet": "ÁP",
+    "mean": "Ấn / Đẩy",
+    "lesson": 16
+  },
+  {
+    "kanji": "引く",
+    "hiragana": "ひく",
+    "hanviet": "DẪN",
+    "mean": "Kéo",
+    "lesson": 16
+  },
+  {
+    "kanji": "引き出し",
+    "hiragana": "ひきだし",
+    "hanviet": "DẪN XUẤT",
+    "mean": "Ngăn kéo",
+    "lesson": 16
+  },
+  {
+    "kanji": "思う",
+    "hiragana": "おもう",
+    "hanviet": "TƯ",
+    "mean": "Nghĩ",
+    "lesson": 16
+  },
+  {
+    "kanji": "思い出す",
+    "hiragana": "おもいだす",
+    "hanviet": "TƯ XUẤT",
+    "mean": "Nhớ ra",
+    "lesson": 16
+  },
+  {
+    "kanji": "知る",
+    "hiragana": "しる",
+    "hanviet": "TRI",
+    "mean": "Biết",
+    "lesson": 16
+  },
+  {
+    "kanji": "知らせる",
+    "hiragana": "しらせる",
+    "hanviet": "TRI",
+    "mean": "Thông báo",
+    "lesson": 16
+  },
+  {
+    "kanji": "考える",
+    "hiragana": "かんがえる",
+    "hanviet": "KHẢO",
+    "mean": "Suy nghĩ",
+    "lesson": 16
+  },
+  {
+    "kanji": "死ぬ",
+    "hiragana": "しぬ",
+    "hanviet": "TỬ",
+    "mean": "Chết",
+    "lesson": 16
+  },
+  {
+    "kanji": "医者",
+    "hiragana": "いしゃ",
+    "hanviet": "Y GIẢ",
+    "mean": "Bác sĩ",
+    "lesson": 17
+  },
+  {
+    "kanji": "医学",
+    "hiragana": "いがく",
+    "hanviet": "Y HỌC",
+    "mean": "Y học",
+    "lesson": 17
+  },
+  {
+    "kanji": "始まる",
+    "hiragana": "はじまる",
+    "hanviet": "THỦY",
+    "mean": "Bắt đầu",
+    "lesson": 17
+  },
+  {
+    "kanji": "始める",
+    "hiragana": "はじめる",
+    "hanviet": "THỦY",
+    "mean": "Bắt đầu (việc gì đó)",
+    "lesson": 17
+  },
+  {
+    "kanji": "終わる",
+    "hiragana": "おわる",
+    "hanviet": "CHUNG",
+    "mean": "Kết thúc",
+    "lesson": 17
+  },
+  {
+    "kanji": "終わり",
+    "hiragana": "おわり",
+    "hanviet": "CHUNG",
+    "mean": "Kết thúc (danh từ)",
+    "lesson": 17
+  },
+  {
+    "kanji": "石",
+    "hiragana": "いし",
+    "hanviet": "THẠCH",
+    "mean": "Đá",
+    "lesson": 17
+  },
+  {
+    "kanji": "研究",
+    "hiragana": "けんきゅう",
+    "hanviet": "NGHIÊN CỨU",
+    "mean": "Nghiên cứu",
+    "lesson": 17
+  },
+  {
+    "kanji": "研究者",
+    "hiragana": "けんきゅうしゃ",
+    "hanviet": "NGHIÊN CỨU GIẢ",
+    "mean": "Nhà nghiên cứu",
+    "lesson": 17
+  },
+  {
+    "kanji": "留学する",
+    "hiragana": "りゅうがくする",
+    "hanviet": "LƯU HỌC",
+    "mean": "Du học",
+    "lesson": 17
+  },
+  {
+    "kanji": "留守",
+    "hiragana": "るす",
+    "hanviet": "LƯU THỦ",
+    "mean": "Vắng nhà",
+    "lesson": 17
+  },
+  {
+    "kanji": "有名な",
+    "hiragana": "ゆうめいな",
+    "hanviet": "HỮU DANH",
+    "mean": "Nổi tiếng",
+    "lesson": 17
+  },
+  {
+    "kanji": "産業",
+    "hiragana": "さんぎょう",
+    "hanviet": "SẢN NGHIỆP",
+    "mean": "Công nghiệp / Ngành nghề",
+    "lesson": 17
+  },
+  {
+    "kanji": "生産",
+    "hiragana": "せいさん",
+    "hanviet": "SINH SẢN",
+    "mean": "Sản xuất",
+    "lesson": 17
+  },
+  {
+    "kanji": "授業",
+    "hiragana": "じゅぎょう",
+    "hanviet": "THỤ NGHIỆP",
+    "mean": "Giờ học",
+    "lesson": 17
+  },
+  {
+    "kanji": "薬",
+    "hiragana": "くすり",
+    "hanviet": "DƯỢC",
+    "mean": "Thuốc",
+    "lesson": 17
+  },
+  {
+    "kanji": "薬局",
+    "hiragana": "やっきょく",
+    "hanviet": "DƯỢC CỤC",
+    "mean": "Hiệu thuốc",
+    "lesson": 17
+  },
+  {
+    "kanji": "働く",
+    "hiragana": "はたらく",
+    "hanviet": "ĐỘNG",
+    "mean": "Làm việc",
+    "lesson": 17
+  },
+  {
+    "kanji": "会社員",
+    "hiragana": "かいしゃいん",
+    "hanviet": "HỘI XÃ VIÊN",
+    "mean": "Nhân viên công ty",
+    "lesson": 17
+  },
+  {
+    "kanji": "店員",
+    "hiragana": "てんいん",
+    "hanviet": "ĐIẾM VIÊN",
+    "mean": "Nhân viên bán hàng",
+    "lesson": 17
+  },
+  {
+    "kanji": "武士",
+    "hiragana": "ぶし",
+    "hanviet": "VŨ SĨ",
+    "mean": "Võ sĩ",
+    "lesson": 17
+  },
+  {
+    "kanji": "仕事",
+    "hiragana": "しごと",
+    "hanviet": "SĨ SỰ",
+    "mean": "Công việc",
+    "lesson": 17
+  },
+  {
+    "kanji": "事",
+    "hiragana": "こと",
+    "hanviet": "SỰ",
+    "mean": "Việc / Sự việc",
+    "lesson": 17
+  },
+  {
+    "kanji": "食事",
+    "hiragana": "しょくじ",
+    "hanviet": "THỰC SỰ",
+    "mean": "Bữa ăn",
+    "lesson": 17
+  },
+  {
+    "kanji": "地図",
+    "hiragana": "ちず",
+    "hanviet": "ĐỊA ĐỒ",
+    "mean": "Bản đồ",
+    "lesson": 18
+  },
+  {
+    "kanji": "図書館",
+    "hiragana": "としょかん",
+    "hanviet": "ĐỒ THƯ QUÁN",
+    "mean": "Thư viện",
+    "lesson": 18
+  },
+  {
+    "kanji": "外交官",
+    "hiragana": "がいこうかん",
+    "hanviet": "NGOẠI GIAO QUAN",
+    "mean": "Nhà ngoại giao",
+    "lesson": 18
+  },
+  {
+    "kanji": "映画館",
+    "hiragana": "えいがかん",
+    "hanviet": "ÁNH HỌA QUÁN",
+    "mean": "Rạp chiếu phim",
+    "lesson": 18
+  },
+  {
+    "kanji": "大使館",
+    "hiragana": "たいしかん",
+    "hanviet": "ĐẠI SỨ QUÁN",
+    "mean": "Đại sứ quán",
+    "lesson": 18
+  },
+  {
+    "kanji": "昔",
+    "hiragana": "むかし",
+    "hanviet": "TÍCH",
+    "mean": "Ngày xưa",
+    "lesson": 18
+  },
+  {
+    "kanji": "借りる",
+    "hiragana": "かりる",
+    "hanviet": "TÁ",
+    "mean": "Mượn",
+    "lesson": 18
+  },
+  {
+    "kanji": "時代",
+    "hiragana": "じだい",
+    "hanviet": "THỜI ĐẠI",
+    "mean": "Thời đại",
+    "lesson": 18
+  },
+  {
+    "kanji": "代わる",
+    "hiragana": "かわる",
+    "hanviet": "ĐẠI",
+    "mean": "Thay thế",
+    "lesson": 18
+  },
+  {
+    "kanji": "貸す",
+    "hiragana": "かす",
+    "hanviet": "THẢI",
+    "mean": "Cho mượn",
+    "lesson": 18
+  },
+  {
+    "kanji": "地理",
+    "hiragana": "ちり",
+    "hanviet": "ĐỊA LÝ",
+    "mean": "Địa lý",
+    "lesson": 18
+  },
+  {
+    "kanji": "地下",
+    "hiragana": "ちか",
+    "hanviet": "ĐỊA HẠ",
+    "mean": "Dưới lòng đất / Hầm",
+    "lesson": 18
+  },
+  {
+    "kanji": "世界",
+    "hiragana": "せかい",
+    "hanviet": "THẾ GIỚI",
+    "mean": "Thế giới",
+    "lesson": 18
+  },
+  {
+    "kanji": "世話",
+    "hiragana": "せわ",
+    "hanviet": "THẾ THOẠI",
+    "mean": "Chăm sóc",
+    "lesson": 18
+  },
+  {
+    "kanji": "一度",
+    "hiragana": "いちど",
+    "hanviet": "NHẤT ĐỘ",
+    "mean": "Một lần",
+    "lesson": 18
+  },
+  {
+    "kanji": "今度",
+    "hiragana": "こんど",
+    "hanviet": "KIM ĐỘ",
+    "mean": "Lần này / Lần tới",
+    "lesson": 18
+  },
+  {
+    "kanji": "一回",
+    "hiragana": "いっかい",
+    "hanviet": "NHẤT HỒI",
+    "mean": "Một lần",
+    "lesson": 18
+  },
+  {
+    "kanji": "回る",
+    "hiragana": "まわる",
+    "hanviet": "HỒI",
+    "mean": "Xoay vòng",
+    "lesson": 18
+  },
+  {
+    "kanji": "用事",
+    "hiragana": "ようじ",
+    "hanviet": "DỤNG SỰ",
+    "mean": "Việc bận",
+    "lesson": 18
+  },
+  {
+    "kanji": "利用する",
+    "hiragana": "りようする",
+    "hanviet": "LỢI DỤNG",
+    "mean": "Sử dụng",
+    "lesson": 18
+  },
+  {
+    "kanji": "国民",
+    "hiragana": "こくみん",
+    "hanviet": "QUỐC DÂN",
+    "mean": "Người dân",
+    "lesson": 18
+  },
+  {
+    "kanji": "市民",
+    "hiragana": "しみん",
+    "hanviet": "THỊ DÂN",
+    "mean": "Dân thành phố",
+    "lesson": 18
+  },
+  {
+    "kanji": "注文する",
+    "hiragana": "ちゅうもんする",
+    "hanviet": "CHÚ VĂN",
+    "mean": "Gọi món / Đặt hàng",
+    "lesson": 18
+  },
+  {
+    "kanji": "注意する",
+    "hiragana": "ちゅういする",
+    "hanviet": "CHÚ Ý",
+    "mean": "Chú ý",
+    "lesson": 18
+  },
+  {
+    "kanji": "意味",
+    "hiragana": "いみ",
+    "hanviet": "Ý VỊ",
+    "mean": "Ý nghĩa",
+    "lesson": 18
+  },
+  {
+    "kanji": "意見",
+    "hiragana": "いけん",
+    "hanviet": "Ý KIẾN",
+    "mean": "Ý kiến",
+    "lesson": 18
+  },
+  {
+    "kanji": "頭",
+    "hiragana": "あたま",
+    "hanviet": "ĐẦU",
+    "mean": "Đầu",
+    "lesson": 19
+  },
+  {
+    "kanji": "顔",
+    "hiragana": "かお",
+    "hanviet": "NHAN",
+    "mean": "Khuôn mặt",
+    "lesson": 19
+  },
+  {
+    "kanji": "声",
+    "hiragana": "こえ",
+    "hanviet": "THANH",
+    "mean": "Giọng nói",
+    "lesson": 19
+  },
+  {
+    "kanji": "特別",
+    "hiragana": "とくべつ",
+    "hanviet": "ĐẶC BIỆT",
+    "mean": "Đặc biệt",
+    "lesson": 19
+  },
+  {
+    "kanji": "特に",
+    "hiragana": "とくに",
+    "hanviet": "ĐẶC",
+    "mean": "Đặc biệt là",
+    "lesson": 19
+  },
+  {
+    "kanji": "別れる",
+    "hiragana": "わかれる",
+    "hanviet": "BIỆT",
+    "mean": "Chia tay",
+    "lesson": 19
+  },
+  {
+    "kanji": "別に",
+    "hiragana": "べつに",
+    "hanviet": "BIỆT",
+    "mean": "Không có gì (đặc biệt)",
+    "lesson": 19
+  },
+  {
+    "kanji": "竹",
+    "hiragana": "たけ",
+    "hanviet": "TRÚC",
+    "mean": "Tre",
+    "lesson": 19
+  },
+  {
+    "kanji": "間に合う",
+    "hiragana": "まにあう",
+    "hanviet": "GIAN HỢP",
+    "mean": "Kịp giờ",
+    "lesson": 19
+  },
+  {
+    "kanji": "試合",
+    "hiragana": "しあい",
+    "hanviet": "THÍ HỢP",
+    "mean": "Trận đấu",
+    "lesson": 19
+  },
+  {
+    "kanji": "答える",
+    "hiragana": "こたえる",
+    "hanviet": "ĐÁP",
+    "mean": "Trả lời",
+    "lesson": 19
+  },
+  {
+    "kanji": "答え",
+    "hiragana": "こたえ",
+    "hanviet": "ĐÁP",
+    "mean": "Câu trả lời",
+    "lesson": 19
+  },
+  {
+    "kanji": "お正月",
+    "hiragana": "おしょうがつ",
+    "hanviet": "CHÍNH NGUYỆT",
+    "mean": "Tết",
+    "lesson": 19
+  },
+  {
+    "kanji": "正しい",
+    "hiragana": "ただしい",
+    "hanviet": "CHÍNH",
+    "mean": "Đúng",
+    "lesson": 19
+  },
+  {
+    "kanji": "同じ",
+    "hiragana": "おなじ",
+    "hanviet": "ĐỒNG",
+    "mean": "Giống",
+    "lesson": 19
+  },
+  {
+    "kanji": "時計",
+    "hiragana": "とけい",
+    "hanviet": "THỜI KẾ",
+    "mean": "Đồng hồ",
+    "lesson": 19
+  },
+  {
+    "kanji": "計画",
+    "hiragana": "けいかく",
+    "hanviet": "KẾ HỌA",
+    "mean": "Kế hoạch",
+    "lesson": 19
+  },
+  {
+    "kanji": "東京",
+    "hiragana": "とうきょう",
+    "hanviet": "ĐÔNG KINH",
+    "mean": "Tokyo",
+    "lesson": 19
+  },
+  {
+    "kanji": "集める",
+    "hiragana": "あつめる",
+    "hanviet": "TẬP",
+    "mean": "Sưu tầm / Thu thập",
+    "lesson": 19
+  },
+  {
+    "kanji": "集まる",
+    "hiragana": "あつまる",
+    "hanviet": "TẬP",
+    "mean": "Tập trung",
+    "lesson": 19
+  },
+  {
+    "kanji": "不便",
+    "hiragana": "ふべん",
+    "hanviet": "BẤT TIỆN",
+    "mean": "Bất tiện",
+    "lesson": 19
+  },
+  {
+    "kanji": "便り",
+    "hiragana": "たより",
+    "hanviet": "TIỆN",
+    "mean": "Tin tức / Thư",
+    "lesson": 19
+  },
+  {
+    "kanji": "便利",
+    "hiragana": "べんり",
+    "hanviet": "TIỆN LỢI",
+    "mean": "Tiện lợi",
+    "lesson": 19
+  },
+  {
+    "kanji": "以上",
+    "hiragana": "いじょう",
+    "hanviet": "DĨ THƯỢNG",
+    "mean": "Trở lên / Xin hết",
+    "lesson": 19
+  },
+  {
+    "kanji": "以外",
+    "hiragana": "いがい",
+    "hanviet": "DĨ NGOẠI",
+    "mean": "Ngoại trừ",
+    "lesson": 19
+  },
+  {
+    "kanji": "場所",
+    "hiragana": "ばしょ",
+    "hanviet": "TRƯỜNG SỞ",
+    "mean": "Địa điểm",
+    "lesson": 20
+  },
+  {
+    "kanji": "工場",
+    "hiragana": "こうじょう",
+    "hanviet": "CÔNG TRƯỜNG",
+    "mean": "Nhà máy",
+    "lesson": 20
+  },
+  {
+    "kanji": "戸",
+    "hiragana": "と",
+    "hanviet": "HỘ",
+    "mean": "Cửa",
+    "lesson": 20
+  },
+  {
+    "kanji": "所",
+    "hiragana": "ところ",
+    "hanviet": "SỞ",
+    "mean": "Nơi chốn",
+    "lesson": 20
+  },
+  {
+    "kanji": "台所",
+    "hiragana": "だいどころ",
+    "hanviet": "ĐÀI SỞ",
+    "mean": "Nhà bếp",
+    "lesson": 20
+  },
+  {
+    "kanji": "住所",
+    "hiragana": "じゅうしょ",
+    "hanviet": "TRÚ SỞ",
+    "mean": "Địa chỉ",
+    "lesson": 20
+  },
+  {
+    "kanji": "屋上",
+    "hiragana": "おくじょう",
+    "hanviet": "ỐC THƯỢNG",
+    "mean": "Sân thượng",
+    "lesson": 20
+  },
+  {
+    "kanji": "八百屋",
+    "hiragana": "やおや",
+    "hanviet": "BÁT BÁCH ỐC",
+    "mean": "Cửa hàng rau quả",
+    "lesson": 20
+  },
+  {
+    "kanji": "食堂",
+    "hiragana": "しょくどう",
+    "hanviet": "THỰC ĐƯỜNG",
+    "mean": "Nhà ăn",
+    "lesson": 20
+  },
+  {
+    "kanji": "東京都",
+    "hiragana": "とうきょうと",
+    "hanviet": "ĐÔNG KINH ĐÔ",
+    "mean": "Thủ đô Tokyo",
+    "lesson": 20
+  },
+  {
+    "kanji": "都合",
+    "hiragana": "つごう",
+    "hanviet": "ĐÔ HỢP",
+    "mean": "Hoàn cảnh / Thuận tiện",
+    "lesson": 20
+  },
+  {
+    "kanji": "県",
+    "hiragana": "けん",
+    "hanviet": "HUYỆN",
+    "mean": "Tỉnh",
+    "lesson": 20
+  },
+  {
+    "kanji": "区",
+    "hiragana": "く",
+    "hanviet": "KHU",
+    "mean": "Quận",
+    "lesson": 20
+  },
+  {
+    "kanji": "池",
+    "hiragana": "いけ",
+    "hanviet": "TRÌ",
+    "mean": "Cái ao",
+    "lesson": 20
+  },
+  {
+    "kanji": "電池",
+    "hiragana": "でんち",
+    "hanviet": "ĐIỆN TRÌ",
+    "mean": "Pin",
+    "lesson": 20
+  },
+  {
+    "kanji": "発音",
+    "hiragana": "はつおん",
+    "hanviet": "PHÁT ÂM",
+    "mean": "Phát âm",
+    "lesson": 20
+  },
+  {
+    "kanji": "出発",
+    "hiragana": "しゅっぱつ",
+    "hanviet": "XUẤT PHÁT",
+    "mean": "Xuất phát",
+    "lesson": 20
+  },
+  {
+    "kanji": "建てる",
+    "hiragana": "たてる",
+    "hanviet": "KIẾN",
+    "mean": "Xây dựng",
+    "lesson": 20
+  },
+  {
+    "kanji": "建物",
+    "hiragana": "たてもの",
+    "hanviet": "KIẾN VẬT",
+    "mean": "Tòa nhà",
+    "lesson": 20
+  },
+  {
+    "kanji": "荷物",
+    "hiragana": "にもつ",
+    "hanviet": "HÀ VẬT",
+    "mean": "Hành lý",
+    "lesson": 20
+  },
+  {
+    "kanji": "食べ物",
+    "hiragana": "たべもの",
+    "hanviet": "THỰC VẬT",
+    "mean": "Đồ ăn",
+    "lesson": 20
+  },
+  {
+    "kanji": "品物",
+    "hiragana": "しなもの",
+    "hanviet": "PHẨM VẬT",
+    "mean": "Hàng hóa",
+    "lesson": 20
+  },
+  {
+    "kanji": "旅行",
+    "hiragana": "りょこう",
+    "hanviet": "LỮ HÀNH",
+    "mean": "Du lịch",
+    "lesson": 20
+  },
+  {
+    "kanji": "通る",
+    "hiragana": "とおる",
+    "hanviet": "THÔNG",
+    "mean": "Đi qua",
+    "lesson": 20
+  },
+  {
+    "kanji": "通う",
+    "hiragana": "かよう",
+    "hanviet": "THÔNG",
+    "mean": "Đi làm / Đi học",
+    "lesson": 20
+  },
+  {
+    "kanji": "交通",
+    "hiragana": "こうつう",
+    "hanviet": "GIAO THÔNG",
+    "mean": "Giao thông",
+    "lesson": 20
+  },
+  {
+    "kanji": "進む",
+    "hiragana": "すすむ",
+    "hanviet": "TIẾN",
+    "mean": "Tiến lên",
+    "lesson": 20
+  },
+  {
+    "kanji": "丸い",
+    "hiragana": "まるい",
+    "hanviet": "HOÀN",
+    "mean": "Tròn",
+    "lesson": 21
+  },
+  {
+    "kanji": "熱い",
+    "hiragana": "あつい",
+    "hanviet": "NHIỆT",
+    "mean": "Nóng (cảm giác)",
+    "lesson": 21
+  },
+  {
+    "kanji": "熱",
+    "hiragana": "ねつ",
+    "hanviet": "NHIỆT",
+    "mean": "Sốt / Nhiệt độ",
+    "lesson": 21
+  },
+  {
+    "kanji": "冷たい",
+    "hiragana": "つめたい",
+    "hanviet": "LÃNH",
+    "mean": "Lạnh (cảm giác)",
+    "lesson": 21
+  },
+  {
+    "kanji": "冷やす",
+    "hiragana": "ひやす",
+    "hanviet": "LÃNH",
+    "mean": "Làm lạnh",
+    "lesson": 21
+  },
+  {
+    "kanji": "甘い",
+    "hiragana": "あまい",
+    "hanviet": "CAM",
+    "mean": "Ngọt",
+    "lesson": 21
+  },
+  {
+    "kanji": "汚い",
+    "hiragana": "きたない",
+    "hanviet": "Ô",
+    "mean": "Bẩn",
+    "lesson": 21
+  },
+  {
+    "kanji": "果物",
+    "hiragana": "くだもの",
+    "hanviet": "QUẢ VẬT",
+    "mean": "Hoa quả",
+    "lesson": 21
+  },
+  {
+    "kanji": "卵",
+    "hiragana": "たまご",
+    "hanviet": "NOÃN",
+    "mean": "Trứng",
+    "lesson": 21
+  },
+  {
+    "kanji": "お皿",
+    "hiragana": "おさら",
+    "hanviet": "MÃNH",
+    "mean": "Cái đĩa",
+    "lesson": 21
+  },
+  {
+    "kanji": "お酒",
+    "hiragana": "おさけ",
+    "hanviet": "TỬU",
+    "mean": "Rượu",
+    "lesson": 21
+  },
+  {
+    "kanji": "塩",
+    "hiragana": "しお",
+    "hanviet": "DIÊM",
+    "mean": "Muối",
+    "lesson": 21
+  },
+  {
+    "kanji": "付き合う",
+    "hiragana": "つきあう",
+    "hanviet": "PHÓ HỢP",
+    "mean": "Hẹn hò / Quan hệ",
+    "lesson": 21
+  },
+  {
+    "kanji": "片付ける",
+    "hiragana": "かたづける",
+    "hanviet": "PHIẾN PHÓ",
+    "mean": "Dọn dẹp",
+    "lesson": 21
+  },
+  {
+    "kanji": "焼く",
+    "hiragana": "やく",
+    "hanviet": "THIÊU",
+    "mean": "Nướng",
+    "lesson": 21
+  },
+  {
+    "kanji": "消す",
+    "hiragana": "けす",
+    "hanviet": "TIÊU",
+    "mean": "Tắt / Xóa",
+    "lesson": 21
+  },
+  {
+    "kanji": "消える",
+    "hiragana": "きえる",
+    "hanviet": "TIÊU",
+    "mean": "Biến mất / Tắt",
+    "lesson": 21
+  },
+  {
+    "kanji": "固い",
+    "hiragana": "かたい",
+    "hanviet": "CỐ",
+    "mean": "Cứng",
+    "lesson": 21
+  },
+  {
+    "kanji": "個",
+    "hiragana": "こ",
+    "hanviet": "CÁ",
+    "mean": "Cái (đếm vật nhỏ)",
+    "lesson": 21
+  },
+  {
+    "kanji": "個人",
+    "hiragana": "こじん",
+    "hanviet": "CÁ NHÂN",
+    "mean": "Cá nhân",
+    "lesson": 21
+  },
+  {
+    "kanji": "笑う",
+    "hiragana": "わらう",
+    "hanviet": "TIẾU",
+    "mean": "Cười",
+    "lesson": 22
+  },
+  {
+    "kanji": "泣く",
+    "hiragana": "なく",
+    "hanviet": "KHẤP",
+    "mean": "Khóc",
+    "lesson": 22
+  },
+  {
+    "kanji": "怒る",
+    "hiragana": "おこる",
+    "hanviet": "NỘ",
+    "mean": "Tức giận",
+    "lesson": 22
+  },
+  {
+    "kanji": "幸せな",
+    "hiragana": "しあわせな",
+    "hanviet": "HẠNH",
+    "mean": "Hạnh phúc",
+    "lesson": 22
+  },
+  {
+    "kanji": "悲しい",
+    "hiragana": "かなしい",
+    "hanviet": "BI",
+    "mean": "Buồn",
+    "lesson": 22
+  },
+  {
+    "kanji": "苦い",
+    "hiragana": "にがい",
+    "hanviet": "KHỔ",
+    "mean": "Đắng",
+    "lesson": 22
+  },
+  {
+    "kanji": "苦手",
+    "hiragana": "にがて",
+    "hanviet": "KHỔ THỦ",
+    "mean": "Kém / Không thích",
+    "lesson": 22
+  },
+  {
+    "kanji": "痛い",
+    "hiragana": "いたい",
+    "hanviet": "THỐNG",
+    "mean": "Đau",
+    "lesson": 22
+  },
+  {
+    "kanji": "恥ずかしい",
+    "hiragana": "はずかしい",
+    "hanviet": "SỈ",
+    "mean": "Xấu hổ",
+    "lesson": 22
+  },
+  {
+    "kanji": "心配する",
+    "hiragana": "しんぱいする",
+    "hanviet": "TÂM PHỐI",
+    "mean": "Lo lắng",
+    "lesson": 22
+  },
+  {
+    "kanji": "配る",
+    "hiragana": "くばる",
+    "hanviet": "PHỐI",
+    "mean": "Phân phát",
+    "lesson": 22
+  },
+  {
+    "kanji": "困る",
+    "hiragana": "こまる",
+    "hanviet": "KHỐN",
+    "mean": "Khó khăn / Rắc rối",
+    "lesson": 22
+  },
+  {
+    "kanji": "辛い",
+    "hiragana": "からい",
+    "hanviet": "TÂN",
+    "mean": "Cay",
+    "lesson": 22
+  },
+  {
+    "kanji": "眠い",
+    "hiragana": "ねむい",
+    "hanviet": "MIÊN",
+    "mean": "Buồn ngủ",
+    "lesson": 22
+  },
+  {
+    "kanji": "眠る",
+    "hiragana": "ねむる",
+    "hanviet": "MIÊN",
+    "mean": "Ngủ",
+    "lesson": 22
+  },
+  {
+    "kanji": "残る",
+    "hiragana": "のこる",
+    "hanviet": "TÀN",
+    "mean": "Còn lại",
+    "lesson": 22
+  },
+  {
+    "kanji": "残念",
+    "hiragana": "ざんねん",
+    "hanviet": "TÀN NIỆM",
+    "mean": "Đáng tiếc",
+    "lesson": 22
+  },
+  {
+    "kanji": "感じる",
+    "hiragana": "かんじる",
+    "hanviet": "CẢM",
+    "mean": "Cảm thấy",
+    "lesson": 22
+  },
+  {
+    "kanji": "感情",
+    "hiragana": "かんじょう",
+    "hanviet": "CẢM TÌNH",
+    "mean": "Cảm xúc",
+    "lesson": 22
+  },
+  {
+    "kanji": "覚える",
+    "hiragana": "おぼえる",
+    "hanviet": "GIÁC",
+    "mean": "Nhớ",
+    "lesson": 23
+  },
+  {
+    "kanji": "忘れる",
+    "hiragana": "わすれる",
+    "hanviet": "VONG",
+    "mean": "Quên",
+    "lesson": 23
+  },
+  {
+    "kanji": "忘年会",
+    "hiragana": "ぼうねんかい",
+    "hanviet": "VONG NIÊN HỘI",
+    "mean": "Tiệc tất niên",
+    "lesson": 23
+  },
+  {
+    "kanji": "決める",
+    "hiragana": "きめる",
+    "hanviet": "QUYẾT",
+    "mean": "Quyết định",
+    "lesson": 23
+  },
+  {
+    "kanji": "予定",
+    "hiragana": "よてい",
+    "hanviet": "DỰ ĐỊNH",
+    "mean": "Dự định",
+    "lesson": 23
+  },
+  {
+    "kanji": "定休日",
+    "hiragana": "ていきゅうび",
+    "hanviet": "ĐỊNH HƯU NHẬT",
+    "mean": "Ngày nghỉ định kỳ",
+    "lesson": 23
+  },
+  {
+    "kanji": "比べる",
+    "hiragana": "くらべる",
+    "hanviet": "TỶ",
+    "mean": "So sánh",
+    "lesson": 23
+  },
+  {
+    "kanji": "受ける",
+    "hiragana": "うける",
+    "hanviet": "THỤ",
+    "mean": "Nhận / Dự thi",
+    "lesson": 23
+  },
+  {
+    "kanji": "授業",
+    "hiragana": "じゅぎょう",
+    "hanviet": "THỤ NGHIỆP",
+    "mean": "Giờ học",
+    "lesson": 23
+  },
+  {
+    "kanji": "教授",
+    "hiragana": "きょうじゅ",
+    "hanviet": "GIÁO THỤ",
+    "mean": "Giáo sư",
+    "lesson": 23
+  },
+  {
+    "kanji": "生徒",
+    "hiragana": "せいと",
+    "hanviet": "SINH ĐỒ",
+    "mean": "Học sinh",
+    "lesson": 23
+  },
+  {
+    "kanji": "練習",
+    "hiragana": "れんしゅう",
+    "hanviet": "LUYỆN TẬP",
+    "mean": "Luyện tập",
+    "lesson": 23
+  },
+  {
+    "kanji": "復習",
+    "hiragana": "ふくしゅう",
+    "hanviet": "PHỤC TẬP",
+    "mean": "Ôn tập",
+    "lesson": 23
+  },
+  {
+    "kanji": "回復",
+    "hiragana": "かいふく",
+    "hanviet": "HỒI PHỤC",
+    "mean": "Hồi phục",
+    "lesson": 23
+  },
+  {
+    "kanji": "表",
+    "hiragana": "おもて",
+    "hanviet": "BIỂU",
+    "mean": "Mặt trước",
+    "lesson": 23
+  },
+  {
+    "kanji": "発表",
+    "hiragana": "はっぴょう",
+    "hanviet": "PHÁT BIỂU",
+    "mean": "Phát biểu",
+    "lesson": 23
+  },
+  {
+    "kanji": "卒業",
+    "hiragana": "そつぎょう",
+    "hanviet": "TỐT NGHIỆP",
+    "mean": "Tốt nghiệp",
+    "lesson": 23
+  },
+  {
+    "kanji": "違う",
+    "hiragana": "ちがう",
+    "hanviet": "VI",
+    "mean": "Khác / Sai",
+    "lesson": 23
+  },
+  {
+    "kanji": "間違える",
+    "hiragana": "まちがえる",
+    "hanviet": "GIAN VI",
+    "mean": "Nhầm lẫn",
+    "lesson": 23
+  },
+  {
+    "kanji": "役に立つ",
+    "hiragana": "やくにたつ",
+    "hanviet": "DỊCH LẬP",
+    "mean": "Có ích",
+    "lesson": 23
+  },
+  {
+    "kanji": "市役所",
+    "hiragana": "しやくしょ",
+    "hanviet": "THỊ DỊCH SỞ",
+    "mean": "Ủy ban thành phố",
+    "lesson": 23
+  },
+  {
+    "kanji": "皆",
+    "hiragana": "みな",
+    "hanviet": "GIAI",
+    "mean": "Mọi người",
+    "lesson": 23
+  },
+  {
+    "kanji": "皆さん",
+    "hiragana": "みなさん",
+    "hanviet": "GIAI",
+    "mean": "Các bạn / Mọi người",
+    "lesson": 23
+  },
+  {
+    "kanji": "彼",
+    "hiragana": "かれ",
+    "hanviet": "BỈ",
+    "mean": "Anh ấy",
+    "lesson": 23
+  },
+  {
+    "kanji": "彼女",
+    "hiragana": "かのじょ",
+    "hanviet": "BỈ NỮ",
+    "mean": "Cô ấy / Bạn gái",
+    "lesson": 23
+  },
+  {
+    "kanji": "全部",
+    "hiragana": "ぜんぶ",
+    "hanviet": "TOÀN BỘ",
+    "mean": "Toàn bộ",
+    "lesson": 24
+  },
+  {
+    "kanji": "安全",
+    "hiragana": "あんぜん",
+    "hanviet": "AN TOÀN",
+    "mean": "An toàn",
+    "lesson": 24
+  },
+  {
+    "kanji": "部屋",
+    "hiragana": "へや",
+    "hanviet": "BỘ ỐC",
+    "mean": "Căn phòng",
+    "lesson": 24
+  },
+  {
+    "kanji": "部長",
+    "hiragana": "ぶちょう",
+    "hanviet": "BỘ TRƯỞNG",
+    "mean": "Trưởng phòng",
+    "lesson": 24
+  },
+  {
+    "kanji": "必要な",
+    "hiragana": "ひつような",
+    "hanviet": "TẤT YẾU",
+    "mean": "Cần thiết",
+    "lesson": 24
+  },
+  {
+    "kanji": "必ず",
+    "hiragana": "かならず",
+    "hanviet": "TẤT",
+    "mean": "Nhất định",
+    "lesson": 24
+  },
+  {
+    "kanji": "要る",
+    "hiragana": "いる",
+    "hanviet": "YẾU",
+    "mean": "Cần",
+    "lesson": 24
+  },
+  {
+    "kanji": "重要な",
+    "hiragana": "じゅうような",
+    "hanviet": "TRỌNG YẾU",
+    "mean": "Quan trọng",
+    "lesson": 24
+  },
+  {
+    "kanji": "荷物",
+    "hiragana": "にもつ",
+    "hanviet": "HÀ VẬT",
+    "mean": "Hành lý",
+    "lesson": 24
+  },
+  {
+    "kanji": "自由",
+    "hiragana": "じゆう",
+    "hanviet": "TỰ DO",
+    "mean": "Tự do",
+    "lesson": 24
+  },
+  {
+    "kanji": "理由",
+    "hiragana": "りゆう",
+    "hanviet": "LÝ DO",
+    "mean": "Lý do",
+    "lesson": 24
+  },
+  {
+    "kanji": "届く",
+    "hiragana": "とどく",
+    "hanviet": "GIỚI",
+    "mean": "Đến / Tới (hàng hóa)",
+    "lesson": 24
+  },
+  {
+    "kanji": "便利",
+    "hiragana": "べんり",
+    "hanviet": "TIỆN LỢI",
+    "mean": "Tiện lợi",
+    "lesson": 24
+  },
+  {
+    "kanji": "利用する",
+    "hiragana": "りようする",
+    "hanviet": "LỢI DỤNG",
+    "mean": "Sử dụng",
+    "lesson": 24
+  },
+  {
+    "kanji": "払う",
+    "hiragana": "はらう",
+    "hanviet": "PHẤT",
+    "mean": "Trả tiền",
+    "lesson": 24
+  },
+  {
+    "kanji": "洗濯する",
+    "hiragana": "せんたくする",
+    "hanviet": "TẨY TRẠC",
+    "mean": "Giặt giũ",
+    "lesson": 24
+  },
+  {
+    "kanji": "洗濯機",
+    "hiragana": "せんたくき",
+    "hanviet": "TẨY TRẠC CƠ",
+    "mean": "Máy giặt",
+    "lesson": 24
+  },
+  {
+    "kanji": "寝る",
+    "hiragana": "ねる",
+    "hanviet": "TẨM",
+    "mean": "Ngủ",
+    "lesson": 24
+  },
+  {
+    "kanji": "踊る",
+    "hiragana": "おどる",
+    "hanviet": "DŨNG",
+    "mean": "Nhảy múa",
+    "lesson": 24
+  },
+  {
+    "kanji": "生活",
+    "hiragana": "せいかつ",
+    "hanviet": "SINH HOẠT",
+    "mean": "Cuộc sống / Sinh hoạt",
+    "lesson": 24
+  },
+  {
+    "kanji": "活動",
+    "hiragana": "かつどう",
+    "hanviet": "HOẠT ĐỘNG",
+    "mean": "Hoạt động",
+    "lesson": 24
+  },
+  {
+    "kanji": "週末",
+    "hiragana": "しゅうまつ",
+    "hanviet": "CHU MẠT",
+    "mean": "Cuối tuần",
+    "lesson": 24
+  },
+  {
+    "kanji": "月末",
+    "hiragana": "げつまつ",
+    "hanviet": "NGUYỆT MẠT",
+    "mean": "Cuối tháng",
+    "lesson": 24
+  },
+  {
+    "kanji": "お宅",
+    "hiragana": "おたく",
+    "hanviet": "TRẠCH",
+    "mean": "Nhà (kính ngữ)",
+    "lesson": 24
+  },
+  {
+    "kanji": "帰宅",
+    "hiragana": "きたく",
+    "hanviet": "QUY TRẠCH",
+    "mean": "Về nhà",
+    "lesson": 24
+  },
+  {
+    "kanji": "祭り",
+    "hiragana": "まつり",
+    "hanviet": "TẾ",
+    "mean": "Lễ hội",
+    "lesson": 24
+  },
+  {
+    "kanji": "平日",
+    "hiragana": "へいじつ",
+    "hanviet": "BÌNH NHẬT",
+    "mean": "Ngày thường",
+    "lesson": 25
+  },
+  {
+    "kanji": "平和",
+    "hiragana": "へいわ",
+    "hanviet": "BÌNH HÒA",
+    "mean": "Hòa bình",
+    "lesson": 25
+  },
+  {
+    "kanji": "和食",
+    "hiragana": "わしょく",
+    "hanviet": "HÒA THỰC",
+    "mean": "Món ăn Nhật",
+    "lesson": 25
+  },
+  {
+    "kanji": "戦争",
+    "hiragana": "せんそう",
+    "hanviet": "CHIẾN TRANH",
+    "mean": "Chiến tranh",
+    "lesson": 25
+  },
+  {
+    "kanji": "戦う",
+    "hiragana": "たたかう",
+    "hanviet": "CHIẾN",
+    "mean": "Chiến đấu",
+    "lesson": 25
+  },
+  {
+    "kanji": "争う",
+    "hiragana": "あらそう",
+    "hanviet": "TRANH",
+    "mean": "Tranh chấp",
+    "lesson": 25
+  },
+  {
+    "kanji": "政治",
+    "hiragana": "せいじ",
+    "hanviet": "CHÍNH TRỊ",
+    "mean": "Chính trị",
+    "lesson": 25
+  },
+  {
+    "kanji": "政治家",
+    "hiragana": "せいじか",
+    "hanviet": "CHÍNH TRỊ GIA",
+    "mean": "Chính trị gia",
+    "lesson": 25
+  },
+  {
+    "kanji": "治る",
+    "hiragana": "なおる",
+    "hanviet": "TRỊ",
+    "mean": "Được chữa trị / Khỏi bệnh",
+    "lesson": 25
+  },
+  {
+    "kanji": "直す",
+    "hiragana": "なおす",
+    "hanviet": "TRỰC",
+    "mean": "Sửa chữa",
+    "lesson": 25
+  },
+  {
+    "kanji": "経済",
+    "hiragana": "けいざい",
+    "hanviet": "KINH TẾ",
+    "mean": "Kinh tế",
+    "lesson": 25
+  },
+  {
+    "kanji": "経験",
+    "hiragana": "けいけん",
+    "hanviet": "KINH NGHIỆM",
+    "mean": "Kinh nghiệm",
+    "lesson": 25
+  },
+  {
+    "kanji": "済む",
+    "hiragana": "すむ",
+    "hanviet": "TẾ",
+    "mean": "Hoàn thành / Kết thúc",
+    "lesson": 25
+  },
+  {
+    "kanji": "法律",
+    "hiragana": "ほうりつ",
+    "hanviet": "PHÁP LUẬT",
+    "mean": "Pháp luật",
+    "lesson": 25
+  },
+  {
+    "kanji": "方法",
+    "hiragana": "ほうほう",
+    "hanviet": "PHƯƠNG PHÁP",
+    "mean": "Phương pháp",
+    "lesson": 25
+  },
+  {
+    "kanji": "国際",
+    "hiragana": "こくさい",
+    "hanviet": "QUỐC TẾ",
+    "mean": "Quốc tế",
+    "lesson": 25
+  },
+  {
+    "kanji": "関係",
+    "hiragana": "かんけい",
+    "hanviet": "QUAN HỆ",
+    "mean": "Quan hệ",
+    "lesson": 25
+  },
+  {
+    "kanji": "関心",
+    "hiragana": "かんしん",
+    "hanviet": "QUAN TÂM",
+    "mean": "Quan tâm",
+    "lesson": 25
+  },
+  {
+    "kanji": "係",
+    "hiragana": "かかり",
+    "hanviet": "HỆ",
+    "mean": "Người phụ trách",
+    "lesson": 25
+  },
+  {
+    "kanji": "主義",
+    "hiragana": "しゅぎ",
+    "hanviet": "CHỦ NGHĨA",
+    "mean": "Chủ nghĩa",
+    "lesson": 25
+  },
+  {
+    "kanji": "会議",
+    "hiragana": "かいぎ",
+    "hanviet": "HỘI NGHỊ",
+    "mean": "Cuộc họp",
+    "lesson": 25
+  },
+  {
+    "kanji": "政党",
+    "hiragana": "せいとう",
+    "hanviet": "CHÍNH ĐẢNG",
+    "mean": "Đảng chính trị",
+    "lesson": 25
+  },
+  {
+    "kanji": "遊ぶ",
+    "hiragana": "あそぶ",
+    "hanviet": "DU",
+    "mean": "Chơi",
+    "lesson": 26
+  },
+  {
+    "kanji": "遊園地",
+    "hiragana": "ゆうえんち",
+    "hanviet": "DU VIÊN ĐỊA",
+    "mean": "Khu vui chơi",
+    "lesson": 26
+  },
+  {
+    "kanji": "泳ぐ",
+    "hiragana": "およぐ",
+    "hanviet": "VỊNH",
+    "mean": "Bơi",
+    "lesson": 26
+  },
+  {
+    "kanji": "水泳",
+    "hiragana": "すいえい",
+    "hanviet": "THỦY VỊNH",
+    "mean": "Bơi lội",
+    "lesson": 26
+  },
+  {
+    "kanji": "疲れる",
+    "hiragana": "つかれる",
+    "hanviet": "BÌ",
+    "mean": "Mệt mỏi",
+    "lesson": 26
+  },
+  {
+    "kanji": "暖かい",
+    "hiragana": "あたたかい",
+    "hanviet": "NOÃN",
+    "mean": "Ấm áp",
+    "lesson": 26
+  },
+  {
+    "kanji": "暖房",
+    "hiragana": "だんぼう",
+    "hanviet": "NOÃN PHÒNG",
+    "mean": "Lò sưởi",
+    "lesson": 26
+  },
+  {
+    "kanji": "涼しい",
+    "hiragana": "すずしい",
+    "hanviet": "LƯƠNG",
+    "mean": "Mát mẻ",
+    "lesson": 26
+  },
+  {
+    "kanji": "静かな",
+    "hiragana": "しずかな",
+    "hanviet": "TĨNH",
+    "mean": "Yên tĩnh",
+    "lesson": 26
+  },
+  {
+    "kanji": "公園",
+    "hiragana": "こうえん",
+    "hanviet": "CÔNG VIÊN",
+    "mean": "Công viên",
+    "lesson": 26
+  },
+  {
+    "kanji": "公務員",
+    "hiragana": "こうむいん",
+    "hanviet": "CÔNG VỤ VIÊN",
+    "mean": "Công chức",
+    "lesson": 26
+  },
+  {
+    "kanji": "動物園",
+    "hiragana": "どうぶつえん",
+    "hanviet": "ĐỘNG VẬT VIÊN",
+    "mean": "Sở thú",
+    "lesson": 26
+  },
+  {
+    "kanji": "込む",
+    "hiragana": "こむ",
+    "hanviet": "NHẬP",
+    "mean": "Đông đúc",
+    "lesson": 26
+  },
+  {
+    "kanji": "連れて行く",
+    "hiragana": "つれていく",
+    "hanviet": "LIÊN HÀNH",
+    "mean": "Dẫn đi",
+    "lesson": 26
+  },
+  {
+    "kanji": "窓",
+    "hiragana": "まど",
+    "hanviet": "SONG",
+    "mean": "Cửa sổ",
+    "lesson": 26
+  },
+  {
+    "kanji": "窓口",
+    "hiragana": "まどぐち",
+    "hanviet": "SONG KHẨU",
+    "mean": "Quầy giao dịch",
+    "lesson": 26
+  },
+  {
+    "kanji": "側",
+    "hiragana": "がわ",
+    "hanviet": "TRẮC",
+    "mean": "Phía",
+    "lesson": 26
+  },
+  {
+    "kanji": "右側",
+    "hiragana": "みぎがわ",
+    "hanviet": "HỮU TRẮC",
+    "mean": "Phía bên phải",
+    "lesson": 26
+  },
+  {
+    "kanji": "葉",
+    "hiragana": "は",
+    "hanviet": "DIỆP",
+    "mean": "Lá",
+    "lesson": 26
+  },
+  {
+    "kanji": "言葉",
+    "hiragana": "ことば",
+    "hanviet": "NGÔN DIỆP",
+    "mean": "Từ vựng / Lời nói",
+    "lesson": 26
+  },
+  {
+    "kanji": "景色",
+    "hiragana": "けしき",
+    "hanviet": "CẢNH SẮC",
+    "mean": "Phong cảnh",
+    "lesson": 26
+  },
+  {
+    "kanji": "日記",
+    "hiragana": "にっき",
+    "hanviet": "NHẬT KÍ",
+    "mean": "Nhật ký",
+    "lesson": 26
+  },
+  {
+    "kanji": "記事",
+    "hiragana": "きじ",
+    "hanviet": "KÍ SỰ",
+    "mean": "Ký sự / Bài báo",
+    "lesson": 26
+  },
+  {
+    "kanji": "形",
+    "hiragana": "かたち",
+    "hanviet": "HÌNH",
+    "mean": "Hình dáng",
+    "lesson": 26
+  },
+  {
+    "kanji": "人形",
+    "hiragana": "にんぎょう",
+    "hanviet": "NHÂN HÌNH",
+    "mean": "Búp bê",
+    "lesson": 26
+  },
+  {
+    "kanji": "吉",
+    "hiragana": "きち",
+    "hanviet": "CÁT",
+    "mean": "Điềm lành",
+    "lesson": 27
+  },
+  {
+    "kanji": "結婚",
+    "hiragana": "けっこん",
+    "hanviet": "KẾT HÔN",
+    "mean": "Kết hôn",
+    "lesson": 27
+  },
+  {
+    "kanji": "結果",
+    "hiragana": "けっか",
+    "hanviet": "KẾT QUẢ",
+    "mean": "Kết quả",
+    "lesson": 27
+  },
+  {
+    "kanji": "婚約",
+    "hiragana": "こんやく",
+    "hanviet": "HÔN ƯỚC",
+    "mean": "Đính hôn",
+    "lesson": 27
+  },
+  {
+    "kanji": "新婚",
+    "hiragana": "しんこん",
+    "hanviet": "TÂN HÔN",
+    "mean": "Tân hôn",
+    "lesson": 27
+  },
+  {
+    "kanji": "共に",
+    "hiragana": "ともに",
+    "hanviet": "CỘNG",
+    "mean": "Cùng nhau",
+    "lesson": 27
+  },
+  {
+    "kanji": "共通",
+    "hiragana": "きょうつう",
+    "hanviet": "CỘNG THÔNG",
+    "mean": "Chung",
+    "lesson": 27
+  },
+  {
+    "kanji": "子供",
+    "hiragana": "こども",
+    "hanviet": "TỬ CUNG",
+    "mean": "Trẻ em",
+    "lesson": 27
+  },
+  {
+    "kanji": "両親",
+    "hiragana": "りょうしん",
+    "hanviet": "LƯỠNG THÂN",
+    "mean": "Bố mẹ",
+    "lesson": 27
+  },
+  {
+    "kanji": "両方",
+    "hiragana": "りょうほう",
+    "hanviet": "LƯỠNG PHƯƠNG",
+    "mean": "Cả hai",
+    "lesson": 27
+  },
+  {
+    "kanji": "若い",
+    "hiragana": "わかい",
+    "hanviet": "NHƯỢC",
+    "mean": "Trẻ",
+    "lesson": 27
+  },
+  {
+    "kanji": "若者",
+    "hiragana": "わかもの",
+    "hanviet": "NHƯỢC GIẢ",
+    "mean": "Giới trẻ",
+    "lesson": 27
+  },
+  {
+    "kanji": "老人",
+    "hiragana": "ろうじん",
+    "hanviet": "LÃO NHÂN",
+    "mean": "Người già",
+    "lesson": 27
+  },
+  {
+    "kanji": "息",
+    "hiragana": "いき",
+    "hanviet": "TỨC",
+    "mean": "Hơi thở",
+    "lesson": 27
+  },
+  {
+    "kanji": "息子",
+    "hiragana": "むすこ",
+    "hanviet": "TỨC TỬ",
+    "mean": "Con trai",
+    "lesson": 27
+  },
+  {
+    "kanji": "娘",
+    "hiragana": "むすめ",
+    "hanviet": "NƯƠNG",
+    "mean": "Con gái",
+    "lesson": 27
+  },
+  {
+    "kanji": "奥さん",
+    "hiragana": "おくさん",
+    "hanviet": "ÁO",
+    "mean": "Vợ (người khác)",
+    "lesson": 27
+  },
+  {
+    "kanji": "将来",
+    "hiragana": "しょうらい",
+    "hanviet": "TƯƠNG LAI",
+    "mean": "Tương lai",
+    "lesson": 27
+  },
+  {
+    "kanji": "祖父",
+    "hiragana": "そふ",
+    "hanviet": "TỔ PHỤ",
+    "mean": "Ông",
+    "lesson": 27
+  },
+  {
+    "kanji": "祖母",
+    "hiragana": "そぼ",
+    "hanviet": "TỔ MẪU",
+    "mean": "Bà",
+    "lesson": 27
+  },
+  {
+    "kanji": "教育",
+    "hiragana": "きょういく",
+    "hanviet": "GIÁO DỤC",
+    "mean": "Giáo dục",
+    "lesson": 27
+  },
+  {
+    "kanji": "育てる",
+    "hiragana": "そだてる",
+    "hanviet": "DỤC",
+    "mean": "Nuôi nấng",
+    "lesson": 27
+  },
+  {
+    "kanji": "男性",
+    "hiragana": "だんせい",
+    "hanviet": "NAM TÍNH",
+    "mean": "Nam giới",
+    "lesson": 27
+  },
+  {
+    "kanji": "女性",
+    "hiragana": "じょせい",
+    "hanviet": "NỮ TÍNH",
+    "mean": "Nữ giới",
+    "lesson": 27
+  },
+  {
+    "kanji": "招待する",
+    "hiragana": "しょうたいする",
+    "hanviet": "CHIÊU ĐÃI",
+    "mean": "Mời",
+    "lesson": 27
+  },
+  {
+    "kanji": "取る",
+    "hiragana": "とる",
+    "hanviet": "THỦ",
+    "mean": "Lấy",
+    "lesson": 28
+  },
+  {
+    "kanji": "最近",
+    "hiragana": "さいきん",
+    "hanviet": "TỐI CẬN",
+    "mean": "Gần đây",
+    "lesson": 28
+  },
+  {
+    "kanji": "最高",
+    "hiragana": "さいこう",
+    "hanviet": "TỐI CAO",
+    "mean": "Cao nhất / Tuyệt nhất",
+    "lesson": 28
+  },
+  {
+    "kanji": "最初",
+    "hiragana": "さいしょ",
+    "hanviet": "TỐI SƠ",
+    "mean": "Đầu tiên",
+    "lesson": 28
+  },
+  {
+    "kanji": "初め",
+    "hiragana": "はじめ",
+    "hanviet": "SƠ",
+    "mean": "Lúc đầu",
+    "lesson": 28
+  },
+  {
+    "kanji": "一番",
+    "hiragana": "いちばん",
+    "hanviet": "NHẤT PHIÊN",
+    "mean": "Số 1 / Nhất",
+    "lesson": 28
+  },
+  {
+    "kanji": "番組",
+    "hiragana": "ばんぐみ",
+    "hanviet": "PHIÊN TỔ",
+    "mean": "Chương trình TV",
+    "lesson": 28
+  },
+  {
+    "kanji": "二十歳",
+    "hiragana": "はたち",
+    "hanviet": "NHỊ THẬP TUẾ",
+    "mean": "20 tuổi",
+    "lesson": 28
+  },
+  {
+    "kanji": "枚数",
+    "hiragana": "まいすう",
+    "hanviet": "MAI SỐ",
+    "mean": "Số tờ",
+    "lesson": 28
+  },
+  {
+    "kanji": "冊数",
+    "hiragana": "さっすう",
+    "hanviet": "SÁCH SỐ",
+    "mean": "Số cuốn sách",
+    "lesson": 28
+  },
+  {
+    "kanji": "一億",
+    "hiragana": "いちおく",
+    "hanviet": "NHẤT ỨC",
+    "mean": "100 triệu",
+    "lesson": 28
+  },
+  {
+    "kanji": "点",
+    "hiragana": "てん",
+    "hanviet": "ĐIỂM",
+    "mean": "Điểm số",
+    "lesson": 28
+  },
+  {
+    "kanji": "交差点",
+    "hiragana": "こうさてん",
+    "hanviet": "GIAO SAI ĐIỂM",
+    "mean": "Ngã tư",
+    "lesson": 28
+  },
+  {
+    "kanji": "階段",
+    "hiragana": "かいだん",
+    "hanviet": "GIAI ĐOẠN",
+    "mean": "Cầu thang",
+    "lesson": 28
+  },
+  {
+    "kanji": "段階",
+    "hiragana": "だんかい",
+    "hanviet": "ĐOẠN GIAI",
+    "mean": "Giai đoạn",
+    "lesson": 28
+  },
+  {
+    "kanji": "番号",
+    "hiragana": "ばんごう",
+    "hanviet": "PHIÊN HIỆU",
+    "mean": "Số hiệu",
+    "lesson": 28
+  },
+  {
+    "kanji": "倍",
+    "hiragana": "ばい",
+    "hanviet": "BỘI",
+    "mean": "Gấp đôi / Bội số",
+    "lesson": 28
+  },
+  {
+    "kanji": "次",
+    "hiragana": "つぎ",
+    "hanviet": "THỨ",
+    "mean": "Tiếp theo",
+    "lesson": 28
+  },
+  {
+    "kanji": "人々",
+    "hiragana": "ひとびと",
+    "hanviet": "NHÂN",
+    "mean": "Mọi người",
+    "lesson": 28
+  },
+  {
+    "kanji": "時々",
+    "hiragana": "ときどき",
+    "hanviet": "THỜI",
+    "mean": "Thỉnh thoảng",
+    "lesson": 28
+  },
+  {
+    "kanji": "他人",
+    "hiragana": "たにん",
+    "hanviet": "THA NHÂN",
+    "mean": "Người khác",
+    "lesson": 28
+  },
+  {
+    "kanji": "勝つ",
+    "hiragana": "かつ",
+    "hanviet": "THẮNG",
+    "mean": "Thắng",
+    "lesson": 29
+  },
+  {
+    "kanji": "負ける",
+    "hiragana": "まける",
+    "hanviet": "PHỤ",
+    "mean": "Thua",
+    "lesson": 29
+  },
+  {
+    "kanji": "賛成する",
+    "hiragana": "さんせいする",
+    "hanviet": "TÁN THÀNH",
+    "mean": "Tán thành",
+    "lesson": 29
+  },
+  {
+    "kanji": "成功",
+    "hiragana": "せいこう",
+    "hanviet": "THÀNH CÔNG",
+    "mean": "Thành công",
+    "lesson": 29
+  },
+  {
+    "kanji": "完成する",
+    "hiragana": "かんせいする",
+    "hanviet": "HOÀN THÀNH",
+    "mean": "Hoàn thành",
+    "lesson": 29
+  },
+  {
+    "kanji": "絶対",
+    "hiragana": "ぜったい",
+    "hanviet": "TUYỆT ĐỐI",
+    "mean": "Tuyệt đối",
+    "lesson": 29
+  },
+  {
+    "kanji": "反対する",
+    "hiragana": "はんたいする",
+    "hanviet": "PHẢN ĐỐI",
+    "mean": "Phản đối",
+    "lesson": 29
+  },
+  {
+    "kanji": "続ける",
+    "hiragana": "つづける",
+    "hanviet": "TỤC",
+    "mean": "Tiếp tục",
+    "lesson": 29
+  },
+  {
+    "kanji": "辞める",
+    "hiragana": "やめる",
+    "hanviet": "TỪ",
+    "mean": "Nghỉ / Từ bỏ",
+    "lesson": 29
+  },
+  {
+    "kanji": "投げる",
+    "hiragana": "なげる",
+    "hanviet": "ĐẦU",
+    "mean": "Ném",
+    "lesson": 29
+  },
+  {
+    "kanji": "選ぶ",
+    "hiragana": "えらぶ",
+    "hanviet": "TUYỂN",
+    "mean": "Chọn",
+    "lesson": 29
+  },
+  {
+    "kanji": "選手",
+    "hiragana": "せんしゅ",
+    "hanviet": "TUYỂN THỦ",
+    "mean": "Vận động viên",
+    "lesson": 29
+  },
+  {
+    "kanji": "約束",
+    "hiragana": "やくそく",
+    "hanviet": "ƯỚC THÚC",
+    "mean": "Lời hứa",
+    "lesson": 29
+  },
+  {
+    "kanji": "花束",
+    "hiragana": "はなたば",
+    "hanviet": "HOA THÚC",
+    "mean": "Bó hoa",
+    "lesson": 29
+  },
+  {
+    "kanji": "守る",
+    "hiragana": "まもる",
+    "hanviet": "THỦ",
+    "mean": "Bảo vệ / Tuân thủ",
+    "lesson": 29
+  },
+  {
+    "kanji": "留守",
+    "hiragana": "るす",
+    "hanviet": "LƯU THỦ",
+    "mean": "Vắng nhà",
+    "lesson": 29
+  },
+  {
+    "kanji": "過ぎる",
+    "hiragana": "すぎる",
+    "hanviet": "QUÁ",
+    "mean": "Quá",
+    "lesson": 29
+  },
+  {
+    "kanji": "過去",
+    "hiragana": "かこ",
+    "hanviet": "QUÁ KHỨ",
+    "mean": "Quá khứ",
+    "lesson": 29
+  },
+  {
+    "kanji": "夢",
+    "hiragana": "ゆめ",
+    "hanviet": "MỘNG",
+    "mean": "Giấc mơ",
+    "lesson": 29
+  },
+  {
+    "kanji": "目的",
+    "hiragana": "もくてき",
+    "hanviet": "MỤC ĐÍCH",
+    "mean": "Mục đích",
+    "lesson": 29
+  },
+  {
+    "kanji": "飛行機",
+    "hiragana": "ひこうき",
+    "hanviet": "PHI HÀNH CƠ",
+    "mean": "Máy bay",
+    "lesson": 30
+  },
+  {
+    "kanji": "機会",
+    "hiragana": "きかい",
+    "hanviet": "CƠ HỘI",
+    "mean": "Cơ hội",
+    "lesson": 30
+  },
+  {
+    "kanji": "失礼する",
+    "hiragana": "しつれいする",
+    "hanviet": "THẤT LỄ",
+    "mean": "Xin thất lễ",
+    "lesson": 30
+  },
+  {
+    "kanji": "失敗",
+    "hiragana": "しっぱい",
+    "hanviet": "THẤT BẠI",
+    "mean": "Thất bại",
+    "lesson": 30
+  },
+  {
+    "kanji": "地下鉄",
+    "hiragana": "ちかてつ",
+    "hanviet": "ĐỊA HẠ THIẾT",
+    "mean": "Tàu điện ngầm",
+    "lesson": 30
+  },
+  {
+    "kanji": "速い",
+    "hiragana": "はやい",
+    "hanviet": "TỐC",
+    "mean": "Nhanh",
+    "lesson": 30
+  },
+  {
+    "kanji": "遅い",
+    "hiragana": "おそい",
+    "hanviet": "TRÌ",
+    "mean": "Chậm / Muộn",
+    "lesson": 30
+  },
+  {
+    "kanji": "遅れる",
+    "hiragana": "おくれる",
+    "hanviet": "TRÌ",
+    "mean": "Muộn / Trễ",
+    "lesson": 30
+  },
+  {
+    "kanji": "駐車",
+    "hiragana": "ちゅうしゃ",
+    "hanviet": "TRÚ XA",
+    "mean": "Đỗ xe",
+    "lesson": 30
+  },
+  {
+    "kanji": "泊まる",
+    "hiragana": "とまる",
+    "hanviet": "BẠC",
+    "mean": "Trọ lại",
+    "lesson": 30
+  },
+  {
+    "kanji": "船",
+    "hiragana": "ふね",
+    "hanviet": "THUYỀN",
+    "mean": "Thuyền",
+    "lesson": 30
+  },
+  {
+    "kanji": "座る",
+    "hiragana": "すわる",
+    "hanviet": "TỌA",
+    "mean": "Ngồi",
+    "lesson": 30
+  },
+  {
+    "kanji": "口座",
+    "hiragana": "こうざ",
+    "hanviet": "KHẨU TỌA",
+    "mean": "Tài khoản ngân hàng",
+    "lesson": 30
+  },
+  {
+    "kanji": "席",
+    "hiragana": "せき",
+    "hanviet": "TỊCH",
+    "mean": "Chỗ ngồi",
+    "lesson": 30
+  },
+  {
+    "kanji": "島",
+    "hiragana": "しま",
+    "hanviet": "ĐẢO",
+    "mean": "Đảo",
+    "lesson": 30
+  },
+  {
+    "kanji": "大陸",
+    "hiragana": "たいりく",
+    "hanviet": "ĐẠI LỤC",
+    "mean": "Đại lục",
+    "lesson": 30
+  },
+  {
+    "kanji": "空港",
+    "hiragana": "くうこう",
+    "hanviet": "KHÔNG CẢNG",
+    "mean": "Sân bay",
+    "lesson": 30
+  },
+  {
+    "kanji": "港",
+    "hiragana": "みなと",
+    "hanviet": "CẢNG",
+    "mean": "Cảng",
+    "lesson": 30
+  },
+  {
+    "kanji": "橋",
+    "hiragana": "はし",
+    "hanviet": "KIỀU",
+    "mean": "Cây cầu",
+    "lesson": 30
+  },
+  {
+    "kanji": "交番",
+    "hiragana": "こうばん",
+    "hanviet": "GIAO PHIÊN",
+    "mean": "Đồn cảnh sát",
+    "lesson": 30
+  },
+  {
+    "kanji": "申し込む",
+    "hiragana": "もうしこむ",
+    "hanviet": "THÂN NHẬP",
+    "mean": "Đăng ký",
+    "lesson": 31
+  },
+  {
+    "kanji": "神様",
+    "hiragana": "かみさま",
+    "hanviet": "THẦN DẠNG",
+    "mean": "Thần thánh",
+    "lesson": 31
+  },
+  {
+    "kanji": "神社",
+    "hiragana": "じんじゃ",
+    "hanviet": "THẦN XÃ",
+    "mean": "Đền thần",
+    "lesson": 31
+  },
+  {
+    "kanji": "様々",
+    "hiragana": "さまざま",
+    "hanviet": "DẠNG",
+    "mean": "Đa dạng",
+    "lesson": 31
+  },
+  {
+    "kanji": "信じる",
+    "hiragana": "しんじる",
+    "hanviet": "TÍN",
+    "mean": "Tin tưởng",
+    "lesson": 31
+  },
+  {
+    "kanji": "信号",
+    "hiragana": "しんごう",
+    "hanviet": "TÍN HIỆU",
+    "mean": "Đèn tín hiệu",
+    "lesson": 31
+  },
+  {
+    "kanji": "調べる",
+    "hiragana": "しらべる",
+    "hanviet": "ĐIỀU",
+    "mean": "Điều tra / Tìm hiểu",
+    "lesson": 31
+  },
+  {
+    "kanji": "調査",
+    "hiragana": "ちょうさ",
+    "hanviet": "ĐIỀU TRA",
+    "mean": "Điều tra",
+    "lesson": 31
+  },
+  {
+    "kanji": "相談",
+    "hiragana": "そうだん",
+    "hanviet": "TƯƠNG ĐÀM",
+    "mean": "Thảo luận",
+    "lesson": 31
+  },
+  {
+    "kanji": "首相",
+    "hiragana": "しゅしょう",
+    "hanviet": "THỦ TƯƠNG",
+    "mean": "Thủ tướng",
+    "lesson": 31
+  },
+  {
+    "kanji": "案内する",
+    "hiragana": "あんないする",
+    "hanviet": "ÁN NỘI",
+    "mean": "Hướng dẫn",
+    "lesson": 31
+  },
+  {
+    "kanji": "家内",
+    "hiragana": "かない",
+    "hanviet": "GIA NỘI",
+    "mean": "Vợ (của tôi)",
+    "lesson": 31
+  },
+  {
+    "kanji": "国内",
+    "hiragana": "こくない",
+    "hanviet": "QUỐC NỘI",
+    "mean": "Trong nước",
+    "lesson": 31
+  },
+  {
+    "kanji": "君",
+    "hiragana": "きみ",
+    "hanviet": "QUÂN",
+    "mean": "Cậu / Em (thân mật)",
+    "lesson": 31
+  },
+  {
+    "kanji": "友達",
+    "hiragana": "ともだち",
+    "hanviet": "HỮU ĐẠT",
+    "mean": "Bạn bè",
+    "lesson": 31
+  },
+  {
+    "kanji": "星",
+    "hiragana": "ほし",
+    "hanviet": "TINH",
+    "mean": "Ngôi sao",
+    "lesson": 31
+  },
+  {
+    "kanji": "雪",
+    "hiragana": "ゆき",
+    "hanviet": "TUYẾT",
+    "mean": "Tuyết",
+    "lesson": 31
+  },
+  {
+    "kanji": "降る",
+    "hiragana": "ふる",
+    "hanviet": "HÀNG",
+    "mean": "Rơi (mưa/tuyết)",
+    "lesson": 31
+  },
+  {
+    "kanji": "降りる",
+    "hiragana": "おりる",
+    "hanviet": "HÀNG",
+    "mean": "Xuống xe",
+    "lesson": 31
+  },
+  {
+    "kanji": "直す",
+    "hiragana": "なおす",
+    "hanviet": "TRỰC",
+    "mean": "Sửa chữa",
+    "lesson": 31
+  },
+  {
+    "kanji": "危ない",
+    "hiragana": "あぶない",
+    "hanviet": "NGUY",
+    "mean": "Nguy hiểm",
+    "lesson": 32
+  },
+  {
+    "kanji": "危険",
+    "hiragana": "きけん",
+    "hanviet": "NGUY HIỂM",
+    "mean": "Nguy hiểm",
+    "lesson": 32
+  },
+  {
+    "kanji": "拾う",
+    "hiragana": "ひろう",
+    "hanviet": "THẬP",
+    "mean": "Nhặt",
+    "lesson": 32
+  },
+  {
+    "kanji": "捨てる",
+    "hiragana": "すてる",
+    "hanviet": "XÁ",
+    "mean": "Vứt bỏ",
+    "lesson": 32
+  },
+  {
+    "kanji": "戻る",
+    "hiragana": "もどる",
+    "hanviet": "LỆ",
+    "mean": "Quay lại",
+    "lesson": 32
+  },
+  {
+    "kanji": "吸う",
+    "hiragana": "すう",
+    "hanviet": "HẤP",
+    "mean": "Hút",
+    "lesson": 32
+  },
+  {
+    "kanji": "放送",
+    "hiragana": "ほうそう",
+    "hanviet": "PHÓNG TỐNG",
+    "mean": "Phát sóng",
+    "lesson": 32
+  },
+  {
+    "kanji": "変える",
+    "hiragana": "かえる",
+    "hanviet": "BIẾN",
+    "mean": "Thay đổi",
+    "lesson": 32
+  },
+  {
+    "kanji": "大変",
+    "hiragana": "たいへん",
+    "hanviet": "ĐẠI BIẾN",
+    "mean": "Vất vả / Rất",
+    "lesson": 32
+  },
+  {
+    "kanji": "歯",
+    "hiragana": "は",
+    "hanviet": "XỈ",
+    "mean": "Răng",
+    "lesson": 32
+  },
+  {
+    "kanji": "歯医者",
+    "hiragana": "はいしゃ",
+    "hanviet": "XỈ Y GIẢ",
+    "mean": "Nha sĩ",
+    "lesson": 32
+  },
+  {
+    "kanji": "髪",
+    "hiragana": "かみ",
+    "hanviet": "PHÁT",
+    "mean": "Tóc",
+    "lesson": 32
+  },
+  {
+    "kanji": "絵",
+    "hiragana": "え",
+    "hanviet": "HỘI",
+    "mean": "Tranh",
+    "lesson": 32
+  },
+  {
+    "kanji": "横",
+    "hiragana": "よこ",
+    "hanviet": "HOÀNH",
+    "mean": "Bên cạnh / Ngang",
+    "lesson": 32
+  },
+  {
+    "kanji": "本当",
+    "hiragana": "ほんとう",
+    "hanviet": "BẢN ĐƯƠNG",
+    "mean": "Sự thật",
+    "lesson": 32
+  },
+  {
+    "kanji": "手伝う",
+    "hiragana": "てつだう",
+    "hanviet": "THỦ TRUYỀN",
+    "mean": "Giúp đỡ",
+    "lesson": 32
+  },
+  {
+    "kanji": "伝える",
+    "hiragana": "つたえる",
+    "hanviet": "TRUYỀN",
+    "mean": "Truyền đạt",
+    "lesson": 32
+  },
+  {
+    "kanji": "細かい",
+    "hiragana": "こまかい",
+    "hanviet": "TẾ",
+    "mean": "Nhỏ / Lẻ (tiền)",
+    "lesson": 32
+  },
+  {
+    "kanji": "無理",
+    "hiragana": "むり",
+    "hanviet": "VÔ LÝ",
+    "mean": "Vô lý / Quá sức",
+    "lesson": 32
+  },
+  {
+    "kanji": "無料",
+    "hiragana": "むりょう",
+    "hanviet": "VÔ LIỆU",
+    "mean": "Miễn phí",
+    "lesson": 32
+  }
+]
