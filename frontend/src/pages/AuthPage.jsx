@@ -7,7 +7,7 @@ import emailjs from '@emailjs/browser';
 
 // 🔥 CẤU HÌNH EMAILJS (Thay bằng Key thật của bạn vào đây)
 const EMAIL_SERVICE_ID = import.meta.env.VITE_MAIN_SERVICE_ID;  // <-- Phải là VITE_MAIN_...
-const EMAIL_TEMPLATE_ID = import.meta.env.VITE_TEMPLATE_REGISTER; 
+const EMAIL_TEMPLATE_ID = import.meta.env.VITE_TEMPLATE_REGISTER;
 const EMAIL_PUBLIC_KEY = import.meta.env.VITE_MAIN_PUBLIC_KEY;  // <-- Phải là VITE_MAIN_...
 
 const LANG_CONFIG = {
@@ -19,19 +19,19 @@ const LANG_CONFIG = {
 };
 
 // --- CÁC COMPONENT PHỤ (Notification, Icons) ---
-const Notification = ({ message, type, onClose, t }) => { 
-    if (!message) return null; 
-    const isSuccess = type === 'success'; 
-    return ( 
-        <div className={`fixed top-6 left-1/2 transform -translate-x-1/2 z-[100] flex items-center gap-3 px-6 py-4 rounded-2xl shadow-2xl backdrop-blur-md animate-fade-in-down border ${isSuccess ? 'bg-green-500/90 border-green-400 text-white' : 'bg-red-500/90 border-red-400 text-white'}`}> 
-            <span className="text-2xl">{isSuccess ? '🎉' : '⚠️'}</span> 
-            <div className="flex flex-col"> 
-                <span className="font-black uppercase text-[10px] tracking-widest opacity-80">{isSuccess ? (t?.success || 'Thành công') : (t?.error || 'Lỗi')}</span> 
-                <span className="font-bold text-sm">{message}</span> 
-            </div> 
-            <button onClick={onClose} className="ml-4 p-1 hover:bg-white/20 rounded-full transition-colors">✕</button> 
-        </div> 
-    ); 
+const Notification = ({ message, type, onClose, t }) => {
+  if (!message) return null;
+  const isSuccess = type === 'success';
+  return (
+    <div className={`fixed top-6 left-1/2 transform -translate-x-1/2 z-[100] flex items-center gap-3 px-6 py-4 rounded-2xl shadow-2xl backdrop-blur-md animate-fade-in-down border ${isSuccess ? 'bg-green-500/90 border-green-400 text-white' : 'bg-red-500/90 border-red-400 text-white'}`}>
+      <span className="text-2xl">{isSuccess ? '🎉' : '⚠️'}</span>
+      <div className="flex flex-col">
+        <span className="font-black uppercase text-[10px] tracking-widest opacity-80">{isSuccess ? (t?.success || 'Thành công') : (t?.error || 'Lỗi')}</span>
+        <span className="font-bold text-sm">{message}</span>
+      </div>
+      <button onClick={onClose} className="ml-4 p-1 hover:bg-white/20 rounded-full transition-colors">✕</button>
+    </div>
+  );
 };
 
 const EyeIcon = () => (<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>);
@@ -48,14 +48,14 @@ const AuthPage = () => {
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [floatingChars, setFloatingChars] = useState([]);
-  
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  
+
   // Trạng thái: Đã gửi email xác thực hay chưa
   const [isEmailSent, setIsEmailSent] = useState(false);
-  
+
   const [errorMsg, setErrorMsg] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [notification, setNotification] = useState({ message: '', type: '' });
@@ -79,7 +79,7 @@ const AuthPage = () => {
     const fullKanjiList = getKanjiList ? getKanjiList() : ["愛", "夢", "旅", "道", "光", "明", "鉄", "心", "力", "風"];
     const chars = Array.from({ length: 75 }).map((_, i) => ({
       id: i, char: fullKanjiList[Math.floor(Math.random() * fullKanjiList.length)],
-      left: (i % 30) * (100/30) + 1.5 + "%", duration: "40s", delay: -(Math.random() * 80) + "s", size: Math.random() * 1.5 + 1.2 + "rem"
+      left: (i % 30) * (100 / 30) + 1.5 + "%", duration: "40s", delay: -(Math.random() * 80) + "s", size: Math.random() * 1.5 + 1.2 + "rem"
     }));
     setFloatingChars(chars);
   }, []);
@@ -99,33 +99,33 @@ const AuthPage = () => {
     try {
       // 1. Kiểm tra Email tồn tại
       const { data: existingUser } = await supabase.from('users').select('email, status').eq('email', email).maybeSingle();
-      
+
       if (existingUser) {
         if (existingUser.status === 'active') {
-             setErrorMsg(t?.err_email_exists || "Email này đã được đăng ký và kích hoạt.");
-             showToast(t?.err_email_exists || "Email đã tồn tại", "error");
-             setIsLoading(false);
-             return;
+          setErrorMsg(t?.err_email_exists || "Email này đã được đăng ký và kích hoạt.");
+          showToast(t?.err_email_exists || "Email đã tồn tại", "error");
+          setIsLoading(false);
+          return;
         } else {
-             setErrorMsg(t?.err_email_pending || "Email đã đăng ký nhưng chưa xác thực. Hãy kiểm tra hộp thư!");
-             setIsLoading(false);
-             return;
+          setErrorMsg(t?.err_email_pending || "Email đã đăng ký nhưng chưa xác thực. Hãy kiểm tra hộp thư!");
+          setIsLoading(false);
+          return;
         }
       }
 
       // 2. Tạo Token bí mật
       const token = Math.random().toString(36).substring(2) + Date.now().toString(36);
-      
+
       // 3. Lưu vào DB (status = 'pending')
-      const { error } = await supabase.from('users').insert([{ 
-        email: email, 
+      const { error } = await supabase.from('users').insert([{
+        email: email,
         password: password,
-        username: email.split('@')[0] + "_" + Math.floor(Math.random() * 1000), 
-        full_name: email.split('@')[0], 
+        username: email.split('@')[0] + "_" + Math.floor(Math.random() * 1000),
+        full_name: email.split('@')[0],
         level: 'N5', streak: 0, goal: "Học 5 Kanji mỗi ngày",
         avatar: `https://api.dicebear.com/7.x/adventurer/svg?seed=${Date.now()}`,
-        status: 'pending', 
-        verification_token: token 
+        status: 'pending',
+        verification_token: token
       }]);
 
       if (error) throw error;
@@ -145,7 +145,7 @@ const AuthPage = () => {
       // 6. Thông báo thành công
       showToast(t?.delete_email_sent || "Đã gửi link xác thực!", "success");
       setIsEmailSent(true);
-      
+
     } catch (error) {
       console.error("Lỗi:", error);
       const msg = error.text || error.message || "Lỗi không xác định";
@@ -162,20 +162,20 @@ const AuthPage = () => {
     setErrorMsg(''); setIsLoading(true);
     try {
       const { data, error } = await supabase.from('users').select('*').eq('email', email).single();
-      
+
       if (error || !data || data.password !== password) {
         setErrorMsg(t?.err_pass_wrong || "Sai tài khoản hoặc mật khẩu");
         showToast(t?.err_login_fail || "Đăng nhập thất bại", "error");
       } else {
         // 🔥 KIỂM TRA TRẠNG THÁI ACTIVE
         if (data.status === 'pending') {
-             setErrorMsg(t?.err_email_pending || "Tài khoản chưa được kích hoạt. Vui lòng kiểm tra email!");
-             showToast(t?.err_email_pending || "Chưa xác thực email", "error");
+          setErrorMsg(t?.err_email_pending || "Tài khoản chưa được kích hoạt. Vui lòng kiểm tra email!");
+          showToast(t?.err_email_pending || "Chưa xác thực email", "error");
         } else {
-             const sessionData = { ...data, language: language };
-             localStorage.setItem('session', JSON.stringify(sessionData));
-             setUser(sessionData);
-             navigate('/');
+          const sessionData = { ...data, language: language };
+          localStorage.setItem('session', JSON.stringify(sessionData));
+          setUser(sessionData);
+          navigate('/');
         }
       }
     } catch (err) {
@@ -185,22 +185,95 @@ const AuthPage = () => {
     }
   };
 
+  // --- ĐĂNG NHẬP BẰNG GOOGLE ---
+  const handleGoogleLogin = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: window.location.hostname === 'localhost'
+          ? 'http://localhost:2103/'
+          : 'https://kanjilearning.vercel.app/'
+      }
+    });
+    if (error) showToast('Lỗi đăng nhập Google: ' + error.message, 'error');
+  };
+
+  // Lắng nghe khi Google redirect về app
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        // Chỉ xử lý khi có session từ Google OAuth
+        if ((event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') && session?.user) {
+          const googleUser = session.user;
+          const googleEmail = googleUser.email;
+          const googleName = googleUser.user_metadata?.full_name || googleUser.user_metadata?.name || googleEmail?.split('@')[0];
+          const googleAvatar = googleUser.user_metadata?.avatar_url || googleUser.user_metadata?.picture
+            || `https://api.dicebear.com/7.x/adventurer/svg?seed=${Date.now()}`;
+
+          // Kiểm tra email đã tồn tại trong bảng users chưa
+          const { data: existingUser } = await supabase
+            .from('users')
+            .select('*')
+            .eq('email', googleEmail)
+            .maybeSingle();
+
+          let finalUser;
+
+          if (existingUser) {
+            // ✅ Email đã tồn tại → dùng tài khoản cũ, không tạo mới
+            finalUser = existingUser;
+          } else {
+            // 🆕 Email chưa có → tạo tài khoản mới từ Google
+            const { data: newUser, error: insertError } = await supabase
+              .from('users')
+              .insert([{
+                email: googleEmail,
+                full_name: googleName,
+                username: googleEmail.split('@')[0] + '_' + Math.floor(Math.random() * 1000),
+                avatar: googleAvatar,
+                password: '', // Không cần mật khẩu khi đăng nhập bằng Google
+                level: 'N5',
+                streak: 0,
+                goal: 'Học 5 Kanji mỗi ngày',
+                status: 'active', // Google đã xác thực email → active luôn
+              }])
+              .select()
+              .single();
+
+            if (insertError) {
+              console.error('Lỗi tạo user Google:', insertError);
+              return;
+            }
+            finalUser = newUser;
+          }
+
+          // Lưu vào localStorage và Context
+          const sessionData = { ...finalUser, language: language };
+          localStorage.setItem('session', JSON.stringify(sessionData));
+          setUser(sessionData);
+          navigate('/');
+        }
+      }
+    );
+    return () => subscription.unsubscribe();
+  }, []);
+
   return (
     <div className="min-h-screen relative flex items-center justify-center bg-gray-100 overflow-hidden font-sans text-slate-900">
       <Notification message={notification.message} type={notification.type} onClose={() => setNotification({ message: '', type: '' })} t={t} />
-      
+
       {/* Menu Ngôn ngữ */}
       <div className="absolute top-6 right-6 z-50">
         <button onClick={() => setIsLangMenuOpen(!isLangMenuOpen)} className="flex items-center gap-3 bg-white/90 backdrop-blur border-2 border-gray-300 rounded-full px-6 py-3 shadow-md hover:bg-white transition-all active:scale-95">
-           <span className="text-lg font-black text-gray-900 uppercase">{LANG_CONFIG[language]?.flag || "VN"}</span> 
-           <span className="text-xs text-gray-500">▼</span>
+          <span className="text-lg font-black text-gray-900 uppercase">{LANG_CONFIG[language]?.flag || "VN"}</span>
+          <span className="text-xs text-gray-500">▼</span>
         </button>
         {isLangMenuOpen && (
-           <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-2xl shadow-2xl border border-gray-100 p-2 z-50 animate-fade-in-down">
-             {Object.keys(LANG_CONFIG).map((key) => (
-               <button key={key} onClick={() => changeLanguage(key)} className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100"><span className="text-xl">{LANG_CONFIG[key].flag}</span> {LANG_CONFIG[key].label}</button>
-             ))}
-           </div>
+          <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-2xl shadow-2xl border border-gray-100 p-2 z-50 animate-fade-in-down">
+            {Object.keys(LANG_CONFIG).map((key) => (
+              <button key={key} onClick={() => changeLanguage(key)} className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100"><span className="text-xl">{LANG_CONFIG[key].flag}</span> {LANG_CONFIG[key].label}</button>
+            ))}
+          </div>
         )}
       </div>
 
@@ -215,23 +288,23 @@ const AuthPage = () => {
         <div className="z-20 -mb-7 pointer-events-none"><ShibaMascot /></div>
 
         <div className={`w-full bg-white px-8 ${isLogin ? 'py-8' : 'py-5'} rounded-[2.5rem] shadow-2xl border border-gray-100 relative z-10 transition-all`}>
-          
+
           {/* 🔥 MÀN HÌNH SAU KHI GỬI EMAIL THÀNH CÔNG 🔥 */}
           {isEmailSent ? (
             <div className="text-center py-6 animate-fade-in-up">
-               <div className="text-6xl mb-4">📧</div>
-               <h2 className="text-2xl font-black text-slate-800 mb-2">{t?.email_check_title || "Kiểm tra Email"}</h2>
-               <p className="text-gray-500 text-sm mb-6 px-2">
-                 {t?.email_sent_desc || "Một liên kết kích hoạt đã được gửi đến:"} <br/>
-                 <b className="text-blue-600">{email}</b>
-               </p>
-               <p className="text-gray-400 text-xs mb-8">
-                 {t?.email_sent_instruction || "Vui lòng bấm vào link trong email để kích hoạt tài khoản."}
-               </p>
-               
-               <button onClick={() => { setIsEmailSent(false); setIsLogin(true); }} className="w-full bg-black text-white font-bold py-4 rounded-xl hover:bg-gray-800 transition-all uppercase text-sm">
-                 {t?.back_to_login || "QUAY VỀ ĐĂNG NHẬP"}
-               </button>
+              <div className="text-6xl mb-4">📧</div>
+              <h2 className="text-2xl font-black text-slate-800 mb-2">{t?.email_check_title || "Kiểm tra Email"}</h2>
+              <p className="text-gray-500 text-sm mb-6 px-2">
+                {t?.email_sent_desc || "Một liên kết kích hoạt đã được gửi đến:"} <br />
+                <b className="text-blue-600">{email}</b>
+              </p>
+              <p className="text-gray-400 text-xs mb-8">
+                {t?.email_sent_instruction || "Vui lòng bấm vào link trong email để kích hoạt tài khoản."}
+              </p>
+
+              <button onClick={() => { setIsEmailSent(false); setIsLogin(true); }} className="w-full bg-black text-white font-bold py-4 rounded-xl hover:bg-gray-800 transition-all uppercase text-sm">
+                {t?.back_to_login || "QUAY VỀ ĐĂNG NHẬP"}
+              </button>
             </div>
           ) : (
             /* --- FORM LOGIN / REGISTER --- */
@@ -260,24 +333,24 @@ const AuthPage = () => {
                     <input type={showPassword ? "text" : "password"} required value={password} onChange={(e) => setPassword(e.target.value)} placeholder={t?.auth_placeholder_pass || "Nhập mật khẩu..."} className="w-full px-5 py-2.5 bg-[#eff6ff] border border-transparent rounded-2xl focus:ring-2 focus:ring-black outline-none transition-all font-medium pr-12 text-slate-800" />
                     <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black">{showPassword ? <EyeOffIcon /> : <EyeIcon />}</button>
                   </div>
-                  
+
                   {/* THANH ĐỘ MẠNH MẬT KHẨU */}
                   {!isLogin && password.length > 0 && (
-                     <div className="mt-2 px-1 animate-fade-in-down">
-                        <div className="flex gap-1 h-1 mb-1.5">
-                           <div className={`flex-1 rounded-full transition-colors ${strengthScore >= 1 ? 'bg-red-500' : 'bg-gray-200'}`}></div>
-                           <div className={`flex-1 rounded-full transition-colors ${strengthScore >= 2 ? 'bg-yellow-500' : 'bg-gray-200'}`}></div>
-                           <div className={`flex-1 rounded-full transition-colors ${strengthScore >= 3 ? 'bg-green-500' : 'bg-gray-200'}`}></div>
-                        </div>
-                     </div>
+                    <div className="mt-2 px-1 animate-fade-in-down">
+                      <div className="flex gap-1 h-1 mb-1.5">
+                        <div className={`flex-1 rounded-full transition-colors ${strengthScore >= 1 ? 'bg-red-500' : 'bg-gray-200'}`}></div>
+                        <div className={`flex-1 rounded-full transition-colors ${strengthScore >= 2 ? 'bg-yellow-500' : 'bg-gray-200'}`}></div>
+                        <div className={`flex-1 rounded-full transition-colors ${strengthScore >= 3 ? 'bg-green-500' : 'bg-gray-200'}`}></div>
+                      </div>
+                    </div>
                   )}
                 </div>
-                
+
                 {/* 👇 LIÊN KẾT QUÊN MẬT KHẨU (CHỈ HIỆN KHI ĐĂNG NHẬP) 👇 */}
                 {isLogin && (
                   <div className="flex justify-end mt-2 mr-1">
-                    <span 
-                      onClick={() => navigate('/forgot-password')} 
+                    <span
+                      onClick={() => navigate('/forgot-password')}
                       className="text-[10px] font-bold text-gray-400 hover:text-black cursor-pointer transition-colors uppercase tracking-wide"
                     >
                       {t?.auth_forgot_pass || "Quên mật khẩu?"}
@@ -299,18 +372,17 @@ const AuthPage = () => {
               </form>
 
               <div className={`${isLogin ? 'mt-6' : 'mt-3'}`}>
-                  <div className="mt-4 grid grid-cols-2 gap-4">
-                    <button className="flex items-center justify-center gap-3 px-4 py-3 border border-gray-200 rounded-2xl hover:bg-gray-50 transition-all font-bold text-gray-700 text-xs shadow-sm"><GoogleIcon /> Google</button>
-                    <button className="flex items-center justify-center gap-3 px-4 py-3 border border-gray-200 rounded-2xl hover:bg-gray-50 transition-all font-bold text-gray-700 text-xs shadow-sm"><FacebookIcon /> Facebook</button>
-                  </div>
+                <div className="mt-4">
+                  <button onClick={handleGoogleLogin} type="button" className="w-full flex items-center justify-center gap-3 px-4 py-3 border border-gray-200 rounded-2xl hover:bg-gray-50 transition-all font-bold text-gray-700 text-xs shadow-sm"><GoogleIcon /> Đăng nhập bằng Google</button>
+                </div>
               </div>
             </>
           )}
 
           <div className="mt-6 pt-4 border-t border-gray-50 flex justify-center gap-8 text-[11px] text-gray-300 font-bold uppercase tracking-widest">
-              <a href="#" className="hover:text-black transition-colors">{t?.auth_terms || "TERMS"}</a>
-              <a href="#" className="hover:text-black transition-colors">{t?.auth_privacy || "PRIVACY"}</a>
-              <a href="#" className="hover:text-black transition-colors">{t?.auth_help || "HELP"}</a>
+            <a href="#" className="hover:text-black transition-colors">{t?.auth_terms || "TERMS"}</a>
+            <a href="#" className="hover:text-black transition-colors">{t?.auth_privacy || "PRIVACY"}</a>
+            <a href="#" className="hover:text-black transition-colors">{t?.auth_help || "HELP"}</a>
           </div>
         </div>
       </div>

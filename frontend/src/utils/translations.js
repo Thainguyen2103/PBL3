@@ -49,15 +49,15 @@ export const translations = {
     // --- HOME & AUTH ---
     home_welcome: "Xin chào, Lữ khách!",
     home_quotes: [
-        "Tựa như lữ khách chốn nhân gian\nCứ mãi theo đuổi thứ lang bạt hư vô",
-        "Đường đi ngàn dặm\nBắt đầu từ một bước chân nhỏ bé",
-        "Biển học mênh mông không bờ bến\nLấy chuyên cần làm bến, kiên trì làm thuyền",
-        "Mài sắt nên kim\nNgày ngày luyện tập, ắt có ngày thành tựu",
-        "Lạc lối giữa rừng Kanji\nChợt tìm thấy chính mình trong từng nét chữ",
-        "Không có việc gì khó\nChỉ sợ lòng không bền"
+      "Mỗi nét chữ là một hơi thở\nMỗi ngày học là một bước gần hơn với giấc mơ",
+      "Chữ Hán như ngọn núi xa\nKiên trì leo mãi, mây mù cũng tan",
+      "Không phải thiên tài mới thành tài\nChỉ cần kiên nhẫn, mỗi ngày một chút",
+      "Biển chữ mênh mông không bờ bến\nLấy tâm làm la bàn, ắt sẽ tìm ra đường",
+      "Giữa muôn vàn ký tự phù du\nTa học để hiểu — và hiểu để yêu",
+      "Lạc lối giữa rừng Kanji\nChợt tìm thấy chính mình trong từng nét chữ"
     ],
     home_btn_write: "Tra cứu Viết tay",
-    home_sub_write: "Viết tay để tra cứu Kanji", 
+    home_sub_write: "Viết tay để tra cứu Kanji",
     home_btn_chat: "Hỏi Lão Vô Danh",
     home_sub_chat: "Trò chuyện cùng AI",
     home_daily_kanji: "HÁN TỰ HÔM NAY",
@@ -130,7 +130,7 @@ export const translations = {
     practice_btn_rewrite: "Viết lại / Tự viết",
     practice_btn_hide_hint: "Ẩn gợi ý",
     practice_guide: "• DÙNG CHUỘT TÔ THEO NÉT MỜ",
-    
+
     // --- PROFILE ---
     profile_title: "Hồ sơ cá nhân",
     profile_sub: "Quản lý thông tin tài khoản.",
@@ -163,21 +163,21 @@ export const translations = {
     err_pass_match: "Mật khẩu xác nhận không khớp",
     err_pass_empty: "Vui lòng nhập mật khẩu hiện tại",
     err_pass_wrong: "Mật khẩu hiện tại không đúng",
-    
+
     // --- CHAT ---
     chat_header: "LÃO VÔ DANH",
     chat_placeholder: "Tiểu tử muốn thỉnh giáo điều gì? Nói mau...",
     chat_typing: "Đang mài mực...",
     chat_greetings: [
-        "Hừ, tiểu tử lại tìm đến lão có việc gì? Nói mau, lão đang bận thưởng trà.",
-        "Lại là ngươi à? Hôm nay trời quang mây tạnh...",
-        "Muốn hỏi chữ gì thì hỏi nhanh lên...",
-        "Chậc chậc, nhìn cái mặt ngơ ngác kia...",
-        "Kiến thức mênh mông như biển..."
+      "Hừ, tiểu tử lại tìm đến lão có việc gì? Nói mau, lão đang bận thưởng trà.",
+      "Lại là ngươi à? Hôm nay trời quang mây tạnh...",
+      "Muốn hỏi chữ gì thì hỏi nhanh lên...",
+      "Chậc chậc, nhìn cái mặt ngơ ngác kia...",
+      "Kiến thức mênh mông như biển..."
     ],
     back: "Quay lại",
     loading: "Đang xử lý...",
-    
+
     // --- CROPPER & DELETE ACCOUNT ---
     crop_title: "Chỉnh sửa ảnh",
     btn_confirm: "Xong",
@@ -208,7 +208,7 @@ export const translations = {
     translator_translating: "Đang dịch...",
     translator_translation_placeholder: "Bản dịch sẽ hiện ở đây...",
     translator_kanji_found: "KANJI TÌM THẤY",
-    
+
     // --- LANGUAGES ---
     lang_auto: "PHÁT HIỆN NGÔN NGỮ",
     lang_vi: "TIẾNG VIỆT",
@@ -312,7 +312,7 @@ export const translations = {
     world_lessons: "BÀI",
     world_no_data: "Chưa có dữ liệu chiến binh.",
     loading_data: "Đang tải dữ liệu...",
-    
+
     // --- FRIEND SYSTEM ---
     friend_search_placeholder: "Tìm chiến hữu bằng tên, email...",
     friend_search_result: "Kết quả tìm kiếm",
@@ -387,7 +387,7 @@ export const translations = {
     forum_uploading: "Đang gửi ảnh...",
     forum_upload_error: "Lỗi upload: ",
     forum_delete_error: "Lỗi xóa: ",
-    
+
     // Reaction labels
     react_like: "Thích",
     react_love: "Yêu thích",
@@ -413,7 +413,7 @@ export const translations = {
     profile_bio: "Giới thiệu (Bio)",
     profile_no_bio: "Người dùng này chưa viết giới thiệu.",
     profile_back_list: "← Quay lại danh sách bạn bè",
-    
+
     // Stats
     profile_stat_kanji: "Kanji",
     profile_stat_lessons: "Bài học",
@@ -440,7 +440,7 @@ export const translations = {
     forgot_btn_reset: "XÁC NHẬN ĐỔI",
     forgot_btn_processing: "ĐANG XỬ LÝ...",
     forgot_close: "ĐÓNG",
-    
+
     // Messages
     forgot_err_email_not_found: "Email này chưa được đăng ký!",
     forgot_success_sent: "Link khôi phục đã được gửi vào email của bạn!",
@@ -449,7 +449,7 @@ export const translations = {
     forgot_err_invalid_link: "Link không hợp lệ hoặc đã hết hạn!",
     forgot_success_reset: "Đổi mật khẩu thành công! Đang chuyển về đăng nhập...",
     forgot_error_prefix: "Lỗi: ",
-    
+
     // --- ARENA LOBBY PAGE ---
     arena_lobby_title: "TRÒ CHƠI",
     arena_progress: "Tiến trình",
@@ -480,7 +480,7 @@ export const translations = {
     arena_cancelled_msg: "Một hoặc nhiều người chơi không sẵn sàng",
     arena_try_again: "Thử lại",
     you: "BẠN",
-    
+
     // --- ARENA PREP PAGE ---
     arena_prep_title: "CHUẨN BỊ THI ĐẤU",
     arena_match_id: "MATCH",
@@ -489,7 +489,7 @@ export const translations = {
     arena_waiting_spin: "ĐỢI QUAY SỐ...",
     arena_spinning: "ĐANG QUAY NGẪU NHIÊN...",
     arena_topic: "CHỦ ĐỀ: BÀI",
-    
+
     // --- ARENA RACE PAGE ---
     arena_race_title: "TRƯỜNG CHẠY KANJI",
     arena_race_your_position: "VỊ TRÍ CỦA BẠN",
@@ -504,7 +504,7 @@ export const translations = {
     arena_race_you_won: "BẠN THẮNG!",
     arena_race_you_lost: "BẠN THUA!",
     arena_race_back_lobby: "QUAY LẠI LOBBY",
-    
+
     // --- RANK NAMES ---
     rank_challenger: "THÁCH ĐẤU",
     rank_grandmaster: "ĐẠI CAO THỦ",
@@ -560,24 +560,24 @@ export const translations = {
     stats_characters: "chars",
     stats_chart_type: "Type:",
     stats_no_data: "No data available",
-    
+
     home_welcome: "Welcome, Traveler!",
     home_quotes: [
-        "Like a traveler in the mortal realm\nForever chasing ethereal wanderings",
-        "A journey of a thousand miles\nBegins with a single step",
-        "Learning is a treasure\nThat will follow its owner everywhere",
-        "Fall seven times\nStand up eight",
-        "The roots of education are bitter\nBut the fruit is sweet",
-        "Nothing is impossible\nTo a willing heart"
+      "Every stroke is a breath\nEvery day of study, one step closer to the dream",
+      "Kanji, like distant mountains\nKeep climbing — the fog will lift",
+      "Genius is not born\nIt is built, one patient day at a time",
+      "The sea of knowledge has no shore\nLet your heart be the compass",
+      "Amid countless fleeting symbols\nWe learn to understand — and understanding, to love",
+      "Lost in the forest of Kanji\nOnly to find yourself in every stroke"
     ],
     home_btn_write: "Handwriting Lookup",
-    home_sub_write: "Draw to search Kanji", 
+    home_sub_write: "Draw to search Kanji",
     home_btn_chat: "Ask the Master",
     home_sub_chat: "Chat with AI Master",
     home_daily_kanji: "KANJI OF THE DAY",
     home_streak: "TRAINING STREAK",
     home_progress_title: "LEARNING PROGRESS",
-    
+
     auth_title: "LEARN KANJI DAILY",
     auth_sub_login: "Persevere daily, success will come.",
     auth_sub_register: "Create an account to start the journey.",
@@ -643,7 +643,7 @@ export const translations = {
     practice_btn_rewrite: "Rewrite / Freehand",
     practice_btn_hide_hint: "Hide Hints",
     practice_guide: "• TRACE THE FAINT LINES WITH MOUSE",
-    
+
     profile_title: "My Profile",
     profile_sub: "Manage your account info.",
     profile_basic: "Basic Info",
@@ -679,11 +679,11 @@ export const translations = {
     chat_placeholder: "What do you seek, young one? Speak up...",
     chat_typing: "Grinding ink...",
     chat_greetings: [
-        "Hmph! You again? What do you want now?",
-        "Why are you here disturbing an old man?",
-        "Lost again, are we?",
-        "Knowledge is a vast ocean...",
-        "Make it quick, young traveler."
+      "Hmph! You again? What do you want now?",
+      "Why are you here disturbing an old man?",
+      "Lost again, are we?",
+      "Knowledge is a vast ocean...",
+      "Make it quick, young traveler."
     ],
     back: "Back",
     loading: "Loading...",
@@ -703,7 +703,7 @@ export const translations = {
     wait: "WAIT",
     btn_send_confirm_mail: "SEND CONFIRMATION EMAIL",
     delete_email_sent: "Confirmation email sent! Please check your inbox.",
-    
+
     // --- DICTIONARY & TRANSLATOR ---
     dictionary_title: "Kanji Dictionary",
     dictionary_data_source: "DATA SOURCE",
@@ -718,7 +718,7 @@ export const translations = {
     translator_translating: "Translating...",
     translator_translation_placeholder: "Translation will appear here...",
     translator_kanji_found: "KANJI FOUND",
-    
+
     // --- LANGUAGES ---
     lang_auto: "DETECT LANGUAGE",
     lang_vi: "VIETNAMESE",
@@ -816,7 +816,7 @@ export const translations = {
     world_lessons: "LESSONS",
     world_no_data: "No warrior data found.",
     loading_data: "Loading data...",
-    
+
     // --- FRIEND SYSTEM ---
     friend_search_placeholder: "Search warriors by name, email...",
     friend_search_result: "Search Results",
@@ -944,7 +944,7 @@ export const translations = {
     forgot_btn_reset: "CONFIRM RESET",
     forgot_btn_processing: "PROCESSING...",
     forgot_close: "CLOSE",
-    
+
     // Messages
     forgot_err_email_not_found: "Email not registered!",
     forgot_success_sent: "Recovery link sent to your email!",
@@ -953,7 +953,7 @@ export const translations = {
     forgot_err_invalid_link: "Link is invalid or expired!",
     forgot_success_reset: "Password reset successful! Redirecting to login...",
     forgot_error_prefix: "Error: ",
-    
+
     // --- ARENA LOBBY PAGE ---
     arena_lobby_title: "GAME",
     arena_progress: "Progress",
@@ -984,7 +984,7 @@ export const translations = {
     arena_cancelled_msg: "One or more players were not ready",
     arena_try_again: "Try Again",
     you: "YOU",
-    
+
     // --- ARENA PREP PAGE ---
     arena_prep_title: "MATCH PREPARATION",
     arena_match_id: "MATCH",
@@ -993,7 +993,7 @@ export const translations = {
     arena_waiting_spin: "WAITING FOR SPIN...",
     arena_spinning: "SPINNING RANDOMLY...",
     arena_topic: "TOPIC: LESSON",
-    
+
     // --- ARENA RACE PAGE ---
     arena_race_title: "KANJI RACE TRACK",
     arena_race_your_position: "YOUR POSITION",
@@ -1008,7 +1008,7 @@ export const translations = {
     arena_race_you_won: "YOU WON!",
     arena_race_you_lost: "YOU LOST!",
     arena_race_back_lobby: "BACK TO LOBBY",
-    
+
     // --- RANK NAMES ---
     rank_challenger: "CHALLENGER",
     rank_grandmaster: "GRANDMASTER",
@@ -1064,20 +1064,20 @@ export const translations = {
     stats_characters: "字",
     stats_chart_type: "タイプ:",
     stats_no_data: "データがありません",
-    
+
     home_welcome: "ようこそ、旅人よ！",
     home_quotes: [
-        "まるで人間界の旅人のように\n儚い放浪を追い求め続ける",
-        "千里の道も一歩から",
-        "学問に王道なし",
-        "七転び八起き",
-        "継続は力なり",
-        "精神一到何事か成らざらん"
+      "一画一画に命が宿る\n毎日の積み重ねが夢へと続く道",
+      "漢字は遥かな山のごとし\n登り続ければ、霧もいつか晴れる",
+      "天才は生まれるものではなく\n忍耐の中で育まれるもの",
+      "学びの海に岸はない\n心を羅針盤として進め",
+      "無数の文字の波の中で\n学ぶことは理解すること、理解することは愛すること",
+      "漢字の森で迷子になって\n一画一画の中に自分を見つける"
     ],
     home_btn_write: "手書き検索",
-    home_sub_write: "手書きで漢字を検索", 
+    home_sub_write: "手書きで漢字を検索",
     home_btn_chat: "仙人に聞く",
-    home_sub_chat: "AIマスターとチャット", 
+    home_sub_chat: "AIマスターとチャット",
     home_daily_kanji: "今日の漢字",
     home_streak: "継続日数",
     home_progress_title: "学習進捗",
@@ -1101,7 +1101,7 @@ export const translations = {
     auth_terms: "利用規約",
     auth_privacy: "プライバシー",
     auth_help: "ヘルプ",
-    
+
     write_area: "描画エリア",
     write_undo: "元に戻す",
     write_clear: "クリア",
@@ -1182,11 +1182,11 @@ export const translations = {
     chat_placeholder: "若者よ、何を知りたいのじゃ？",
     chat_typing: "墨を磨っています...",
     chat_greetings: [
-        "ふん、また来たのか？わしは今茶を飲んでおる。",
-        "おや、お前か。今日はいい天気じゃのう...",
-        "聞きたいことがあるなら早く言え...",
-        "やれやれ、そんな顔をして...",
-        "知識の大海は果てしない..."
+      "ふん、また来たのか？わしは今茶を飲んでおる。",
+      "おや、お前か。今日はいい天気じゃのう...",
+      "聞きたいことがあるなら早く言え...",
+      "やれやれ、そんな顔をして...",
+      "知識の大海は果てしない..."
     ],
     back: "戻る",
     loading: "読み込み中...",
@@ -1219,7 +1219,7 @@ export const translations = {
     translator_translating: "翻訳中...",
     translator_translation_placeholder: "翻訳結果がここに表示されます...",
     translator_kanji_found: "見つかった漢字",
-    
+
     // --- LANGUAGES ---
     lang_auto: "言語を検出",
     lang_vi: "ベトナム語",
@@ -1317,7 +1317,7 @@ export const translations = {
     world_lessons: "課",
     world_no_data: "戦士のデータがありません。",
     loading_data: "データを読み込み中...",
-    
+
     // --- FRIEND SYSTEM ---
     friend_search_placeholder: "戦士を名前、メールで検索...",
     friend_search_result: "検索結果",
@@ -1445,7 +1445,7 @@ export const translations = {
     forgot_btn_reset: "再設定を確定",
     forgot_btn_processing: "処理中...",
     forgot_close: "閉じる",
-    
+
     // Messages
     forgot_err_email_not_found: "このメールアドレスは登録されていません！",
     forgot_success_sent: "復旧リンクをメールに送信しました！",
@@ -1454,7 +1454,7 @@ export const translations = {
     forgot_err_invalid_link: "リンクが無効か、期限切れです！",
     forgot_success_reset: "パスワードを変更しました！ログイン画面へ移動します...",
     forgot_error_prefix: "エラー: ",
-    
+
     // --- ARENA LOBBY PAGE ---
     arena_lobby_title: "ゲーム",
     arena_progress: "進捗",
@@ -1485,7 +1485,7 @@ export const translations = {
     arena_cancelled_msg: "一人以上のプレイヤーが準備できていません",
     arena_try_again: "再試行",
     you: "あなた",
-    
+
     // --- ARENA PREP PAGE ---
     arena_prep_title: "試合準備",
     arena_match_id: "マッチ",
@@ -1494,7 +1494,7 @@ export const translations = {
     arena_waiting_spin: "スピン待機中...",
     arena_spinning: "ランダムに回転中...",
     arena_topic: "トピック: 課",
-    
+
     // --- ARENA RACE PAGE ---
     arena_race_title: "漢字レースコース",
     arena_race_your_position: "あなたの位置",
@@ -1526,20 +1526,20 @@ export const translations = {
     menu_world: "世界",
     menu_profile_view: "查看主页",
     menu_logout: "登出",
-    
+
     home_welcome: "你好，旅人！",
     home_quotes: [
-        "人生如逆旅，我亦是行人",
-        "千里之行，始于足下",
-        "学海无涯苦作舟",
-        "铁杵磨成针",
-        "书山有路勤为径",
-        "世上无难事，只怕有心人"
+      "每一笔画都是一次呼吸\n每一天的学习都是离梦想更近一步",
+      "汉字如远山\n坚持攀登，云雾终将散去",
+      "天才非天生\n而是在每一个耐心的日子里慢慢铸就",
+      "学海无涯\n以心为舵，终能找到方向",
+      "在无数飘忽的文字之间\n学习是理解，理解即是热爱",
+      "迷失在汉字的森林\n却在每一笔画中找到了自己"
     ],
     home_btn_write: "手写查询",
-    home_sub_write: "手写查询汉字", 
+    home_sub_write: "手写查询汉字",
     home_btn_chat: "请教老夫",
-    home_sub_chat: "与人工智能聊天", 
+    home_sub_chat: "与人工智能聊天",
     home_daily_kanji: "今日汉字",
     home_streak: "连续打卡",
     home_progress_title: "学习进度",
@@ -1644,11 +1644,11 @@ export const translations = {
     chat_placeholder: "年轻人，你想问什么？",
     chat_typing: "正在研磨...",
     chat_greetings: [
-        "哼，臭小子又来找老夫何事？快说，老夫正忙着品茶。",
-        "又是你？今天天气不错...",
-        "想问什么字快问...",
-        "啧啧，看你那迷茫的样子...",
-        "知识浩如烟海..."
+      "哼，臭小子又来找老夫何事？快说，老夫正忙着品茶。",
+      "又是你？今天天气不错...",
+      "想问什么字快问...",
+      "啧啧，看你那迷茫的样子...",
+      "知识浩如烟海..."
     ],
     back: "返回",
     loading: "加载中...",
@@ -1681,7 +1681,7 @@ export const translations = {
     translator_translating: "翻译中...",
     translator_translation_placeholder: "翻译结果将显示在这里...",
     translator_kanji_found: "找到的汉字",
-    
+
     // --- LANGUAGES ---
     lang_auto: "检测语言",
     lang_vi: "越南语",
@@ -1907,7 +1907,7 @@ export const translations = {
     forgot_btn_reset: "确认重置",
     forgot_btn_processing: "处理中...",
     forgot_close: "关闭",
-    
+
     // Messages
     forgot_err_email_not_found: "此邮箱尚未注册！",
     forgot_success_sent: "恢复链接已发送至您的邮箱！",
@@ -1916,7 +1916,7 @@ export const translations = {
     forgot_err_invalid_link: "链接无效或已过期！",
     forgot_success_reset: "密码重置成功！正在跳转至登录...",
     forgot_error_prefix: "错误: ",
-    
+
     // --- ARENA LOBBY PAGE ---
     arena_lobby_title: "游戏",
     arena_progress: "进度",
@@ -1937,7 +1937,7 @@ export const translations = {
     arena_cancel: "取消搜索",
     arena_matched: "匹配成功！",
     arena_entering_prep: "进入准备大厅...",
-    
+
     // --- ARENA PREP PAGE ---
     arena_prep_title: "比赛准备",
     arena_match_id: "对局",
@@ -1946,7 +1946,7 @@ export const translations = {
     arena_waiting_spin: "等待转盘...",
     arena_spinning: "随机转盘中...",
     arena_topic: "主题: 第",
-    
+
     // --- ARENA RACE PAGE ---
     arena_race_title: "汉字比赛赛道",
     arena_race_your_position: "你的位置",
@@ -1978,18 +1978,18 @@ export const translations = {
     menu_world: "세상",
     menu_profile_view: "프로필 보기",
     menu_logout: "로그아웃",
-    
+
     home_welcome: "환영합니다!",
     home_quotes: [
-        "인생은 나그네 길\n덧없는 방랑을 쫓아...",
-        "천 리 길도 한 걸음부터",
-        "배움의 바다는 끝이 없다",
-        "고생 끝에 낙이 온다",
-        "한자 숲에서 길을 잃다\n글자 속에서 나를 찾다",
-        "뜻이 있는 곳에 길이 있다"
+      "한 획 한 획에 생명이 깃들어 있고\n매일의 노력이 꿈으로 향하는 길이 된다",
+      "한자는 저 멀리 있는 산과 같다\n계속 오르다 보면, 안개도 언젠가 걷힌다",
+      "천재는 타고나는 것이 아니라\n인내 속에서 길러지는 것이다",
+      "배움의 바다엔 끝이 없다\n마음을 나침반 삼아 나아가라",
+      "수많은 문자의 물결 속에서\n배움은 이해이고, 이해는 사랑이다",
+      "한자의 숲에서 길을 잃었다가\n한 획 한 획 속에서 나를 발견하다"
     ],
     home_btn_write: "필기 검색",
-    home_sub_write: "한자를 검색하려면 그리기", 
+    home_sub_write: "한자를 검색하려면 그리기",
     home_btn_chat: "노사님께 질문",
     home_sub_chat: "AI와 채팅",
     home_daily_kanji: "오늘의 한자",
@@ -2096,11 +2096,11 @@ export const translations = {
     chat_placeholder: "젊은이여, 무엇이 궁금한가?",
     chat_typing: "먹을 갈고 있습니다...",
     chat_greetings: [
-        "흥, 또 무슨 일로 찾아왔느냐? 말해 보거라, 차를 즐기는 중이다.",
-        "오, 너로구나. 오늘은 날씨가 맑군...",
-        "묻고 싶은 게 있으면 빨리 물어봐라...",
-        "쯧쯧, 저 멍한 표정 좀 보게...",
-        "지식은 바다처럼 끝이 없지..."
+      "흥, 또 무슨 일로 찾아왔느냐? 말해 보거라, 차를 즐기는 중이다.",
+      "오, 너로구나. 오늘은 날씨가 맑군...",
+      "묻고 싶은 게 있으면 빨리 물어봐라...",
+      "쯧쯧, 저 멍한 표정 좀 보게...",
+      "지식은 바다처럼 끝이 없지..."
     ],
     back: "뒤로",
     loading: "로딩 중...",
@@ -2133,7 +2133,7 @@ export const translations = {
     translator_translating: "번역 중...",
     translator_translation_placeholder: "번역 결과가 여기에 표시됩니다...",
     translator_kanji_found: "발견된 한자",
-    
+
     // --- LANGUAGES ---
     lang_auto: "언어 감지",
     lang_vi: "베트남어",
@@ -2356,7 +2356,7 @@ export const translations = {
     forgot_btn_reset: "재설정 확인",
     forgot_btn_processing: "처리 중...",
     forgot_close: "닫기",
-    
+
     // Messages
     forgot_err_email_not_found: "등록되지 않은 이메일입니다!",
     forgot_success_sent: "복구 링크가 이메일로 발송되었습니다!",
@@ -2365,7 +2365,7 @@ export const translations = {
     forgot_err_invalid_link: "유효하지 않거나 만료된 링크입니다!",
     forgot_success_reset: "비밀번호 변경 성공! 로그인 화면으로 이동합니다...",
     forgot_error_prefix: "오류: ",
-    
+
     // --- ARENA LOBBY PAGE ---
     arena_lobby_title: "게임",
     arena_progress: "진도",
@@ -2386,7 +2386,7 @@ export const translations = {
     arena_cancel: "검색 취소",
     arena_matched: "매치 성공!",
     arena_entering_prep: "준비 로비에 입장 중...",
-    
+
     // --- ARENA PREP PAGE ---
     arena_prep_title: "경기 준비",
     arena_match_id: "매치",
@@ -2395,7 +2395,7 @@ export const translations = {
     arena_waiting_spin: "스핀 대기 중...",
     arena_spinning: "무작위 회전 중...",
     arena_topic: "주제: 과",
-    
+
     // --- ARENA RACE PAGE ---
     arena_race_title: "한자 레이스 트랙",
     arena_race_your_position: "당신의 위치",
