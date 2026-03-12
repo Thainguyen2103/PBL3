@@ -56,39 +56,39 @@ const MASCOT_MESSAGES = {
 // monthlyData = mỗi ngày lưu SỐ HỌC TRONG NGÀY (từ daily_stats)
 const analyzeUserHabit = (userData, monthlyData) => {
     if (!userData) return 'normal';
-    
+
     // Tổng tích lũy từ bảng users
     const totalKanji = userData.kanjiLearned || 0;
     const totalRankPoints = userData.rankPoints || 0;
     const totalChallengeScore = userData.challengeScore || 0;
-    
+
     // Đếm số ngày có học trong tháng (dựa vào daily_stats)
-    const daysWithData = monthlyData?.filter(d => 
+    const daysWithData = monthlyData?.filter(d =>
         (d.kanjiLearned > 0 || d.rankPoints > 0 || d.challengeScore > 0)
     ).length || 0;
-    
+
     // Tổng số kanji học trong tháng này
     const kanjiThisMonth = monthlyData?.reduce((sum, d) => sum + (d.kanjiLearned || 0), 0) || 0;
-    
+
     // Kiểm tra ngày hôm nay có học không
     const today = monthlyData?.find(d => d.isToday);
     const learnedToday = today && (today.kanjiLearned > 0 || today.rankPoints > 0);
-    
+
     // Người mới (tổng ít hơn 10 kanji)
     if (totalKanji < 10) return 'newbie';
-    
+
     // Thành tích cao (tổng challenge score > 100)
     if (totalChallengeScore > 100) return 'champion';
-    
+
     // Chăm chỉ (học nhiều hơn 5 ngày trong tháng)
     if (daysWithData >= 5) return 'hardworking';
-    
+
     // Tiến bộ tốt (tổng rank points > 200)
     if (totalRankPoints > 200) return 'progressing';
-    
+
     // Lâu không học (tháng này chưa có data và đã có ít nhất 1 kanji trước đó)
     if (daysWithData === 0 && totalKanji > 0 && !learnedToday) return 'comeback';
-    
+
     return 'normal';
 };
 
@@ -96,9 +96,9 @@ const analyzeUserHabit = (userData, monthlyData) => {
 const Mascot = ({ userData, monthlyData }) => {
     const [message, setMessage] = useState(null);
     const [isVisible, setIsVisible] = useState(true);
-    
+
     const habitType = useMemo(() => analyzeUserHabit(userData, monthlyData), [userData, monthlyData]);
-    
+
     useEffect(() => {
         // Lấy messages theo loại thói quen
         const messages = MASCOT_MESSAGES[habitType] || MASCOT_MESSAGES.normal;
@@ -120,7 +120,7 @@ const Mascot = ({ userData, monthlyData }) => {
                 return { eyeRy: 4, eyeY: 26 }; // Bình thường
         }
     };
-    
+
     const getMouthExpression = () => {
         switch (message.mood) {
             case 'sad':
@@ -133,7 +133,7 @@ const Mascot = ({ userData, monthlyData }) => {
                 return "M28 37 Q32 42 36 37"; // Cười nhẹ
         }
     };
-    
+
     const { eyeRy, eyeY } = getEyeExpression();
     const mouthPath = getMouthExpression();
 
@@ -145,57 +145,57 @@ const Mascot = ({ userData, monthlyData }) => {
                 {/* Bubble tail */}
                 <div className="absolute -right-2 bottom-6 w-5 h-5 bg-white border-r border-b border-gray-100 transform rotate-[-45deg]"></div>
                 {/* Close button */}
-                <button 
+                <button
                     onClick={() => setIsVisible(false)}
                     className="absolute -top-2 -right-2 w-6 h-6 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center text-gray-500 text-sm transition-colors"
                 >
                     ✕
                 </button>
             </div>
-            
+
             {/* Mascot Character - Cute Shiba */}
             <div className="w-24 h-24 relative">
                 <svg viewBox="0 0 64 64" className="w-full h-full drop-shadow-lg">
                     {/* Body */}
-                    <ellipse cx="32" cy="48" rx="18" ry="12" fill="#F4A460"/>
+                    <ellipse cx="32" cy="48" rx="18" ry="12" fill="#F4A460" />
                     {/* Head */}
-                    <circle cx="32" cy="28" r="20" fill="#F4A460"/>
+                    <circle cx="32" cy="28" r="20" fill="#F4A460" />
                     {/* Face (cream color) */}
-                    <ellipse cx="32" cy="32" rx="14" ry="12" fill="#FFF8DC"/>
+                    <ellipse cx="32" cy="32" rx="14" ry="12" fill="#FFF8DC" />
                     {/* Left Ear */}
-                    <path d="M12 18 Q8 4 20 12 Q16 18 12 18Z" fill="#F4A460"/>
-                    <path d="M14 16 Q12 8 20 13" fill="#FFB6C1" opacity="0.6"/>
+                    <path d="M12 18 Q8 4 20 12 Q16 18 12 18Z" fill="#F4A460" />
+                    <path d="M14 16 Q12 8 20 13" fill="#FFB6C1" opacity="0.6" />
                     {/* Right Ear */}
-                    <path d="M52 18 Q56 4 44 12 Q48 18 52 18Z" fill="#F4A460"/>
-                    <path d="M50 16 Q52 8 44 13" fill="#FFB6C1" opacity="0.6"/>
+                    <path d="M52 18 Q56 4 44 12 Q48 18 52 18Z" fill="#F4A460" />
+                    <path d="M50 16 Q52 8 44 13" fill="#FFB6C1" opacity="0.6" />
                     {/* Eyes - Dynamic based on mood */}
-                    <ellipse cx="24" cy={eyeY} rx="3" ry={eyeRy} fill="#2D2D2D"/>
-                    <ellipse cx="40" cy={eyeY} rx="3" ry={eyeRy} fill="#2D2D2D"/>
-                    <circle cx="25" cy={eyeY - 1} r="1" fill="white"/>
-                    <circle cx="41" cy={eyeY - 1} r="1" fill="white"/>
+                    <ellipse cx="24" cy={eyeY} rx="3" ry={eyeRy} fill="#2D2D2D" />
+                    <ellipse cx="40" cy={eyeY} rx="3" ry={eyeRy} fill="#2D2D2D" />
+                    <circle cx="25" cy={eyeY - 1} r="1" fill="white" />
+                    <circle cx="41" cy={eyeY - 1} r="1" fill="white" />
                     {/* Sparkle eyes for excited mood */}
                     {message.mood === 'excited' && (
                         <>
-                            <path d="M22 22 L24 20 L26 22 L24 24 Z" fill="#FFD700"/>
-                            <path d="M38 22 L40 20 L42 22 L40 24 Z" fill="#FFD700"/>
+                            <path d="M22 22 L24 20 L26 22 L24 24 Z" fill="#FFD700" />
+                            <path d="M38 22 L40 20 L42 22 L40 24 Z" fill="#FFD700" />
                         </>
                     )}
                     {/* Tears for sad mood */}
                     {(message.mood === 'sad' || message.mood === 'worried') && (
                         <>
-                            <ellipse cx="20" cy="30" rx="2" ry="3" fill="#87CEEB" opacity="0.7"/>
-                            <ellipse cx="44" cy="30" rx="2" ry="3" fill="#87CEEB" opacity="0.7"/>
+                            <ellipse cx="20" cy="30" rx="2" ry="3" fill="#87CEEB" opacity="0.7" />
+                            <ellipse cx="44" cy="30" rx="2" ry="3" fill="#87CEEB" opacity="0.7" />
                         </>
                     )}
                     {/* Nose */}
-                    <ellipse cx="32" cy="33" rx="3" ry="2" fill="#2D2D2D"/>
+                    <ellipse cx="32" cy="33" rx="3" ry="2" fill="#2D2D2D" />
                     {/* Mouth - Dynamic based on mood */}
-                    <path d={mouthPath} stroke="#2D2D2D" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+                    <path d={mouthPath} stroke="#2D2D2D" strokeWidth="1.5" fill="none" strokeLinecap="round" />
                     {/* Blush */}
-                    <ellipse cx="18" cy="32" rx="4" ry="2" fill="#FFB6C1" opacity="0.5"/>
-                    <ellipse cx="46" cy="32" rx="4" ry="2" fill="#FFB6C1" opacity="0.5"/>
+                    <ellipse cx="18" cy="32" rx="4" ry="2" fill="#FFB6C1" opacity="0.5" />
+                    <ellipse cx="46" cy="32" rx="4" ry="2" fill="#FFB6C1" opacity="0.5" />
                     {/* Tail - wagging for happy moods */}
-                    <path d="M50 48 Q62 40 56 50 Q54 54 50 52" fill="#F4A460" className={message.mood === 'excited' ? 'animate-wag' : ''}/>
+                    <path d="M50 48 Q62 40 56 50 Q54 54 50 52" fill="#F4A460" className={message.mood === 'excited' ? 'animate-wag' : ''} />
                 </svg>
             </div>
         </div>
@@ -206,19 +206,19 @@ const Mascot = ({ userData, monthlyData }) => {
 const Icons = {
     Back: () => (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/>
+            <path d="M19 12H5" /><path d="M12 19l-7-7 7-7" />
         </svg>
     ),
     // Gamepad icon - Rank Đấu
     Gamepad: () => (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><line x1="15" y1="13" x2="15.01" y2="13"/><line x1="18" y1="11" x2="18.01" y2="11"/><rect x="2" y="6" width="20" height="12" rx="2"/>
+            <line x1="6" y1="12" x2="10" y2="12" /><line x1="8" y1="10" x2="8" y2="14" /><line x1="15" y1="13" x2="15.01" y2="13" /><line x1="18" y1="11" x2="18.01" y2="11" /><rect x="2" y="6" width="20" height="12" rx="2" />
         </svg>
     ),
     // Swords icon - Chiến công
     Swords: () => (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/><line x1="13" y1="19" x2="19" y2="13"/><line x1="16" y1="16" x2="20" y2="20"/><line x1="19" y1="21" x2="21" y2="19"/><polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/><line x1="5" y1="14" x2="9" y2="18"/><line x1="7" y1="17" x2="4" y2="20"/><line x1="3" y1="19" x2="5" y2="21"/>
+            <polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5" /><line x1="13" y1="19" x2="19" y2="13" /><line x1="16" y1="16" x2="20" y2="20" /><line x1="19" y1="21" x2="21" y2="19" /><polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5" /><line x1="5" y1="14" x2="9" y2="18" /><line x1="7" y1="17" x2="4" y2="20" /><line x1="3" y1="19" x2="5" y2="21" />
         </svg>
     ),
     // Kanji icon - Sức mạnh (Hán tự học được)
@@ -280,8 +280,8 @@ const StatisticsPage = () => {
             {/* Header */}
             <header className="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-gray-200 px-4 py-3">
                 <div className="flex items-center justify-between">
-                    <button 
-                        onClick={() => navigate(-1)} 
+                    <button
+                        onClick={() => navigate(-1)}
                         className="flex items-center gap-2 px-3 py-2 rounded-xl text-slate-600 hover:bg-slate-100 transition-colors font-bold text-sm"
                     >
                         <Icons.Back />
@@ -290,16 +290,16 @@ const StatisticsPage = () => {
                     <h1 className="text-lg font-black text-slate-800 flex items-center gap-2">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="1" y="3" width="22" height="18" rx="3" fill="url(#statsGradHeader)" />
-                            <rect x="4" y="12" width="3" height="6" rx="1" fill="white" opacity="0.9"/>
-                            <rect x="8.5" y="8" width="3" height="10" rx="1" fill="white" opacity="0.95"/>
-                            <rect x="13" y="10" width="3" height="8" rx="1" fill="white" opacity="0.9"/>
-                            <rect x="17.5" y="6" width="3" height="12" rx="1" fill="white"/>
-                            <path d="M5.5 11 L10 7 L14.5 9 L19 5" stroke="#FCD34D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            <circle cx="19" cy="5" r="1.5" fill="#FCD34D"/>
+                            <rect x="4" y="12" width="3" height="6" rx="1" fill="white" opacity="0.9" />
+                            <rect x="8.5" y="8" width="3" height="10" rx="1" fill="white" opacity="0.95" />
+                            <rect x="13" y="10" width="3" height="8" rx="1" fill="white" opacity="0.9" />
+                            <rect x="17.5" y="6" width="3" height="12" rx="1" fill="white" />
+                            <path d="M5.5 11 L10 7 L14.5 9 L19 5" stroke="#FCD34D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <circle cx="19" cy="5" r="1.5" fill="#FCD34D" />
                             <defs>
                                 <linearGradient id="statsGradHeader" x1="1" y1="3" x2="23" y2="21" gradientUnits="userSpaceOnUse">
-                                    <stop stopColor="#06B6D4"/>
-                                    <stop offset="1" stopColor="#0891B2"/>
+                                    <stop stopColor="#06B6D4" />
+                                    <stop offset="1" stopColor="#0891B2" />
                                 </linearGradient>
                             </defs>
                         </svg>
@@ -314,25 +314,25 @@ const StatisticsPage = () => {
                 <div className="grid grid-cols-3 gap-3">
                     <StatCard
                         icon={<Icons.Gamepad />}
-                        title={t.rank_battle || 'Rank Đấu'}
+                        title={t.stats_rank_battle || 'Rank Đấu'}
                         value={totalStats.rankPoints}
-                        subtitle={t.pts || 'pts'}
+                        subtitle={t.stats_pts || 'pts'}
                         color="text-orange-600"
                         bgColor="bg-gradient-to-br from-orange-50 to-orange-100/50"
                     />
                     <StatCard
                         icon={<Icons.Kanji />}
-                        title={t.power || 'Sức mạnh'}
+                        title={t.stats_power || 'Sức mạnh'}
                         value={totalStats.kanjiLearned}
-                        subtitle={t.kanji_unit || 'Hán tự'}
+                        subtitle={t.stats_kanji_unit || 'Hán tự'}
                         color="text-cyan-600"
                         bgColor="bg-gradient-to-br from-cyan-50 to-cyan-100/50"
                     />
                     <StatCard
                         icon={<Icons.Swords />}
-                        title={t.achievements || 'Chiến công'}
+                        title={t.stats_achievements_label || 'Chiến công'}
                         value={totalStats.challengeScore}
-                        subtitle={t.points || 'điểm'}
+                        subtitle={t.stats_score_unit || 'điểm'}
                         color="text-purple-600"
                         bgColor="bg-gradient-to-br from-purple-50 to-purple-100/50"
                     />

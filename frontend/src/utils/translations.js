@@ -45,9 +45,63 @@ export const translations = {
     stats_characters: "chữ",
     stats_chart_type: "Kiểu:",
     stats_no_data: "Chưa có dữ liệu",
+    stats_rank_battle: "Rank Đấu",
+    stats_power: "Sức mạnh",
+    stats_kanji_unit: "Hán tự",
+    stats_pts: "pts",
+    stats_score_unit: "điểm",
+    stats_achievements_label: "Chiến công",
+    stats_chart_type: "Kiểu:",
+    stats_chart_bar: "Cột",
+    stats_chart_line: "Đường",
+    stats_chart_spline: "Cong",
+    stats_chart_total: "Tổng",
+    stats_chart_footer: "Biểu đồ hiển thị số lượng học được trong từng ngày",
+    stats_footer: "Dữ liệu được cập nhật khi bạn học Flashcard hoặc làm Thử thách",
+
+    // --- MASCOT MESSAGES ---
+    mascot_messages: {
+      newbie: [
+        "Chào mừng bạn đến với thế giới Kanji! Hành trình vạn dặm bắt đầu từ bước đầu tiên! 🌱",
+        "Bạn mới bắt đầu thôi à? Không sao, mình sẽ đồng hành cùng bạn! 🤝",
+        "Mỗi chữ Hán là một câu chuyện, hãy khám phá từng chút một nhé! 📖"
+      ],
+      hardworking: [
+        "Woa! Bạn học đều đặn quá! Kiến tha lâu đầy tổ là đây! 🐜✨",
+        "Nhìn biểu đồ mà mình thấy tự hào quá! Bạn giỏi lắm! 🌟",
+        "Nước chảy đá mòn, bạn chính là minh chứng cho câu này! 💪",
+        "Cứ đà này, bạn sẽ thành cao thủ Kanji thôi! 🏆"
+      ],
+      progressing: [
+        "Điểm Rank của bạn cao quá! Có công mài sắt, có ngày nên kim! ⚡",
+        "Bạn đang tiến bộ rất nhanh đấy! Cứ tiếp tục nhé! 🚀",
+        "Thống kê đẹp quá! Hôm nay gieo hạt, mai sau gặt vàng! 🌾"
+      ],
+      comeback: [
+        "Ơ bạn đi đâu mất rồi? Mình nhớ bạn quá à! 🥺",
+        "Lâu quá không thấy bạn... Học như thuyền ngược nước, không tiến ắt lùi đó! ⛵",
+        "Hôm nay bạn quay lại rồi! Mình vui quá! Cùng học tiếp nhé! 🎉",
+        "Đừng bỏ cuộc nha! Chậm mà chắc, như rùa thắng thỏ vậy! 🐢"
+      ],
+      normal: [
+        "Ngày ngày chăm học chữ, mai sau thành đại thụ! 🌳",
+        "Một chữ một ngày, năm tháng dài thêm trí tuệ! ✨",
+        "Chữ nghĩa như hoa, càng học càng nở rộ! 🌸",
+        "Mỗi Kanji là một viên ngọc, hãy góp nhặt từng ngày! 💎",
+        "Tri thức là ánh sáng, hãy thắp lên mỗi ngày! 💡",
+        "Đọc sách vạn quyển, hạ bút như thần! 📚",
+        "Học hành là con đường hoa, gian nan nhưng đẹp! 🌷"
+      ],
+      champion: [
+        "Chiến công hiển hách! Bạn là chiến binh Kanji thực thụ! ⚔️",
+        "Điểm thử thách cao quá! Bạn quá xuất sắc rồi! 🏅",
+        "Cây cao bóng cả nhờ rễ sâu, bạn đã chứng minh điều đó! 🌲"
+      ]
+    },
 
     // --- HOME & AUTH ---
     home_welcome: "Xin chào, Lữ khách!",
+
     home_quotes: [
       "Mỗi nét chữ là một hơi thở\nMỗi ngày học là một bước gần hơn với giấc mơ",
       "Chữ Hán như ngọn núi xa\nKiên trì leo mãi, mây mù cũng tan",
@@ -560,6 +614,19 @@ export const translations = {
     stats_characters: "chars",
     stats_chart_type: "Type:",
     stats_no_data: "No data available",
+    stats_rank_battle: "Arena Rank",
+    stats_power: "Power",
+    stats_kanji_unit: "Kanji",
+    stats_pts: "pts",
+    stats_score_unit: "pts",
+    stats_achievements_label: "Achievements",
+    stats_chart_type: "Type:",
+    stats_chart_bar: "Bar",
+    stats_chart_line: "Line",
+    stats_chart_spline: "Curve",
+    stats_chart_total: "Total",
+    stats_chart_footer: "Chart shows daily learning progress",
+    stats_footer: "Data is updated when you study Flashcards or complete Challenges",
 
     home_welcome: "Welcome, Traveler!",
     home_quotes: [
@@ -1064,6 +1131,19 @@ export const translations = {
     stats_characters: "字",
     stats_chart_type: "タイプ:",
     stats_no_data: "データがありません",
+    stats_rank_battle: "ランク戦",
+    stats_power: "強さ",
+    stats_kanji_unit: "漢字",
+    stats_pts: "pts",
+    stats_score_unit: "点",
+    stats_achievements_label: "実績",
+    stats_chart_type: "種類:",
+    stats_chart_bar: "棒グラフ",
+    stats_chart_line: "折れ線",
+    stats_chart_spline: "曲線",
+    stats_chart_total: "合計",
+    stats_chart_footer: "グラフは毎日の学習数を表示します",
+    stats_footer: "フラッシュカードまたはチャレンジ完了時にデータが更新されます",
 
     home_welcome: "ようこそ、旅人よ！",
     home_quotes: [

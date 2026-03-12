@@ -30,9 +30,7 @@ const LoginPage = () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: window.location.hostname === 'localhost'
-          ? 'http://localhost:5173/home'
-          : 'https://kanjilearning.vercel.app/home'
+        redirectTo: `${window.location.origin}/home`
       }
     });
     if (error) setError('Lỗi đăng nhập Google: ' + error.message);
