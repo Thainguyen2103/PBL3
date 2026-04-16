@@ -5,50 +5,15 @@ import { translations } from '../utils/translations';
 import { useStatistics, getMonthName } from '../hooks/useStatistics';
 import StatisticsChart from '../components/StatisticsChart';
 
-// --- MASCOT MESSAGES BY MOOD ---
-const MASCOT_MESSAGES = {
-    // Người mới bắt đầu (ít hơn 10 kanji)
-    newbie: [
-        { text: "Chào mừng bạn đến với thế giới Kanji! Hành trình vạn dặm bắt đầu từ bước đầu tiên! 🌱", mood: "welcome" },
-        { text: "Bạn mới bắt đầu thôi à? Không sao, mình sẽ đồng hành cùng bạn! 🤝", mood: "care" },
-        { text: "Mỗi chữ Hán là một câu chuyện, hãy khám phá từng chút một nhé! 📖", mood: "happy" },
-    ],
-    // Chăm chỉ (học nhiều ngày liên tiếp)
-    hardworking: [
-        { text: "Woa! Bạn học đều đặn quá! Kiến tha lâu đầy tổ là đây! 🐜✨", mood: "proud" },
-        { text: "Nhìn biểu đồ mà mình thấy tự hào quá! Bạn giỏi lắm! 🌟", mood: "excited" },
-        { text: "Nước chảy đá mòn, bạn chính là minh chứng cho câu này! 💪", mood: "cheer" },
-        { text: "Cứ đà này, bạn sẽ thành cao thủ Kanji thôi! 🏆", mood: "proud" },
-    ],
-    // Tiến bộ tốt (rank points cao)
-    progressing: [
-        { text: "Điểm Rank của bạn cao quá! Có công mài sắt, có ngày nên kim! ⚡", mood: "excited" },
-        { text: "Bạn đang tiến bộ rất nhanh đấy! Cứ tiếp tục nhé! 🚀", mood: "cheer" },
-        { text: "Thống kê đẹp quá! Hôm nay gieo hạt, mai sau gặt vàng! 🌾", mood: "proud" },
-    ],
-    // Lâu không học (không có data gần đây)
-    comeback: [
-        { text: "Ơ bạn đi đâu mất rồi? Mình nhớ bạn quá à! 🥺", mood: "sad" },
-        { text: "Lâu quá không thấy bạn... Học như thuyền ngược nước, không tiến ắt lùi đó! ⛵", mood: "worried" },
-        { text: "Hôm nay bạn quay lại rồi! Mình vui quá! Cùng học tiếp nhé! 🎉", mood: "happy" },
-        { text: "Đừng bỏ cuộc nha! Chậm mà chắc, như rùa thắng thỏ vậy! 🐢", mood: "care" },
-    ],
-    // Bình thường
-    normal: [
-        { text: "Ngày ngày chăm học chữ, mai sau thành đại thụ! 🌳", mood: "cheer" },
-        { text: "Một chữ một ngày, năm tháng dài thêm trí tuệ! ✨", mood: "happy" },
-        { text: "Chữ nghĩa như hoa, càng học càng nở rộ! 🌸", mood: "proud" },
-        { text: "Mỗi Kanji là một viên ngọc, hãy góp nhặt từng ngày! 💎", mood: "happy" },
-        { text: "Tri thức là ánh sáng, hãy thắp lên mỗi ngày! 💡", mood: "cheer" },
-        { text: "Đọc sách vạn quyển, hạ bút như thần! 📚", mood: "proud" },
-        { text: "Học hành là con đường hoa, gian nan nhưng đẹp! 🌷", mood: "happy" },
-    ],
-    // Thành tích cao (nhiều challenge score)
-    champion: [
-        { text: "Chiến công hiển hách! Bạn là chiến binh Kanji thực thụ! ⚔️", mood: "excited" },
-        { text: "Điểm thử thách cao quá! Bạn quá xuất sắc rồi! 🏅", mood: "proud" },
-        { text: "Cây cao bóng cả nhờ rễ sâu, bạn đã chứng minh điều đó! 🌲", mood: "cheer" },
-    ],
+// --- MASCOT MOOD MAPPING ---
+// Use translations for text, this object stores only the corresponding moods
+const MASCOT_MOODS = {
+    newbie: ["welcome", "care", "happy"],
+    hardworking: ["proud", "excited", "cheer", "proud"],
+    progressing: ["excited", "cheer", "proud"],
+    comeback: ["sad", "worried", "happy", "care"],
+    normal: ["cheer", "happy", "proud", "happy", "cheer", "proud", "happy"],
+    champion: ["excited", "proud", "cheer"],
 };
 
 // Phân tích thói quen học tập
@@ -94,17 +59,26 @@ const analyzeUserHabit = (userData, monthlyData) => {
 
 // --- MASCOT COMPONENT ---
 const Mascot = ({ userData, monthlyData }) => {
+    const { language } = useAppContext();
+    const t = translations[language] || translations.vi;
     const [message, setMessage] = useState(null);
     const [isVisible, setIsVisible] = useState(true);
 
     const habitType = useMemo(() => analyzeUserHabit(userData, monthlyData), [userData, monthlyData]);
 
     useEffect(() => {
-        // Lấy messages theo loại thói quen
-        const messages = MASCOT_MESSAGES[habitType] || MASCOT_MESSAGES.normal;
-        const randomMsg = messages[Math.floor(Math.random() * messages.length)];
-        setMessage(randomMsg);
-    }, [habitType]);
+        // Lấy messages text từ translations.js theo ngôn ngữ hiện tại
+        const tMessages = t.mascot_messages?.[habitType] || t.mascot_messages?.normal || [];
+        const moods = MASCOT_MOODS[habitType] || MASCOT_MOODS.normal;
+        
+        if (tMessages.length > 0) {
+            const randomIndex = Math.floor(Math.random() * tMessages.length);
+            const text = tMessages[randomIndex];
+            // Dự phòng mood happy nếu mảng mood không khớp độ dài
+            const mood = moods[randomIndex] || "happy";
+            setMessage({ text, mood });
+        }
+    }, [habitType, t]);
 
     if (!isVisible || !message) return null;
 

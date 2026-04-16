@@ -628,6 +628,46 @@ export const translations = {
     stats_chart_footer: "Chart shows daily learning progress",
     stats_footer: "Data is updated when you study Flashcards or complete Challenges",
 
+    // --- MASCOT MESSAGES ---
+    mascot_messages: {
+      newbie: [
+        "Welcome to the world of Kanji! A journey of a thousand miles begins with a single step! 🌱",
+        "Just starting out? Don't worry, I'll be with you every step of the way! 🤝",
+        "Every Kanji has a story, let's explore them bit by bit! 📖"
+      ],
+      hardworking: [
+        "Wow! You study so consistently! Slow and steady wins the race! 🐜✨",
+        "Looking at your chart makes me so proud! You're doing great! 🌟",
+        "Dripping water hollows out stone, and you are the proof! 💪",
+        "At this rate, you'll become a Kanji master in no time! 🏆"
+      ],
+      progressing: [
+        "Your Rank score is so high! Hard work pays off! ⚡",
+        "You're progressing so fast! Keep it up! 🚀",
+        "Beautiful stats! Plant seeds today, harvest gold tomorrow! 🌾"
+      ],
+      comeback: [
+        "Where did you go? I missed you so much! 🥺",
+        "Long time no see... Learning is like rowing upstream, not advancing is dropping back! ⛵",
+        "You're back today! I'm so happy! Let's continue learning! 🎉",
+        "Don't give up! Slow and steady, like the tortoise beating the hare! 🐢"
+      ],
+      normal: [
+        "Study words daily, become a great tree in the future! 🌳",
+        "One word a day, wisdom grows with time! ✨",
+        "Words are like flowers, the more you learn, the more they bloom! 🌸",
+        "Every Kanji is a gem, collect them day by day! 💎",
+        "Knowledge is light, ignite it every day! 💡",
+        "Read ten thousand books, write like a god! 📚",
+        "Learning is a flowery path, arduous but beautiful! 🌷"
+      ],
+      champion: [
+        "Glorious achievements! You are a true Kanji warrior! ⚔️",
+        "Challenge score is so high! You are outstanding! 🏅",
+        "A tall tree casts a large shadow thanks to deep roots, you've proved it! 🌲"
+      ]
+    },
+
     home_welcome: "Welcome, Traveler!",
     home_quotes: [
       "Every stroke is a breath\nEvery day of study, one step closer to the dream",
@@ -1145,6 +1185,46 @@ export const translations = {
     stats_chart_footer: "グラフは毎日の学習数を表示します",
     stats_footer: "フラッシュカードまたはチャレンジ完了時にデータが更新されます",
 
+    // --- MASCOT MESSAGES ---
+    mascot_messages: {
+      newbie: [
+        "漢字の世界へようこそ！千里の道も一歩から！ 🌱",
+        "まだ始めたばかりですか？大丈夫、私がついていますよ！ 🤝",
+        "一つ一つの漢字には物語があります。少しずつ探求しましょう！ 📖"
+      ],
+      hardworking: [
+        "うわー！毎日コツコツ勉強していますね！継続は力なり！ 🐜✨",
+        "あなたのグラフを見ると誇らしくなります！素晴らしい！ 🌟",
+        "雨垂れ石を穿つ。あなたがその証明です！ 💪",
+        "この調子なら、すぐに漢字マスターになれますよ！ 🏆"
+      ],
+      progressing: [
+        "ランクポイントが凄いです！努力は報われますね！ ⚡",
+        "上達がとても早いです！その調子で！ 🚀",
+        "美しい統計です！今日種をまき、明日黄金の収穫を！ 🌾"
+      ],
+      comeback: [
+        "どこへ行っていたの？とても寂しかったです！ 🥺",
+        "お久しぶりです… 学問は逆水を行く舟の如し、進まざれば退くのみ！ ⛵",
+        "今日戻ってきてくれて嬉しいです！さあ、勉強を続けましょう！ 🎉",
+        "諦めないで！ウサギとカメのように、ゆっくりでも確実に！ 🐢"
+      ],
+      normal: [
+        "毎日字を学べば、いつか大樹になります！ 🌳",
+        "一日一字、年月と共に知恵が増します！ ✨",
+        "文字は花のようなもの、学べば学ぶほど咲き誇ります！ 🌸",
+        "全ての漢字は宝石です。毎日少しずつ集めましょう！ 💎",
+        "知識は光、毎日灯しましょう！ 💡",
+        "万巻の書を読み、神の如く筆を振るう！ 📚",
+        "学びの道は花の道、険しいけれど美しい！ 🌷"
+      ],
+      champion: [
+        "輝かしい功績！あなたは真の漢字戦士です！ ⚔️",
+        "チャレンジスコアがとても高い！素晴らしい！ 🏅",
+        "根が深い木は風に揺れない。あなたはそれを証明しました！ 🌲"
+      ]
+    },
+
     home_welcome: "ようこそ、旅人よ！",
     home_quotes: [
       "一画一画に命が宿る\n毎日の積み重ねが夢へと続く道",
@@ -1603,9 +1683,91 @@ export const translations = {
     menu_flashcard: "抽认卡",
     menu_challenge: "挑战",
     menu_game: "游戏",
+    menu_statistics: "统计",
     menu_world: "世界",
     menu_profile_view: "查看主页",
     menu_logout: "登出",
+
+    // --- STATISTICS PAGE ---
+    stats_title: "学习统计",
+    stats_period: "近30天统计",
+    stats_streak: "连续天数",
+    stats_flashcards_learned: "已学抽认卡",
+    stats_arena_points: "竞技场积分",
+    stats_challenge_score: "挑战分数",
+    stats_best_streak: "最高连续",
+    stats_cards: "张",
+    stats_points: "分",
+    stats_days: "天",
+    stats_tab_flashcards: "抽认卡",
+    stats_tab_arena: "竞技场积分",
+    stats_tab_challenge: "挑战",
+    stats_achievements: "成就",
+    stats_unlocked: "已解锁",
+    stats_note: "数据每天自动更新",
+    stats_achievement_streak7: "连续7天",
+    stats_achievement_100cards: "100张抽认卡",
+    stats_achievement_arena10: "10场竞技场",
+    stats_achievement_top10: "排行榜前10",
+    stats_achievement_all_lessons: "完成全部课程",
+    stats_achievement_master: "汉字大师",
+    stats_tab_kanji: "汉字",
+    stats_kanji_learned: "已学汉字",
+    stats_characters: "字",
+    stats_chart_type: "类型:",
+    stats_no_data: "暂无数据",
+    stats_rank_battle: "竞技排名",
+    stats_power: "实力",
+    stats_kanji_unit: "汉字",
+    stats_pts: "pts",
+    stats_score_unit: "分",
+    stats_achievements_label: "战功",
+    stats_chart_bar: "柱状",
+    stats_chart_line: "折线",
+    stats_chart_spline: "曲线",
+    stats_chart_total: "总计",
+    stats_chart_footer: "图表显示每日学习数量",
+    stats_footer: "学习抽认卡或完成挑战时数据将更新",
+
+    // --- MASCOT MESSAGES ---
+    mascot_messages: {
+      newbie: [
+        "欢迎来到汉字的世界！千里之行，始于足下！ 🌱",
+        "才刚刚开始吗？没关系，我会一直陪伴你的！ 🤝",
+        "每个汉字都有一个故事，让我们一点点去探索吧！ 📖"
+      ],
+      hardworking: [
+        "哇！你每天都在坚持学习！聚沙成塔集腋成裘！ 🐜✨",
+        "看着你的图表我感到很自豪！你太棒了！ 🌟",
+        "滴水穿石，你就是这句话的证明！ 💪",
+        "照这个势头，你很快就会成为汉字大师的！ 🏆"
+      ],
+      progressing: [
+        "你的排名分数好高！只要功夫深，铁杵磨成针！ ⚡",
+        "你进步得真快！继续保持！ 🚀",
+        "漂亮的数据！今天播种，明天收获黄金！ 🌾"
+      ],
+      comeback: [
+        "你去哪儿了？我好想你啊！ 🥺",
+        "好久不见……学如逆水行舟，不进则退！ ⛵",
+        "今天你回来了！我很高兴！继续学习吧！ 🎉",
+        "不要放弃！像龟兔赛跑一样，稳扎稳打！ 🐢"
+      ],
+      normal: [
+        "日复一日勤学字，来日必定成大树！ 🌳",
+        "一日一字，岁月长长智慧增！ ✨",
+        "文字如花，越学越绽放！ 🌸",
+        "每个汉字都是一颗宝石，每天收集一点吧！ 💎",
+        "知识就是光芒，每天点亮它！ 💡",
+        "读书破万卷，下笔如有神！ 📚",
+        "学习是一条花路，虽然艰难但很美丽！ 🌷"
+      ],
+      champion: [
+        "显赫的战功！你是真正的汉字战士！ ⚔️",
+        "挑战分数真高！你太出色了！ 🏅",
+        "树大根深，你证明了这一点！ 🌲"
+      ]
+    },
 
     home_welcome: "你好，旅人！",
     home_quotes: [
@@ -2055,9 +2217,91 @@ export const translations = {
     menu_flashcard: "플래시카드",
     menu_challenge: "도전",
     menu_game: "게임",
+    menu_statistics: "통계",
     menu_world: "세상",
     menu_profile_view: "프로필 보기",
     menu_logout: "로그아웃",
+
+    // --- STATISTICS PAGE ---
+    stats_title: "학습 통계",
+    stats_period: "최근 30일 통계",
+    stats_streak: "연속 일수",
+    stats_flashcards_learned: "학습한 플래시카드",
+    stats_arena_points: "아레나 점수",
+    stats_challenge_score: "도전 점수",
+    stats_best_streak: "최고 연속",
+    stats_cards: "장",
+    stats_points: "점",
+    stats_days: "일",
+    stats_tab_flashcards: "플래시카드",
+    stats_tab_arena: "아레나 점수",
+    stats_tab_challenge: "도전",
+    stats_achievements: "업적",
+    stats_unlocked: "해제됨",
+    stats_note: "데이터는 매일 자동 업데이트됩니다",
+    stats_achievement_streak7: "7일 연속",
+    stats_achievement_100cards: "플래시카드 100장",
+    stats_achievement_arena10: "아레나 10경기",
+    stats_achievement_top10: "랭킹 Top 10",
+    stats_achievement_all_lessons: "전체 레슨 완료",
+    stats_achievement_master: "한자 마스터",
+    stats_tab_kanji: "한자",
+    stats_kanji_learned: "학습한 한자",
+    stats_characters: "자",
+    stats_chart_type: "유형:",
+    stats_no_data: "데이터 없음",
+    stats_rank_battle: "아레나 랭크",
+    stats_power: "실력",
+    stats_kanji_unit: "한자",
+    stats_pts: "pts",
+    stats_score_unit: "점",
+    stats_achievements_label: "전공",
+    stats_chart_bar: "막대",
+    stats_chart_line: "선",
+    stats_chart_spline: "곡선",
+    stats_chart_total: "합계",
+    stats_chart_footer: "차트는 매일 학습량을 보여줍니다",
+    stats_footer: "플래시카드를 학습하거나 도전을 완료하면 데이터가 업데이트됩니다",
+
+    // --- MASCOT MESSAGES ---
+    mascot_messages: {
+      newbie: [
+        "한자의 세계에 오신 것을 환영합니다! 천 리 길도 한 걸음부터! 🌱",
+        "이제 막 시작하셨나요? 걱정 마세요, 제가 함께 할게요! 🤝",
+        "모든 한자에는 스토리가 있습니다. 조금씩 탐험해 봐요! 📖"
+      ],
+      hardworking: [
+        "와! 꾸준히 공부하시네요! 티끌 모아 태산입니다! 🐜✨",
+        "당신의 그래프를 보니 정말 자랑스럽습니다! 잘하고 계십니다! 🌟",
+        "낙수물이 바위를 뚫는다죠, 당신이 바로 그 증거입니다! 💪",
+        "이 기세라면 곧 한자 마스터가 될 거예요! 🏆"
+      ],
+      progressing: [
+        "랭크 점수가 정말 높네요! 노력은 배신하지 않습니다! ⚡",
+        "정말 빠르게 발전하고 있어요! 이대로 계속하세요! 🚀",
+        "아름다운 통계입니다! 오늘 씨를 뿌리고 내일 황금을 얻으세요! 🌾"
+      ],
+      comeback: [
+        "어디 다녀오셨어요? 정말 보고 싶었습니다! 🥺",
+        "오랜만이네요... 배움은 물을 거슬러 오르는 배와 같아서 나아가지 않으면 뒤쳐지게 됩니다! ⛵",
+        "오늘 돌아오셨군요! 정말 기쁩니다! 다시 공부를 시작해 봐요! 🎉",
+        "포기하지 마세요! 토끼와 거북이처럼 천천히 그리고 확실하게! 🐢"
+      ],
+      normal: [
+        "매일 글자를 배우면 훗날 큰 나무가 됩니다! 🌳",
+        "하루에 한 글자, 세월과 함께 지혜가 자랍니다! ✨",
+        "글씨는 꽃과 같아서, 배울수록 활짝 피어납니다! 🌸",
+        "모든 한자는 보석입니다. 매일 조금씩 모아보세요! 💎",
+        "지식은 빛이니, 매일 빛을 밝혀보세요! 💡",
+        "책을 만 권 읽으면, 신처럼 글을 쓸 수 있습니다! 📚",
+        "배움은 꽃길입니다. 험난하지만 아름답죠! 🌷"
+      ],
+      champion: [
+        "찬란한 업적입니다! 당신은 진정한 한자 전사입니다! ⚔️",
+        "도전 점수가 엄청 높네요! 대단하십니다! 🏅",
+        "뿌리 깊은 나무는 바람에 흔들리지 않는다고, 당신이 바로 그 증명입니다! 🌲"
+      ]
+    },
 
     home_welcome: "환영합니다!",
     home_quotes: [
