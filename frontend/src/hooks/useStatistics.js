@@ -50,6 +50,7 @@ export const useStatistics = (userId) => {
     const [loading, setLoading] = useState(true);
     const [userData, setUserData] = useState(null);
     const [dailySnapshots, setDailySnapshots] = useState({});
+    const [prevDailySnapshots, setPrevDailySnapshots] = useState({});
     
     const today = new Date();
     const [selectedMonth, setSelectedMonth] = useState(today.getMonth());
@@ -128,8 +129,16 @@ export const useStatistics = (userId) => {
     useEffect(() => {
         const loadMonthlyData = async () => {
             if (!userId) return;
-            const snapshots = await fetchMonthlySnapshots(userId, selectedYear, selectedMonth);
-            setDailySnapshots(snapshots);
+            const prevMonth = selectedMonth === 0 ? 11 : selectedMonth - 1;
+            const prevYear = selectedMonth === 0 ? selectedYear - 1 : selectedYear;
+
+            const [currSnapshots, prevSnapshots] = await Promise.all([
+                fetchMonthlySnapshots(userId, selectedYear, selectedMonth),
+                fetchMonthlySnapshots(userId, prevYear, prevMonth)
+            ]);
+
+            setDailySnapshots(currSnapshots);
+            setPrevDailySnapshots(prevSnapshots);
         };
         loadMonthlyData();
     }, [userId, selectedMonth, selectedYear]);
@@ -174,11 +183,21 @@ export const useStatistics = (userId) => {
         challengeScore: monthlyData.reduce((sum, d) => sum + (d.challengeScore || 0), 0)
     }), [monthlyData]);
 
+    // Previous Monthly totals
+    const prevMonthlyTotals = useMemo(() => {
+        return Object.values(prevDailySnapshots).reduce((acc, curr) => ({
+            rankPoints: acc.rankPoints + (curr.rankPoints || 0),
+            kanjiLearned: acc.kanjiLearned + (curr.kanjiLearned || 0),
+            challengeScore: acc.challengeScore + (curr.challengeScore || 0)
+        }), { rankPoints: 0, kanjiLearned: 0, challengeScore: 0 });
+    }, [prevDailySnapshots]);
+
     return {
         loading,
         userData,
         monthlyData,
         monthlyTotals,
+        prevMonthlyTotals,
         selectedMonth,
         selectedYear,
         isCurrentMonth,

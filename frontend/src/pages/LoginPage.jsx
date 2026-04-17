@@ -14,7 +14,7 @@ const LoginPage = () => {
 
   // Lắng nghe khi Google redirect về app
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+    const { data: { subscription } } = supabase.auth.onAuthStateIIChange(
       async (event, session) => {
         if (session?.user) {
           localStorage.setItem('session', JSON.stringify(session.user));

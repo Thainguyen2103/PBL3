@@ -3,6 +3,23 @@ export const translations = {
   // 1. TIẾNG VIỆT (VI)
   // =================================================================
   vi: {
+    mascot_ai_messages: {
+      earlyMonthNoData: [ 'Tháng mới bắt đầu! Cùng xây đắp biểu đồ từ những nét vẽ đầu tiên hôm nay nhé!', 'Một khởi đầu rực rỡ đang chờ đón! Chữ vạn sự khởi đầu nan, hãy bắt đầu ngay hôm nay nhé!', 'Chưa có dữ liệu nào cho tháng này. Không sao cả, chỉ một bài học nhỏ cũng đủ thắp sáng biểu đồ!' ],
+      earlyMonthGood: [ 'Khởi đầu cực mượt! Sớm gặt hái được {points} điểm ngay đầu tháng, cứ đà này thì thành rồng thành phượng mất thôi! 🐉', 'Mới những ngày đầu mà bạn đã cày được {points} điểm! Có vẻ tháng này sẽ là một kỷ lục mới đây!', 'Tháng mới khởi sắc với {points} điểm bỏ túi sớm. Cùng vút bay nào!' ],
+      crammingWarn: [ 'Gom {points} điểm nhưng bỏ trống tận {missedDays} ngày. Bạn đang học nhồi nhét đấy à? Học thế não bộ mệt lắm, chia nhỏ ra nhé!', 'Đồ thị như "núi non trùng điệp" chỉ tập trung vài ngày thế này thì kiến thức bay nhanh lắm. Học ít mà đều đặn mới tốt cơ!', 'Cày cuốc liên tục vài hôm rồi lặn mất tăm {missedDays} ngày. Rất dễ bị quên ngang đấy nghen!' ],
+      spacingChampion: [ 'Kỷ luật thép! Bạn đã xuất hiện {activeDays}/{dayProgressNum} ngày vừa qua. Spaced Repetition thực sự là chân ái của bạn!', 'Sự kiên trì tạo nên nhà vô địch! {activeDays} ngày học trải đều sẽ khắc não bộ của bạn hơn bất cứ phương pháp nào!', 'Nhìn đồ thị phủ kín kìa! Bạn chính là hình mẫu tiêu chuẩn của việc "chậm mà chắc, nhỏ mà có võ"!' ],
+      crossMonthSpike: [ 'Đạp ga bức tốc! Thành tích tháng này đã vọt lên hơn {pct}% so với tháng trước!', 'Đồ thị như bay lên trời! Bước đột phá lớn so với tháng trước, bạn đúng là vừa tìm được bí kíp gì đúng không?', 'Cú chọc trời ngoạn mục! Tăng hơn gấp rưỡi tháng trước rồi đấy, phong độ chói sáng! 💥' ],
+      crossMonthLag: [ 'Úi xùi ui, tiến độ tháng này đang chững lại đáng kể so với lửa hừng hực tháng trước. Mau châm củi thôi!', 'Tháng trước oai phong lẫm liệt thế mà sao tháng này lại xìu rồi? Gác lại âu lo học bài thôi nào! 😤', 'Biểu đồ đang lao dốc so với đường cơ sở tuyệt đẹp của tháng vừa rồi. Kỷ luật nào!' ],
+      crossMonthSteady: [ 'Làm sao bạn có thể photocopy cái nhịp điệu hoàn hảo của tháng trước qua tháng này tài tình vậy? Đỉnh chóp! 🏔️', 'Sự ổn định đáng gờm! Đồ thị chạy ngang lưng chừng mây luôn. Thật khó cản bước bạn lúc này!', 'Không phải "chớp nhoáng", đây là thực lực hằng tháng! Chuỗi ngày phong độ cao dường như kéo dài bất tận.' ],
+      flatlineWarn: [ 'Đồ thị cạn cung tới {missedDays} ngày ròng rã rồi. Tri thức cũng biết khóc vì cô đơn đó T.T', 'Dậy học nào dậy học nào! Ngủ liền {missedDays} ngày vậy thì quên hết kiến thức mất thôi! 🧊', 'Nằm bẹp {missedDays} hôm, xương khớp cứng lại rồi chứ gì? Đứng dậy học liền 1 bài để làm nóng nào!' ],
+      hatTrick: [ 'Combo thần thánh tăng 3 ngày liên tiếp! Thuật toán xác nhận bạn đang bứt tốc "Snowball Effect" siêu khủng! 🔥', 'Nhìn cái bậc thang 3 ngày đâm thẳng lên trời kìa! Bạn tìm được bí kíp gì để học sung thế?', 'Ba ngày phong độ vút cao không ngừng nghỉ! Trăng Khuyết cũng có ngày thành Trăng Tròn, ráng giữ đà này nha!' ],
+      comebackGood: [ 'Cú gánh team đỉnh chóp! Hôm nay bạn "tay to" học bù luôn phần của hôm qua. Gút chóp bạn iuuu! 👏', 'Ngã ở đâu đứng lên bằng đồ thị cao gấp đôi ở đó. Pha lội ngược dòng lấp đầy khoảng trắng siêu ngầu!', 'Tài năng cày bù (comeback) xuất quỷ nhập thần, ráng giữ chứ đừng để rớt nhịp hằng ngày hoài nhé!' ],
+      weekendWarrior: [ 'Thuật toán ghi nhận: Chiến thần rực lửa! Mọi người đang xõa cuối tuần mà bạn vẫn đớp gọn {scoreToday} điểm. Tuyệt vời! 🏇', 'Nhà bao việc nhưng thứ 7 chủ nhật vẫn chốt đơn {scoreToday} điểm. Khoảng cách với đối thủ đang nới rộng đó! ⚔️', 'Không có ngày nghỉ trong từ điển của bạn à? Nỗ lực cuối tuần này thật sự đáng trân trọng!' ],
+      peakDrop: [ 'Hôm qua nhảy map cao tít {yesterdayScore} điểm mà nay chạm đáy xã hội 0 điểm vậy hả trời!? Lấy lại phong độ mauuu! 📉', 'Hôm qua huy hoàng quá nay ngủ đi quên tương lai luôn hông? Dậy học ngay còn kịp vớt lấy cái đồ thị!', 'Biểu đồ vừa xuyên thủng mây hôm qua xong rơi tự do cắm đầu luôn hôm nay. Giải cứu đồ thị đi SOS! 🚨' ],
+      predictMilestone: [ 'AI tiên tri báo mộng: Với tốc độ {pace} chữ/ngày này, {dayOfWeek} tới là bạn rinh trọn mốc {nextMilestone} chữ rồi! 🔮', 'Phân tích dữ liệu báo về: Bạn dư sức đập nát cánh cổng {nextMilestone} Kanji vào {dayOfWeek} tuần tới. Cố lên nhé!', 'Mốc tiếp theo {nextMilestone} đã ngắm trúng bạn! Giữ vững tiến độ hiện tại thì {dayOfWeek} là ngày đăng quang!' ],
+      eomZero: [ 'Tháng này biểu đồ hoàn toàn phẳng lặng. Xin đừng quên tiếp tục hành trình học tiếng Nhật nhé!', 'Tháng này không sủi bọt tí nào! Trở lại học bài liền đi bạn ơi!', 'Tri thức đang chờ bạn quay lại lấp đầy tháng này đó!' ],
+      eomGood: [ 'Tổng kết tháng: Bạn đã thu thập được {points} điểm. Thuật toán ghi nhận sự nỗ lực của bạn!', 'Quá tuyệt vời! Chốt sổ tháng với {points} điểm đút túi!', 'Tháng chốt sổ rực rỡ với {points} điểm gặt hái được. Cứ thế phát huy!' ]
+    },
     // --- SIDEBAR MENU ---
     menu_home: "Trang chủ",
     menu_handwriting: "Tra cứu",
@@ -573,6 +590,23 @@ export const translations = {
   // 2. ENGLISH (EN)
   // =================================================================
   en: {
+    mascot_ai_messages: {
+      earlyMonthNoData: [ 'New month, fresh start! Let\'s build the chart with our first steps today!', 'A bright beginning awaits! Every long journey begins with a single step, start now!', 'No data for this month yet. No worries, even a small lesson will light up the chart!' ],
+      earlyMonthGood: [ 'Silky smooth start! You grabbed {points} points early on. Are you aiming for greatness? 🐉', 'It\'s just the beginning and you already scored {points} points! Looks like a new record coming!', 'The new month is looking bright with {points} points in the bag. Let\'s soar!' ],
+      crammingWarn: [ 'You gathered {points} points but left {missedDays} days blank. Are you cramming? It tires the brain!', 'Your chart looks like a rollercoaster. Cramming knowledge isn\'t great. Try studying a bit every day!', 'You studied hard for a few days then vanished for {missedDays} days. Consistency is key to memory!' ],
+      spacingChampion: [ 'Iron discipline! You showed up {activeDays}/{dayProgressNum} days. Spaced Repetition is your true superpower!', 'Persistence forms a champion! {activeDays} days of steady learning will etch knowledge into your brain!', 'Look at that dense chart! You are the perfect example of "slow and steady wins the race"!' ],
+      crossMonthSpike: [ 'Speeding up! This month\'s performance skyrocketed by {pct}% compared to last month!', 'The chart is flying! A massive breakthrough from last month. Did you find a secret technique?', 'Spectacular spike! You did more than one and a half times last month\'s work. Brilliant form! 💥' ],
+      crossMonthLag: [ 'Oops, this month\'s progress is lagging significantly behind last month\'s fire. Time to add some fuel!', 'You were so majestic last month, what happened? Let\'s put worries aside and study! 😤', 'The chart is plunging compared to last month\'s beautiful baseline. Discipline time!' ],
+      crossMonthSteady: [ 'How did you perfectly photocopy last month\'s rhythm? Absolutely peak! 🏔️', 'Formidable stability! The chart is running smoothly in the clouds. Hard to stop you now!', 'Not a fluke! Your high performance streak seems endless. Keep it going!' ],
+      flatlineWarn: [ 'Your chart has been flat for {missedDays} days. Consistency is key, let\'s learn a little today!', 'Wake up! Sleeping for {missedDays} days will make your brain rusty! 🧊', 'Laying low for {missedDays} days? Get up and finish 1 lesson to warm up!' ],
+      hatTrick: [ 'Combo climbing 3 days in a row! The algorithm confirms your Snowball Effect! 🔥', 'Look at that 3-day staircase to heaven! Did you find a secret studying technique?', 'Three days of unstoppable momentum! Keep this streak going!' ],
+      comebackGood: [ 'Ultimate carry! Today you worked hard to make up for yesterday\'s rest. Well done! 👏', 'What a powerful comeback. Filling that blank spot like a boss!', 'Amazing catch-up skills, but try not to lose your daily rhythm too often!' ],
+      weekendWarrior: [ 'Weekend warrior! While everyone rests, you snagged {scoreToday} points. Amazing! 🏇', 'Busy weekends can\'t stop you from scoring {scoreToday} points. The gap is widening! ⚔️', 'No days off in your dictionary? Appreciating the weekend grind!' ],
+      peakDrop: [ 'Yesterday you spiked {yesterdayScore} points but hit rock bottom today!? Get your form back! 📉', 'Too glorious yesterday so you slept in today? Wake up and save the chart!', 'The chart pierced the clouds yesterday and is free-falling today. SOS! 🚨' ],
+      predictMilestone: [ 'AI Prediction: At your pace ({pace} kanji/day), you\'ll hit {nextMilestone} kanji next {dayOfWeek}! 🔮', 'Awesome! You\'re on track to shatter the {nextMilestone} kanji milestone very soon!', 'Target locked on {nextMilestone} kanji! Keep it up and you\'ll reach it by next {dayOfWeek}!' ],
+      eomZero: [ 'This month was completely flat. Please don\'t forget your Japanese learning journey!', 'Zero points this month. Your textbooks are waiting for you to come back!', 'A silent month on the chart! Come back and make some noise!' ],
+      eomGood: [ 'Monthly recap: You gathered {points} points. Well done!', 'Awesome! Closing the month with {points} points in the bag!', 'A brilliant month wrapped up with {points} points. Keep it up!' ]
+    },
     menu_home: "Home",
     menu_handwriting: "Lookup",
     menu_chatbot: "Chatbot",
@@ -1130,6 +1164,23 @@ export const translations = {
   // 3. JAPANESE (JP)
   // =================================================================
   jp: {
+    mascot_ai_messages: {
+      earlyMonthNoData: [ '新しい月が始まりました！さっそく今日からグラフを描き始めましょう！', '素晴らしいスタートが待っています！千里の道も一歩から、今日始めましょう！', '今月のデータはまだありません。小さなレッスン一つでもグラフが光りますよ！' ],
+      earlyMonthGood: [ 'スムーズな滑り出し！月初めに{points}ポイントを獲得しました。この調子でトップを目指しましょう！🐉', 'まだ月初めなのに{points}ポイント！今月は新記録の予感がします！', '早くも{points}ポイントゲットで順調なスタートです。飛び立ちましょう！' ],
+      crammingWarn: [ '{points}ポイント獲得しましたが、{missedDays}日も空いていますね。詰め込み学習は脳が疲れますよ！', '数日だけに集中するグラフは知識が定着しにくいです。少しずつ毎日学ぶのが一番です！', '数日頑張って{missedDays}日消えましたね。継続しないと忘れやすいですよ！' ],
+      spacingChampion: [ '素晴らしい規律！ここ{dayProgressNum}日のうち{activeDays}日も学習しました。分散学習こそあなたの真の力です！', '継続は力なり！{activeDays}日間の安定した学習は脳にしっかり刻まれます！', 'グラフがぎっしりですね！「急がば回れ」の完璧な見本です！' ],
+      crossMonthSpike: [ '急加速！今月の成績は先月より{pct}%も跳ね上がりました！', 'グラフが飛んでいます！先月からの大きな飛躍です。何か秘訣を見つけましたか？', '見事な急上昇！先月の1.5倍以上の成果を出しましたね。素晴らしい！💥' ],
+      crossMonthLag: [ 'おっと、今月の進捗は先月の勢いからだいぶ遅れていますね。気合を入れましょう！', '先月はあんなにすごかったのに、今月はどうしましたか？悩まずに勉強しましょう！😤', 'グラフが先月の美しいベースラインより急降下しています。規律を正しましょう！' ],
+      crossMonthSteady: [ '先月の完璧なリズムをどうやってコピーしたんですか？まさにピークです！🏔️', '驚異的な安定感！グラフが雲の上を走っています。今のあなたを止めるのは難しい！', 'まぐれではありません！高いパフォーマンスがずっと続いていますね。そのままキープ！' ],
+      flatlineWarn: [ '{missedDays}日間もグラフが底を這っています。知識も寂しくて泣いていますよ(T.T)', '起きて！{missedDays}日も寝ていたら脳が錆びてしまいますよ！🧊', 'ここで{missedDays}日も休んでどうするんですか？立ち上がって1レッスン終わらせましょう！' ],
+      hatTrick: [ '3日連続のコンボ！アルゴリズムがあなたの「スノーボール効果」を確認しました！🔥', '空に突き刺さる3日間の階段！最高の勉強法でも見つけましたか？', '3日間止まらない勢い！この連続記録をキープしましょう！' ],
+      comebackGood: [ '最高の挽回です！昨日の分まで今日は頑張りましたね。グッジョブ！👏', '見事なカムバック。空白をボスのように埋め尽くしましたね！', '素晴らしい遅れを取り戻す力です！でも毎日のリズムを崩さないようにね！' ],
+      weekendWarrior: [ '週末の戦士！みんなが休んでいる間に{scoreToday}ポイント獲得。素晴らしい！🏇', '忙しい週末でも{scoreToday}ポイントゲット。ライバルとの差が広がっています！⚔️', '休日の文字はないんですか？週末の努力に拍手！' ],
+      peakDrop: [ '昨日は{yesterdayScore}ポイントも取ったのに、今日はゼロですか！？調子を取り戻して！📉', '昨日は最高だったから今日は寝坊ですか？起きてグラフを救って！', 'グラフが昨日は雲を突き抜けたのに、今日は真っ逆さまです。SOS！🚨' ],
+      predictMilestone: [ 'AIの予言：このペース（{pace}字/日）なら、次の{dayOfWeek}には{nextMilestone}字を達成しますよ！🔮', '分析完了！あなたなら次の{dayOfWeek}に{nextMilestone}字の門を簡単に突破できます。頑張って！', '{nextMilestone}字という目標が近づいています！今のペースを維持すれば、次の{dayOfWeek}が記念日です！' ],
+      eomZero: [ '今月はグラフが完全に平坦でした。日本語学習の旅を忘れないでくださいね！', '今月は全く動きがありませんでした！今すぐ勉強に戻りましょう！', '今月はグラフが静かすぎます！戻ってきて賑やかにしましょう！' ],
+      eomGood: [ '今月のまとめ：あなたは{points}ポイントを獲得しました。よく頑張りました！', '素晴らしい！今月は{points}ポイントで締めくくりました！', '輝かしい月が{points}ポイントで終わりました。この調子で！' ]
+    },
     menu_home: "ホーム",
     menu_handwriting: "検索",
     menu_chatbot: "チャットボット",
@@ -1675,6 +1726,23 @@ export const translations = {
   // 4. CHINESE (CN)
   // =================================================================
   cn: {
+    mascot_ai_messages: {
+      earlyMonthNoData: [ '新的一月开始了！让我们今天就开始画图表吧！', '美好的开局在等你！千里之行，始于足下，现在就开始吧！', '本月还没有数据。没关系，一节小课也能点亮图表！' ],
+      earlyMonthGood: [ '开局顺利！月初就获得了 {points} 分。照这个进度你要起飞啊！🐉', '才刚开始你就拿到了 {points} 分！看来本月要创下新纪录了！', '随着 {points} 分入账，新的一月开局大好。一起冲刺吧！' ],
+      crammingWarn: [ '拿了 {points} 分，但空出了 {missedDays} 天。你在突击复习吗？这太伤脑了，分散开来学吧！', '仅在几天内集中学习的图表容易让人遗忘。每天学一点才是王道！', '猛学几天然后消失了 {missedDays} 天。这样很容易忘记的！' ],
+      spacingChampion: [ '钢铁纪律！过去 {dayProgressNum} 天你出勤了 {activeDays} 天。间隔重复是你的超能力！', '坚持造就冠军！{activeDays} 天的稳定学习将知识深深印在你的脑海中！', '看看这密集的图表！你就是“稳扎稳打”的完美榜样！' ],
+      crossMonthSpike: [ '加速前进！本月的表现比上个月飙升了 {pct}%！', '图表起飞了！这与上个月相比是一个巨大的突破。你找到秘籍了吗？', '惊人的激增！你完成了上个月一倍半的成果。状态太棒了！💥' ],
+      crossMonthLag: [ '哎呀，本月的进度比上个月的热情大幅落后。该加把劲了！', '上个月你那么威风，本月怎么了？抛开烦恼学习吧！😤', '图表与上个月美丽的基线相比正在暴跌。注意纪律！' ],
+      crossMonthSteady: [ '你怎么能完美复制上个月的节奏？简直是巅峰！🏔️', '可怕的稳定性！图表平稳地跑在云端。现在很难阻止你了！', '这不是巧合！你的高表现连续不断。继续保持！' ],
+      flatlineWarn: [ '图表已经连续 {missedDays} 天垫底了。由于孤独，知识也在哭泣(T.T)', '醒醒！连睡 {missedDays} 天会让大脑生锈的！🧊', '躺平 {missedDays} 天了？起来完成1节课热热身吧！' ],
+      hatTrick: [ '连续3天冲刺连击！算法已确认你的“滚雪球效应”！🔥', '看看那冲破天际的3天阶梯！你找到了什么学习秘籍？', '3天不可阻挡的势头！保持这个连胜记录！' ],
+      comebackGood: [ '绝对的Carry！今天你努力弥补了昨天的休息。太棒了！👏', '多么强力的回归！像老板一样填补那个空白！', '惊人的追赶技巧！但尽量不要经常失去日常节奏哦！' ],
+      weekendWarrior: [ '周末战士！当大家都在休息时，你拿下了 {scoreToday} 分。太棒了！🏇', '忙碌的周末也无法阻止你获得 {scoreToday} 分。差距正在拉大！⚔️', '你的字典里没有休息日吗？周末的努力值得赞赏！' ],
+      peakDrop: [ '昨天你飙升了 {yesterdayScore} 分，今天却跌入谷底！？找回你的状态！📉', '昨天太辉煌所以今天睡懒觉了？醒醒，拯救图表！', '昨天图表冲破云霄，今天却自由落体。SOS！🚨' ],
+      predictMilestone: [ 'AI 预言：按照你现在的速度（{pace}字/天），下个 {dayOfWeek} 就能突破 {nextMilestone} 字的里程碑！🔮', '分析完成：你绝对有能力在下个 {dayOfWeek} 冲破 {nextMilestone} 字的大门。加油！', '下一个目标 {nextMilestone} 字已经锁定！保持这个节奏，下个 {dayOfWeek} 就是加冕之日！' ],
+      eomZero: [ '这个月的图表完全平坦。请不要忘记你的日语学习之旅！', '本月竟然一分没得！你的课本正在等你回来！', '在这个图表上度过了一个安静的月份！回来弄点动静吧！' ],
+      eomGood: [ '月度总结：你获得了 {points} 分。太棒了！', '太棒了！以 {points} 分完美结束本月！', '非常辉煌的一个月结，获得了 {points} 分。继续保持！' ]
+    },
     menu_home: "首页",
     menu_handwriting: "查询",
     menu_chatbot: "聊天机器人",
@@ -2209,6 +2277,23 @@ export const translations = {
   // 5. KOREAN (KR)
   // =================================================================
   kr: {
+    mascot_ai_messages: {
+      earlyMonthNoData: [ '새로운 달이 시작되었습니다! 오늘부터 차트를 그려볼까요?', '멋진 시작이 기다립니다! 천 리 길도 한 걸음부터, 지금 시작하세요!', '이번 달은 데이터가 없네요. 괜찮아요, 작은 레슨 하나면 충분해요!' ],
+      earlyMonthGood: [ '순조로운 출발! 월초부터 {points}점을 얻었습니다. 이대로라면 신기록이겠는걸요! 🐉', '시작부터 {points}점 획득! 이번 달은 뭔가 다를 것 같아요!', '달콤한 시작, 벌써 {points}점입니다. 높이 날아봅시다!' ],
+      crammingWarn: [ '{points}점을 얻었지만 {missedDays}일이나 비어있네요. 벼락치기 중이신가요? 매일 꾸준히 하세요!', '며칠 동안 집중적으로 한 공부는 쉽게 잊혀집니다. 하루 조금씩이 최고예요!', '{missedDays}일 동안 쉬다니, 그렇게 하면 지식을 잃기 쉬워요!' ],
+      spacingChampion: [ '강철의 규율! 지난 {dayProgressNum}일 중 {activeDays}일이나 학습하셨네요. 꾸준함이 무기입니다!', '인내가 챔피언을 만듭니다! {activeDays}일의 규칙적인 학습은 뇌에 새겨질 거예요!', '촘촘한 차트 좀 보세요! 느리지만 확실한 승리의 표본입니다!' ],
+      crossMonthSpike: [ '가속도 붙는 중! 저번 달보다 이번 달 성적이 {pct}%나 상승했습니다!', '차트가 날아다니고 있어요! 저번 달에 비해 엄청난 발전입니다. 비결이 뭐죠?', '엄청난 급상승입니다! 지난 달의 1.5배가 넘네요. 대단합니다! 💥' ],
+      crossMonthLag: [ '아이고, 이번 달 진도가 저번 달의 열정에 비해 많이 느리네요. 연료를 더 채워야겠어요!', '저번 달엔 그렇게 멋졌으면서 오늘은 왜 이러시나요? 고민 말고 공부하세요! 😤', '아름다웠던 저번 달에 비해 차트가 곤두박질치고 있습니다. 규칙을 되찾으세요!' ],
+      crossMonthSteady: [ '어떻게 저번 달의 완벽한 리듬을 그대로 복사하셨나요? 완전 최고예요! 🏔️', '엄청난 안정감! 차트가 구름 위를 달리고 있네요. 누구도 당신을 막을 수 없어요!', '우연이 아닙니다! 이런 높은 성과가 계속 이어지네요. 킵고잉!' ],
+      flatlineWarn: [ '차트가 {missedDays}일째 바닥을 기고 있습니다. 지식도 외로워서 울고 있어요 T.T', '일어나세요! {missedDays}일이나 쉰다면 뇌가 녹슬고 말 거예요! 🧊', '{missedDays}일이나 누워 있었나요? 일어나서 1강만 들으며 워밍업 하세요!' ],
+      hatTrick: [ '3일 연속 콤보! 알고리즘이 당신의 스노우볼 효과를 확인했습니다! 🔥', '하늘을 찌를 듯한 3일 풀콤보 차트! 공부 비결이라도 찾으셨나요?', '3일째 멈추지 않는 기세! 이 연속 기록을 유지하세요!' ],
+      comebackGood: [ '완벽한 캐리! 어제 쉰 만큼 오늘 열심히 했네요. 아주 훌륭해요! 👏', '엄청난 컴백입니다. 그 빈칸을 보스처럼 채워주시는군요!', '놀라운 따라잡기 실력이지만, 가능하면 매일 리듬을 유지해 보세요!' ],
+      weekendWarrior: [ '주말의 전사! 모두가 쉴 때 당신은 {scoreToday}점을 따냈네요. 멋집니다! 🏇', '바쁜 주말도 {scoreToday}점 획득을 막지 못하네요. 격차가 벌어지고 있습니다! ⚔️', '휴일은 사전에 없으신가요? 주말의 노력에 박수를 보냅니다!' ],
+      peakDrop: [ '어제는 {yesterdayScore}점이나 찍더니 오늘은 0점인가요!? 얼른 페이스를 되찾으세요! 📉', '어제가 너무 화려해서 오늘은 늦잠이신가요? 일어나 차트를 구하세요!', '차트가 어제는 하늘을 뚫더니 오늘은 자유낙하 중이네요. SOS! 🚨' ],
+      predictMilestone: [ 'AI 예언: 지금 속도({pace}자/일)라면, 다음 주 {dayOfWeek}에 {nextMilestone}자 돌파 예정입니다! 🔮', '분석 완료: 다음 주 {dayOfWeek}에 {nextMilestone}자의 문을 거뜬히 넘을 수 있어요. 파이팅!', '다음 목표인 {nextMilestone}자를 향해 정조준! 돌아오는 {dayOfWeek}가 대관식 날이 될 것입니다!' ],
+      eomZero: [ '이번 달 차트가 완전히 평평합니다. 일본어 학습 여정을 잊지 마세요!', '이번 달 0점이네요! 교과서가 당신을 기다리고 있어요!', '침묵의 한 달! 돌아와서 요란하게 부활해 보세요!' ],
+      eomGood: [ '월간 결산: 당신은 {points}점을 획득했습니다. 잘하셨습니다!', '멋지네요! {points}점으로 이번 달을 마무리하셨습니다!', '빛나는 한 달을 {points}점으로 마무리했군요. 계속 이런 식으로!' ]
+    },
     menu_home: "홈",
     menu_handwriting: "검색",
     menu_chatbot: "챗봇",
