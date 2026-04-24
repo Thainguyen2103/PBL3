@@ -4,7 +4,7 @@ import { useAppContext } from '../context/AppContext';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-const BACKEND_URL = "https://pbl3-sofd.onrender.com"; 
+const BACKEND_URL = import.meta.env.VITE_API_URL || "https://pbl3-sofd.onrender.com";
 
 // Component trang trí (Giữ nguyên)
 const FullLandscapeDecor = () => (
