@@ -182,8 +182,11 @@ app.post("/api/chat", async (req, res) => {
         }
         // --------------------------------------------------------
 
-        let finalReply = null;
-        let lastError = null;
+        // THIẾT LẬP KẾT NỐI STREAMING (SSE)
+        res.setHeader('Content-Type', 'text/event-stream');
+        res.setHeader('Cache-Control', 'no-cache');
+        res.setHeader('Connection', 'keep-alive');
+        res.flushHeaders();
 
         // VÒNG LẶP THỬ MODEL
         for (const modelName of MODEL_LIST) {
@@ -192,9 +195,9 @@ app.post("/api/chat", async (req, res) => {
                 const { key, index } = getRandomKeyData();
                 const keyShort = `...${key.slice(-4)}`; // Lấy 4 số cuối để log cho gọn
 
-                console.log(`🤖 Đang thử: ${modelName} | Key [${index}]: ${keyShort}`);
+                console.log(`🤖 Đang thử (Stream): ${modelName} | Key [${index}]: ${keyShort}`);
 
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${key}`;
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:streamGenerateContent?alt=sse&key=${key}`;
 
                 const response = await fetch(url, {
                     method: "POST",
@@ -207,50 +210,36 @@ app.post("/api/chat", async (req, res) => {
                     })
                 });
 
-                const data = await response.json();
-
-                if (response.ok && data.candidates?.[0]?.content?.parts?.[0]?.text) {
-                    finalReply = data.candidates[0].content.parts[0].text;
-                    
-                    // --- 📊 CẬP NHẬT & IN LOG THỐNG KÊ ---
-                    
-                    // 1. Khởi tạo bộ đếm cho Key này nếu chưa có
+                if (response.ok && response.body) {
+                    // Cập nhật thống kê
                     if (!usageTracker[index]) usageTracker[index] = {};
                     if (!usageTracker[index][modelName]) usageTracker[index][modelName] = 0;
-
-                    // 2. Tăng số lần dùng
                     usageTracker[index][modelName]++;
 
-                    // 3. Tính toán
-                    const used = usageTracker[index][modelName];
-                    const limit = MODEL_LIMITS[modelName] || 9999;
-                    const remaining = limit - used;
-
-                    // 4. In Log màu mè cho dễ nhìn
-                    console.log(`✅ THÀNH CÔNG!`);
-                    console.log(`📊 [THỐNG KÊ KEY ${index} - ${keyShort}]`);
-                    console.log(`   Model: ${modelName}`);
-                    console.log(`   Đã dùng: ${used} / ${limit}`);
-                    console.log(`   CÒN LẠI: ${remaining} lượt (Ước tính)`);
+                    console.log(`✅ STREAMING THÀNH CÔNG! (Model: ${modelName})`);
                     console.log("---------------------------------------------------");
 
-                    break; // Xong việc thì thoát
+                    // Bơm dữ liệu Stream thẳng xuống client thông qua Reader
+                    const reader = response.body.getReader();
+                    while (true) {
+                        const { done, value } = await reader.read();
+                        if (done) break;
+                        res.write(value);
+                    }
+                    res.end();
+                    return; // Thoát vòng lặp sau khi stream xong
                 } 
                 
-                console.warn(`⚠️ Model ${modelName} thất bại (Key ${index}). Chuyển cái khác...`);
-                lastError = data.error?.message;
-
+                const errorData = await response.json();
+                console.warn(`⚠️ Model ${modelName} thất bại (Key ${index}). Lỗi: ${errorData?.error?.message}`);
             } catch (err) {
                 console.error(`❌ Lỗi kết nối:`, err.message);
-                lastError = err.message;
             }
         }
 
-        if (finalReply) {
-            res.json({ reply: finalReply });
-        } else {
-            res.status(500).json({ error: `Lão phu bó tay rồi. (${lastError})` });
-        }
+        // Báo lỗi bằng định dạng Stream nếu tất cả model đều chết
+        res.write(`data: {"error": {"message": "Lão phu bó tay rồi, mạng mẽo chán quá!"}}\n\n`);
+        res.end();
 
     } catch (error) {
         res.status(500).json({ error: "Lỗi Server: " + error.message });

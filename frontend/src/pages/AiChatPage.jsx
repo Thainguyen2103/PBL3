@@ -46,10 +46,40 @@ const AiChatPage = () => {
       }
   }, [t]); // Chạy lại khi 't' thay đổi (tức là khi đổi ngôn ngữ)
 
+  const THINKING_PHRASES = [
+    "Lão phu đang vuốt râu suy nghĩ...",
+    "Đợi tí, lão đang lục lại trí nhớ...",
+    "Hừm... câu này hơi khoai đấy...",
+    "Đang lật mở bí kíp truyền đời...",
+    "Từ từ để lão uống ngụm trà đã...",
+    "Đang mài mực...",
+    "Nhãi ranh, đợi lão nghĩ xem chửi sao cho hay...",
+    "Kiến thức mênh mông, để lão nhớ xem...",
+    "Đang bấm quẻ tính toán thiên cơ..."
+  ];
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [typingText, setTypingText] = useState(THINKING_PHRASES[0]);
 
   useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages, isTyping]);
+  
+  // Hiệu ứng luân phiên xoay vòng các câu "đang nghĩ"
+  useEffect(() => {
+      let intervalId;
+      if (isTyping) {
+          intervalId = setInterval(() => {
+              setTypingText(prev => {
+                  const currentIndex = THINKING_PHRASES.indexOf(prev);
+                  // Chuyển sang câu tiếp theo, nếu hết mảng thì quay lại câu đầu tiên
+                  const nextIndex = (currentIndex + 1) % THINKING_PHRASES.length;
+                  return THINKING_PHRASES[nextIndex];
+              });
+          }, 2000); // Mỗi 2 giây đổi 1 câu
+      }
+      return () => {
+          if (intervalId) clearInterval(intervalId);
+      };
+  }, [isTyping]);
   
   useEffect(() => { 
       if (textareaRef.current) { 
@@ -65,6 +95,7 @@ const AiChatPage = () => {
     // Cập nhật giao diện ngay lập tức
     setMessages(prev => [...prev, { id: Date.now(), role: 'user', text: userText }]);
     setInputValue('');
+    setTypingText(THINKING_PHRASES[Math.floor(Math.random() * THINKING_PHRASES.length)]);
     setIsTyping(true);
     if (textareaRef.current) textareaRef.current.style.height = 'auto';
 
@@ -89,16 +120,82 @@ const AiChatPage = () => {
         })
       });
 
-      const data = await response.json();
-      if (data.reply) {
-          setMessages(prev => [...prev, { id: Date.now() + 1, role: 'model', text: data.reply }]);
-      } else {
-          throw new Error("No response");
+      if (!response.ok) throw new Error("Network error");
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      
+      const msgId = Date.now() + 1;
+      setMessages(prev => [...prev, { id: msgId, role: 'model', text: "" }]);
+      
+      let fullTextToRender = "";
+      let currentlyRendered = "";
+      let hasReceivedFirstData = false;
+      let isStreamFinished = false;
+
+      // THUẬT TOÁN ĐIỀU HÒA TỐC ĐỘ GÕ CHỮ (SMOOTHING TYPEWRITER)
+      // Google thường gửi 1 cục JSON chứa vài chục chữ cùng lúc khiến UI bị giật cục.
+      // Interval này sẽ đóng vai trò lấy từng chữ trong cục đó ra và gõ mượt mà 60fps.
+      const typingInterval = setInterval(() => {
+          if (currentlyRendered.length < fullTextToRender.length) {
+              // Tăng số chữ gõ mỗi lần nếu AI trả lời quá dài (để tránh người dùng đợi lâu)
+              const charsToAdd = fullTextToRender.length - currentlyRendered.length > 50 ? 3 : 1; 
+              currentlyRendered = fullTextToRender.slice(0, currentlyRendered.length + charsToAdd);
+              setMessages(prev => prev.map(m => m.id === msgId ? { ...m, text: currentlyRendered } : m));
+          } else if (isStreamFinished) {
+              clearInterval(typingInterval);
+          }
+      }, 20); // Gõ mỗi 20ms
+
+      let buffer = "";
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) {
+            isStreamFinished = true;
+            break;
+        }
+        
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        
+        buffer = lines.pop(); // Giữ lại dòng cuối chưa hoàn chỉnh
+        
+        for (const line of lines) {
+            const trimmedLine = line.trim();
+            if (!trimmedLine || !trimmedLine.startsWith('data: ')) continue;
+            
+            const dataStr = trimmedLine.substring(6).trim();
+            if (!dataStr || dataStr === '[DONE]') continue;
+            
+            try {
+                const data = JSON.parse(dataStr);
+                if (data.error) throw new Error(data.error.message || "Lỗi stream");
+                
+                const textChunk = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
+                
+                if (textChunk) {
+                    if (!hasReceivedFirstData) {
+                        setIsTyping(false); // Tắt hiệu ứng mài mực
+                        hasReceivedFirstData = true;
+                    }
+                    // Bơm chữ mới vào kho lưu trữ (chưa in ra ngay)
+                    fullTextToRender += textChunk;
+                }
+            } catch (err) {
+                console.error("Lỗi parse JSON chunk:", err, "Data string:", dataStr);
+            }
+        }
       }
+      
+      // Đảm bảo dọn dẹp nếu stream kết thúc lỗi
+      setIsTyping(false);
     } catch (error) {
       console.error("Chat Error:", error);
       setMessages(prev => [...prev, { id: Date.now() + 1, role: 'model', text: 'Mạng mẽo không thông, lão phu không nghe rõ!' }]);
-    } finally { setIsTyping(false); }
+    } finally { 
+        setIsTyping(false); 
+    }
   };
 
   return (
@@ -138,8 +235,7 @@ const AiChatPage = () => {
               <div className="flex gap-4 items-center">
                   <OldMasterIcon />
                   <div className="text-slate-400 text-xs italic animate-pulse font-bold tracking-widest bg-white/80 backdrop-blur-sm px-4 py-3 rounded-2xl rounded-bl-none border border-slate-200 relative z-10">
-                      {/* ✅ Dùng t.chat_typing */}
-                      {t?.chat_typing || "Đang mài mực..."}
+                      {typingText}
                   </div>
               </div>
           )}
